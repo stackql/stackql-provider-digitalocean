@@ -32,28 +32,12 @@ Creates, updates, deletes, gets or lists a <code>checks</code> resource.
 The following fields are returned by `SELECT` queries:
 
 <Tabs
-    defaultValue="uptime_list_checks"
+    defaultValue="uptime_get_check"
     values={[
-        { label: 'uptime_list_checks', value: 'uptime_list_checks' },
-        { label: 'uptime_get_check', value: 'uptime_get_check' }
+        { label: 'uptime_get_check', value: 'uptime_get_check' },
+        { label: 'uptime_list_checks', value: 'uptime_list_checks' }
     ]}
 >
-<TabItem value="uptime_list_checks">
-
-The response will be a JSON object with a key called `checks`. This will be set to an array of objects, each of which will contain the standard attributes associated with an uptime check
-
-<table>
-<thead>
-    <tr>
-    <th>Name</th>
-    <th>Datatype</th>
-    <th>Description</th>
-    </tr>
-</thead>
-<tbody>
-</tbody>
-</table>
-</TabItem>
 <TabItem value="uptime_get_check">
 
 The response will be a JSON object with a key called `check`. The value of this will be an object that contains the standard attributes associated with an uptime check.
@@ -67,6 +51,82 @@ The response will be a JSON object with a key called `check`. The value of this 
     </tr>
 </thead>
 <tbody>
+<tr>
+    <td><CopyableCode code="id" /></td>
+    <td><code>string (uuid)</code></td>
+    <td>A unique ID that can be used to identify and reference the check. (example: 5a4981aa-9653-4bd1-bef5-d6bff52042e4)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="name" /></td>
+    <td><code>string</code></td>
+    <td>A human-friendly display name. (example: Landing page check)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="enabled" /></td>
+    <td><code>boolean</code></td>
+    <td>A boolean value indicating whether the check is enabled/disabled.</td>
+</tr>
+<tr>
+    <td><CopyableCode code="regions" /></td>
+    <td><code>array</code></td>
+    <td>An array containing the selected regions to perform healthchecks from.</td>
+</tr>
+<tr>
+    <td><CopyableCode code="target" /></td>
+    <td><code>string (url)</code></td>
+    <td>The endpoint to perform healthchecks on. (example: https://www.landingpage.com)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="type" /></td>
+    <td><code>string</code></td>
+    <td>The type of health check to perform. (example: https)</td>
+</tr>
+</tbody>
+</table>
+</TabItem>
+<TabItem value="uptime_list_checks">
+
+The response will be a JSON object with a key called `checks`. This will be set to an array of objects, each of which will contain the standard attributes associated with an uptime check
+
+<table>
+<thead>
+    <tr>
+    <th>Name</th>
+    <th>Datatype</th>
+    <th>Description</th>
+    </tr>
+</thead>
+<tbody>
+<tr>
+    <td><CopyableCode code="id" /></td>
+    <td><code>string (uuid)</code></td>
+    <td>A unique ID that can be used to identify and reference the check. (example: 5a4981aa-9653-4bd1-bef5-d6bff52042e4)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="name" /></td>
+    <td><code>string</code></td>
+    <td>A human-friendly display name. (example: Landing page check)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="enabled" /></td>
+    <td><code>boolean</code></td>
+    <td>A boolean value indicating whether the check is enabled/disabled.</td>
+</tr>
+<tr>
+    <td><CopyableCode code="regions" /></td>
+    <td><code>array</code></td>
+    <td>An array containing the selected regions to perform healthchecks from.</td>
+</tr>
+<tr>
+    <td><CopyableCode code="target" /></td>
+    <td><code>string (url)</code></td>
+    <td>The endpoint to perform healthchecks on. (example: https://www.landingpage.com)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="type" /></td>
+    <td><code>string</code></td>
+    <td>The type of health check to perform. (example: https)</td>
+</tr>
 </tbody>
 </table>
 </TabItem>
@@ -88,18 +148,18 @@ The following methods are available for this resource:
 </thead>
 <tbody>
 <tr>
-    <td><a href="#uptime_list_checks"><CopyableCode code="uptime_list_checks" /></a></td>
-    <td><CopyableCode code="select" /></td>
-    <td></td>
-    <td><a href="#parameter-per_page"><code>per_page</code></a>, <a href="#parameter-page"><code>page</code></a></td>
-    <td>To list all of the Uptime checks on your account, send a GET request to `/v2/uptime/checks`.</td>
-</tr>
-<tr>
     <td><a href="#uptime_get_check"><CopyableCode code="uptime_get_check" /></a></td>
     <td><CopyableCode code="select" /></td>
     <td><a href="#parameter-check_id"><code>check_id</code></a></td>
     <td></td>
     <td>To show information about an existing check, send a GET request to `/v2/uptime/checks/$CHECK_ID`.</td>
+</tr>
+<tr>
+    <td><a href="#uptime_list_checks"><CopyableCode code="uptime_list_checks" /></a></td>
+    <td><CopyableCode code="select" /></td>
+    <td></td>
+    <td><a href="#parameter-per_page"><code>per_page</code></a>, <a href="#parameter-page"><code>page</code></a></td>
+    <td>To list all of the Uptime checks on your account, send a GET request to `/v2/uptime/checks`.</td>
 </tr>
 <tr>
     <td><a href="#uptime_create_check"><CopyableCode code="uptime_create_check" /></a></td>
@@ -159,33 +219,43 @@ Parameters can be passed in the `WHERE` clause of a query. Check the [Methods](#
 ## `SELECT` examples
 
 <Tabs
-    defaultValue="uptime_list_checks"
+    defaultValue="uptime_get_check"
     values={[
-        { label: 'uptime_list_checks', value: 'uptime_list_checks' },
-        { label: 'uptime_get_check', value: 'uptime_get_check' }
+        { label: 'uptime_get_check', value: 'uptime_get_check' },
+        { label: 'uptime_list_checks', value: 'uptime_list_checks' }
     ]}
 >
-<TabItem value="uptime_list_checks">
-
-To list all of the Uptime checks on your account, send a GET request to `/v2/uptime/checks`.
-
-```sql
-SELECT
-*
-FROM digitalocean.monitoring.checks
-WHERE per_page = '{{ per_page }}'
-AND page = '{{ page }}';
-```
-</TabItem>
 <TabItem value="uptime_get_check">
 
 To show information about an existing check, send a GET request to `/v2/uptime/checks/$CHECK_ID`.
 
 ```sql
 SELECT
-*
+id,
+name,
+enabled,
+regions,
+target,
+type
 FROM digitalocean.monitoring.checks
 WHERE check_id = '{{ check_id }}' -- required;
+```
+</TabItem>
+<TabItem value="uptime_list_checks">
+
+To list all of the Uptime checks on your account, send a GET request to `/v2/uptime/checks`.
+
+```sql
+SELECT
+id,
+name,
+enabled,
+regions,
+target,
+type
+FROM digitalocean.monitoring.checks
+WHERE per_page = '{{ per_page }}'
+AND page = '{{ page }}';
 ```
 </TabItem>
 </Tabs>
@@ -218,6 +288,8 @@ SELECT
 '{{ target }}' --required,
 '{{ regions }}' --required,
 {{ enabled }} --required
+RETURNING
+check
 ;
 ```
 </TabItem>
@@ -280,7 +352,9 @@ data__target = '{{ target }}',
 data__regions = '{{ regions }}',
 data__enabled = {{ enabled }}
 WHERE 
-check_id = '{{ check_id }}' --required;
+check_id = '{{ check_id }}' --required
+RETURNING
+check;
 ```
 </TabItem>
 </Tabs>

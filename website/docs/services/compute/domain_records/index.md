@@ -32,28 +32,12 @@ Creates, updates, deletes, gets or lists a <code>domain_records</code> resource.
 The following fields are returned by `SELECT` queries:
 
 <Tabs
-    defaultValue="domains_list_records"
+    defaultValue="domains_get_record"
     values={[
-        { label: 'domains_list_records', value: 'domains_list_records' },
-        { label: 'domains_get_record', value: 'domains_get_record' }
+        { label: 'domains_get_record', value: 'domains_get_record' },
+        { label: 'domains_list_records', value: 'domains_list_records' }
     ]}
 >
-<TabItem value="domains_list_records">
-
-The response will be a JSON object with a key called `domain_records`. The value of this will be an array of domain record objects, each of which contains the standard domain record attributes. For attributes that are not used by a specific record type, a value of `null` will be returned. For instance, all records other than SRV will have `null` for the `weight` and `port` attributes.
-
-<table>
-<thead>
-    <tr>
-    <th>Name</th>
-    <th>Datatype</th>
-    <th>Description</th>
-    </tr>
-</thead>
-<tbody>
-</tbody>
-</table>
-</TabItem>
 <TabItem value="domains_get_record">
 
 The response will be a JSON object with a key called `domain_record`. The value of this will be a domain record object which contains the standard domain record attributes.
@@ -67,6 +51,122 @@ The response will be a JSON object with a key called `domain_record`. The value 
     </tr>
 </thead>
 <tbody>
+<tr>
+    <td><CopyableCode code="id" /></td>
+    <td><code>integer</code></td>
+    <td>A unique identifier for each domain record.</td>
+</tr>
+<tr>
+    <td><CopyableCode code="name" /></td>
+    <td><code>string</code></td>
+    <td>The host name, alias, or service being defined by the record. (example: @)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="data" /></td>
+    <td><code>string</code></td>
+    <td>Variable data depending on record type. For example, the "data" value for an A record would be the IPv4 address to which the domain will be mapped. For a CAA record, it would contain the domain name of the CA being granted permission to issue certificates. (example: ns1.digitalocean.com)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="flags" /></td>
+    <td><code>integer</code></td>
+    <td>An unsigned integer between 0-255 used for CAA records.</td>
+</tr>
+<tr>
+    <td><CopyableCode code="port" /></td>
+    <td><code>integer</code></td>
+    <td>The port for SRV records.</td>
+</tr>
+<tr>
+    <td><CopyableCode code="priority" /></td>
+    <td><code>integer</code></td>
+    <td>The priority for SRV and MX records.</td>
+</tr>
+<tr>
+    <td><CopyableCode code="tag" /></td>
+    <td><code>string</code></td>
+    <td>The parameter tag for CAA records. Valid values are "issue", "issuewild", or "iodef"</td>
+</tr>
+<tr>
+    <td><CopyableCode code="ttl" /></td>
+    <td><code>integer</code></td>
+    <td>This value is the time to live for the record, in seconds. This defines the time frame that clients can cache queried information before a refresh should be requested.</td>
+</tr>
+<tr>
+    <td><CopyableCode code="type" /></td>
+    <td><code>string</code></td>
+    <td>The type of the DNS record. For example: A, CNAME, TXT, ... (example: NS)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="weight" /></td>
+    <td><code>integer</code></td>
+    <td>The weight for SRV records.</td>
+</tr>
+</tbody>
+</table>
+</TabItem>
+<TabItem value="domains_list_records">
+
+The response will be a JSON object with a key called `domain_records`. The value of this will be an array of domain record objects, each of which contains the standard domain record attributes. For attributes that are not used by a specific record type, a value of `null` will be returned. For instance, all records other than SRV will have `null` for the `weight` and `port` attributes.
+
+<table>
+<thead>
+    <tr>
+    <th>Name</th>
+    <th>Datatype</th>
+    <th>Description</th>
+    </tr>
+</thead>
+<tbody>
+<tr>
+    <td><CopyableCode code="id" /></td>
+    <td><code>integer</code></td>
+    <td>A unique identifier for each domain record.</td>
+</tr>
+<tr>
+    <td><CopyableCode code="name" /></td>
+    <td><code>string</code></td>
+    <td>The host name, alias, or service being defined by the record. (example: @)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="data" /></td>
+    <td><code>string</code></td>
+    <td>Variable data depending on record type. For example, the "data" value for an A record would be the IPv4 address to which the domain will be mapped. For a CAA record, it would contain the domain name of the CA being granted permission to issue certificates. (example: ns1.digitalocean.com)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="flags" /></td>
+    <td><code>integer</code></td>
+    <td>An unsigned integer between 0-255 used for CAA records.</td>
+</tr>
+<tr>
+    <td><CopyableCode code="port" /></td>
+    <td><code>integer</code></td>
+    <td>The port for SRV records.</td>
+</tr>
+<tr>
+    <td><CopyableCode code="priority" /></td>
+    <td><code>integer</code></td>
+    <td>The priority for SRV and MX records.</td>
+</tr>
+<tr>
+    <td><CopyableCode code="tag" /></td>
+    <td><code>string</code></td>
+    <td>The parameter tag for CAA records. Valid values are "issue", "issuewild", or "iodef"</td>
+</tr>
+<tr>
+    <td><CopyableCode code="ttl" /></td>
+    <td><code>integer</code></td>
+    <td>This value is the time to live for the record, in seconds. This defines the time frame that clients can cache queried information before a refresh should be requested.</td>
+</tr>
+<tr>
+    <td><CopyableCode code="type" /></td>
+    <td><code>string</code></td>
+    <td>The type of the DNS record. For example: A, CNAME, TXT, ... (example: NS)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="weight" /></td>
+    <td><code>integer</code></td>
+    <td>The weight for SRV records.</td>
+</tr>
 </tbody>
 </table>
 </TabItem>
@@ -88,13 +188,6 @@ The following methods are available for this resource:
 </thead>
 <tbody>
 <tr>
-    <td><a href="#domains_list_records"><CopyableCode code="domains_list_records" /></a></td>
-    <td><CopyableCode code="select" /></td>
-    <td><a href="#parameter-domain_name"><code>domain_name</code></a></td>
-    <td><a href="#parameter-name"><code>name</code></a>, <a href="#parameter-type"><code>type</code></a>, <a href="#parameter-per_page"><code>per_page</code></a>, <a href="#parameter-page"><code>page</code></a></td>
-    <td>To get a listing of all records configured for a domain, send a GET request to `/v2/domains/$DOMAIN_NAME/records`.<br />The list of records returned can be filtered by using the `name` and `type` query parameters. For example, to only include A records for a domain, send a GET request to `/v2/domains/$DOMAIN_NAME/records?type=A`. `name` must be a fully qualified record name. For example, to only include records matching `sub.example.com`, send a GET request to `/v2/domains/$DOMAIN_NAME/records?name=sub.example.com`. Both name and type may be used together.<br /><br /></td>
-</tr>
-<tr>
     <td><a href="#domains_get_record"><CopyableCode code="domains_get_record" /></a></td>
     <td><CopyableCode code="select" /></td>
     <td><a href="#parameter-domain_name"><code>domain_name</code></a>, <a href="#parameter-domain_record_id"><code>domain_record_id</code></a></td>
@@ -102,25 +195,32 @@ The following methods are available for this resource:
     <td>To retrieve a specific domain record, send a GET request to `/v2/domains/$DOMAIN_NAME/records/$RECORD_ID`.</td>
 </tr>
 <tr>
+    <td><a href="#domains_list_records"><CopyableCode code="domains_list_records" /></a></td>
+    <td><CopyableCode code="select" /></td>
+    <td><a href="#parameter-domain_name"><code>domain_name</code></a></td>
+    <td><a href="#parameter-name"><code>name</code></a>, <a href="#parameter-type"><code>type</code></a>, <a href="#parameter-per_page"><code>per_page</code></a>, <a href="#parameter-page"><code>page</code></a></td>
+    <td>To get a listing of all records configured for a domain, send a GET request to `/v2/domains/$DOMAIN_NAME/records`.<br />The list of records returned can be filtered by using the `name` and `type` query parameters. For example, to only include A records for a domain, send a GET request to `/v2/domains/$DOMAIN_NAME/records?type=A`. `name` must be a fully qualified record name. For example, to only include records matching `sub.example.com`, send a GET request to `/v2/domains/$DOMAIN_NAME/records?name=sub.example.com`. Both name and type may be used together.<br /><br /></td>
+</tr>
+<tr>
     <td><a href="#domains_create_record"><CopyableCode code="domains_create_record" /></a></td>
     <td><CopyableCode code="insert" /></td>
     <td><a href="#parameter-domain_name"><code>domain_name</code></a></td>
     <td></td>
-    <td>To create a new record to a domain, send a POST request to<br />`/v2/domains/$DOMAIN_NAME/records`.<br /><br />The request must include all of the required fields for the domain record type<br />being added.<br /><br />See the [attribute table](#tag/Domain-Records) for details regarding record<br />types and their respective required attributes.<br /></td>
+    <td>To create a new record to a domain, send a POST request to<br />`/v2/domains/$DOMAIN_NAME/records`.<br /><br />The request must include all of the required fields for the domain record type<br />being added.<br /><br />See the [attribute table]https://docs.digitalocean.com/products/networking/dns/how-to/manage-records/ for details regarding record<br />types and their respective required attributes.<br /></td>
 </tr>
 <tr>
     <td><a href="#domains_patch_record"><CopyableCode code="domains_patch_record" /></a></td>
     <td><CopyableCode code="update" /></td>
     <td><a href="#parameter-domain_name"><code>domain_name</code></a>, <a href="#parameter-domain_record_id"><code>domain_record_id</code></a>, <a href="#parameter-data__type"><code>data__type</code></a></td>
     <td></td>
-    <td>To update an existing record, send a PATCH request to<br />`/v2/domains/$DOMAIN_NAME/records/$DOMAIN_RECORD_ID`. Any attribute valid for<br />the record type can be set to a new value for the record.<br /><br />See the [attribute table](#tag/Domain-Records) for details regarding record<br />types and their respective attributes.<br /></td>
+    <td>To update an existing record, send a PATCH request to<br />`/v2/domains/$DOMAIN_NAME/records/$DOMAIN_RECORD_ID`. Any attribute valid for<br />the record type can be set to a new value for the record.<br /><br />See the [attribute table]https://docs.digitalocean.com/products/networking/dns/how-to/manage-records/ for details regarding record<br />types and their respective attributes.<br /></td>
 </tr>
 <tr>
     <td><a href="#domains_update_record"><CopyableCode code="domains_update_record" /></a></td>
     <td><CopyableCode code="replace" /></td>
     <td><a href="#parameter-domain_name"><code>domain_name</code></a>, <a href="#parameter-domain_record_id"><code>domain_record_id</code></a>, <a href="#parameter-data__type"><code>data__type</code></a></td>
     <td></td>
-    <td>To update an existing record, send a PUT request to<br />`/v2/domains/$DOMAIN_NAME/records/$DOMAIN_RECORD_ID`. Any attribute valid for<br />the record type can be set to a new value for the record.<br /><br />See the [attribute table](#tag/Domain-Records) for details regarding record<br />types and their respective attributes.<br /></td>
+    <td>To update an existing record, send a PUT request to<br />`/v2/domains/$DOMAIN_NAME/records/$DOMAIN_RECORD_ID`. Any attribute valid for<br />the record type can be set to a new value for the record.<br /><br />See the [attribute table]https://docs.digitalocean.com/products/networking/dns/how-to/manage-records/ for details regarding record<br />types and their respective attributes.<br /></td>
 </tr>
 <tr>
     <td><a href="#domains_delete_record"><CopyableCode code="domains_delete_record" /></a></td>
@@ -181,37 +281,55 @@ Parameters can be passed in the `WHERE` clause of a query. Check the [Methods](#
 ## `SELECT` examples
 
 <Tabs
-    defaultValue="domains_list_records"
+    defaultValue="domains_get_record"
     values={[
-        { label: 'domains_list_records', value: 'domains_list_records' },
-        { label: 'domains_get_record', value: 'domains_get_record' }
+        { label: 'domains_get_record', value: 'domains_get_record' },
+        { label: 'domains_list_records', value: 'domains_list_records' }
     ]}
 >
-<TabItem value="domains_list_records">
-
-To get a listing of all records configured for a domain, send a GET request to `/v2/domains/$DOMAIN_NAME/records`.<br />The list of records returned can be filtered by using the `name` and `type` query parameters. For example, to only include A records for a domain, send a GET request to `/v2/domains/$DOMAIN_NAME/records?type=A`. `name` must be a fully qualified record name. For example, to only include records matching `sub.example.com`, send a GET request to `/v2/domains/$DOMAIN_NAME/records?name=sub.example.com`. Both name and type may be used together.<br /><br />
-
-```sql
-SELECT
-*
-FROM digitalocean.compute.domain_records
-WHERE domain_name = '{{ domain_name }}' -- required
-AND name = '{{ name }}'
-AND type = '{{ type }}'
-AND per_page = '{{ per_page }}'
-AND page = '{{ page }}';
-```
-</TabItem>
 <TabItem value="domains_get_record">
 
 To retrieve a specific domain record, send a GET request to `/v2/domains/$DOMAIN_NAME/records/$RECORD_ID`.
 
 ```sql
 SELECT
-*
+id,
+name,
+data,
+flags,
+port,
+priority,
+tag,
+ttl,
+type,
+weight
 FROM digitalocean.compute.domain_records
 WHERE domain_name = '{{ domain_name }}' -- required
 AND domain_record_id = '{{ domain_record_id }}' -- required;
+```
+</TabItem>
+<TabItem value="domains_list_records">
+
+To get a listing of all records configured for a domain, send a GET request to `/v2/domains/$DOMAIN_NAME/records`.<br />The list of records returned can be filtered by using the `name` and `type` query parameters. For example, to only include A records for a domain, send a GET request to `/v2/domains/$DOMAIN_NAME/records?type=A`. `name` must be a fully qualified record name. For example, to only include records matching `sub.example.com`, send a GET request to `/v2/domains/$DOMAIN_NAME/records?name=sub.example.com`. Both name and type may be used together.<br /><br />
+
+```sql
+SELECT
+id,
+name,
+data,
+flags,
+port,
+priority,
+tag,
+ttl,
+type,
+weight
+FROM digitalocean.compute.domain_records
+WHERE domain_name = '{{ domain_name }}' -- required
+AND name = '{{ name }}'
+AND type = '{{ type }}'
+AND per_page = '{{ per_page }}'
+AND page = '{{ page }}';
 ```
 </TabItem>
 </Tabs>
@@ -228,7 +346,7 @@ AND domain_record_id = '{{ domain_record_id }}' -- required;
 >
 <TabItem value="domains_create_record">
 
-To create a new record to a domain, send a POST request to<br />`/v2/domains/$DOMAIN_NAME/records`.<br /><br />The request must include all of the required fields for the domain record type<br />being added.<br /><br />See the [attribute table](#tag/Domain-Records) for details regarding record<br />types and their respective required attributes.<br />
+To create a new record to a domain, send a POST request to<br />`/v2/domains/$DOMAIN_NAME/records`.<br /><br />The request must include all of the required fields for the domain record type<br />being added.<br /><br />See the [attribute table]https://docs.digitalocean.com/products/networking/dns/how-to/manage-records/ for details regarding record<br />types and their respective required attributes.<br />
 
 ```sql
 INSERT INTO digitalocean.compute.domain_records (
@@ -236,6 +354,8 @@ domain_name
 )
 SELECT 
 '{{ domain_name }}'
+RETURNING
+domain_record
 ;
 ```
 </TabItem>
@@ -263,7 +383,7 @@ SELECT
 >
 <TabItem value="domains_patch_record">
 
-To update an existing record, send a PATCH request to<br />`/v2/domains/$DOMAIN_NAME/records/$DOMAIN_RECORD_ID`. Any attribute valid for<br />the record type can be set to a new value for the record.<br /><br />See the [attribute table](#tag/Domain-Records) for details regarding record<br />types and their respective attributes.<br />
+To update an existing record, send a PATCH request to<br />`/v2/domains/$DOMAIN_NAME/records/$DOMAIN_RECORD_ID`. Any attribute valid for<br />the record type can be set to a new value for the record.<br /><br />See the [attribute table]https://docs.digitalocean.com/products/networking/dns/how-to/manage-records/ for details regarding record<br />types and their respective attributes.<br />
 
 ```sql
 UPDATE digitalocean.compute.domain_records
@@ -280,7 +400,9 @@ data__tag = '{{ tag }}'
 WHERE 
 domain_name = '{{ domain_name }}' --required
 AND domain_record_id = '{{ domain_record_id }}' --required
-AND data__type = '{{ type }}' --required;
+AND data__type = '{{ type }}' --required
+RETURNING
+domain_record;
 ```
 </TabItem>
 </Tabs>
@@ -296,7 +418,7 @@ AND data__type = '{{ type }}' --required;
 >
 <TabItem value="domains_update_record">
 
-To update an existing record, send a PUT request to<br />`/v2/domains/$DOMAIN_NAME/records/$DOMAIN_RECORD_ID`. Any attribute valid for<br />the record type can be set to a new value for the record.<br /><br />See the [attribute table](#tag/Domain-Records) for details regarding record<br />types and their respective attributes.<br />
+To update an existing record, send a PUT request to<br />`/v2/domains/$DOMAIN_NAME/records/$DOMAIN_RECORD_ID`. Any attribute valid for<br />the record type can be set to a new value for the record.<br /><br />See the [attribute table]https://docs.digitalocean.com/products/networking/dns/how-to/manage-records/ for details regarding record<br />types and their respective attributes.<br />
 
 ```sql
 REPLACE digitalocean.compute.domain_records
@@ -313,7 +435,9 @@ data__tag = '{{ tag }}'
 WHERE 
 domain_name = '{{ domain_name }}' --required
 AND domain_record_id = '{{ domain_record_id }}' --required
-AND data__type = '{{ type }}' --required;
+AND data__type = '{{ type }}' --required
+RETURNING
+domain_record;
 ```
 </TabItem>
 </Tabs>

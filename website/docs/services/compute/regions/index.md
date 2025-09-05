@@ -50,6 +50,31 @@ A JSON object with a key set to `regions`. The value is an array of `region` obj
     </tr>
 </thead>
 <tbody>
+<tr>
+    <td><CopyableCode code="name" /></td>
+    <td><code>string</code></td>
+    <td>The display name of the region.  This will be a full name that is used in the control panel and other interfaces. (example: New York 3)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="available" /></td>
+    <td><code>boolean</code></td>
+    <td>This is a boolean value that represents whether new Droplets can be created in this region.</td>
+</tr>
+<tr>
+    <td><CopyableCode code="features" /></td>
+    <td><code>array</code></td>
+    <td>This attribute is set to an array which contains features available in this region</td>
+</tr>
+<tr>
+    <td><CopyableCode code="sizes" /></td>
+    <td><code>array</code></td>
+    <td>This attribute is set to an array which contains the identifying slugs for the sizes available in this region. sizes:read is required to view.</td>
+</tr>
+<tr>
+    <td><CopyableCode code="slug" /></td>
+    <td><code>string</code></td>
+    <td>A human-readable string that is used as a unique identifier for each region. (example: nyc3)</td>
+</tr>
 </tbody>
 </table>
 </TabItem>
@@ -120,7 +145,11 @@ To list all of the regions that are available, send a GET request to `/v2/region
 
 ```sql
 SELECT
-*
+name,
+available,
+features,
+sizes,
+slug
 FROM digitalocean.compute.regions
 WHERE per_page = '{{ per_page }}'
 AND page = '{{ page }}';

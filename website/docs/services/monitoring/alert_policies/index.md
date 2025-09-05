@@ -32,28 +32,12 @@ Creates, updates, deletes, gets or lists an <code>alert_policies</code> resource
 The following fields are returned by `SELECT` queries:
 
 <Tabs
-    defaultValue="monitoring_list_alert_policy"
+    defaultValue="monitoring_get_alert_policy"
     values={[
-        { label: 'monitoring_list_alert_policy', value: 'monitoring_list_alert_policy' },
-        { label: 'monitoring_get_alert_policy', value: 'monitoring_get_alert_policy' }
+        { label: 'monitoring_get_alert_policy', value: 'monitoring_get_alert_policy' },
+        { label: 'monitoring_list_alert_policy', value: 'monitoring_list_alert_policy' }
     ]}
 >
-<TabItem value="monitoring_list_alert_policy">
-
-A list of alert policies.
-
-<table>
-<thead>
-    <tr>
-    <th>Name</th>
-    <th>Datatype</th>
-    <th>Description</th>
-    </tr>
-</thead>
-<tbody>
-</tbody>
-</table>
-</TabItem>
 <TabItem value="monitoring_get_alert_policy">
 
 An alert policy.
@@ -67,6 +51,87 @@ An alert policy.
     </tr>
 </thead>
 <tbody>
+<tr>
+    <td><CopyableCode code="alerts" /></td>
+    <td><code>object</code></td>
+    <td></td>
+</tr>
+<tr>
+    <td><CopyableCode code="compare" /></td>
+    <td><code>string</code></td>
+    <td> (example: GreaterThan)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="description" /></td>
+    <td><code>string</code></td>
+    <td> (example: CPU Alert)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="enabled" /></td>
+    <td><code>boolean</code></td>
+    <td></td>
+</tr>
+<tr>
+    <td><CopyableCode code="entities" /></td>
+    <td><code>array</code></td>
+    <td></td>
+</tr>
+<tr>
+    <td><CopyableCode code="tags" /></td>
+    <td><code>array</code></td>
+    <td></td>
+</tr>
+<tr>
+    <td><CopyableCode code="type" /></td>
+    <td><code>string</code></td>
+    <td> (example: v1/insights/droplet/cpu)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="uuid" /></td>
+    <td><code>string</code></td>
+    <td> (example: 78b3da62-27e5-49ba-ac70-5db0b5935c64)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="value" /></td>
+    <td><code>number (float)</code></td>
+    <td></td>
+</tr>
+<tr>
+    <td><CopyableCode code="window" /></td>
+    <td><code>string</code></td>
+    <td> (example: 5m)</td>
+</tr>
+</tbody>
+</table>
+</TabItem>
+<TabItem value="monitoring_list_alert_policy">
+
+A list of alert policies.
+
+<table>
+<thead>
+    <tr>
+    <th>Name</th>
+    <th>Datatype</th>
+    <th>Description</th>
+    </tr>
+</thead>
+<tbody>
+<tr>
+    <td><CopyableCode code="links" /></td>
+    <td><code>object</code></td>
+    <td></td>
+</tr>
+<tr>
+    <td><CopyableCode code="meta" /></td>
+    <td><code>object</code></td>
+    <td>Information about the response itself.</td>
+</tr>
+<tr>
+    <td><CopyableCode code="policies" /></td>
+    <td><code>array</code></td>
+    <td></td>
+</tr>
 </tbody>
 </table>
 </TabItem>
@@ -88,18 +153,18 @@ The following methods are available for this resource:
 </thead>
 <tbody>
 <tr>
-    <td><a href="#monitoring_list_alert_policy"><CopyableCode code="monitoring_list_alert_policy" /></a></td>
-    <td><CopyableCode code="select" /></td>
-    <td></td>
-    <td><a href="#parameter-per_page"><code>per_page</code></a>, <a href="#parameter-page"><code>page</code></a></td>
-    <td>Returns all alert policies that are configured for the given account. To List all alert policies, send a GET request to `/v2/monitoring/alerts`.</td>
-</tr>
-<tr>
     <td><a href="#monitoring_get_alert_policy"><CopyableCode code="monitoring_get_alert_policy" /></a></td>
     <td><CopyableCode code="select" /></td>
     <td><a href="#parameter-alert_uuid"><code>alert_uuid</code></a></td>
     <td></td>
     <td>To retrieve a given alert policy, send a GET request to `/v2/monitoring/alerts/&#123;alert_uuid&#125;`</td>
+</tr>
+<tr>
+    <td><a href="#monitoring_list_alert_policy"><CopyableCode code="monitoring_list_alert_policy" /></a></td>
+    <td><CopyableCode code="select" /></td>
+    <td></td>
+    <td><a href="#parameter-per_page"><code>per_page</code></a>, <a href="#parameter-page"><code>page</code></a></td>
+    <td>Returns all alert policies that are configured for the given account. To List all alert policies, send a GET request to `/v2/monitoring/alerts`.</td>
 </tr>
 <tr>
     <td><a href="#monitoring_create_alert_policy"><CopyableCode code="monitoring_create_alert_policy" /></a></td>
@@ -159,33 +224,44 @@ Parameters can be passed in the `WHERE` clause of a query. Check the [Methods](#
 ## `SELECT` examples
 
 <Tabs
-    defaultValue="monitoring_list_alert_policy"
+    defaultValue="monitoring_get_alert_policy"
     values={[
-        { label: 'monitoring_list_alert_policy', value: 'monitoring_list_alert_policy' },
-        { label: 'monitoring_get_alert_policy', value: 'monitoring_get_alert_policy' }
+        { label: 'monitoring_get_alert_policy', value: 'monitoring_get_alert_policy' },
+        { label: 'monitoring_list_alert_policy', value: 'monitoring_list_alert_policy' }
     ]}
 >
-<TabItem value="monitoring_list_alert_policy">
-
-Returns all alert policies that are configured for the given account. To List all alert policies, send a GET request to `/v2/monitoring/alerts`.
-
-```sql
-SELECT
-*
-FROM digitalocean.monitoring.alert_policies
-WHERE per_page = '{{ per_page }}'
-AND page = '{{ page }}';
-```
-</TabItem>
 <TabItem value="monitoring_get_alert_policy">
 
 To retrieve a given alert policy, send a GET request to `/v2/monitoring/alerts/&#123;alert_uuid&#125;`
 
 ```sql
 SELECT
-*
+alerts,
+compare,
+description,
+enabled,
+entities,
+tags,
+type,
+uuid,
+value,
+window
 FROM digitalocean.monitoring.alert_policies
 WHERE alert_uuid = '{{ alert_uuid }}' -- required;
+```
+</TabItem>
+<TabItem value="monitoring_list_alert_policy">
+
+Returns all alert policies that are configured for the given account. To List all alert policies, send a GET request to `/v2/monitoring/alerts`.
+
+```sql
+SELECT
+links,
+meta,
+policies
+FROM digitalocean.monitoring.alert_policies
+WHERE per_page = '{{ per_page }}'
+AND page = '{{ page }}';
 ```
 </TabItem>
 </Tabs>
@@ -226,6 +302,8 @@ SELECT
 '{{ type }}' --required,
 {{ value }} --required,
 '{{ window }}' --required
+RETURNING
+policy
 ;
 ```
 </TabItem>
@@ -295,7 +373,9 @@ AND data__window = '{{ window }}' --required
 AND data__entities = '{{ entities }}' --required
 AND data__tags = '{{ tags }}' --required
 AND data__alerts = '{{ alerts }}' --required
-AND data__enabled = {{ enabled }} --required;
+AND data__enabled = {{ enabled }} --required
+RETURNING
+policy;
 ```
 </TabItem>
 </Tabs>

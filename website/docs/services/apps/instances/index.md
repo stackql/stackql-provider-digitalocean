@@ -50,6 +50,26 @@ A JSON with key `instances`
     </tr>
 </thead>
 <tbody>
+<tr>
+    <td><CopyableCode code="component_name" /></td>
+    <td><code>string</code></td>
+    <td>Name of the component, from the app spec. (example: sample-golang)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="instance_name" /></td>
+    <td><code>string</code></td>
+    <td>Name of the instance, which is a unique identifier for the instance. (example: sample-golang-76b84c7fb8-6p8kq)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="component_type" /></td>
+    <td><code>string</code></td>
+    <td>Supported compute component by DigitalOcean App Platform. (example: SERVICE)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="instance_alias" /></td>
+    <td><code>string</code></td>
+    <td>Readable identifier, an alias of the instance name, reference for mapping insights to instance names. (example: sample-golang-0)</td>
+</tr>
 </tbody>
 </table>
 </TabItem>
@@ -115,7 +135,10 @@ Retrieve the list of running instances for a given application, including instan
 
 ```sql
 SELECT
-*
+component_name,
+instance_name,
+component_type,
+instance_alias
 FROM digitalocean.apps.instances
 WHERE app_id = '{{ app_id }}' -- required;
 ```

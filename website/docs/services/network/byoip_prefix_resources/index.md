@@ -50,6 +50,31 @@ List of IP addresses assigned to resources (such as Droplets) in a BYOIP prefix
     </tr>
 </thead>
 <tbody>
+<tr>
+    <td><CopyableCode code="id" /></td>
+    <td><code>integer (int64)</code></td>
+    <td>Unique identifier for the allocation</td>
+</tr>
+<tr>
+    <td><CopyableCode code="assigned_at" /></td>
+    <td><code>string (date-time)</code></td>
+    <td>Time when the allocation was assigned (example: 2025-06-25T12:00:00Z)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="byoip" /></td>
+    <td><code>string</code></td>
+    <td>The BYOIP prefix UUID (example: f47ac10b-58cc-4372-a567-0e02b2c3d479)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="region" /></td>
+    <td><code>string</code></td>
+    <td>Region where the allocation is made (example: nyc3)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="resource" /></td>
+    <td><code>string</code></td>
+    <td>The resource associated with the allocation (example: do:droplet:fa3c10b-58cc-4372-a567-0e02b2c3d479)</td>
+</tr>
 </tbody>
 </table>
 </TabItem>
@@ -125,7 +150,11 @@ To list resources associated with BYOIP prefixes, send a GET request to `/v2/byo
 
 ```sql
 SELECT
-*
+id,
+assigned_at,
+byoip,
+region,
+resource
 FROM digitalocean.network.byoip_prefix_resources
 WHERE byoip_prefix_uuid = '{{ byoip_prefix_uuid }}' -- required
 AND per_page = '{{ per_page }}'

@@ -32,33 +32,12 @@ Creates, updates, deletes, gets or lists a <code>workspaces</code> resource.
 The following fields are returned by `SELECT` queries:
 
 <Tabs
-    defaultValue="genai_list_workspaces"
+    defaultValue="genai_get_workspace"
     values={[
-        { label: 'genai_list_workspaces', value: 'genai_list_workspaces' },
-        { label: 'genai_get_workspace', value: 'genai_get_workspace' }
+        { label: 'genai_get_workspace', value: 'genai_get_workspace' },
+        { label: 'genai_list_workspaces', value: 'genai_list_workspaces' }
     ]}
 >
-<TabItem value="genai_list_workspaces">
-
-A successful response.
-
-<table>
-<thead>
-    <tr>
-    <th>Name</th>
-    <th>Datatype</th>
-    <th>Description</th>
-    </tr>
-</thead>
-<tbody>
-<tr>
-    <td><CopyableCode code="workspaces" /></td>
-    <td><code>array</code></td>
-    <td>Workspaces</td>
-</tr>
-</tbody>
-</table>
-</TabItem>
 <TabItem value="genai_get_workspace">
 
 A successful response.
@@ -73,9 +52,120 @@ A successful response.
 </thead>
 <tbody>
 <tr>
-    <td><CopyableCode code="workspace" /></td>
-    <td><code>object</code></td>
-    <td></td>
+    <td><CopyableCode code="name" /></td>
+    <td><code>string</code></td>
+    <td>Name of the workspace (example: example name)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="agents" /></td>
+    <td><code>array</code></td>
+    <td>Agents</td>
+</tr>
+<tr>
+    <td><CopyableCode code="created_at" /></td>
+    <td><code>string (date-time)</code></td>
+    <td>Creation date (example: 2023-01-01T00:00:00Z)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="created_by" /></td>
+    <td><code>string (uint64)</code></td>
+    <td>The id of user who created this workspace (example: 12345)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="created_by_email" /></td>
+    <td><code>string</code></td>
+    <td>The email of the user who created this workspace (example: example@example.com)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="deleted_at" /></td>
+    <td><code>string (date-time)</code></td>
+    <td>Deleted date (example: 2023-01-01T00:00:00Z)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="description" /></td>
+    <td><code>string</code></td>
+    <td>Description of the workspace (example: example string)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="evaluation_test_cases" /></td>
+    <td><code>array</code></td>
+    <td>Evaluations</td>
+</tr>
+<tr>
+    <td><CopyableCode code="updated_at" /></td>
+    <td><code>string (date-time)</code></td>
+    <td>Update date (example: 2023-01-01T00:00:00Z)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="uuid" /></td>
+    <td><code>string</code></td>
+    <td>Unique id (example: 123e4567-e89b-12d3-a456-426614174000)</td>
+</tr>
+</tbody>
+</table>
+</TabItem>
+<TabItem value="genai_list_workspaces">
+
+A successful response.
+
+<table>
+<thead>
+    <tr>
+    <th>Name</th>
+    <th>Datatype</th>
+    <th>Description</th>
+    </tr>
+</thead>
+<tbody>
+<tr>
+    <td><CopyableCode code="name" /></td>
+    <td><code>string</code></td>
+    <td>Name of the workspace (example: example name)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="agents" /></td>
+    <td><code>array</code></td>
+    <td>Agents</td>
+</tr>
+<tr>
+    <td><CopyableCode code="created_at" /></td>
+    <td><code>string (date-time)</code></td>
+    <td>Creation date (example: 2023-01-01T00:00:00Z)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="created_by" /></td>
+    <td><code>string (uint64)</code></td>
+    <td>The id of user who created this workspace (example: 12345)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="created_by_email" /></td>
+    <td><code>string</code></td>
+    <td>The email of the user who created this workspace (example: example@example.com)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="deleted_at" /></td>
+    <td><code>string (date-time)</code></td>
+    <td>Deleted date (example: 2023-01-01T00:00:00Z)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="description" /></td>
+    <td><code>string</code></td>
+    <td>Description of the workspace (example: example string)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="evaluation_test_cases" /></td>
+    <td><code>array</code></td>
+    <td>Evaluations</td>
+</tr>
+<tr>
+    <td><CopyableCode code="updated_at" /></td>
+    <td><code>string (date-time)</code></td>
+    <td>Update date (example: 2023-01-01T00:00:00Z)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="uuid" /></td>
+    <td><code>string</code></td>
+    <td>Unique id (example: 123e4567-e89b-12d3-a456-426614174000)</td>
 </tr>
 </tbody>
 </table>
@@ -98,18 +188,18 @@ The following methods are available for this resource:
 </thead>
 <tbody>
 <tr>
-    <td><a href="#genai_list_workspaces"><CopyableCode code="genai_list_workspaces" /></a></td>
-    <td><CopyableCode code="select" /></td>
-    <td></td>
-    <td></td>
-    <td>To list all workspaces, send a GET request to `/v2/gen-ai/workspaces`.</td>
-</tr>
-<tr>
     <td><a href="#genai_get_workspace"><CopyableCode code="genai_get_workspace" /></a></td>
     <td><CopyableCode code="select" /></td>
     <td><a href="#parameter-workspace_uuid"><code>workspace_uuid</code></a></td>
     <td></td>
     <td>To retrieve details of a workspace, GET request to `/v2/gen-ai/workspaces/&#123;workspace_uuid&#125;`. The response body is a JSON object containing the workspace.</td>
+</tr>
+<tr>
+    <td><a href="#genai_list_workspaces"><CopyableCode code="genai_list_workspaces" /></a></td>
+    <td><CopyableCode code="select" /></td>
+    <td></td>
+    <td></td>
+    <td>To list all workspaces, send a GET request to `/v2/gen-ai/workspaces`.</td>
 </tr>
 <tr>
     <td><a href="#genai_create_workspace"><CopyableCode code="genai_create_workspace" /></a></td>
@@ -159,31 +249,49 @@ Parameters can be passed in the `WHERE` clause of a query. Check the [Methods](#
 ## `SELECT` examples
 
 <Tabs
-    defaultValue="genai_list_workspaces"
+    defaultValue="genai_get_workspace"
     values={[
-        { label: 'genai_list_workspaces', value: 'genai_list_workspaces' },
-        { label: 'genai_get_workspace', value: 'genai_get_workspace' }
+        { label: 'genai_get_workspace', value: 'genai_get_workspace' },
+        { label: 'genai_list_workspaces', value: 'genai_list_workspaces' }
     ]}
 >
-<TabItem value="genai_list_workspaces">
-
-To list all workspaces, send a GET request to `/v2/gen-ai/workspaces`.
-
-```sql
-SELECT
-workspaces
-FROM digitalocean.genai.workspaces;
-```
-</TabItem>
 <TabItem value="genai_get_workspace">
 
 To retrieve details of a workspace, GET request to `/v2/gen-ai/workspaces/&#123;workspace_uuid&#125;`. The response body is a JSON object containing the workspace.
 
 ```sql
 SELECT
-workspace
+name,
+agents,
+created_at,
+created_by,
+created_by_email,
+deleted_at,
+description,
+evaluation_test_cases,
+updated_at,
+uuid
 FROM digitalocean.genai.workspaces
 WHERE workspace_uuid = '{{ workspace_uuid }}' -- required;
+```
+</TabItem>
+<TabItem value="genai_list_workspaces">
+
+To list all workspaces, send a GET request to `/v2/gen-ai/workspaces`.
+
+```sql
+SELECT
+name,
+agents,
+created_at,
+created_by,
+created_by_email,
+deleted_at,
+description,
+evaluation_test_cases,
+updated_at,
+uuid
+FROM digitalocean.genai.workspaces;
 ```
 </TabItem>
 </Tabs>

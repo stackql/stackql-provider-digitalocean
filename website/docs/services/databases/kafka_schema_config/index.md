@@ -50,6 +50,11 @@ A JSON object with a key of `compatibility_level`.
     </tr>
 </thead>
 <tbody>
+<tr>
+    <td><CopyableCode code="compatibility_level" /></td>
+    <td><code>string</code></td>
+    <td>The compatibility level of the schema registry.</td>
+</tr>
 </tbody>
 </table>
 </TabItem>
@@ -122,7 +127,7 @@ To retrieve the Schema Registry configuration for a Kafka cluster, send a GET re
 
 ```sql
 SELECT
-*
+compatibility_level
 FROM digitalocean.databases.kafka_schema_config
 WHERE database_cluster_uuid = '{{ database_cluster_uuid }}' -- required;
 ```
@@ -148,7 +153,9 @@ SET
 data__compatibility_level = '{{ compatibility_level }}'
 WHERE 
 database_cluster_uuid = '{{ database_cluster_uuid }}' --required
-AND data__compatibility_level = '{{ compatibility_level }}' --required;
+AND data__compatibility_level = '{{ compatibility_level }}' --required
+RETURNING
+compatibility_level;
 ```
 </TabItem>
 </Tabs>

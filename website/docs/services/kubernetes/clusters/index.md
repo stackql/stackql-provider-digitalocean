@@ -32,28 +32,12 @@ Creates, updates, deletes, gets or lists a <code>clusters</code> resource.
 The following fields are returned by `SELECT` queries:
 
 <Tabs
-    defaultValue="kubernetes_list_clusters"
+    defaultValue="kubernetes_get_cluster"
     values={[
-        { label: 'kubernetes_list_clusters', value: 'kubernetes_list_clusters' },
-        { label: 'kubernetes_get_cluster', value: 'kubernetes_get_cluster' }
+        { label: 'kubernetes_get_cluster', value: 'kubernetes_get_cluster' },
+        { label: 'kubernetes_list_clusters', value: 'kubernetes_list_clusters' }
     ]}
 >
-<TabItem value="kubernetes_list_clusters">
-
-The response will be a JSON object with a key called `kubernetes_clusters`.<br />This will be set to an array of objects, each of which will contain the<br />standard Kubernetes cluster attributes.<br />
-
-<table>
-<thead>
-    <tr>
-    <th>Name</th>
-    <th>Datatype</th>
-    <th>Description</th>
-    </tr>
-</thead>
-<tbody>
-</tbody>
-</table>
-</TabItem>
 <TabItem value="kubernetes_get_cluster">
 
 The response will be a JSON object with a key called `kubernetes_cluster`. The<br />value of this will be an object containing the standard attributes of a<br />Kubernetes cluster.<br />
@@ -67,6 +51,262 @@ The response will be a JSON object with a key called `kubernetes_cluster`. The<b
     </tr>
 </thead>
 <tbody>
+<tr>
+    <td><CopyableCode code="id" /></td>
+    <td><code>string (uuid)</code></td>
+    <td>A unique ID that can be used to identify and reference a Kubernetes cluster. (example: bd5f5959-5e1e-4205-a714-a914373942af)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="name" /></td>
+    <td><code>string</code></td>
+    <td>A human-readable name for a Kubernetes cluster. (example: prod-cluster-01)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="amd_gpu_device_metrics_exporter_plugin" /></td>
+    <td><code>object</code></td>
+    <td>An object specifying whether the AMD Device Metrics Exporter should be enabled in the Kubernetes cluster.</td>
+</tr>
+<tr>
+    <td><CopyableCode code="amd_gpu_device_plugin" /></td>
+    <td><code>object</code></td>
+    <td>An object specifying whether the AMD GPU Device Plugin should be enabled in the Kubernetes cluster. It's enabled by default for clusters with an AMD GPU node pool.</td>
+</tr>
+<tr>
+    <td><CopyableCode code="auto_upgrade" /></td>
+    <td><code>boolean</code></td>
+    <td>A boolean value indicating whether the cluster will be automatically upgraded to new patch releases during its maintenance window.</td>
+</tr>
+<tr>
+    <td><CopyableCode code="cluster_autoscaler_configuration" /></td>
+    <td><code>object</code></td>
+    <td>An object specifying custom cluster autoscaler configuration.</td>
+</tr>
+<tr>
+    <td><CopyableCode code="cluster_subnet" /></td>
+    <td><code>string (cidr)</code></td>
+    <td>The range of IP addresses for the overlay network of the Kubernetes cluster in CIDR notation. (example: 192.168.0.0/20)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="control_plane_firewall" /></td>
+    <td><code>object</code></td>
+    <td>An object specifying the control plane firewall for the Kubernetes cluster. Control plane firewall is in early availability (invite only).</td>
+</tr>
+<tr>
+    <td><CopyableCode code="created_at" /></td>
+    <td><code>string (date-time)</code></td>
+    <td>A time value given in ISO8601 combined date and time format that represents when the Kubernetes cluster was created. (example: 2018-11-15T16:00:11Z)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="endpoint" /></td>
+    <td><code>string</code></td>
+    <td>The base URL of the API server on the Kubernetes master node. (example: https://bd5f5959-5e1e-4205-a714-a914373942af.k8s.ondigitalocean.com)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="ha" /></td>
+    <td><code>boolean</code></td>
+    <td>A boolean value indicating whether the control plane is run in a highly available configuration in the cluster. Highly available control planes incur less downtime. The property cannot be disabled.</td>
+</tr>
+<tr>
+    <td><CopyableCode code="ipv4" /></td>
+    <td><code>string</code></td>
+    <td>The public IPv4 address of the Kubernetes master node. This will not be set if high availability is configured on the cluster (v1.21+) (example: 68.183.121.157)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="maintenance_policy" /></td>
+    <td><code>object</code></td>
+    <td>An object specifying the maintenance window policy for the Kubernetes cluster.</td>
+</tr>
+<tr>
+    <td><CopyableCode code="node_pools" /></td>
+    <td><code>array</code></td>
+    <td>An object specifying the details of the worker nodes available to the Kubernetes cluster.</td>
+</tr>
+<tr>
+    <td><CopyableCode code="region" /></td>
+    <td><code>string</code></td>
+    <td>The slug identifier for the region where the Kubernetes cluster is located. (example: nyc1)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="registry_enabled" /></td>
+    <td><code>boolean</code></td>
+    <td>A read-only boolean value indicating if a container registry is integrated with the cluster.</td>
+</tr>
+<tr>
+    <td><CopyableCode code="routing_agent" /></td>
+    <td><code>object</code></td>
+    <td>An object specifying whether the routing-agent component should be enabled for the Kubernetes cluster.</td>
+</tr>
+<tr>
+    <td><CopyableCode code="service_subnet" /></td>
+    <td><code>string (cidr)</code></td>
+    <td>The range of assignable IP addresses for services running in the Kubernetes cluster in CIDR notation. (example: 192.168.16.0/24)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="status" /></td>
+    <td><code>object</code></td>
+    <td>An object containing a `state` attribute whose value is set to a string indicating the current status of the cluster.</td>
+</tr>
+<tr>
+    <td><CopyableCode code="surge_upgrade" /></td>
+    <td><code>boolean</code></td>
+    <td>A boolean value indicating whether surge upgrade is enabled/disabled for the cluster. Surge upgrade makes cluster upgrades fast and reliable by bringing up new nodes before destroying the outdated nodes.</td>
+</tr>
+<tr>
+    <td><CopyableCode code="tags" /></td>
+    <td><code>array</code></td>
+    <td>An array of tags applied to the Kubernetes cluster. All clusters are automatically tagged `k8s` and `k8s:$K8S_CLUSTER_ID`. <br /><br />Requires `tag:read` scope.</td>
+</tr>
+<tr>
+    <td><CopyableCode code="updated_at" /></td>
+    <td><code>string (date-time)</code></td>
+    <td>A time value given in ISO8601 combined date and time format that represents when the Kubernetes cluster was last updated. (example: 2018-11-15T16:00:11Z)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="version" /></td>
+    <td><code>string</code></td>
+    <td>The slug identifier for the version of Kubernetes used for the cluster. If set to a minor version (e.g. "1.14"), the latest version within it will be used (e.g. "1.14.6-do.1"); if set to "latest", the latest published version will be used. See the `/v2/kubernetes/options` endpoint to find all currently available versions. (example: 1.18.6-do.0)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="vpc_uuid" /></td>
+    <td><code>string (uuid)</code></td>
+    <td>A string specifying the UUID of the VPC to which the Kubernetes cluster is assigned.<br /><br />Requires `vpc:read` scope. (example: c33931f2-a26a-4e61-b85c-4e95a2ec431b)</td>
+</tr>
+</tbody>
+</table>
+</TabItem>
+<TabItem value="kubernetes_list_clusters">
+
+The response will be a JSON object with a key called `kubernetes_clusters`.<br />This will be set to an array of objects, each of which will contain the<br />standard Kubernetes cluster attributes.<br />
+
+<table>
+<thead>
+    <tr>
+    <th>Name</th>
+    <th>Datatype</th>
+    <th>Description</th>
+    </tr>
+</thead>
+<tbody>
+<tr>
+    <td><CopyableCode code="id" /></td>
+    <td><code>string (uuid)</code></td>
+    <td>A unique ID that can be used to identify and reference a Kubernetes cluster. (example: bd5f5959-5e1e-4205-a714-a914373942af)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="name" /></td>
+    <td><code>string</code></td>
+    <td>A human-readable name for a Kubernetes cluster. (example: prod-cluster-01)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="amd_gpu_device_metrics_exporter_plugin" /></td>
+    <td><code>object</code></td>
+    <td>An object specifying whether the AMD Device Metrics Exporter should be enabled in the Kubernetes cluster.</td>
+</tr>
+<tr>
+    <td><CopyableCode code="amd_gpu_device_plugin" /></td>
+    <td><code>object</code></td>
+    <td>An object specifying whether the AMD GPU Device Plugin should be enabled in the Kubernetes cluster. It's enabled by default for clusters with an AMD GPU node pool.</td>
+</tr>
+<tr>
+    <td><CopyableCode code="auto_upgrade" /></td>
+    <td><code>boolean</code></td>
+    <td>A boolean value indicating whether the cluster will be automatically upgraded to new patch releases during its maintenance window.</td>
+</tr>
+<tr>
+    <td><CopyableCode code="cluster_autoscaler_configuration" /></td>
+    <td><code>object</code></td>
+    <td>An object specifying custom cluster autoscaler configuration.</td>
+</tr>
+<tr>
+    <td><CopyableCode code="cluster_subnet" /></td>
+    <td><code>string (cidr)</code></td>
+    <td>The range of IP addresses for the overlay network of the Kubernetes cluster in CIDR notation. (example: 192.168.0.0/20)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="control_plane_firewall" /></td>
+    <td><code>object</code></td>
+    <td>An object specifying the control plane firewall for the Kubernetes cluster. Control plane firewall is in early availability (invite only).</td>
+</tr>
+<tr>
+    <td><CopyableCode code="created_at" /></td>
+    <td><code>string (date-time)</code></td>
+    <td>A time value given in ISO8601 combined date and time format that represents when the Kubernetes cluster was created. (example: 2018-11-15T16:00:11Z)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="endpoint" /></td>
+    <td><code>string</code></td>
+    <td>The base URL of the API server on the Kubernetes master node. (example: https://bd5f5959-5e1e-4205-a714-a914373942af.k8s.ondigitalocean.com)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="ha" /></td>
+    <td><code>boolean</code></td>
+    <td>A boolean value indicating whether the control plane is run in a highly available configuration in the cluster. Highly available control planes incur less downtime. The property cannot be disabled.</td>
+</tr>
+<tr>
+    <td><CopyableCode code="ipv4" /></td>
+    <td><code>string</code></td>
+    <td>The public IPv4 address of the Kubernetes master node. This will not be set if high availability is configured on the cluster (v1.21+) (example: 68.183.121.157)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="maintenance_policy" /></td>
+    <td><code>object</code></td>
+    <td>An object specifying the maintenance window policy for the Kubernetes cluster.</td>
+</tr>
+<tr>
+    <td><CopyableCode code="node_pools" /></td>
+    <td><code>array</code></td>
+    <td>An object specifying the details of the worker nodes available to the Kubernetes cluster.</td>
+</tr>
+<tr>
+    <td><CopyableCode code="region" /></td>
+    <td><code>string</code></td>
+    <td>The slug identifier for the region where the Kubernetes cluster is located. (example: nyc1)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="registry_enabled" /></td>
+    <td><code>boolean</code></td>
+    <td>A read-only boolean value indicating if a container registry is integrated with the cluster.</td>
+</tr>
+<tr>
+    <td><CopyableCode code="routing_agent" /></td>
+    <td><code>object</code></td>
+    <td>An object specifying whether the routing-agent component should be enabled for the Kubernetes cluster.</td>
+</tr>
+<tr>
+    <td><CopyableCode code="service_subnet" /></td>
+    <td><code>string (cidr)</code></td>
+    <td>The range of assignable IP addresses for services running in the Kubernetes cluster in CIDR notation. (example: 192.168.16.0/24)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="status" /></td>
+    <td><code>object</code></td>
+    <td>An object containing a `state` attribute whose value is set to a string indicating the current status of the cluster.</td>
+</tr>
+<tr>
+    <td><CopyableCode code="surge_upgrade" /></td>
+    <td><code>boolean</code></td>
+    <td>A boolean value indicating whether surge upgrade is enabled/disabled for the cluster. Surge upgrade makes cluster upgrades fast and reliable by bringing up new nodes before destroying the outdated nodes.</td>
+</tr>
+<tr>
+    <td><CopyableCode code="tags" /></td>
+    <td><code>array</code></td>
+    <td>An array of tags applied to the Kubernetes cluster. All clusters are automatically tagged `k8s` and `k8s:$K8S_CLUSTER_ID`. <br /><br />Requires `tag:read` scope.</td>
+</tr>
+<tr>
+    <td><CopyableCode code="updated_at" /></td>
+    <td><code>string (date-time)</code></td>
+    <td>A time value given in ISO8601 combined date and time format that represents when the Kubernetes cluster was last updated. (example: 2018-11-15T16:00:11Z)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="version" /></td>
+    <td><code>string</code></td>
+    <td>The slug identifier for the version of Kubernetes used for the cluster. If set to a minor version (e.g. "1.14"), the latest version within it will be used (e.g. "1.14.6-do.1"); if set to "latest", the latest published version will be used. See the `/v2/kubernetes/options` endpoint to find all currently available versions. (example: 1.18.6-do.0)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="vpc_uuid" /></td>
+    <td><code>string (uuid)</code></td>
+    <td>A string specifying the UUID of the VPC to which the Kubernetes cluster is assigned.<br /><br />Requires `vpc:read` scope. (example: c33931f2-a26a-4e61-b85c-4e95a2ec431b)</td>
+</tr>
 </tbody>
 </table>
 </TabItem>
@@ -88,18 +328,18 @@ The following methods are available for this resource:
 </thead>
 <tbody>
 <tr>
-    <td><a href="#kubernetes_list_clusters"><CopyableCode code="kubernetes_list_clusters" /></a></td>
-    <td><CopyableCode code="select" /></td>
-    <td></td>
-    <td><a href="#parameter-per_page"><code>per_page</code></a>, <a href="#parameter-page"><code>page</code></a></td>
-    <td>To list all of the Kubernetes clusters on your account, send a GET request<br />to `/v2/kubernetes/clusters`.<br /></td>
-</tr>
-<tr>
     <td><a href="#kubernetes_get_cluster"><CopyableCode code="kubernetes_get_cluster" /></a></td>
     <td><CopyableCode code="select" /></td>
     <td><a href="#parameter-cluster_id"><code>cluster_id</code></a></td>
     <td></td>
     <td>To show information about an existing Kubernetes cluster, send a GET request<br />to `/v2/kubernetes/clusters/$K8S_CLUSTER_ID`.<br /></td>
+</tr>
+<tr>
+    <td><a href="#kubernetes_list_clusters"><CopyableCode code="kubernetes_list_clusters" /></a></td>
+    <td><CopyableCode code="select" /></td>
+    <td></td>
+    <td><a href="#parameter-per_page"><code>per_page</code></a>, <a href="#parameter-page"><code>page</code></a></td>
+    <td>To list all of the Kubernetes clusters on your account, send a GET request<br />to `/v2/kubernetes/clusters`.<br /></td>
 </tr>
 <tr>
     <td><a href="#kubernetes_create_cluster"><CopyableCode code="kubernetes_create_cluster" /></a></td>
@@ -192,33 +432,79 @@ Parameters can be passed in the `WHERE` clause of a query. Check the [Methods](#
 ## `SELECT` examples
 
 <Tabs
-    defaultValue="kubernetes_list_clusters"
+    defaultValue="kubernetes_get_cluster"
     values={[
-        { label: 'kubernetes_list_clusters', value: 'kubernetes_list_clusters' },
-        { label: 'kubernetes_get_cluster', value: 'kubernetes_get_cluster' }
+        { label: 'kubernetes_get_cluster', value: 'kubernetes_get_cluster' },
+        { label: 'kubernetes_list_clusters', value: 'kubernetes_list_clusters' }
     ]}
 >
-<TabItem value="kubernetes_list_clusters">
-
-To list all of the Kubernetes clusters on your account, send a GET request<br />to `/v2/kubernetes/clusters`.<br />
-
-```sql
-SELECT
-*
-FROM digitalocean.kubernetes.clusters
-WHERE per_page = '{{ per_page }}'
-AND page = '{{ page }}';
-```
-</TabItem>
 <TabItem value="kubernetes_get_cluster">
 
 To show information about an existing Kubernetes cluster, send a GET request<br />to `/v2/kubernetes/clusters/$K8S_CLUSTER_ID`.<br />
 
 ```sql
 SELECT
-*
+id,
+name,
+amd_gpu_device_metrics_exporter_plugin,
+amd_gpu_device_plugin,
+auto_upgrade,
+cluster_autoscaler_configuration,
+cluster_subnet,
+control_plane_firewall,
+created_at,
+endpoint,
+ha,
+ipv4,
+maintenance_policy,
+node_pools,
+region,
+registry_enabled,
+routing_agent,
+service_subnet,
+status,
+surge_upgrade,
+tags,
+updated_at,
+version,
+vpc_uuid
 FROM digitalocean.kubernetes.clusters
 WHERE cluster_id = '{{ cluster_id }}' -- required;
+```
+</TabItem>
+<TabItem value="kubernetes_list_clusters">
+
+To list all of the Kubernetes clusters on your account, send a GET request<br />to `/v2/kubernetes/clusters`.<br />
+
+```sql
+SELECT
+id,
+name,
+amd_gpu_device_metrics_exporter_plugin,
+amd_gpu_device_plugin,
+auto_upgrade,
+cluster_autoscaler_configuration,
+cluster_subnet,
+control_plane_firewall,
+created_at,
+endpoint,
+ha,
+ipv4,
+maintenance_policy,
+node_pools,
+region,
+registry_enabled,
+routing_agent,
+service_subnet,
+status,
+surge_upgrade,
+tags,
+updated_at,
+version,
+vpc_uuid
+FROM digitalocean.kubernetes.clusters
+WHERE per_page = '{{ per_page }}'
+AND page = '{{ page }}';
 ```
 </TabItem>
 </Tabs>
@@ -275,6 +561,8 @@ SELECT
 '{{ routing_agent }}',
 '{{ amd_gpu_device_plugin }}',
 '{{ amd_gpu_device_metrics_exporter_plugin }}'
+RETURNING
+kubernetes_cluster
 ;
 ```
 </TabItem>
@@ -405,7 +693,9 @@ data__amd_gpu_device_plugin = '{{ amd_gpu_device_plugin }}',
 data__amd_gpu_device_metrics_exporter_plugin = '{{ amd_gpu_device_metrics_exporter_plugin }}'
 WHERE 
 cluster_id = '{{ cluster_id }}' --required
-AND data__name = '{{ name }}' --required;
+AND data__name = '{{ name }}' --required
+RETURNING
+kubernetes_cluster;
 ```
 </TabItem>
 </Tabs>

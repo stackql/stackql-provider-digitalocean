@@ -32,28 +32,12 @@ Creates, updates, deletes, gets or lists a <code>sinks</code> resource.
 The following fields are returned by `SELECT` queries:
 
 <Tabs
-    defaultValue="monitoring_list_sinks"
+    defaultValue="monitoring_get_sink"
     values={[
-        { label: 'monitoring_list_sinks', value: 'monitoring_list_sinks' },
-        { label: 'monitoring_get_sink', value: 'monitoring_get_sink' }
+        { label: 'monitoring_get_sink', value: 'monitoring_get_sink' },
+        { label: 'monitoring_list_sinks', value: 'monitoring_list_sinks' }
     ]}
 >
-<TabItem value="monitoring_list_sinks">
-
-The response is a JSON object with a `sinks` key.
-
-<table>
-<thead>
-    <tr>
-    <th>Name</th>
-    <th>Datatype</th>
-    <th>Description</th>
-    </tr>
-</thead>
-<tbody>
-</tbody>
-</table>
-</TabItem>
 <TabItem value="monitoring_get_sink">
 
 The response is a JSON object with a `sink` key.
@@ -67,6 +51,42 @@ The response is a JSON object with a `sink` key.
     </tr>
 </thead>
 <tbody>
+<tr>
+    <td><CopyableCode code="destination" /></td>
+    <td><code>object</code></td>
+    <td></td>
+</tr>
+<tr>
+    <td><CopyableCode code="resources" /></td>
+    <td><code>array</code></td>
+    <td>List of resources identified by their URNs.</td>
+</tr>
+</tbody>
+</table>
+</TabItem>
+<TabItem value="monitoring_list_sinks">
+
+The response is a JSON object with a `sinks` key.
+
+<table>
+<thead>
+    <tr>
+    <th>Name</th>
+    <th>Datatype</th>
+    <th>Description</th>
+    </tr>
+</thead>
+<tbody>
+<tr>
+    <td><CopyableCode code="destination" /></td>
+    <td><code>object</code></td>
+    <td></td>
+</tr>
+<tr>
+    <td><CopyableCode code="resources" /></td>
+    <td><code>array</code></td>
+    <td>List of resources identified by their URNs.</td>
+</tr>
 </tbody>
 </table>
 </TabItem>
@@ -88,18 +108,18 @@ The following methods are available for this resource:
 </thead>
 <tbody>
 <tr>
-    <td><a href="#monitoring_list_sinks"><CopyableCode code="monitoring_list_sinks" /></a></td>
-    <td><CopyableCode code="select" /></td>
-    <td></td>
-    <td><a href="#parameter-resource_id"><code>resource_id</code></a></td>
-    <td>To list all sinks, send a GET request to `/v2/monitoring/sinks`.</td>
-</tr>
-<tr>
     <td><a href="#monitoring_get_sink"><CopyableCode code="monitoring_get_sink" /></a></td>
     <td><CopyableCode code="select" /></td>
     <td><a href="#parameter-sink_uuid"><code>sink_uuid</code></a></td>
     <td></td>
     <td>To get the details of a sink (resources and destination), send a GET request to `/v2/monitoring/sinks/$&#123;sink_uuid&#125;`.</td>
+</tr>
+<tr>
+    <td><a href="#monitoring_list_sinks"><CopyableCode code="monitoring_list_sinks" /></a></td>
+    <td><CopyableCode code="select" /></td>
+    <td></td>
+    <td><a href="#parameter-resource_id"><code>resource_id</code></a></td>
+    <td>To list all sinks, send a GET request to `/v2/monitoring/sinks`.</td>
 </tr>
 <tr>
     <td><a href="#monitoring_create_sink"><CopyableCode code="monitoring_create_sink" /></a></td>
@@ -147,32 +167,34 @@ Parameters can be passed in the `WHERE` clause of a query. Check the [Methods](#
 ## `SELECT` examples
 
 <Tabs
-    defaultValue="monitoring_list_sinks"
+    defaultValue="monitoring_get_sink"
     values={[
-        { label: 'monitoring_list_sinks', value: 'monitoring_list_sinks' },
-        { label: 'monitoring_get_sink', value: 'monitoring_get_sink' }
+        { label: 'monitoring_get_sink', value: 'monitoring_get_sink' },
+        { label: 'monitoring_list_sinks', value: 'monitoring_list_sinks' }
     ]}
 >
-<TabItem value="monitoring_list_sinks">
-
-To list all sinks, send a GET request to `/v2/monitoring/sinks`.
-
-```sql
-SELECT
-*
-FROM digitalocean.monitoring.sinks
-WHERE resource_id = '{{ resource_id }}';
-```
-</TabItem>
 <TabItem value="monitoring_get_sink">
 
 To get the details of a sink (resources and destination), send a GET request to `/v2/monitoring/sinks/$&#123;sink_uuid&#125;`.
 
 ```sql
 SELECT
-*
+destination,
+resources
 FROM digitalocean.monitoring.sinks
 WHERE sink_uuid = '{{ sink_uuid }}' -- required;
+```
+</TabItem>
+<TabItem value="monitoring_list_sinks">
+
+To list all sinks, send a GET request to `/v2/monitoring/sinks`.
+
+```sql
+SELECT
+destination,
+resources
+FROM digitalocean.monitoring.sinks
+WHERE resource_id = '{{ resource_id }}';
 ```
 </TabItem>
 </Tabs>

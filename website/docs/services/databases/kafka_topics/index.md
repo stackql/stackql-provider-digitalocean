@@ -32,28 +32,12 @@ Creates, updates, deletes, gets or lists a <code>kafka_topics</code> resource.
 The following fields are returned by `SELECT` queries:
 
 <Tabs
-    defaultValue="databases_list_kafka_topics"
+    defaultValue="databases_get_kafka_topic"
     values={[
-        { label: 'databases_list_kafka_topics', value: 'databases_list_kafka_topics' },
-        { label: 'databases_get_kafka_topic', value: 'databases_get_kafka_topic' }
+        { label: 'databases_get_kafka_topic', value: 'databases_get_kafka_topic' },
+        { label: 'databases_list_kafka_topics', value: 'databases_list_kafka_topics' }
     ]}
 >
-<TabItem value="databases_list_kafka_topics">
-
-A JSON object with a key of `topics`.
-
-<table>
-<thead>
-    <tr>
-    <th>Name</th>
-    <th>Datatype</th>
-    <th>Description</th>
-    </tr>
-</thead>
-<tbody>
-</tbody>
-</table>
-</TabItem>
 <TabItem value="databases_get_kafka_topic">
 
 A JSON object with a key of `topic`.
@@ -67,6 +51,67 @@ A JSON object with a key of `topic`.
     </tr>
 </thead>
 <tbody>
+<tr>
+    <td><CopyableCode code="name" /></td>
+    <td><code>string</code></td>
+    <td>The name of the Kafka topic. (example: events)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="config" /></td>
+    <td><code>object</code></td>
+    <td></td>
+</tr>
+<tr>
+    <td><CopyableCode code="partitions" /></td>
+    <td><code>array</code></td>
+    <td></td>
+</tr>
+<tr>
+    <td><CopyableCode code="replication_factor" /></td>
+    <td><code>integer</code></td>
+    <td>The number of nodes to replicate data across the cluster.</td>
+</tr>
+<tr>
+    <td><CopyableCode code="state" /></td>
+    <td><code>string</code></td>
+    <td>The state of the Kafka topic. (example: active)</td>
+</tr>
+</tbody>
+</table>
+</TabItem>
+<TabItem value="databases_list_kafka_topics">
+
+A JSON object with a key of `topics`.
+
+<table>
+<thead>
+    <tr>
+    <th>Name</th>
+    <th>Datatype</th>
+    <th>Description</th>
+    </tr>
+</thead>
+<tbody>
+<tr>
+    <td><CopyableCode code="name" /></td>
+    <td><code>string</code></td>
+    <td>The name of the Kafka topic. (example: events)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="partition_count" /></td>
+    <td><code>integer</code></td>
+    <td>The number of partitions available for the topic. On update, this value can only be increased.</td>
+</tr>
+<tr>
+    <td><CopyableCode code="replication_factor" /></td>
+    <td><code>integer</code></td>
+    <td>The number of nodes to replicate data across the cluster.</td>
+</tr>
+<tr>
+    <td><CopyableCode code="state" /></td>
+    <td><code>string</code></td>
+    <td>The state of the Kafka topic. (example: active)</td>
+</tr>
 </tbody>
 </table>
 </TabItem>
@@ -88,18 +133,18 @@ The following methods are available for this resource:
 </thead>
 <tbody>
 <tr>
-    <td><a href="#databases_list_kafka_topics"><CopyableCode code="databases_list_kafka_topics" /></a></td>
-    <td><CopyableCode code="select" /></td>
-    <td><a href="#parameter-database_cluster_uuid"><code>database_cluster_uuid</code></a></td>
-    <td></td>
-    <td>To list all of a Kafka cluster's topics, send a GET request to<br />`/v2/databases/$DATABASE_ID/topics`.<br /><br />The result will be a JSON object with a `topics` key.<br /></td>
-</tr>
-<tr>
     <td><a href="#databases_get_kafka_topic"><CopyableCode code="databases_get_kafka_topic" /></a></td>
     <td><CopyableCode code="select" /></td>
     <td><a href="#parameter-database_cluster_uuid"><code>database_cluster_uuid</code></a>, <a href="#parameter-topic_name"><code>topic_name</code></a></td>
     <td></td>
     <td>To retrieve a given topic by name from the set of a Kafka cluster's topics,<br />send a GET request to `/v2/databases/$DATABASE_ID/topics/$TOPIC_NAME`.<br /><br />The result will be a JSON object with a `topic` key.<br /></td>
+</tr>
+<tr>
+    <td><a href="#databases_list_kafka_topics"><CopyableCode code="databases_list_kafka_topics" /></a></td>
+    <td><CopyableCode code="select" /></td>
+    <td><a href="#parameter-database_cluster_uuid"><code>database_cluster_uuid</code></a></td>
+    <td></td>
+    <td>To list all of a Kafka cluster's topics, send a GET request to<br />`/v2/databases/$DATABASE_ID/topics`.<br /><br />The result will be a JSON object with a `topics` key.<br /></td>
 </tr>
 <tr>
     <td><a href="#databases_create_kafka_topic"><CopyableCode code="databases_create_kafka_topic" /></a></td>
@@ -154,33 +199,40 @@ Parameters can be passed in the `WHERE` clause of a query. Check the [Methods](#
 ## `SELECT` examples
 
 <Tabs
-    defaultValue="databases_list_kafka_topics"
+    defaultValue="databases_get_kafka_topic"
     values={[
-        { label: 'databases_list_kafka_topics', value: 'databases_list_kafka_topics' },
-        { label: 'databases_get_kafka_topic', value: 'databases_get_kafka_topic' }
+        { label: 'databases_get_kafka_topic', value: 'databases_get_kafka_topic' },
+        { label: 'databases_list_kafka_topics', value: 'databases_list_kafka_topics' }
     ]}
 >
-<TabItem value="databases_list_kafka_topics">
-
-To list all of a Kafka cluster's topics, send a GET request to<br />`/v2/databases/$DATABASE_ID/topics`.<br /><br />The result will be a JSON object with a `topics` key.<br />
-
-```sql
-SELECT
-*
-FROM digitalocean.databases.kafka_topics
-WHERE database_cluster_uuid = '{{ database_cluster_uuid }}' -- required;
-```
-</TabItem>
 <TabItem value="databases_get_kafka_topic">
 
 To retrieve a given topic by name from the set of a Kafka cluster's topics,<br />send a GET request to `/v2/databases/$DATABASE_ID/topics/$TOPIC_NAME`.<br /><br />The result will be a JSON object with a `topic` key.<br />
 
 ```sql
 SELECT
-*
+name,
+config,
+partitions,
+replication_factor,
+state
 FROM digitalocean.databases.kafka_topics
 WHERE database_cluster_uuid = '{{ database_cluster_uuid }}' -- required
 AND topic_name = '{{ topic_name }}' -- required;
+```
+</TabItem>
+<TabItem value="databases_list_kafka_topics">
+
+To list all of a Kafka cluster's topics, send a GET request to<br />`/v2/databases/$DATABASE_ID/topics`.<br /><br />The result will be a JSON object with a `topics` key.<br />
+
+```sql
+SELECT
+name,
+partition_count,
+replication_factor,
+state
+FROM digitalocean.databases.kafka_topics
+WHERE database_cluster_uuid = '{{ database_cluster_uuid }}' -- required;
 ```
 </TabItem>
 </Tabs>
@@ -213,6 +265,8 @@ SELECT
 {{ partition_count }},
 '{{ config }}',
 '{{ database_cluster_uuid }}'
+RETURNING
+topic
 ;
 ```
 </TabItem>
@@ -267,7 +321,9 @@ data__partition_count = {{ partition_count }},
 data__config = '{{ config }}'
 WHERE 
 database_cluster_uuid = '{{ database_cluster_uuid }}' --required
-AND topic_name = '{{ topic_name }}' --required;
+AND topic_name = '{{ topic_name }}' --required
+RETURNING
+topic;
 ```
 </TabItem>
 </Tabs>

@@ -4,7 +4,7 @@ hide_title: false
 hide_table_of_contents: false
 keywords:
   - repository_manifests
-  - container_registries
+  - container_registry
   - digitalocean
   - infrastructure-as-code
   - configuration-as-data
@@ -24,7 +24,7 @@ Creates, updates, deletes, gets or lists a <code>repository_manifests</code> res
 <table><tbody>
 <tr><td><b>Name</b></td><td><code>repository_manifests</code></td></tr>
 <tr><td><b>Type</b></td><td>Resource</td></tr>
-<tr><td><b>Id</b></td><td><CopyableCode code="digitalocean.container_registries.repository_manifests" /></td></tr>
+<tr><td><b>Id</b></td><td><CopyableCode code="digitalocean.container_registry.repository_manifests" /></td></tr>
 </tbody></table>
 
 ## Fields
@@ -50,6 +50,46 @@ The response body will be a JSON object with a key of `manifests`. This will be 
     </tr>
 </thead>
 <tbody>
+<tr>
+    <td><CopyableCode code="registry_name" /></td>
+    <td><code>string</code></td>
+    <td>The name of the container registry. (example: example)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="blobs" /></td>
+    <td><code>array</code></td>
+    <td>All blobs associated with this manifest</td>
+</tr>
+<tr>
+    <td><CopyableCode code="compressed_size_bytes" /></td>
+    <td><code>integer</code></td>
+    <td>The compressed size of the manifest in bytes.</td>
+</tr>
+<tr>
+    <td><CopyableCode code="digest" /></td>
+    <td><code>string</code></td>
+    <td>The manifest digest (example: sha256:cb8a924afdf0229ef7515d9e5b3024e23b3eb03ddbba287f4a19c6ac90b8d221)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="repository" /></td>
+    <td><code>string</code></td>
+    <td>The name of the repository. (example: repo-1)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="size_bytes" /></td>
+    <td><code>integer</code></td>
+    <td>The uncompressed size of the manifest in bytes (this size is calculated asynchronously so it may not be immediately available).</td>
+</tr>
+<tr>
+    <td><CopyableCode code="tags" /></td>
+    <td><code>array</code></td>
+    <td>All tags associated with this manifest</td>
+</tr>
+<tr>
+    <td><CopyableCode code="updated_at" /></td>
+    <td><code>string (date-time)</code></td>
+    <td>The time the manifest was last updated. (example: 2020-04-09T23:54:25Z)</td>
+</tr>
 </tbody>
 </table>
 </TabItem>
@@ -156,8 +196,15 @@ To list all manifests in your container registry repository, send a GET<br />req
 
 ```sql
 SELECT
-*
-FROM digitalocean.container_registries.repository_manifests
+registry_name,
+blobs,
+compressed_size_bytes,
+digest,
+repository,
+size_bytes,
+tags,
+updated_at
+FROM digitalocean.container_registry.repository_manifests
 WHERE registry_name = '{{ registry_name }}' -- required
 AND repository_name = '{{ repository_name }}' -- required
 AND per_page = '{{ per_page }}'
@@ -180,7 +227,7 @@ AND page = '{{ page }}';
 To delete a container repository manifest by digest in one of your registries, send a DELETE request to<br />`/v2/registries/$REGISTRY_NAME/repositories/$REPOSITORY_NAME/digests/$MANIFEST_DIGEST`.<br /><br />Note that if your repository name contains `/` characters, it must be<br />URL-encoded in the request URL. For example, to delete<br />`registry.digitalocean.com/example/my/repo@sha256:abcd`, the path would be<br />`/v2/registry/example/repositories/my%2Frepo/digests/sha256:abcd`.<br /><br />A successful request will receive a 204 status code with no body in response.<br />This indicates that the request was processed successfully.<br /><br />It is similar to DELETE `/v2/registry/$REGISTRY_NAME/repositories/$REPOSITORY_NAME/digests/$MANIFEST_DIGEST` and exists for backward compatibility.<br />
 
 ```sql
-DELETE FROM digitalocean.container_registries.repository_manifests
+DELETE FROM digitalocean.container_registry.repository_manifests
 WHERE registry_name = '{{ registry_name }}' --required
 AND repository_name = '{{ repository_name }}' --required
 AND manifest_digest = '{{ manifest_digest }}' --required;
@@ -203,7 +250,7 @@ AND manifest_digest = '{{ manifest_digest }}' --required;
 To list all manifests in your container registry repository, send a GET<br />request to `/v2/registry/$REGISTRY_NAME/repositories/$REPOSITORY_NAME/digests`.<br /><br />Note that if your repository name contains `/` characters, it must be<br />URL-encoded in the request URL. For example, to list manifests for<br />`registry.digitalocean.com/example/my/repo`, the path would be<br />`/v2/registry/example/repositories/my%2Frepo/digests`.<br />
 
 ```sql
-EXEC digitalocean.container_registries.repository_manifests.registry_list_repository_manifests_legacy 
+EXEC digitalocean.container_registry.repository_manifests.registry_list_repository_manifests_legacy 
 @registry_name='{{ registry_name }}' --required, 
 @repository_name='{{ repository_name }}' --required, 
 @per_page='{{ per_page }}', 
@@ -215,7 +262,7 @@ EXEC digitalocean.container_registries.repository_manifests.registry_list_reposi
 To delete a container repository manifest by digest, send a DELETE request to<br />`/v2/registry/$REGISTRY_NAME/repositories/$REPOSITORY_NAME/digests/$MANIFEST_DIGEST`.<br /><br />Note that if your repository name contains `/` characters, it must be<br />URL-encoded in the request URL. For example, to delete<br />`registry.digitalocean.com/example/my/repo@sha256:abcd`, the path would be<br />`/v2/registry/example/repositories/my%2Frepo/digests/sha256:abcd`.<br /><br />A successful request will receive a 204 status code with no body in response.<br />This indicates that the request was processed successfully.<br />
 
 ```sql
-EXEC digitalocean.container_registries.repository_manifests.registry_delete_repository_manifest_legacy 
+EXEC digitalocean.container_registry.repository_manifests.registry_delete_repository_manifest_legacy 
 @registry_name='{{ registry_name }}' --required, 
 @repository_name='{{ repository_name }}' --required, 
 @manifest_digest='{{ manifest_digest }}' --required;

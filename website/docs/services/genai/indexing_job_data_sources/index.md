@@ -51,9 +51,74 @@ A successful response.
 </thead>
 <tbody>
 <tr>
-    <td><CopyableCode code="indexed_data_sources" /></td>
-    <td><code>array</code></td>
-    <td></td>
+    <td><CopyableCode code="completed_at" /></td>
+    <td><code>string (date-time)</code></td>
+    <td>Timestamp when data source completed indexing (example: 2023-01-01T00:00:00Z)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="data_source_uuid" /></td>
+    <td><code>string</code></td>
+    <td>Uuid of the indexed data source (example: 123e4567-e89b-12d3-a456-426614174000)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="error_details" /></td>
+    <td><code>string</code></td>
+    <td>A detailed error description (example: example string)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="error_msg" /></td>
+    <td><code>string</code></td>
+    <td>A string code provinding a hint which part of the system experienced an error (example: example string)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="failed_item_count" /></td>
+    <td><code>string (uint64)</code></td>
+    <td>Total count of files that have failed (example: 12345)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="indexed_file_count" /></td>
+    <td><code>string (uint64)</code></td>
+    <td>Total count of files that have been indexed (example: 12345)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="indexed_item_count" /></td>
+    <td><code>string (uint64)</code></td>
+    <td>Total count of files that have been indexed (example: 12345)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="removed_item_count" /></td>
+    <td><code>string (uint64)</code></td>
+    <td>Total count of files that have been removed (example: 12345)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="skipped_item_count" /></td>
+    <td><code>string (uint64)</code></td>
+    <td>Total count of files that have been skipped (example: 12345)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="started_at" /></td>
+    <td><code>string (date-time)</code></td>
+    <td>Timestamp when data source started indexing (example: 2023-01-01T00:00:00Z)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="status" /></td>
+    <td><code>string</code></td>
+    <td> (default: DATA_SOURCE_STATUS_UNKNOWN, example: DATA_SOURCE_STATUS_UNKNOWN)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="total_bytes" /></td>
+    <td><code>string (uint64)</code></td>
+    <td>Total size of files in data source in bytes (example: 12345)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="total_bytes_indexed" /></td>
+    <td><code>string (uint64)</code></td>
+    <td>Total size of files in data source in bytes that have been indexed (example: 12345)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="total_file_count" /></td>
+    <td><code>string (uint64)</code></td>
+    <td>Total file count in the data source (example: 12345)</td>
 </tr>
 </tbody>
 </table>
@@ -120,7 +185,20 @@ To list all datasources for an indexing job, send a GET request to `/v2/gen-ai/i
 
 ```sql
 SELECT
-indexed_data_sources
+completed_at,
+data_source_uuid,
+error_details,
+error_msg,
+failed_item_count,
+indexed_file_count,
+indexed_item_count,
+removed_item_count,
+skipped_item_count,
+started_at,
+status,
+total_bytes,
+total_bytes_indexed,
+total_file_count
 FROM digitalocean.genai.indexing_job_data_sources
 WHERE indexing_job_uuid = '{{ indexing_job_uuid }}' -- required;
 ```

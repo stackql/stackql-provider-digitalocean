@@ -51,9 +51,114 @@ A successful response.
 </thead>
 <tbody>
 <tr>
-    <td><CopyableCode code="evaluation_run" /></td>
+    <td><CopyableCode code="created_by_user_id" /></td>
+    <td><code>string (uint64)</code></td>
+    <td> (example: 12345)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="agent_name" /></td>
+    <td><code>string</code></td>
+    <td>Agent name (example: example name)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="run_name" /></td>
+    <td><code>string</code></td>
+    <td>Run name. (example: example name)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="test_case_name" /></td>
+    <td><code>string</code></td>
+    <td>Test case name. (example: example name)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="agent_deleted" /></td>
+    <td><code>boolean</code></td>
+    <td>Whether agent is deleted</td>
+</tr>
+<tr>
+    <td><CopyableCode code="agent_uuid" /></td>
+    <td><code>string</code></td>
+    <td>Agent UUID. (example: 123e4567-e89b-12d3-a456-426614174000)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="agent_version_hash" /></td>
+    <td><code>string</code></td>
+    <td>Version hash (example: example string)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="agent_workspace_uuid" /></td>
+    <td><code>string</code></td>
+    <td>Agent workspace uuid (example: 123e4567-e89b-12d3-a456-426614174000)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="created_by_user_email" /></td>
+    <td><code>string</code></td>
+    <td> (example: example@example.com)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="error_description" /></td>
+    <td><code>string</code></td>
+    <td>The error description (example: example string)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="evaluation_run_uuid" /></td>
+    <td><code>string</code></td>
+    <td>Evaluation run UUID. (example: 123e4567-e89b-12d3-a456-426614174000)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="evaluation_test_case_workspace_uuid" /></td>
+    <td><code>string</code></td>
+    <td>Evaluation test case workspace uuid (example: 123e4567-e89b-12d3-a456-426614174000)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="finished_at" /></td>
+    <td><code>string (date-time)</code></td>
+    <td>Run end time. (example: 2023-01-01T00:00:00Z)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="pass_status" /></td>
+    <td><code>boolean</code></td>
+    <td>The pass status of the evaluation run based on the star metric.</td>
+</tr>
+<tr>
+    <td><CopyableCode code="queued_at" /></td>
+    <td><code>string (date-time)</code></td>
+    <td>Run queued time. (example: 2023-01-01T00:00:00Z)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="run_level_metric_results" /></td>
+    <td><code>array</code></td>
+    <td></td>
+</tr>
+<tr>
+    <td><CopyableCode code="star_metric_result" /></td>
     <td><code>object</code></td>
     <td></td>
+</tr>
+<tr>
+    <td><CopyableCode code="started_at" /></td>
+    <td><code>string (date-time)</code></td>
+    <td>Run start time. (example: 2023-01-01T00:00:00Z)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="status" /></td>
+    <td><code>string</code></td>
+    <td>Evaluation Run Statuses (default: EVALUATION_RUN_STATUS_UNSPECIFIED, example: EVALUATION_RUN_STATUS_UNSPECIFIED)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="test_case_description" /></td>
+    <td><code>string</code></td>
+    <td>Test case description. (example: example string)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="test_case_uuid" /></td>
+    <td><code>string</code></td>
+    <td>Test-case UUID. (example: 123e4567-e89b-12d3-a456-426614174000)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="test_case_version" /></td>
+    <td><code>integer (int64)</code></td>
+    <td>Test-case-version.</td>
 </tr>
 </tbody>
 </table>
@@ -127,7 +232,28 @@ To retrive information about an existing evaluation run, send a GET request to `
 
 ```sql
 SELECT
-evaluation_run
+created_by_user_id,
+agent_name,
+run_name,
+test_case_name,
+agent_deleted,
+agent_uuid,
+agent_version_hash,
+agent_workspace_uuid,
+created_by_user_email,
+error_description,
+evaluation_run_uuid,
+evaluation_test_case_workspace_uuid,
+finished_at,
+pass_status,
+queued_at,
+run_level_metric_results,
+star_metric_result,
+started_at,
+status,
+test_case_description,
+test_case_uuid,
+test_case_version
 FROM digitalocean.genai.evaluation_runs
 WHERE evaluation_run_uuid = '{{ evaluation_run_uuid }}' -- required;
 ```

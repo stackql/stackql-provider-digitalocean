@@ -32,12 +32,58 @@ Creates, updates, deletes, gets or lists an <code>anthropic_api_keys</code> reso
 The following fields are returned by `SELECT` queries:
 
 <Tabs
-    defaultValue="genai_list_anthropic_api_keys"
+    defaultValue="genai_get_anthropic_api_key"
     values={[
-        { label: 'genai_list_anthropic_api_keys', value: 'genai_list_anthropic_api_keys' },
-        { label: 'genai_get_anthropic_api_key', value: 'genai_get_anthropic_api_key' }
+        { label: 'genai_get_anthropic_api_key', value: 'genai_get_anthropic_api_key' },
+        { label: 'genai_list_anthropic_api_keys', value: 'genai_list_anthropic_api_keys' }
     ]}
 >
+<TabItem value="genai_get_anthropic_api_key">
+
+A successful response.
+
+<table>
+<thead>
+    <tr>
+    <th>Name</th>
+    <th>Datatype</th>
+    <th>Description</th>
+    </tr>
+</thead>
+<tbody>
+<tr>
+    <td><CopyableCode code="name" /></td>
+    <td><code>string</code></td>
+    <td>Name (example: example name)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="created_at" /></td>
+    <td><code>string (date-time)</code></td>
+    <td>Key creation date (example: 2023-01-01T00:00:00Z)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="created_by" /></td>
+    <td><code>string (uint64)</code></td>
+    <td>Created by user id from DO (example: 12345)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="deleted_at" /></td>
+    <td><code>string (date-time)</code></td>
+    <td>Key deleted date (example: 2023-01-01T00:00:00Z)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="updated_at" /></td>
+    <td><code>string (date-time)</code></td>
+    <td>Key last updated date (example: 2023-01-01T00:00:00Z)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="uuid" /></td>
+    <td><code>string</code></td>
+    <td>Uuid (example: 123e4567-e89b-12d3-a456-426614174000)</td>
+</tr>
+</tbody>
+</table>
+</TabItem>
 <TabItem value="genai_list_anthropic_api_keys">
 
 A successful response.
@@ -69,27 +115,6 @@ A successful response.
 </tbody>
 </table>
 </TabItem>
-<TabItem value="genai_get_anthropic_api_key">
-
-A successful response.
-
-<table>
-<thead>
-    <tr>
-    <th>Name</th>
-    <th>Datatype</th>
-    <th>Description</th>
-    </tr>
-</thead>
-<tbody>
-<tr>
-    <td><CopyableCode code="api_key_info" /></td>
-    <td><code>object</code></td>
-    <td>Anthropic API Key Info</td>
-</tr>
-</tbody>
-</table>
-</TabItem>
 </Tabs>
 
 ## Methods
@@ -108,18 +133,18 @@ The following methods are available for this resource:
 </thead>
 <tbody>
 <tr>
-    <td><a href="#genai_list_anthropic_api_keys"><CopyableCode code="genai_list_anthropic_api_keys" /></a></td>
-    <td><CopyableCode code="select" /></td>
-    <td></td>
-    <td><a href="#parameter-page"><code>page</code></a>, <a href="#parameter-per_page"><code>per_page</code></a></td>
-    <td>To list all Anthropic API keys, send a GET request to `/v2/gen-ai/anthropic/keys`.</td>
-</tr>
-<tr>
     <td><a href="#genai_get_anthropic_api_key"><CopyableCode code="genai_get_anthropic_api_key" /></a></td>
     <td><CopyableCode code="select" /></td>
     <td><a href="#parameter-api_key_uuid"><code>api_key_uuid</code></a></td>
     <td></td>
     <td>To retrieve details of an Anthropic API key, send a GET request to `/v2/gen-ai/anthropic/keys/&#123;api_key_uuid&#125;`.</td>
+</tr>
+<tr>
+    <td><a href="#genai_list_anthropic_api_keys"><CopyableCode code="genai_list_anthropic_api_keys" /></a></td>
+    <td><CopyableCode code="select" /></td>
+    <td></td>
+    <td><a href="#parameter-page"><code>page</code></a>, <a href="#parameter-per_page"><code>per_page</code></a></td>
+    <td>To list all Anthropic API keys, send a GET request to `/v2/gen-ai/anthropic/keys`.</td>
 </tr>
 <tr>
     <td><a href="#genai_create_anthropic_api_key"><CopyableCode code="genai_create_anthropic_api_key" /></a></td>
@@ -179,12 +204,28 @@ Parameters can be passed in the `WHERE` clause of a query. Check the [Methods](#
 ## `SELECT` examples
 
 <Tabs
-    defaultValue="genai_list_anthropic_api_keys"
+    defaultValue="genai_get_anthropic_api_key"
     values={[
-        { label: 'genai_list_anthropic_api_keys', value: 'genai_list_anthropic_api_keys' },
-        { label: 'genai_get_anthropic_api_key', value: 'genai_get_anthropic_api_key' }
+        { label: 'genai_get_anthropic_api_key', value: 'genai_get_anthropic_api_key' },
+        { label: 'genai_list_anthropic_api_keys', value: 'genai_list_anthropic_api_keys' }
     ]}
 >
+<TabItem value="genai_get_anthropic_api_key">
+
+To retrieve details of an Anthropic API key, send a GET request to `/v2/gen-ai/anthropic/keys/&#123;api_key_uuid&#125;`.
+
+```sql
+SELECT
+name,
+created_at,
+created_by,
+deleted_at,
+updated_at,
+uuid
+FROM digitalocean.genai.anthropic_api_keys
+WHERE api_key_uuid = '{{ api_key_uuid }}' -- required;
+```
+</TabItem>
 <TabItem value="genai_list_anthropic_api_keys">
 
 To list all Anthropic API keys, send a GET request to `/v2/gen-ai/anthropic/keys`.
@@ -197,17 +238,6 @@ meta
 FROM digitalocean.genai.anthropic_api_keys
 WHERE page = '{{ page }}'
 AND per_page = '{{ per_page }}';
-```
-</TabItem>
-<TabItem value="genai_get_anthropic_api_key">
-
-To retrieve details of an Anthropic API key, send a GET request to `/v2/gen-ai/anthropic/keys/&#123;api_key_uuid&#125;`.
-
-```sql
-SELECT
-api_key_info
-FROM digitalocean.genai.anthropic_api_keys
-WHERE api_key_uuid = '{{ api_key_uuid }}' -- required;
 ```
 </TabItem>
 </Tabs>

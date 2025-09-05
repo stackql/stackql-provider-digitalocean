@@ -32,28 +32,12 @@ Creates, updates, deletes, gets or lists a <code>clusters</code> resource.
 The following fields are returned by `SELECT` queries:
 
 <Tabs
-    defaultValue="databases_list_clusters"
+    defaultValue="databases_get_cluster"
     values={[
-        { label: 'databases_list_clusters', value: 'databases_list_clusters' },
-        { label: 'databases_get_cluster', value: 'databases_get_cluster' }
+        { label: 'databases_get_cluster', value: 'databases_get_cluster' },
+        { label: 'databases_list_clusters', value: 'databases_list_clusters' }
     ]}
 >
-<TabItem value="databases_list_clusters">
-
-A JSON object with a key of `databases`.
-
-<table>
-<thead>
-    <tr>
-    <th>Name</th>
-    <th>Datatype</th>
-    <th>Description</th>
-    </tr>
-</thead>
-<tbody>
-</tbody>
-</table>
-</TabItem>
 <TabItem value="databases_get_cluster">
 
 A JSON object with a key of `database`.
@@ -67,6 +51,292 @@ A JSON object with a key of `database`.
     </tr>
 </thead>
 <tbody>
+<tr>
+    <td><CopyableCode code="id" /></td>
+    <td><code>string (uuid)</code></td>
+    <td>A unique ID that can be used to identify and reference a database cluster. (example: 9cc10173-e9ea-4176-9dbc-a4cee4c4ff30)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="name" /></td>
+    <td><code>string</code></td>
+    <td>A unique, human-readable name referring to a database cluster. (example: backend)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="project_id" /></td>
+    <td><code>string (uuid)</code></td>
+    <td>The ID of the project that the database cluster is assigned to. If excluded when creating a new database cluster, it will be assigned to your default project.<br /><br />Requires `project:read` scope. (example: 9cc10173-e9ea-4176-9dbc-a4cee4c4ff30)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="connection" /></td>
+    <td><code>object</code></td>
+    <td></td>
+</tr>
+<tr>
+    <td><CopyableCode code="created_at" /></td>
+    <td><code>string (date-time)</code></td>
+    <td>A time value given in ISO8601 combined date and time format that represents when the database cluster was created. (example: 2019-01-11T18:37:36Z)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="db_names" /></td>
+    <td><code>array</code></td>
+    <td>An array of strings containing the names of databases created in the database cluster.</td>
+</tr>
+<tr>
+    <td><CopyableCode code="engine" /></td>
+    <td><code>string</code></td>
+    <td>A slug representing the database engine used for the cluster. The possible values are: "pg" for PostgreSQL, "mysql" for MySQL, "redis" for Caching, "mongodb" for MongoDB, "kafka" for Kafka, "opensearch" for OpenSearch, and "valkey" for Valkey. (example: mysql)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="maintenance_window" /></td>
+    <td><code>object</code></td>
+    <td></td>
+</tr>
+<tr>
+    <td><CopyableCode code="metrics_endpoints" /></td>
+    <td><code>array</code></td>
+    <td>Public hostname and port of the cluster's metrics endpoint(s). Includes one record for the cluster's primary node and a second entry for the cluster's standby node(s).</td>
+</tr>
+<tr>
+    <td><CopyableCode code="num_nodes" /></td>
+    <td><code>integer</code></td>
+    <td>The number of nodes in the database cluster.</td>
+</tr>
+<tr>
+    <td><CopyableCode code="private_connection" /></td>
+    <td><code>object</code></td>
+    <td></td>
+</tr>
+<tr>
+    <td><CopyableCode code="private_network_uuid" /></td>
+    <td><code>string</code></td>
+    <td>A string specifying the UUID of the VPC to which the database cluster will be assigned. If excluded, the cluster when creating a new database cluster, it will be assigned to your account's default VPC for the region. <br /><br />Requires `vpc:read` scope. (pattern: ^$|[0-9a-f]&#123;8&#125;\b-[0-9a-f]&#123;4&#125;-[0-9a-f]&#123;4&#125;-[0-9a-f]&#123;4&#125;-\b[0-9a-f]&#123;12&#125;, example: d455e75d-4858-4eec-8c95-da2f0a5f93a7)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="region" /></td>
+    <td><code>string</code></td>
+    <td>The slug identifier for the region where the database cluster is located. (example: nyc3)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="rules" /></td>
+    <td><code>array</code></td>
+    <td></td>
+</tr>
+<tr>
+    <td><CopyableCode code="schema_registry_connection" /></td>
+    <td><code>object</code></td>
+    <td>The connection details for Schema Registry.</td>
+</tr>
+<tr>
+    <td><CopyableCode code="semantic_version" /></td>
+    <td><code>string</code></td>
+    <td>A string representing the semantic version of the database engine in use for the cluster. (example: 8.0.28)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="size" /></td>
+    <td><code>string</code></td>
+    <td>The slug identifier representing the size of the nodes in the database cluster. (example: db-s-2vcpu-4gb)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="standby_connection" /></td>
+    <td><code>object</code></td>
+    <td></td>
+</tr>
+<tr>
+    <td><CopyableCode code="standby_private_connection" /></td>
+    <td><code>object</code></td>
+    <td></td>
+</tr>
+<tr>
+    <td><CopyableCode code="status" /></td>
+    <td><code>string</code></td>
+    <td>A string representing the current status of the database cluster. (example: creating)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="storage_size_mib" /></td>
+    <td><code>integer</code></td>
+    <td>Additional storage added to the cluster, in MiB. If null, no additional storage is added to the cluster, beyond what is provided as a base amount from the 'size' and any previously added additional storage.</td>
+</tr>
+<tr>
+    <td><CopyableCode code="tags" /></td>
+    <td><code>array</code></td>
+    <td>An array of tags that have been applied to the database cluster. <br /><br />Requires `tag:read` scope.</td>
+</tr>
+<tr>
+    <td><CopyableCode code="ui_connection" /></td>
+    <td><code>object</code></td>
+    <td>The connection details for OpenSearch dashboard. </td>
+</tr>
+<tr>
+    <td><CopyableCode code="users" /></td>
+    <td><code>array</code></td>
+    <td></td>
+</tr>
+<tr>
+    <td><CopyableCode code="version" /></td>
+    <td><code>string</code></td>
+    <td>A string representing the version of the database engine in use for the cluster. (example: 8)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="version_end_of_availability" /></td>
+    <td><code>string</code></td>
+    <td>A timestamp referring to the date when the particular version will no longer be available for creating new clusters. If null, the version does not have an end of availability timeline. (example: 2023-05-09T00:00:00Z)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="version_end_of_life" /></td>
+    <td><code>string</code></td>
+    <td>A timestamp referring to the date when the particular version will no longer be supported. If null, the version does not have an end of life timeline. (example: 2023-11-09T00:00:00Z)</td>
+</tr>
+</tbody>
+</table>
+</TabItem>
+<TabItem value="databases_list_clusters">
+
+A JSON object with a key of `databases`.
+
+<table>
+<thead>
+    <tr>
+    <th>Name</th>
+    <th>Datatype</th>
+    <th>Description</th>
+    </tr>
+</thead>
+<tbody>
+<tr>
+    <td><CopyableCode code="id" /></td>
+    <td><code>string (uuid)</code></td>
+    <td>A unique ID that can be used to identify and reference a database cluster. (example: 9cc10173-e9ea-4176-9dbc-a4cee4c4ff30)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="name" /></td>
+    <td><code>string</code></td>
+    <td>A unique, human-readable name referring to a database cluster. (example: backend)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="project_id" /></td>
+    <td><code>string (uuid)</code></td>
+    <td>The ID of the project that the database cluster is assigned to. If excluded when creating a new database cluster, it will be assigned to your default project.<br /><br />Requires `project:read` scope. (example: 9cc10173-e9ea-4176-9dbc-a4cee4c4ff30)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="connection" /></td>
+    <td><code>object</code></td>
+    <td></td>
+</tr>
+<tr>
+    <td><CopyableCode code="created_at" /></td>
+    <td><code>string (date-time)</code></td>
+    <td>A time value given in ISO8601 combined date and time format that represents when the database cluster was created. (example: 2019-01-11T18:37:36Z)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="db_names" /></td>
+    <td><code>array</code></td>
+    <td>An array of strings containing the names of databases created in the database cluster.</td>
+</tr>
+<tr>
+    <td><CopyableCode code="engine" /></td>
+    <td><code>string</code></td>
+    <td>A slug representing the database engine used for the cluster. The possible values are: "pg" for PostgreSQL, "mysql" for MySQL, "redis" for Caching, "mongodb" for MongoDB, "kafka" for Kafka, "opensearch" for OpenSearch, and "valkey" for Valkey. (example: mysql)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="maintenance_window" /></td>
+    <td><code>object</code></td>
+    <td></td>
+</tr>
+<tr>
+    <td><CopyableCode code="metrics_endpoints" /></td>
+    <td><code>array</code></td>
+    <td>Public hostname and port of the cluster's metrics endpoint(s). Includes one record for the cluster's primary node and a second entry for the cluster's standby node(s).</td>
+</tr>
+<tr>
+    <td><CopyableCode code="num_nodes" /></td>
+    <td><code>integer</code></td>
+    <td>The number of nodes in the database cluster.</td>
+</tr>
+<tr>
+    <td><CopyableCode code="private_connection" /></td>
+    <td><code>object</code></td>
+    <td></td>
+</tr>
+<tr>
+    <td><CopyableCode code="private_network_uuid" /></td>
+    <td><code>string</code></td>
+    <td>A string specifying the UUID of the VPC to which the database cluster will be assigned. If excluded, the cluster when creating a new database cluster, it will be assigned to your account's default VPC for the region. <br /><br />Requires `vpc:read` scope. (pattern: ^$|[0-9a-f]&#123;8&#125;\b-[0-9a-f]&#123;4&#125;-[0-9a-f]&#123;4&#125;-[0-9a-f]&#123;4&#125;-\b[0-9a-f]&#123;12&#125;, example: d455e75d-4858-4eec-8c95-da2f0a5f93a7)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="region" /></td>
+    <td><code>string</code></td>
+    <td>The slug identifier for the region where the database cluster is located. (example: nyc3)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="rules" /></td>
+    <td><code>array</code></td>
+    <td></td>
+</tr>
+<tr>
+    <td><CopyableCode code="schema_registry_connection" /></td>
+    <td><code>object</code></td>
+    <td>The connection details for Schema Registry.</td>
+</tr>
+<tr>
+    <td><CopyableCode code="semantic_version" /></td>
+    <td><code>string</code></td>
+    <td>A string representing the semantic version of the database engine in use for the cluster. (example: 8.0.28)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="size" /></td>
+    <td><code>string</code></td>
+    <td>The slug identifier representing the size of the nodes in the database cluster. (example: db-s-2vcpu-4gb)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="standby_connection" /></td>
+    <td><code>object</code></td>
+    <td></td>
+</tr>
+<tr>
+    <td><CopyableCode code="standby_private_connection" /></td>
+    <td><code>object</code></td>
+    <td></td>
+</tr>
+<tr>
+    <td><CopyableCode code="status" /></td>
+    <td><code>string</code></td>
+    <td>A string representing the current status of the database cluster. (example: creating)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="storage_size_mib" /></td>
+    <td><code>integer</code></td>
+    <td>Additional storage added to the cluster, in MiB. If null, no additional storage is added to the cluster, beyond what is provided as a base amount from the 'size' and any previously added additional storage.</td>
+</tr>
+<tr>
+    <td><CopyableCode code="tags" /></td>
+    <td><code>array</code></td>
+    <td>An array of tags that have been applied to the database cluster. <br /><br />Requires `tag:read` scope.</td>
+</tr>
+<tr>
+    <td><CopyableCode code="ui_connection" /></td>
+    <td><code>object</code></td>
+    <td>The connection details for OpenSearch dashboard. </td>
+</tr>
+<tr>
+    <td><CopyableCode code="users" /></td>
+    <td><code>array</code></td>
+    <td></td>
+</tr>
+<tr>
+    <td><CopyableCode code="version" /></td>
+    <td><code>string</code></td>
+    <td>A string representing the version of the database engine in use for the cluster. (example: 8)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="version_end_of_availability" /></td>
+    <td><code>string</code></td>
+    <td>A timestamp referring to the date when the particular version will no longer be available for creating new clusters. If null, the version does not have an end of availability timeline. (example: 2023-05-09T00:00:00Z)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="version_end_of_life" /></td>
+    <td><code>string</code></td>
+    <td>A timestamp referring to the date when the particular version will no longer be supported. If null, the version does not have an end of life timeline. (example: 2023-11-09T00:00:00Z)</td>
+</tr>
 </tbody>
 </table>
 </TabItem>
@@ -88,18 +358,18 @@ The following methods are available for this resource:
 </thead>
 <tbody>
 <tr>
-    <td><a href="#databases_list_clusters"><CopyableCode code="databases_list_clusters" /></a></td>
-    <td><CopyableCode code="select" /></td>
-    <td></td>
-    <td><a href="#parameter-tag_name"><code>tag_name</code></a></td>
-    <td>To list all of the database clusters available on your account, send a GET request to `/v2/databases`. To limit the results to database clusters with a specific tag, include the `tag_name` query parameter set to the name of the tag. For example, `/v2/databases?tag_name=$TAG_NAME`.<br /><br />The result will be a JSON object with a `databases` key. This will be set to an array of database objects, each of which will contain the standard database attributes.<br /><br />The embedded `connection` and `private_connection` objects will contain the information needed to access the database cluster. For multi-node clusters, the `standby_connection` and `standby_private_connection` objects will contain the information needed to connect to the cluster's standby node(s).<br /><br />The embedded `maintenance_window` object will contain information about any scheduled maintenance for the database cluster.</td>
-</tr>
-<tr>
     <td><a href="#databases_get_cluster"><CopyableCode code="databases_get_cluster" /></a></td>
     <td><CopyableCode code="select" /></td>
     <td><a href="#parameter-database_cluster_uuid"><code>database_cluster_uuid</code></a></td>
     <td></td>
     <td>To show information about an existing database cluster, send a GET request to `/v2/databases/$DATABASE_ID`.<br /><br />The response will be a JSON object with a database key. This will be set to an object containing the standard database cluster attributes.<br /><br />The embedded `connection` and `private_connection` objects will contain the information needed to access the database cluster. For multi-node clusters, the `standby_connection` and `standby_private_connection` objects contain the information needed to connect to the cluster's standby node(s).<br /><br />The embedded maintenance_window object will contain information about any scheduled maintenance for the database cluster.</td>
+</tr>
+<tr>
+    <td><a href="#databases_list_clusters"><CopyableCode code="databases_list_clusters" /></a></td>
+    <td><CopyableCode code="select" /></td>
+    <td></td>
+    <td><a href="#parameter-tag_name"><code>tag_name</code></a></td>
+    <td>To list all of the database clusters available on your account, send a GET request to `/v2/databases`. To limit the results to database clusters with a specific tag, include the `tag_name` query parameter set to the name of the tag. For example, `/v2/databases?tag_name=$TAG_NAME`.<br /><br />The result will be a JSON object with a `databases` key. This will be set to an array of database objects, each of which will contain the standard database attributes.<br /><br />The embedded `connection` and `private_connection` objects will contain the information needed to access the database cluster. For multi-node clusters, the `standby_connection` and `standby_private_connection` objects will contain the information needed to connect to the cluster's standby node(s).<br /><br />The embedded `maintenance_window` object will contain information about any scheduled maintenance for the database cluster.</td>
 </tr>
 <tr>
     <td><a href="#databases_create_cluster"><CopyableCode code="databases_create_cluster" /></a></td>
@@ -174,7 +444,7 @@ Parameters can be passed in the `WHERE` clause of a query. Check the [Methods](#
 <tr id="parameter-tag_name">
     <td><CopyableCode code="tag_name" /></td>
     <td><code>string</code></td>
-    <td>Limits the results to database clusters with a specific tag.&lt;br&gt;&lt;br&gt;Requires `tag:read` scope. (example: production)</td>
+    <td>Limits the results to database clusters with a specific tag.<br /><br />Requires `tag:read` scope. (example: production)</td>
 </tr>
 </tbody>
 </table>
@@ -182,32 +452,84 @@ Parameters can be passed in the `WHERE` clause of a query. Check the [Methods](#
 ## `SELECT` examples
 
 <Tabs
-    defaultValue="databases_list_clusters"
+    defaultValue="databases_get_cluster"
     values={[
-        { label: 'databases_list_clusters', value: 'databases_list_clusters' },
-        { label: 'databases_get_cluster', value: 'databases_get_cluster' }
+        { label: 'databases_get_cluster', value: 'databases_get_cluster' },
+        { label: 'databases_list_clusters', value: 'databases_list_clusters' }
     ]}
 >
-<TabItem value="databases_list_clusters">
-
-To list all of the database clusters available on your account, send a GET request to `/v2/databases`. To limit the results to database clusters with a specific tag, include the `tag_name` query parameter set to the name of the tag. For example, `/v2/databases?tag_name=$TAG_NAME`.<br /><br />The result will be a JSON object with a `databases` key. This will be set to an array of database objects, each of which will contain the standard database attributes.<br /><br />The embedded `connection` and `private_connection` objects will contain the information needed to access the database cluster. For multi-node clusters, the `standby_connection` and `standby_private_connection` objects will contain the information needed to connect to the cluster's standby node(s).<br /><br />The embedded `maintenance_window` object will contain information about any scheduled maintenance for the database cluster.
-
-```sql
-SELECT
-*
-FROM digitalocean.databases.clusters
-WHERE tag_name = '{{ tag_name }}';
-```
-</TabItem>
 <TabItem value="databases_get_cluster">
 
 To show information about an existing database cluster, send a GET request to `/v2/databases/$DATABASE_ID`.<br /><br />The response will be a JSON object with a database key. This will be set to an object containing the standard database cluster attributes.<br /><br />The embedded `connection` and `private_connection` objects will contain the information needed to access the database cluster. For multi-node clusters, the `standby_connection` and `standby_private_connection` objects contain the information needed to connect to the cluster's standby node(s).<br /><br />The embedded maintenance_window object will contain information about any scheduled maintenance for the database cluster.
 
 ```sql
 SELECT
-*
+id,
+name,
+project_id,
+connection,
+created_at,
+db_names,
+engine,
+maintenance_window,
+metrics_endpoints,
+num_nodes,
+private_connection,
+private_network_uuid,
+region,
+rules,
+schema_registry_connection,
+semantic_version,
+size,
+standby_connection,
+standby_private_connection,
+status,
+storage_size_mib,
+tags,
+ui_connection,
+users,
+version,
+version_end_of_availability,
+version_end_of_life
 FROM digitalocean.databases.clusters
 WHERE database_cluster_uuid = '{{ database_cluster_uuid }}' -- required;
+```
+</TabItem>
+<TabItem value="databases_list_clusters">
+
+To list all of the database clusters available on your account, send a GET request to `/v2/databases`. To limit the results to database clusters with a specific tag, include the `tag_name` query parameter set to the name of the tag. For example, `/v2/databases?tag_name=$TAG_NAME`.<br /><br />The result will be a JSON object with a `databases` key. This will be set to an array of database objects, each of which will contain the standard database attributes.<br /><br />The embedded `connection` and `private_connection` objects will contain the information needed to access the database cluster. For multi-node clusters, the `standby_connection` and `standby_private_connection` objects will contain the information needed to connect to the cluster's standby node(s).<br /><br />The embedded `maintenance_window` object will contain information about any scheduled maintenance for the database cluster.
+
+```sql
+SELECT
+id,
+name,
+project_id,
+connection,
+created_at,
+db_names,
+engine,
+maintenance_window,
+metrics_endpoints,
+num_nodes,
+private_connection,
+private_network_uuid,
+region,
+rules,
+schema_registry_connection,
+semantic_version,
+size,
+standby_connection,
+standby_private_connection,
+status,
+storage_size_mib,
+tags,
+ui_connection,
+users,
+version,
+version_end_of_availability,
+version_end_of_life
+FROM digitalocean.databases.clusters
+WHERE tag_name = '{{ tag_name }}';
 ```
 </TabItem>
 </Tabs>
@@ -256,6 +578,8 @@ SELECT
 {{ storage_size_mib }},
 '{{ autoscale }}',
 '{{ backup_restore }}'
+RETURNING
+database
 ;
 ```
 </TabItem>

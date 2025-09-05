@@ -50,6 +50,11 @@ A JSON object with autoscale configuration details.
     </tr>
 </thead>
 <tbody>
+<tr>
+    <td><CopyableCode code="storage" /></td>
+    <td><code>object</code></td>
+    <td>Configuration for database cluster storage autoscaling</td>
+</tr>
 </tbody>
 </table>
 </TabItem>
@@ -122,7 +127,7 @@ To retrieve the autoscale configuration for an existing database cluster, send a
 
 ```sql
 SELECT
-*
+storage
 FROM digitalocean.databases.autoscale_config
 WHERE database_cluster_uuid = '{{ database_cluster_uuid }}' -- required;
 ```

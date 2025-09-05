@@ -32,30 +32,14 @@ Creates, updates, deletes, gets or lists a <code>deployment_logs</code> resource
 The following fields are returned by `SELECT` queries:
 
 <Tabs
-    defaultValue="apps_get_logs_active_deployment"
+    defaultValue="apps_get_logs"
     values={[
-        { label: 'apps_get_logs_active_deployment', value: 'apps_get_logs_active_deployment' },
         { label: 'apps_get_logs', value: 'apps_get_logs' },
+        { label: 'apps_get_logs_active_deployment', value: 'apps_get_logs_active_deployment' },
         { label: 'apps_get_logs_aggregate', value: 'apps_get_logs_aggregate' },
         { label: 'apps_get_logs_active_deployment_aggregate', value: 'apps_get_logs_active_deployment_aggregate' }
     ]}
 >
-<TabItem value="apps_get_logs_active_deployment">
-
-A JSON object with urls that point to archived logs
-
-<table>
-<thead>
-    <tr>
-    <th>Name</th>
-    <th>Datatype</th>
-    <th>Description</th>
-    </tr>
-</thead>
-<tbody>
-</tbody>
-</table>
-</TabItem>
 <TabItem value="apps_get_logs">
 
 A JSON object with urls that point to archived logs
@@ -69,6 +53,42 @@ A JSON object with urls that point to archived logs
     </tr>
 </thead>
 <tbody>
+<tr>
+    <td><CopyableCode code="historic_urls" /></td>
+    <td><code>array</code></td>
+    <td> (title: A list of URLs to archived log files)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="live_url" /></td>
+    <td><code>string</code></td>
+    <td>A URL of the real-time live logs. This URL may use either the `https://` or `wss://` protocols and will keep pushing live logs as they become available. (example: ws://logs/build)</td>
+</tr>
+</tbody>
+</table>
+</TabItem>
+<TabItem value="apps_get_logs_active_deployment">
+
+A JSON object with urls that point to archived logs
+
+<table>
+<thead>
+    <tr>
+    <th>Name</th>
+    <th>Datatype</th>
+    <th>Description</th>
+    </tr>
+</thead>
+<tbody>
+<tr>
+    <td><CopyableCode code="historic_urls" /></td>
+    <td><code>array</code></td>
+    <td> (title: A list of URLs to archived log files)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="live_url" /></td>
+    <td><code>string</code></td>
+    <td>A URL of the real-time live logs. This URL may use either the `https://` or `wss://` protocols and will keep pushing live logs as they become available. (example: ws://logs/build)</td>
+</tr>
 </tbody>
 </table>
 </TabItem>
@@ -85,6 +105,16 @@ A JSON object with urls that point to archived logs
     </tr>
 </thead>
 <tbody>
+<tr>
+    <td><CopyableCode code="historic_urls" /></td>
+    <td><code>array</code></td>
+    <td> (title: A list of URLs to archived log files)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="live_url" /></td>
+    <td><code>string</code></td>
+    <td>A URL of the real-time live logs. This URL may use either the `https://` or `wss://` protocols and will keep pushing live logs as they become available. (example: ws://logs/build)</td>
+</tr>
 </tbody>
 </table>
 </TabItem>
@@ -101,6 +131,16 @@ A JSON object with urls that point to archived logs
     </tr>
 </thead>
 <tbody>
+<tr>
+    <td><CopyableCode code="historic_urls" /></td>
+    <td><code>array</code></td>
+    <td> (title: A list of URLs to archived log files)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="live_url" /></td>
+    <td><code>string</code></td>
+    <td>A URL of the real-time live logs. This URL may use either the `https://` or `wss://` protocols and will keep pushing live logs as they become available. (example: ws://logs/build)</td>
+</tr>
 </tbody>
 </table>
 </TabItem>
@@ -122,18 +162,18 @@ The following methods are available for this resource:
 </thead>
 <tbody>
 <tr>
-    <td><a href="#apps_get_logs_active_deployment"><CopyableCode code="apps_get_logs_active_deployment" /></a></td>
-    <td><CopyableCode code="select" /></td>
-    <td><a href="#parameter-app_id"><code>app_id</code></a>, <a href="#parameter-component_name"><code>component_name</code></a>, <a href="#parameter-type"><code>type</code></a></td>
-    <td><a href="#parameter-follow"><code>follow</code></a>, <a href="#parameter-pod_connection_timeout"><code>pod_connection_timeout</code></a></td>
-    <td>Retrieve the logs of the active deployment if one exists. The response will include links to either real-time logs of an in-progress or active deployment or archived logs of a past deployment. Note log_type=BUILD logs will return logs associated with the current active deployment (being served). To view build logs associated with in-progress build, the query must explicitly reference the deployment id.</td>
-</tr>
-<tr>
     <td><a href="#apps_get_logs"><CopyableCode code="apps_get_logs" /></a></td>
     <td><CopyableCode code="select" /></td>
     <td><a href="#parameter-app_id"><code>app_id</code></a>, <a href="#parameter-deployment_id"><code>deployment_id</code></a>, <a href="#parameter-component_name"><code>component_name</code></a>, <a href="#parameter-type"><code>type</code></a></td>
     <td><a href="#parameter-follow"><code>follow</code></a>, <a href="#parameter-pod_connection_timeout"><code>pod_connection_timeout</code></a></td>
     <td>Retrieve the logs of a past, in-progress, or active deployment. The response will include links to either real-time logs of an in-progress or active deployment or archived logs of a past deployment.</td>
+</tr>
+<tr>
+    <td><a href="#apps_get_logs_active_deployment"><CopyableCode code="apps_get_logs_active_deployment" /></a></td>
+    <td><CopyableCode code="select" /></td>
+    <td><a href="#parameter-app_id"><code>app_id</code></a>, <a href="#parameter-component_name"><code>component_name</code></a>, <a href="#parameter-type"><code>type</code></a></td>
+    <td><a href="#parameter-follow"><code>follow</code></a>, <a href="#parameter-pod_connection_timeout"><code>pod_connection_timeout</code></a></td>
+    <td>Retrieve the logs of the active deployment if one exists. The response will include links to either real-time logs of an in-progress or active deployment or archived logs of a past deployment. Note log_type=BUILD logs will return logs associated with the current active deployment (being served). To view build logs associated with in-progress build, the query must explicitly reference the deployment id.</td>
 </tr>
 <tr>
     <td><a href="#apps_get_logs_aggregate"><CopyableCode code="apps_get_logs_aggregate" /></a></td>
@@ -201,39 +241,41 @@ Parameters can be passed in the `WHERE` clause of a query. Check the [Methods](#
 ## `SELECT` examples
 
 <Tabs
-    defaultValue="apps_get_logs_active_deployment"
+    defaultValue="apps_get_logs"
     values={[
-        { label: 'apps_get_logs_active_deployment', value: 'apps_get_logs_active_deployment' },
         { label: 'apps_get_logs', value: 'apps_get_logs' },
+        { label: 'apps_get_logs_active_deployment', value: 'apps_get_logs_active_deployment' },
         { label: 'apps_get_logs_aggregate', value: 'apps_get_logs_aggregate' },
         { label: 'apps_get_logs_active_deployment_aggregate', value: 'apps_get_logs_active_deployment_aggregate' }
     ]}
 >
-<TabItem value="apps_get_logs_active_deployment">
-
-Retrieve the logs of the active deployment if one exists. The response will include links to either real-time logs of an in-progress or active deployment or archived logs of a past deployment. Note log_type=BUILD logs will return logs associated with the current active deployment (being served). To view build logs associated with in-progress build, the query must explicitly reference the deployment id.
-
-```sql
-SELECT
-*
-FROM digitalocean.apps.deployment_logs
-WHERE app_id = '{{ app_id }}' -- required
-AND component_name = '{{ component_name }}' -- required
-AND type = '{{ type }}' -- required
-AND follow = '{{ follow }}'
-AND pod_connection_timeout = '{{ pod_connection_timeout }}';
-```
-</TabItem>
 <TabItem value="apps_get_logs">
 
 Retrieve the logs of a past, in-progress, or active deployment. The response will include links to either real-time logs of an in-progress or active deployment or archived logs of a past deployment.
 
 ```sql
 SELECT
-*
+historic_urls,
+live_url
 FROM digitalocean.apps.deployment_logs
 WHERE app_id = '{{ app_id }}' -- required
 AND deployment_id = '{{ deployment_id }}' -- required
+AND component_name = '{{ component_name }}' -- required
+AND type = '{{ type }}' -- required
+AND follow = '{{ follow }}'
+AND pod_connection_timeout = '{{ pod_connection_timeout }}';
+```
+</TabItem>
+<TabItem value="apps_get_logs_active_deployment">
+
+Retrieve the logs of the active deployment if one exists. The response will include links to either real-time logs of an in-progress or active deployment or archived logs of a past deployment. Note log_type=BUILD logs will return logs associated with the current active deployment (being served). To view build logs associated with in-progress build, the query must explicitly reference the deployment id.
+
+```sql
+SELECT
+historic_urls,
+live_url
+FROM digitalocean.apps.deployment_logs
+WHERE app_id = '{{ app_id }}' -- required
 AND component_name = '{{ component_name }}' -- required
 AND type = '{{ type }}' -- required
 AND follow = '{{ follow }}'
@@ -246,7 +288,8 @@ Retrieve the logs of a past, in-progress, or active deployment. If a component n
 
 ```sql
 SELECT
-*
+historic_urls,
+live_url
 FROM digitalocean.apps.deployment_logs
 WHERE app_id = '{{ app_id }}' -- required
 AND deployment_id = '{{ deployment_id }}' -- required
@@ -261,7 +304,8 @@ Retrieve the logs of the active deployment if one exists. The response will incl
 
 ```sql
 SELECT
-*
+historic_urls,
+live_url
 FROM digitalocean.apps.deployment_logs
 WHERE app_id = '{{ app_id }}' -- required
 AND type = '{{ type }}' -- required

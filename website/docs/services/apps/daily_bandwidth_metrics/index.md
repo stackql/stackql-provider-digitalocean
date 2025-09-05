@@ -50,6 +50,16 @@ A JSON object with a `app_bandwidth_usage` key
     </tr>
 </thead>
 <tbody>
+<tr>
+    <td><CopyableCode code="app_bandwidth_usage" /></td>
+    <td><code>array</code></td>
+    <td>A list of bandwidth usage details by app.</td>
+</tr>
+<tr>
+    <td><CopyableCode code="date" /></td>
+    <td><code>string (date-time)</code></td>
+    <td>The date for the metrics data. (example: 2023-01-17T00:00:00Z)</td>
+</tr>
 </tbody>
 </table>
 </TabItem>
@@ -127,7 +137,8 @@ Retrieve daily bandwidth usage metrics for a single app.
 
 ```sql
 SELECT
-*
+app_bandwidth_usage,
+date
 FROM digitalocean.apps.daily_bandwidth_metrics
 WHERE app_id = '{{ app_id }}' -- required
 AND date = '{{ date }}';
@@ -157,6 +168,9 @@ data__date
 SELECT 
 '{{ app_ids }}' --required,
 '{{ date }}'
+RETURNING
+app_bandwidth_usage,
+date
 ;
 ```
 </TabItem>

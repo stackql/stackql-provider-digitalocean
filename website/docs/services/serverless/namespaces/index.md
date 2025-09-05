@@ -32,28 +32,12 @@ Creates, updates, deletes, gets or lists a <code>namespaces</code> resource.
 The following fields are returned by `SELECT` queries:
 
 <Tabs
-    defaultValue="functions_list_namespaces"
+    defaultValue="functions_get_namespace"
     values={[
-        { label: 'functions_list_namespaces', value: 'functions_list_namespaces' },
-        { label: 'functions_get_namespace', value: 'functions_get_namespace' }
+        { label: 'functions_get_namespace', value: 'functions_get_namespace' },
+        { label: 'functions_list_namespaces', value: 'functions_list_namespaces' }
     ]}
 >
-<TabItem value="functions_list_namespaces">
-
-An array of JSON objects with a key called `namespaces`.  Each object represents a namespace and contains<br />the properties associated with it. 
-
-<table>
-<thead>
-    <tr>
-    <th>Name</th>
-    <th>Datatype</th>
-    <th>Description</th>
-    </tr>
-</thead>
-<tbody>
-</tbody>
-</table>
-</TabItem>
 <TabItem value="functions_get_namespace">
 
 A JSON response object with a key called `namespace`. The object contains the properties associated<br />with the namespace.
@@ -67,6 +51,102 @@ A JSON response object with a key called `namespace`. The object contains the pr
     </tr>
 </thead>
 <tbody>
+<tr>
+    <td><CopyableCode code="api_host" /></td>
+    <td><code>string</code></td>
+    <td>The namespace's API hostname. Each function in a namespace is provided an endpoint at the namespace's hostname. (example: https://api_host.io)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="created_at" /></td>
+    <td><code>string</code></td>
+    <td>UTC time string. (example: 2022-09-14T04:16:45Z)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="key" /></td>
+    <td><code>string</code></td>
+    <td>A random alpha numeric string. This key is used in conjunction with the namespace's UUID to authenticate  a user to use the namespace via `doctl`, DigitalOcean's official CLI. (example: d1zcd455h01mqjfs4s2eaewyejehi5f2uj4etqq3h7cera8iwkub6xg5of1wdde2)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="label" /></td>
+    <td><code>string</code></td>
+    <td>The namespace's unique name. (example: my namespace)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="namespace" /></td>
+    <td><code>string</code></td>
+    <td>A unique string format of UUID with a prefix fn-. (example: fn-xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="region" /></td>
+    <td><code>string</code></td>
+    <td>The namespace's datacenter region. (example: nyc1)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="updated_at" /></td>
+    <td><code>string</code></td>
+    <td>UTC time string. (example: 2022-09-14T04:16:45Z)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="uuid" /></td>
+    <td><code>string</code></td>
+    <td>The namespace's Universally Unique Identifier. (example: xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx)</td>
+</tr>
+</tbody>
+</table>
+</TabItem>
+<TabItem value="functions_list_namespaces">
+
+An array of JSON objects with a key called `namespaces`.  Each object represents a namespace and contains<br />the properties associated with it. 
+
+<table>
+<thead>
+    <tr>
+    <th>Name</th>
+    <th>Datatype</th>
+    <th>Description</th>
+    </tr>
+</thead>
+<tbody>
+<tr>
+    <td><CopyableCode code="api_host" /></td>
+    <td><code>string</code></td>
+    <td>The namespace's API hostname. Each function in a namespace is provided an endpoint at the namespace's hostname. (example: https://api_host.io)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="created_at" /></td>
+    <td><code>string</code></td>
+    <td>UTC time string. (example: 2022-09-14T04:16:45Z)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="key" /></td>
+    <td><code>string</code></td>
+    <td>A random alpha numeric string. This key is used in conjunction with the namespace's UUID to authenticate  a user to use the namespace via `doctl`, DigitalOcean's official CLI. (example: d1zcd455h01mqjfs4s2eaewyejehi5f2uj4etqq3h7cera8iwkub6xg5of1wdde2)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="label" /></td>
+    <td><code>string</code></td>
+    <td>The namespace's unique name. (example: my namespace)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="namespace" /></td>
+    <td><code>string</code></td>
+    <td>A unique string format of UUID with a prefix fn-. (example: fn-xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="region" /></td>
+    <td><code>string</code></td>
+    <td>The namespace's datacenter region. (example: nyc1)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="updated_at" /></td>
+    <td><code>string</code></td>
+    <td>UTC time string. (example: 2022-09-14T04:16:45Z)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="uuid" /></td>
+    <td><code>string</code></td>
+    <td>The namespace's Universally Unique Identifier. (example: xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx)</td>
+</tr>
 </tbody>
 </table>
 </TabItem>
@@ -88,18 +168,18 @@ The following methods are available for this resource:
 </thead>
 <tbody>
 <tr>
-    <td><a href="#functions_list_namespaces"><CopyableCode code="functions_list_namespaces" /></a></td>
-    <td><CopyableCode code="select" /></td>
-    <td></td>
-    <td></td>
-    <td>Returns a list of namespaces associated with the current user. To get all namespaces, send a GET request to `/v2/functions/namespaces`.</td>
-</tr>
-<tr>
     <td><a href="#functions_get_namespace"><CopyableCode code="functions_get_namespace" /></a></td>
     <td><CopyableCode code="select" /></td>
     <td><a href="#parameter-namespace_id"><code>namespace_id</code></a></td>
     <td></td>
     <td>Gets the namespace details for the given namespace UUID. To get namespace details, send a GET request to `/v2/functions/namespaces/$NAMESPACE_ID` with no parameters.</td>
+</tr>
+<tr>
+    <td><a href="#functions_list_namespaces"><CopyableCode code="functions_list_namespaces" /></a></td>
+    <td><CopyableCode code="select" /></td>
+    <td></td>
+    <td></td>
+    <td>Returns a list of namespaces associated with the current user. To get all namespaces, send a GET request to `/v2/functions/namespaces`.</td>
 </tr>
 <tr>
     <td><a href="#functions_create_namespace"><CopyableCode code="functions_create_namespace" /></a></td>
@@ -142,31 +222,45 @@ Parameters can be passed in the `WHERE` clause of a query. Check the [Methods](#
 ## `SELECT` examples
 
 <Tabs
-    defaultValue="functions_list_namespaces"
+    defaultValue="functions_get_namespace"
     values={[
-        { label: 'functions_list_namespaces', value: 'functions_list_namespaces' },
-        { label: 'functions_get_namespace', value: 'functions_get_namespace' }
+        { label: 'functions_get_namespace', value: 'functions_get_namespace' },
+        { label: 'functions_list_namespaces', value: 'functions_list_namespaces' }
     ]}
 >
-<TabItem value="functions_list_namespaces">
-
-Returns a list of namespaces associated with the current user. To get all namespaces, send a GET request to `/v2/functions/namespaces`.
-
-```sql
-SELECT
-*
-FROM digitalocean.serverless.namespaces;
-```
-</TabItem>
 <TabItem value="functions_get_namespace">
 
 Gets the namespace details for the given namespace UUID. To get namespace details, send a GET request to `/v2/functions/namespaces/$NAMESPACE_ID` with no parameters.
 
 ```sql
 SELECT
-*
+api_host,
+created_at,
+key,
+label,
+namespace,
+region,
+updated_at,
+uuid
 FROM digitalocean.serverless.namespaces
 WHERE namespace_id = '{{ namespace_id }}' -- required;
+```
+</TabItem>
+<TabItem value="functions_list_namespaces">
+
+Returns a list of namespaces associated with the current user. To get all namespaces, send a GET request to `/v2/functions/namespaces`.
+
+```sql
+SELECT
+api_host,
+created_at,
+key,
+label,
+namespace,
+region,
+updated_at,
+uuid
+FROM digitalocean.serverless.namespaces;
 ```
 </TabItem>
 </Tabs>
@@ -193,6 +287,8 @@ data__label
 SELECT 
 '{{ region }}' --required,
 '{{ label }}' --required
+RETURNING
+namespace
 ;
 ```
 </TabItem>

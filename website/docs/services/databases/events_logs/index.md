@@ -50,6 +50,26 @@ A JSON object with a key of `events`.
     </tr>
 </thead>
 <tbody>
+<tr>
+    <td><CopyableCode code="id" /></td>
+    <td><code>string</code></td>
+    <td>ID of the particular event. (example: pe8u2huh)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="cluster_name" /></td>
+    <td><code>string</code></td>
+    <td>The name of cluster. (example: sample_cluster)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="create_time" /></td>
+    <td><code>string</code></td>
+    <td>The time of the generation of a event. (example: 2020-10-29T15:57:38Z)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="event_type" /></td>
+    <td><code>string</code></td>
+    <td>Type of the event. (example: cluster_create)</td>
+</tr>
 </tbody>
 </table>
 </TabItem>
@@ -115,7 +135,10 @@ To list all of the cluster events, send a GET request to<br />`/v2/databases/$DA
 
 ```sql
 SELECT
-*
+id,
+cluster_name,
+create_time,
+event_type
 FROM digitalocean.databases.events_logs
 WHERE database_cluster_uuid = '{{ database_cluster_uuid }}' -- required;
 ```

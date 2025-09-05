@@ -50,6 +50,21 @@ A JSON object.
     </tr>
 </thead>
 <tbody>
+<tr>
+    <td><CopyableCode code="id" /></td>
+    <td><code>string</code></td>
+    <td>The ID of the most recent migration. (example: 77b28fc8-19ff-11eb-8c9c-c68e24557488)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="created_at" /></td>
+    <td><code>string</code></td>
+    <td>The time the migration was initiated, in ISO 8601 format. (example: 2020-10-29T15:57:38Z)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="status" /></td>
+    <td><code>string</code></td>
+    <td>The current status of the migration. (example: running)</td>
+</tr>
 </tbody>
 </table>
 </TabItem>
@@ -134,7 +149,9 @@ To retrieve the status of the most recent online migration, send a GET request t
 
 ```sql
 SELECT
-*
+id,
+created_at,
+status
 FROM digitalocean.databases.online_migrations
 WHERE database_cluster_uuid = '{{ database_cluster_uuid }}' -- required;
 ```

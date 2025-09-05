@@ -50,6 +50,11 @@ A JSON string with a key of `sql_mode`.
     </tr>
 </thead>
 <tbody>
+<tr>
+    <td><CopyableCode code="sql_mode" /></td>
+    <td><code>string</code></td>
+    <td>A string specifying the configured SQL modes for the MySQL cluster. (example: ANSI,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION,NO_ZERO_DATE,NO_ZERO_IN_DATE,STRICT_ALL_TABLES)</td>
+</tr>
 </tbody>
 </table>
 </TabItem>
@@ -122,7 +127,7 @@ To retrieve the configured SQL modes for an existing MySQL cluster, send a GET r
 
 ```sql
 SELECT
-*
+sql_mode
 FROM digitalocean.databases.sql_mode
 WHERE database_cluster_uuid = '{{ database_cluster_uuid }}' -- required;
 ```

@@ -51,9 +51,44 @@ A successful response.
 </thead>
 <tbody>
 <tr>
-    <td><CopyableCode code="metrics" /></td>
-    <td><code>array</code></td>
-    <td></td>
+    <td><CopyableCode code="metric_name" /></td>
+    <td><code>string</code></td>
+    <td> (example: example name)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="description" /></td>
+    <td><code>string</code></td>
+    <td> (example: example string)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="inverted" /></td>
+    <td><code>boolean</code></td>
+    <td>If true, the metric is inverted, meaning that a lower value is better.</td>
+</tr>
+<tr>
+    <td><CopyableCode code="metric_type" /></td>
+    <td><code>string</code></td>
+    <td> (default: METRIC_TYPE_UNSPECIFIED, example: METRIC_TYPE_UNSPECIFIED)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="metric_uuid" /></td>
+    <td><code>string</code></td>
+    <td> (example: 123e4567-e89b-12d3-a456-426614174000)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="metric_value_type" /></td>
+    <td><code>string</code></td>
+    <td> (default: METRIC_VALUE_TYPE_UNSPECIFIED, example: METRIC_VALUE_TYPE_UNSPECIFIED)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="range_max" /></td>
+    <td><code>number (float)</code></td>
+    <td>The maximum value for the metric.</td>
+</tr>
+<tr>
+    <td><CopyableCode code="range_min" /></td>
+    <td><code>number (float)</code></td>
+    <td>The minimum value for the metric.</td>
 </tr>
 </tbody>
 </table>
@@ -115,7 +150,14 @@ To list all evaluation metrics, send a GET request to `/v2/gen-ai/evaluation_met
 
 ```sql
 SELECT
-metrics
+metric_name,
+description,
+inverted,
+metric_type,
+metric_uuid,
+metric_value_type,
+range_max,
+range_min
 FROM digitalocean.genai.evaluation_metrics;
 ```
 </TabItem>

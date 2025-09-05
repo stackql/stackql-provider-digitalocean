@@ -32,28 +32,12 @@ Creates, updates, deletes, gets or lists a <code>reserved_ips</code> resource.
 The following fields are returned by `SELECT` queries:
 
 <Tabs
-    defaultValue="reserved_ips_list"
+    defaultValue="reserved_ips_get"
     values={[
-        { label: 'reserved_ips_list', value: 'reserved_ips_list' },
-        { label: 'reserved_ips_get', value: 'reserved_ips_get' }
+        { label: 'reserved_ips_get', value: 'reserved_ips_get' },
+        { label: 'reserved_ips_list', value: 'reserved_ips_list' }
     ]}
 >
-<TabItem value="reserved_ips_list">
-
-The response will be a JSON object with a key called `reserved_ips`. This will be set to an array of reserved IP objects, each of which will contain the standard reserved IP attributes
-
-<table>
-<thead>
-    <tr>
-    <th>Name</th>
-    <th>Datatype</th>
-    <th>Description</th>
-    </tr>
-</thead>
-<tbody>
-</tbody>
-</table>
-</TabItem>
 <TabItem value="reserved_ips_get">
 
 The response will be a JSON object with a key called `reserved_ip`. The value of this will be an object that contains the standard attributes associated with a reserved IP.
@@ -67,6 +51,72 @@ The response will be a JSON object with a key called `reserved_ip`. The value of
     </tr>
 </thead>
 <tbody>
+<tr>
+    <td><CopyableCode code="project_id" /></td>
+    <td><code>string (uuid)</code></td>
+    <td>The UUID of the project to which the reserved IP currently belongs.<br /><br />Requires `project:read` scope. (example: 746c6152-2fa2-11ed-92d3-27aaa54e4988)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="droplet" /></td>
+    <td><code></code></td>
+    <td>The Droplet that the reserved IP has been assigned to. When you query a reserved IP, if it is assigned to a Droplet, the entire Droplet object will be returned. If it is not assigned, the value will be null.<br /><br />Requires `droplet:read` scope.</td>
+</tr>
+<tr>
+    <td><CopyableCode code="ip" /></td>
+    <td><code>string (ipv4)</code></td>
+    <td>The public IP address of the reserved IP. It also serves as its identifier. (example: 45.55.96.47)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="locked" /></td>
+    <td><code>boolean</code></td>
+    <td>A boolean value indicating whether or not the reserved IP has pending actions preventing new ones from being submitted.</td>
+</tr>
+<tr>
+    <td><CopyableCode code="region" /></td>
+    <td><code>object</code></td>
+    <td>The region that the reserved IP is reserved to. When you query a reserved IP, the entire region object will be returned.</td>
+</tr>
+</tbody>
+</table>
+</TabItem>
+<TabItem value="reserved_ips_list">
+
+The response will be a JSON object with a key called `reserved_ips`. This will be set to an array of reserved IP objects, each of which will contain the standard reserved IP attributes
+
+<table>
+<thead>
+    <tr>
+    <th>Name</th>
+    <th>Datatype</th>
+    <th>Description</th>
+    </tr>
+</thead>
+<tbody>
+<tr>
+    <td><CopyableCode code="project_id" /></td>
+    <td><code>string (uuid)</code></td>
+    <td>The UUID of the project to which the reserved IP currently belongs.<br /><br />Requires `project:read` scope. (example: 746c6152-2fa2-11ed-92d3-27aaa54e4988)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="droplet" /></td>
+    <td><code></code></td>
+    <td>The Droplet that the reserved IP has been assigned to. When you query a reserved IP, if it is assigned to a Droplet, the entire Droplet object will be returned. If it is not assigned, the value will be null.<br /><br />Requires `droplet:read` scope.</td>
+</tr>
+<tr>
+    <td><CopyableCode code="ip" /></td>
+    <td><code>string (ipv4)</code></td>
+    <td>The public IP address of the reserved IP. It also serves as its identifier. (example: 45.55.96.47)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="locked" /></td>
+    <td><code>boolean</code></td>
+    <td>A boolean value indicating whether or not the reserved IP has pending actions preventing new ones from being submitted.</td>
+</tr>
+<tr>
+    <td><CopyableCode code="region" /></td>
+    <td><code>object</code></td>
+    <td>The region that the reserved IP is reserved to. When you query a reserved IP, the entire region object will be returned.</td>
+</tr>
 </tbody>
 </table>
 </TabItem>
@@ -88,18 +138,18 @@ The following methods are available for this resource:
 </thead>
 <tbody>
 <tr>
-    <td><a href="#reserved_ips_list"><CopyableCode code="reserved_ips_list" /></a></td>
-    <td><CopyableCode code="select" /></td>
-    <td></td>
-    <td><a href="#parameter-per_page"><code>per_page</code></a>, <a href="#parameter-page"><code>page</code></a></td>
-    <td>To list all of the reserved IPs available on your account, send a GET request to `/v2/reserved_ips`.</td>
-</tr>
-<tr>
     <td><a href="#reserved_ips_get"><CopyableCode code="reserved_ips_get" /></a></td>
     <td><CopyableCode code="select" /></td>
     <td><a href="#parameter-reserved_ip"><code>reserved_ip</code></a></td>
     <td></td>
     <td>To show information about a reserved IP, send a GET request to `/v2/reserved_ips/$RESERVED_IP_ADDR`.</td>
+</tr>
+<tr>
+    <td><a href="#reserved_ips_list"><CopyableCode code="reserved_ips_list" /></a></td>
+    <td><CopyableCode code="select" /></td>
+    <td></td>
+    <td><a href="#parameter-per_page"><code>per_page</code></a>, <a href="#parameter-page"><code>page</code></a></td>
+    <td>To list all of the reserved IPs available on your account, send a GET request to `/v2/reserved_ips`.</td>
 </tr>
 <tr>
     <td><a href="#reserved_ips_create"><CopyableCode code="reserved_ips_create" /></a></td>
@@ -152,33 +202,41 @@ Parameters can be passed in the `WHERE` clause of a query. Check the [Methods](#
 ## `SELECT` examples
 
 <Tabs
-    defaultValue="reserved_ips_list"
+    defaultValue="reserved_ips_get"
     values={[
-        { label: 'reserved_ips_list', value: 'reserved_ips_list' },
-        { label: 'reserved_ips_get', value: 'reserved_ips_get' }
+        { label: 'reserved_ips_get', value: 'reserved_ips_get' },
+        { label: 'reserved_ips_list', value: 'reserved_ips_list' }
     ]}
 >
-<TabItem value="reserved_ips_list">
-
-To list all of the reserved IPs available on your account, send a GET request to `/v2/reserved_ips`.
-
-```sql
-SELECT
-*
-FROM digitalocean.compute.reserved_ips
-WHERE per_page = '{{ per_page }}'
-AND page = '{{ page }}';
-```
-</TabItem>
 <TabItem value="reserved_ips_get">
 
 To show information about a reserved IP, send a GET request to `/v2/reserved_ips/$RESERVED_IP_ADDR`.
 
 ```sql
 SELECT
-*
+project_id,
+droplet,
+ip,
+locked,
+region
 FROM digitalocean.compute.reserved_ips
 WHERE reserved_ip = '{{ reserved_ip }}' -- required;
+```
+</TabItem>
+<TabItem value="reserved_ips_list">
+
+To list all of the reserved IPs available on your account, send a GET request to `/v2/reserved_ips`.
+
+```sql
+SELECT
+project_id,
+droplet,
+ip,
+locked,
+region
+FROM digitalocean.compute.reserved_ips
+WHERE per_page = '{{ per_page }}'
+AND page = '{{ page }}';
 ```
 </TabItem>
 </Tabs>
@@ -203,6 +261,9 @@ INSERT INTO digitalocean.compute.reserved_ips (
 )
 SELECT 
 
+RETURNING
+links,
+reserved_ip
 ;
 ```
 </TabItem>

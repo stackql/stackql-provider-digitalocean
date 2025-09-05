@@ -50,6 +50,16 @@ A JSON with key `app_health`
     </tr>
 </thead>
 <tbody>
+<tr>
+    <td><CopyableCode code="components" /></td>
+    <td><code>array</code></td>
+    <td></td>
+</tr>
+<tr>
+    <td><CopyableCode code="functions_components" /></td>
+    <td><code>array</code></td>
+    <td></td>
+</tr>
 </tbody>
 </table>
 </TabItem>
@@ -115,7 +125,8 @@ Retrieve information like health status, cpu and memory utilization of app compo
 
 ```sql
 SELECT
-*
+components,
+functions_components
 FROM digitalocean.apps.health
 WHERE app_id = '{{ app_id }}' -- required;
 ```

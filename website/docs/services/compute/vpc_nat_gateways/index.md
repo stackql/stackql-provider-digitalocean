@@ -32,28 +32,12 @@ Creates, updates, deletes, gets or lists a <code>vpc_nat_gateways</code> resourc
 The following fields are returned by `SELECT` queries:
 
 <Tabs
-    defaultValue="vpcnatgateways_list"
+    defaultValue="vpcnatgateways_get"
     values={[
-        { label: 'vpcnatgateways_list', value: 'vpcnatgateways_list' },
-        { label: 'vpcnatgateways_get', value: 'vpcnatgateways_get' }
+        { label: 'vpcnatgateways_get', value: 'vpcnatgateways_get' },
+        { label: 'vpcnatgateways_list', value: 'vpcnatgateways_list' }
     ]}
 >
-<TabItem value="vpcnatgateways_list">
-
-A JSON object with a key of `vpc_nat_gateways`.
-
-<table>
-<thead>
-    <tr>
-    <th>Name</th>
-    <th>Datatype</th>
-    <th>Description</th>
-    </tr>
-</thead>
-<tbody>
-</tbody>
-</table>
-</TabItem>
 <TabItem value="vpcnatgateways_get">
 
 The response will be a JSON object with a key called `vpc_nat_gateway`. This will be<br />set to a JSON object that contains the standard VPC NAT gateway attributes.<br />
@@ -67,6 +51,152 @@ The response will be a JSON object with a key called `vpc_nat_gateway`. This wil
     </tr>
 </thead>
 <tbody>
+<tr>
+    <td><CopyableCode code="id" /></td>
+    <td><code>string</code></td>
+    <td>The unique identifier for the VPC NAT gateway. This is automatically generated upon creation. (example: 70e1b58d-cdec-4e95-b3ee-2d4d95feff51)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="name" /></td>
+    <td><code>string</code></td>
+    <td>The human-readable name of the VPC NAT gateway. (example: my-vpc-nat-gateway)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="created_at" /></td>
+    <td><code>string (date-time)</code></td>
+    <td>A time value given in ISO8601 combined date and time format that represents when the VPC NAT gateway was created. (title: The creation time of the VPC NAT gateway., example: 2020-07-28T18:00:00Z)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="egresses" /></td>
+    <td><code>object</code></td>
+    <td>An object containing egress information for the VPC NAT gateway.</td>
+</tr>
+<tr>
+    <td><CopyableCode code="icmp_timeout_seconds" /></td>
+    <td><code>integer</code></td>
+    <td>The ICMP timeout in seconds for the VPC NAT gateway.</td>
+</tr>
+<tr>
+    <td><CopyableCode code="region" /></td>
+    <td><code>string</code></td>
+    <td>The region in which the VPC NAT gateway is created. (example: tor1)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="size" /></td>
+    <td><code>integer</code></td>
+    <td>The size of the VPC NAT gateway.</td>
+</tr>
+<tr>
+    <td><CopyableCode code="state" /></td>
+    <td><code>string</code></td>
+    <td>The current state of the VPC NAT gateway. (example: ACTIVE)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="tcp_timeout_seconds" /></td>
+    <td><code>integer</code></td>
+    <td>The TCP timeout in seconds for the VPC NAT gateway.</td>
+</tr>
+<tr>
+    <td><CopyableCode code="type" /></td>
+    <td><code>string</code></td>
+    <td>The type of the VPC NAT gateway. (example: PUBLIC)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="udp_timeout_seconds" /></td>
+    <td><code>integer</code></td>
+    <td>The UDP timeout in seconds for the VPC NAT gateway.</td>
+</tr>
+<tr>
+    <td><CopyableCode code="updated_at" /></td>
+    <td><code>string (date-time)</code></td>
+    <td>A time value given in ISO8601 combined date and time format that represents when the VPC NAT gateway was last updated. (title: The last update time of the VPC NAT gateway., example: 2020-07-28T18:00:00Z)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="vpcs" /></td>
+    <td><code>array</code></td>
+    <td>An array of VPCs associated with the VPC NAT gateway.</td>
+</tr>
+</tbody>
+</table>
+</TabItem>
+<TabItem value="vpcnatgateways_list">
+
+A JSON object with a key of `vpc_nat_gateways`.
+
+<table>
+<thead>
+    <tr>
+    <th>Name</th>
+    <th>Datatype</th>
+    <th>Description</th>
+    </tr>
+</thead>
+<tbody>
+<tr>
+    <td><CopyableCode code="id" /></td>
+    <td><code>string</code></td>
+    <td>The unique identifier for the VPC NAT gateway. This is automatically generated upon creation. (example: 70e1b58d-cdec-4e95-b3ee-2d4d95feff51)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="name" /></td>
+    <td><code>string</code></td>
+    <td>The human-readable name of the VPC NAT gateway. (example: my-vpc-nat-gateway)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="created_at" /></td>
+    <td><code>string (date-time)</code></td>
+    <td>A time value given in ISO8601 combined date and time format that represents when the VPC NAT gateway was created. (title: The creation time of the VPC NAT gateway., example: 2020-07-28T18:00:00Z)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="egresses" /></td>
+    <td><code>object</code></td>
+    <td>An object containing egress information for the VPC NAT gateway.</td>
+</tr>
+<tr>
+    <td><CopyableCode code="icmp_timeout_seconds" /></td>
+    <td><code>integer</code></td>
+    <td>The ICMP timeout in seconds for the VPC NAT gateway.</td>
+</tr>
+<tr>
+    <td><CopyableCode code="region" /></td>
+    <td><code>string</code></td>
+    <td>The region in which the VPC NAT gateway is created. (example: tor1)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="size" /></td>
+    <td><code>integer</code></td>
+    <td>The size of the VPC NAT gateway.</td>
+</tr>
+<tr>
+    <td><CopyableCode code="state" /></td>
+    <td><code>string</code></td>
+    <td>The current state of the VPC NAT gateway. (example: ACTIVE)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="tcp_timeout_seconds" /></td>
+    <td><code>integer</code></td>
+    <td>The TCP timeout in seconds for the VPC NAT gateway.</td>
+</tr>
+<tr>
+    <td><CopyableCode code="type" /></td>
+    <td><code>string</code></td>
+    <td>The type of the VPC NAT gateway. (example: PUBLIC)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="udp_timeout_seconds" /></td>
+    <td><code>integer</code></td>
+    <td>The UDP timeout in seconds for the VPC NAT gateway.</td>
+</tr>
+<tr>
+    <td><CopyableCode code="updated_at" /></td>
+    <td><code>string (date-time)</code></td>
+    <td>A time value given in ISO8601 combined date and time format that represents when the VPC NAT gateway was last updated. (title: The last update time of the VPC NAT gateway., example: 2020-07-28T18:00:00Z)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="vpcs" /></td>
+    <td><code>array</code></td>
+    <td>An array of VPCs associated with the VPC NAT gateway.</td>
+</tr>
 </tbody>
 </table>
 </TabItem>
@@ -88,18 +218,18 @@ The following methods are available for this resource:
 </thead>
 <tbody>
 <tr>
-    <td><a href="#vpcnatgateways_list"><CopyableCode code="vpcnatgateways_list" /></a></td>
-    <td><CopyableCode code="select" /></td>
-    <td></td>
-    <td><a href="#parameter-per_page"><code>per_page</code></a>, <a href="#parameter-page"><code>page</code></a>, <a href="#parameter-state"><code>state</code></a>, <a href="#parameter-region"><code>region</code></a>, <a href="#parameter-type"><code>type</code></a>, <a href="#parameter-name"><code>name</code></a></td>
-    <td>To list all VPC NAT gateways in your team, send a GET request to `/v2/vpc_nat_gateways`.<br />The response body will be a JSON object with a key of `vpc_nat_gateways` containing an array of VPC NAT gateway objects.<br />These each contain the standard VPC NAT gateway attributes.<br /></td>
-</tr>
-<tr>
     <td><a href="#vpcnatgateways_get"><CopyableCode code="vpcnatgateways_get" /></a></td>
     <td><CopyableCode code="select" /></td>
     <td><a href="#parameter-id"><code>id</code></a></td>
     <td></td>
     <td>To show information about an individual VPC NAT gateway, send a GET request to<br />`/v2/vpc_nat_gateways/$VPC_NAT_GATEWAY_ID`.<br /></td>
+</tr>
+<tr>
+    <td><a href="#vpcnatgateways_list"><CopyableCode code="vpcnatgateways_list" /></a></td>
+    <td><CopyableCode code="select" /></td>
+    <td></td>
+    <td><a href="#parameter-per_page"><code>per_page</code></a>, <a href="#parameter-page"><code>page</code></a>, <a href="#parameter-state"><code>state</code></a>, <a href="#parameter-region"><code>region</code></a>, <a href="#parameter-type"><code>type</code></a>, <a href="#parameter-name"><code>name</code></a></td>
+    <td>To list all VPC NAT gateways in your team, send a GET request to `/v2/vpc_nat_gateways`.<br />The response body will be a JSON object with a key of `vpc_nat_gateways` containing an array of VPC NAT gateway objects.<br />These each contain the standard VPC NAT gateway attributes.<br /></td>
 </tr>
 <tr>
     <td><a href="#vpcnatgateways_create"><CopyableCode code="vpcnatgateways_create" /></a></td>
@@ -179,19 +309,54 @@ Parameters can be passed in the `WHERE` clause of a query. Check the [Methods](#
 ## `SELECT` examples
 
 <Tabs
-    defaultValue="vpcnatgateways_list"
+    defaultValue="vpcnatgateways_get"
     values={[
-        { label: 'vpcnatgateways_list', value: 'vpcnatgateways_list' },
-        { label: 'vpcnatgateways_get', value: 'vpcnatgateways_get' }
+        { label: 'vpcnatgateways_get', value: 'vpcnatgateways_get' },
+        { label: 'vpcnatgateways_list', value: 'vpcnatgateways_list' }
     ]}
 >
+<TabItem value="vpcnatgateways_get">
+
+To show information about an individual VPC NAT gateway, send a GET request to<br />`/v2/vpc_nat_gateways/$VPC_NAT_GATEWAY_ID`.<br />
+
+```sql
+SELECT
+id,
+name,
+created_at,
+egresses,
+icmp_timeout_seconds,
+region,
+size,
+state,
+tcp_timeout_seconds,
+type,
+udp_timeout_seconds,
+updated_at,
+vpcs
+FROM digitalocean.compute.vpc_nat_gateways
+WHERE id = '{{ id }}' -- required;
+```
+</TabItem>
 <TabItem value="vpcnatgateways_list">
 
 To list all VPC NAT gateways in your team, send a GET request to `/v2/vpc_nat_gateways`.<br />The response body will be a JSON object with a key of `vpc_nat_gateways` containing an array of VPC NAT gateway objects.<br />These each contain the standard VPC NAT gateway attributes.<br />
 
 ```sql
 SELECT
-*
+id,
+name,
+created_at,
+egresses,
+icmp_timeout_seconds,
+region,
+size,
+state,
+tcp_timeout_seconds,
+type,
+udp_timeout_seconds,
+updated_at,
+vpcs
 FROM digitalocean.compute.vpc_nat_gateways
 WHERE per_page = '{{ per_page }}'
 AND page = '{{ page }}'
@@ -199,17 +364,6 @@ AND state = '{{ state }}'
 AND region = '{{ region }}'
 AND type = '{{ type }}'
 AND name = '{{ name }}';
-```
-</TabItem>
-<TabItem value="vpcnatgateways_get">
-
-To show information about an individual VPC NAT gateway, send a GET request to<br />`/v2/vpc_nat_gateways/$VPC_NAT_GATEWAY_ID`.<br />
-
-```sql
-SELECT
-*
-FROM digitalocean.compute.vpc_nat_gateways
-WHERE id = '{{ id }}' -- required;
 ```
 </TabItem>
 </Tabs>
@@ -248,6 +402,8 @@ SELECT
 {{ udp_timeout_seconds }},
 {{ icmp_timeout_seconds }},
 {{ tcp_timeout_seconds }}
+RETURNING
+vpc_nat_gateway
 ;
 ```
 </TabItem>
@@ -327,7 +483,9 @@ data__tcp_timeout_seconds = {{ tcp_timeout_seconds }}
 WHERE 
 id = '{{ id }}' --required
 AND data__name = '{{ name }}' --required
-AND data__size = '{{ size }}' --required;
+AND data__size = '{{ size }}' --required
+RETURNING
+vpc_nat_gateway;
 ```
 </TabItem>
 </Tabs>

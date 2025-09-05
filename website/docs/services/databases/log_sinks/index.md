@@ -32,28 +32,12 @@ Creates, updates, deletes, gets or lists a <code>log_sinks</code> resource.
 The following fields are returned by `SELECT` queries:
 
 <Tabs
-    defaultValue="databases_list_logsink"
+    defaultValue="databases_get_logsink"
     values={[
-        { label: 'databases_list_logsink', value: 'databases_list_logsink' },
-        { label: 'databases_get_logsink', value: 'databases_get_logsink' }
+        { label: 'databases_get_logsink', value: 'databases_get_logsink' },
+        { label: 'databases_list_logsink', value: 'databases_list_logsink' }
     ]}
 >
-<TabItem value="databases_list_logsink">
-
-A JSON object with a key of `sinks`.
-
-<table>
-<thead>
-    <tr>
-    <th>Name</th>
-    <th>Datatype</th>
-    <th>Description</th>
-    </tr>
-</thead>
-<tbody>
-</tbody>
-</table>
-</TabItem>
 <TabItem value="databases_get_logsink">
 
 A JSON object with a key of `sink`.
@@ -67,6 +51,47 @@ A JSON object with a key of `sink`.
     </tr>
 </thead>
 <tbody>
+<tr>
+    <td><CopyableCode code="sink" /></td>
+    <td><code>object</code></td>
+    <td></td>
+</tr>
+</tbody>
+</table>
+</TabItem>
+<TabItem value="databases_list_logsink">
+
+A JSON object with a key of `sinks`.
+
+<table>
+<thead>
+    <tr>
+    <th>Name</th>
+    <th>Datatype</th>
+    <th>Description</th>
+    </tr>
+</thead>
+<tbody>
+<tr>
+    <td><CopyableCode code="sink_id" /></td>
+    <td><code>string</code></td>
+    <td>A unique identifier for Logsink (example: dfcc9f57d86bf58e321c2c6c31c7a971be244ac7)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="sink_name" /></td>
+    <td><code>string</code></td>
+    <td>The name of the Logsink (example: prod-logsink)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="config" /></td>
+    <td><code></code></td>
+    <td></td>
+</tr>
+<tr>
+    <td><CopyableCode code="sink_type" /></td>
+    <td><code>string</code></td>
+    <td> (example: rsyslog)</td>
+</tr>
 </tbody>
 </table>
 </TabItem>
@@ -88,18 +113,18 @@ The following methods are available for this resource:
 </thead>
 <tbody>
 <tr>
-    <td><a href="#databases_list_logsink"><CopyableCode code="databases_list_logsink" /></a></td>
-    <td><CopyableCode code="select" /></td>
-    <td><a href="#parameter-database_cluster_uuid"><code>database_cluster_uuid</code></a></td>
-    <td></td>
-    <td>To list logsinks for a database cluster, send a GET request to<br />`/v2/databases/$DATABASE_ID/logsink`.<br /></td>
-</tr>
-<tr>
     <td><a href="#databases_get_logsink"><CopyableCode code="databases_get_logsink" /></a></td>
     <td><CopyableCode code="select" /></td>
     <td><a href="#parameter-database_cluster_uuid"><code>database_cluster_uuid</code></a>, <a href="#parameter-logsink_id"><code>logsink_id</code></a></td>
     <td></td>
     <td>To get a logsink for a database cluster, send a GET request to<br />`/v2/databases/$DATABASE_ID/logsink/$LOGSINK_ID`.<br /></td>
+</tr>
+<tr>
+    <td><a href="#databases_list_logsink"><CopyableCode code="databases_list_logsink" /></a></td>
+    <td><CopyableCode code="select" /></td>
+    <td><a href="#parameter-database_cluster_uuid"><code>database_cluster_uuid</code></a></td>
+    <td></td>
+    <td>To list logsinks for a database cluster, send a GET request to<br />`/v2/databases/$DATABASE_ID/logsink`.<br /></td>
 </tr>
 <tr>
     <td><a href="#databases_create_logsink"><CopyableCode code="databases_create_logsink" /></a></td>
@@ -154,33 +179,36 @@ Parameters can be passed in the `WHERE` clause of a query. Check the [Methods](#
 ## `SELECT` examples
 
 <Tabs
-    defaultValue="databases_list_logsink"
+    defaultValue="databases_get_logsink"
     values={[
-        { label: 'databases_list_logsink', value: 'databases_list_logsink' },
-        { label: 'databases_get_logsink', value: 'databases_get_logsink' }
+        { label: 'databases_get_logsink', value: 'databases_get_logsink' },
+        { label: 'databases_list_logsink', value: 'databases_list_logsink' }
     ]}
 >
-<TabItem value="databases_list_logsink">
-
-To list logsinks for a database cluster, send a GET request to<br />`/v2/databases/$DATABASE_ID/logsink`.<br />
-
-```sql
-SELECT
-*
-FROM digitalocean.databases.log_sinks
-WHERE database_cluster_uuid = '{{ database_cluster_uuid }}' -- required;
-```
-</TabItem>
 <TabItem value="databases_get_logsink">
 
 To get a logsink for a database cluster, send a GET request to<br />`/v2/databases/$DATABASE_ID/logsink/$LOGSINK_ID`.<br />
 
 ```sql
 SELECT
-*
+sink
 FROM digitalocean.databases.log_sinks
 WHERE database_cluster_uuid = '{{ database_cluster_uuid }}' -- required
 AND logsink_id = '{{ logsink_id }}' -- required;
+```
+</TabItem>
+<TabItem value="databases_list_logsink">
+
+To list logsinks for a database cluster, send a GET request to<br />`/v2/databases/$DATABASE_ID/logsink`.<br />
+
+```sql
+SELECT
+sink_id,
+sink_name,
+config,
+sink_type
+FROM digitalocean.databases.log_sinks
+WHERE database_cluster_uuid = '{{ database_cluster_uuid }}' -- required;
 ```
 </TabItem>
 </Tabs>
@@ -211,6 +239,8 @@ SELECT
 '{{ sink_type }}' --required,
 '{{ config }}' --required,
 '{{ database_cluster_uuid }}'
+RETURNING
+sink
 ;
 ```
 </TabItem>

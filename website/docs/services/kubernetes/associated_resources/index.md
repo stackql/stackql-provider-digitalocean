@@ -50,6 +50,21 @@ The response will be a JSON object containing `load_balancers`, `volumes`, and `
     </tr>
 </thead>
 <tbody>
+<tr>
+    <td><CopyableCode code="load_balancers" /></td>
+    <td><code>array</code></td>
+    <td>A list of names and IDs for associated load balancers that can be destroyed along with the cluster.</td>
+</tr>
+<tr>
+    <td><CopyableCode code="volume_snapshots" /></td>
+    <td><code>array</code></td>
+    <td>A list of names and IDs for associated volume snapshots that can be destroyed along with the cluster.</td>
+</tr>
+<tr>
+    <td><CopyableCode code="volumes" /></td>
+    <td><code>array</code></td>
+    <td>A list of names and IDs for associated volumes that can be destroyed along with the cluster.</td>
+</tr>
 </tbody>
 </table>
 </TabItem>
@@ -129,7 +144,9 @@ To list the associated billable resources that can be destroyed along with a clu
 
 ```sql
 SELECT
-*
+load_balancers,
+volume_snapshots,
+volumes
 FROM digitalocean.kubernetes.associated_resources
 WHERE cluster_id = '{{ cluster_id }}' -- required;
 ```

@@ -50,6 +50,51 @@ A JSON object keyed on account with an excerpt of the current user account data.
     </tr>
 </thead>
 <tbody>
+<tr>
+    <td><CopyableCode code="name" /></td>
+    <td><code>string</code></td>
+    <td>The display name for the current user. (example: Sammy the Shark)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="droplet_limit" /></td>
+    <td><code>integer</code></td>
+    <td>The total number of Droplets current user or team may have active at one time. <br /><br />Requires `droplet:read` scope. </td>
+</tr>
+<tr>
+    <td><CopyableCode code="email" /></td>
+    <td><code>string</code></td>
+    <td>The email address used by the current user to register for DigitalOcean. (example: sammy@digitalocean.com)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="email_verified" /></td>
+    <td><code>boolean</code></td>
+    <td>If true, the user has verified their account via email. False otherwise.</td>
+</tr>
+<tr>
+    <td><CopyableCode code="floating_ip_limit" /></td>
+    <td><code>integer</code></td>
+    <td>The total number of Floating IPs the current user or team may have. <br /><br />Requires `reserved_ip:read` scope. </td>
+</tr>
+<tr>
+    <td><CopyableCode code="status" /></td>
+    <td><code>string</code></td>
+    <td>This value is one of "active", "warning" or "locked". (default: active, example: active)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="status_message" /></td>
+    <td><code>string</code></td>
+    <td>A human-readable message giving more details about the status of the account. (example:  )</td>
+</tr>
+<tr>
+    <td><CopyableCode code="team" /></td>
+    <td><code>object</code></td>
+    <td>When authorized in a team context, includes information about the current team.</td>
+</tr>
+<tr>
+    <td><CopyableCode code="uuid" /></td>
+    <td><code>string</code></td>
+    <td>The unique universal identifier for the current user. (example: b6fr89dbf6d9156cace5f3c78dc9851d957381ef)</td>
+</tr>
 </tbody>
 </table>
 </TabItem>
@@ -110,7 +155,15 @@ To show information about the current user account, send a GET request to `/v2/a
 
 ```sql
 SELECT
-*
+name,
+droplet_limit,
+email,
+email_verified,
+floating_ip_limit,
+status,
+status_message,
+team,
+uuid
 FROM digitalocean.account.account;
 ```
 </TabItem>

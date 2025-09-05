@@ -32,28 +32,12 @@ Creates, updates, deletes, gets or lists a <code>tags</code> resource.
 The following fields are returned by `SELECT` queries:
 
 <Tabs
-    defaultValue="tags_list"
+    defaultValue="tags_get"
     values={[
-        { label: 'tags_list', value: 'tags_list' },
-        { label: 'tags_get', value: 'tags_get' }
+        { label: 'tags_get', value: 'tags_get' },
+        { label: 'tags_list', value: 'tags_list' }
     ]}
 >
-<TabItem value="tags_list">
-
-To list all of your tags, you can send a `GET` request to `/v2/tags`.
-
-<table>
-<thead>
-    <tr>
-    <th>Name</th>
-    <th>Datatype</th>
-    <th>Description</th>
-    </tr>
-</thead>
-<tbody>
-</tbody>
-</table>
-</TabItem>
 <TabItem value="tags_get">
 
 The response will be a JSON object with a key called `tag`. <br />The value of this will be a tag object containing the standard tag attributes.<br /><br />Tagged resources will only include resources that you are authorized to see.<br />
@@ -67,6 +51,42 @@ The response will be a JSON object with a key called `tag`. <br />The value of t
     </tr>
 </thead>
 <tbody>
+<tr>
+    <td><CopyableCode code="name" /></td>
+    <td><code>string</code></td>
+    <td>The name of the tag. Tags may contain letters, numbers, colons, dashes, and underscores. There is a limit of 255 characters per tag.  **Note:** Tag names are case stable, which means the capitalization you use when you first create a tag is canonical.  When working with tags in the API, you must use the tag's canonical capitalization. For example, if you create a tag named "PROD", the URL to add that tag to a resource would be `https://api.digitalocean.com/v2/tags/PROD/resources` (not `/v2/tags/prod/resources`).  Tagged resources in the control panel will always display the canonical capitalization. For example, if you create a tag named "PROD", you can tag resources in the control panel by entering "prod". The tag will still display with its canonical capitalization, "PROD".  (pattern: ^[a-zA-Z0-9_\-\:]+$, example: extra-awesome)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="resources" /></td>
+    <td><code>object</code></td>
+    <td>Tagged Resource Statistics include metadata regarding the resource type that has been tagged.</td>
+</tr>
+</tbody>
+</table>
+</TabItem>
+<TabItem value="tags_list">
+
+To list all of your tags, you can send a `GET` request to `/v2/tags`.
+
+<table>
+<thead>
+    <tr>
+    <th>Name</th>
+    <th>Datatype</th>
+    <th>Description</th>
+    </tr>
+</thead>
+<tbody>
+<tr>
+    <td><CopyableCode code="name" /></td>
+    <td><code>string</code></td>
+    <td>The name of the tag. Tags may contain letters, numbers, colons, dashes, and underscores. There is a limit of 255 characters per tag.  **Note:** Tag names are case stable, which means the capitalization you use when you first create a tag is canonical.  When working with tags in the API, you must use the tag's canonical capitalization. For example, if you create a tag named "PROD", the URL to add that tag to a resource would be `https://api.digitalocean.com/v2/tags/PROD/resources` (not `/v2/tags/prod/resources`).  Tagged resources in the control panel will always display the canonical capitalization. For example, if you create a tag named "PROD", you can tag resources in the control panel by entering "prod". The tag will still display with its canonical capitalization, "PROD".  (pattern: ^[a-zA-Z0-9_\-\:]+$, example: extra-awesome)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="resources" /></td>
+    <td><code>object</code></td>
+    <td>Tagged Resource Statistics include metadata regarding the resource type that has been tagged.</td>
+</tr>
 </tbody>
 </table>
 </TabItem>
@@ -88,18 +108,18 @@ The following methods are available for this resource:
 </thead>
 <tbody>
 <tr>
-    <td><a href="#tags_list"><CopyableCode code="tags_list" /></a></td>
-    <td><CopyableCode code="select" /></td>
-    <td></td>
-    <td><a href="#parameter-per_page"><code>per_page</code></a>, <a href="#parameter-page"><code>page</code></a></td>
-    <td>To list all of your tags, you can send a GET request to `/v2/tags`.<br /><br />This endpoint will only return tagged resources that you are authorized to see<br />(e.g. Droplets will only be returned if you have `droplet:read`).<br /></td>
-</tr>
-<tr>
     <td><a href="#tags_get"><CopyableCode code="tags_get" /></a></td>
     <td><CopyableCode code="select" /></td>
     <td><a href="#parameter-tag_id"><code>tag_id</code></a></td>
     <td></td>
     <td>To retrieve an individual tag, you can send a `GET` request to<br />`/v2/tags/$TAG_NAME`.<br /><br />This endpoint will only return tagged resources that you are authorized to see.<br />For example, to see tagged Droplets, include the `droplet:read` scope.<br /></td>
+</tr>
+<tr>
+    <td><a href="#tags_list"><CopyableCode code="tags_list" /></a></td>
+    <td><CopyableCode code="select" /></td>
+    <td></td>
+    <td><a href="#parameter-per_page"><code>per_page</code></a>, <a href="#parameter-page"><code>page</code></a></td>
+    <td>To list all of your tags, you can send a GET request to `/v2/tags`.<br /><br />This endpoint will only return tagged resources that you are authorized to see<br />(e.g. Droplets will only be returned if you have `droplet:read`).<br /></td>
 </tr>
 <tr>
     <td><a href="#tags_create"><CopyableCode code="tags_create" /></a></td>
@@ -120,14 +140,14 @@ The following methods are available for this resource:
     <td><CopyableCode code="exec" /></td>
     <td><a href="#parameter-tag_id"><code>tag_id</code></a>, <a href="#parameter-resources"><code>resources</code></a></td>
     <td></td>
-    <td>Resources can be tagged by sending a POST request to<br />`/v2/tags/$TAG_NAME/resources` with an array of json objects containing<br />`resource_id` and `resource_type` attributes.<br /><br />Currently only tagging of Droplets, Databases, Images, Volumes, and Volume<br />Snapshots is supported. `resource_type` is expected to be the string `droplet`,<br />`database`, `image`, `volume` or `volume_snapshot`. `resource_id` is expected<br />to be the ID of the resource as a string.<br /><br />In order to tag a resource, you must have both `tag:create` and `&lt;resource type&gt;:update` scopes. For example, <br />to tag a Droplet, you must have `tag:create` and `droplet:update`.<br /></td>
+    <td>Resources can be tagged by sending a POST request to<br />`/v2/tags/$TAG_NAME/resources` with an array of json objects containing<br />`resource_id` and `resource_type` attributes.<br /><br />Currently only tagging of Droplets, Databases, Images, Volumes, and Volume<br />Snapshots is supported. `resource_type` is expected to be the string `droplet`,<br />`database`, `image`, `volume` or `volume_snapshot`. `resource_id` is expected<br />to be the ID of the resource as a string.<br /><br />In order to tag a resource, you must have both `tag:create` and `<resource type>:update` scopes. For example, <br />to tag a Droplet, you must have `tag:create` and `droplet:update`.<br /></td>
 </tr>
 <tr>
     <td><a href="#tags_unassign_resources"><CopyableCode code="tags_unassign_resources" /></a></td>
     <td><CopyableCode code="exec" /></td>
     <td><a href="#parameter-tag_id"><code>tag_id</code></a>, <a href="#parameter-resources"><code>resources</code></a></td>
     <td></td>
-    <td>Resources can be untagged by sending a DELETE request to<br />`/v2/tags/$TAG_NAME/resources` with an array of json objects containing<br />`resource_id` and `resource_type` attributes.<br /><br />Currently only untagging of Droplets, Databases, Images, Volumes, and Volume<br />Snapshots is supported. `resource_type` is expected to be the string `droplet`,<br />`database`, `image`, `volume` or `volume_snapshot`. `resource_id` is expected<br />to be the ID of the resource as a string.<br /><br />In order to untag a resource, you must have both `tag:delete` and `&lt;resource type&gt;:update` scopes. For example, <br />to untag a Droplet, you must have `tag:delete` and `droplet:update`.<br /></td>
+    <td>Resources can be untagged by sending a DELETE request to<br />`/v2/tags/$TAG_NAME/resources` with an array of json objects containing<br />`resource_id` and `resource_type` attributes.<br /><br />Currently only untagging of Droplets, Databases, Images, Volumes, and Volume<br />Snapshots is supported. `resource_type` is expected to be the string `droplet`,<br />`database`, `image`, `volume` or `volume_snapshot`. `resource_id` is expected<br />to be the ID of the resource as a string.<br /><br />In order to untag a resource, you must have both `tag:delete` and `<resource type>:update` scopes. For example, <br />to untag a Droplet, you must have `tag:delete` and `droplet:update`.<br /></td>
 </tr>
 </tbody>
 </table>
@@ -166,33 +186,35 @@ Parameters can be passed in the `WHERE` clause of a query. Check the [Methods](#
 ## `SELECT` examples
 
 <Tabs
-    defaultValue="tags_list"
+    defaultValue="tags_get"
     values={[
-        { label: 'tags_list', value: 'tags_list' },
-        { label: 'tags_get', value: 'tags_get' }
+        { label: 'tags_get', value: 'tags_get' },
+        { label: 'tags_list', value: 'tags_list' }
     ]}
 >
-<TabItem value="tags_list">
-
-To list all of your tags, you can send a GET request to `/v2/tags`.<br /><br />This endpoint will only return tagged resources that you are authorized to see<br />(e.g. Droplets will only be returned if you have `droplet:read`).<br />
-
-```sql
-SELECT
-*
-FROM digitalocean.compute.tags
-WHERE per_page = '{{ per_page }}'
-AND page = '{{ page }}';
-```
-</TabItem>
 <TabItem value="tags_get">
 
 To retrieve an individual tag, you can send a `GET` request to<br />`/v2/tags/$TAG_NAME`.<br /><br />This endpoint will only return tagged resources that you are authorized to see.<br />For example, to see tagged Droplets, include the `droplet:read` scope.<br />
 
 ```sql
 SELECT
-*
+name,
+resources
 FROM digitalocean.compute.tags
 WHERE tag_id = '{{ tag_id }}' -- required;
+```
+</TabItem>
+<TabItem value="tags_list">
+
+To list all of your tags, you can send a GET request to `/v2/tags`.<br /><br />This endpoint will only return tagged resources that you are authorized to see<br />(e.g. Droplets will only be returned if you have `droplet:read`).<br />
+
+```sql
+SELECT
+name,
+resources
+FROM digitalocean.compute.tags
+WHERE per_page = '{{ per_page }}'
+AND page = '{{ page }}';
 ```
 </TabItem>
 </Tabs>
@@ -217,6 +239,8 @@ data__name
 )
 SELECT 
 '{{ name }}'
+RETURNING
+tag
 ;
 ```
 </TabItem>
@@ -274,7 +298,7 @@ WHERE tag_id = '{{ tag_id }}' --required;
 >
 <TabItem value="tags_assign_resources">
 
-Resources can be tagged by sending a POST request to<br />`/v2/tags/$TAG_NAME/resources` with an array of json objects containing<br />`resource_id` and `resource_type` attributes.<br /><br />Currently only tagging of Droplets, Databases, Images, Volumes, and Volume<br />Snapshots is supported. `resource_type` is expected to be the string `droplet`,<br />`database`, `image`, `volume` or `volume_snapshot`. `resource_id` is expected<br />to be the ID of the resource as a string.<br /><br />In order to tag a resource, you must have both `tag:create` and `&lt;resource type&gt;:update` scopes. For example, <br />to tag a Droplet, you must have `tag:create` and `droplet:update`.<br />
+Resources can be tagged by sending a POST request to<br />`/v2/tags/$TAG_NAME/resources` with an array of json objects containing<br />`resource_id` and `resource_type` attributes.<br /><br />Currently only tagging of Droplets, Databases, Images, Volumes, and Volume<br />Snapshots is supported. `resource_type` is expected to be the string `droplet`,<br />`database`, `image`, `volume` or `volume_snapshot`. `resource_id` is expected<br />to be the ID of the resource as a string.<br /><br />In order to tag a resource, you must have both `tag:create` and `<resource type>:update` scopes. For example, <br />to tag a Droplet, you must have `tag:create` and `droplet:update`.<br />
 
 ```sql
 EXEC digitalocean.compute.tags.tags_assign_resources 
@@ -287,7 +311,7 @@ EXEC digitalocean.compute.tags.tags_assign_resources
 </TabItem>
 <TabItem value="tags_unassign_resources">
 
-Resources can be untagged by sending a DELETE request to<br />`/v2/tags/$TAG_NAME/resources` with an array of json objects containing<br />`resource_id` and `resource_type` attributes.<br /><br />Currently only untagging of Droplets, Databases, Images, Volumes, and Volume<br />Snapshots is supported. `resource_type` is expected to be the string `droplet`,<br />`database`, `image`, `volume` or `volume_snapshot`. `resource_id` is expected<br />to be the ID of the resource as a string.<br /><br />In order to untag a resource, you must have both `tag:delete` and `&lt;resource type&gt;:update` scopes. For example, <br />to untag a Droplet, you must have `tag:delete` and `droplet:update`.<br />
+Resources can be untagged by sending a DELETE request to<br />`/v2/tags/$TAG_NAME/resources` with an array of json objects containing<br />`resource_id` and `resource_type` attributes.<br /><br />Currently only untagging of Droplets, Databases, Images, Volumes, and Volume<br />Snapshots is supported. `resource_type` is expected to be the string `droplet`,<br />`database`, `image`, `volume` or `volume_snapshot`. `resource_id` is expected<br />to be the ID of the resource as a string.<br /><br />In order to untag a resource, you must have both `tag:delete` and `<resource type>:update` scopes. For example, <br />to untag a Droplet, you must have `tag:delete` and `droplet:update`.<br />
 
 ```sql
 EXEC digitalocean.compute.tags.tags_unassign_resources 

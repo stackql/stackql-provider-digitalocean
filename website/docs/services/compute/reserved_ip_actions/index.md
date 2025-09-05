@@ -32,28 +32,12 @@ Creates, updates, deletes, gets or lists a <code>reserved_ip_actions</code> reso
 The following fields are returned by `SELECT` queries:
 
 <Tabs
-    defaultValue="reserved_ips_actions_list"
+    defaultValue="reserved_ips_actions_get"
     values={[
-        { label: 'reserved_ips_actions_list', value: 'reserved_ips_actions_list' },
-        { label: 'reserved_ips_actions_get', value: 'reserved_ips_actions_get' }
+        { label: 'reserved_ips_actions_get', value: 'reserved_ips_actions_get' },
+        { label: 'reserved_ips_actions_list', value: 'reserved_ips_actions_list' }
     ]}
 >
-<TabItem value="reserved_ips_actions_list">
-
-The results will be returned as a JSON object with an `actions` key. This will be set to an array filled with action objects containing the standard reserved IP action attributes.
-
-<table>
-<thead>
-    <tr>
-    <th>Name</th>
-    <th>Datatype</th>
-    <th>Description</th>
-    </tr>
-</thead>
-<tbody>
-</tbody>
-</table>
-</TabItem>
 <TabItem value="reserved_ips_actions_get">
 
 The response will be an object with a key called `action`. The value of this will be an object that contains the standard reserved IP action attributes.
@@ -67,6 +51,72 @@ The response will be an object with a key called `action`. The value of this wil
     </tr>
 </thead>
 <tbody>
+<tr>
+    <td><CopyableCode code="action" /></td>
+    <td><code>object</code></td>
+    <td></td>
+</tr>
+</tbody>
+</table>
+</TabItem>
+<TabItem value="reserved_ips_actions_list">
+
+The results will be returned as a JSON object with an `actions` key. This will be set to an array filled with action objects containing the standard reserved IP action attributes.
+
+<table>
+<thead>
+    <tr>
+    <th>Name</th>
+    <th>Datatype</th>
+    <th>Description</th>
+    </tr>
+</thead>
+<tbody>
+<tr>
+    <td><CopyableCode code="id" /></td>
+    <td><code>integer</code></td>
+    <td>A unique numeric ID that can be used to identify and reference an action.</td>
+</tr>
+<tr>
+    <td><CopyableCode code="resource_id" /></td>
+    <td><code>integer</code></td>
+    <td>A unique identifier for the resource that the action is associated with.</td>
+</tr>
+<tr>
+    <td><CopyableCode code="completed_at" /></td>
+    <td><code>string (date-time)</code></td>
+    <td>A time value given in ISO8601 combined date and time format that represents when the action was completed. (example: 2020-11-14T16:30:06Z)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="region" /></td>
+    <td><code>object</code></td>
+    <td></td>
+</tr>
+<tr>
+    <td><CopyableCode code="region_slug" /></td>
+    <td><code>string</code></td>
+    <td>A human-readable string that is used as a unique identifier for each region. (example: nyc3)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="resource_type" /></td>
+    <td><code>string</code></td>
+    <td>The type of resource that the action is associated with. (example: droplet)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="started_at" /></td>
+    <td><code>string (date-time)</code></td>
+    <td>A time value given in ISO8601 combined date and time format that represents when the action was initiated. (example: 2020-11-14T16:29:21Z)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="status" /></td>
+    <td><code>string</code></td>
+    <td>The current status of the action. This can be "in-progress", "completed", or "errored". (example: completed, default: in-progress)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="type" /></td>
+    <td><code>string</code></td>
+    <td>This is the type of action that the object represents. For example, this could be "transfer" to represent the state of an image transfer action. (example: create)</td>
+</tr>
 </tbody>
 </table>
 </TabItem>
@@ -88,18 +138,18 @@ The following methods are available for this resource:
 </thead>
 <tbody>
 <tr>
-    <td><a href="#reserved_ips_actions_list"><CopyableCode code="reserved_ips_actions_list" /></a></td>
-    <td><CopyableCode code="select" /></td>
-    <td><a href="#parameter-reserved_ip"><code>reserved_ip</code></a></td>
-    <td></td>
-    <td>To retrieve all actions that have been executed on a reserved IP, send a GET request to `/v2/reserved_ips/$RESERVED_IP/actions`.</td>
-</tr>
-<tr>
     <td><a href="#reserved_ips_actions_get"><CopyableCode code="reserved_ips_actions_get" /></a></td>
     <td><CopyableCode code="select" /></td>
     <td><a href="#parameter-reserved_ip"><code>reserved_ip</code></a>, <a href="#parameter-action_id"><code>action_id</code></a></td>
     <td></td>
     <td>To retrieve the status of a reserved IP action, send a GET request to `/v2/reserved_ips/$RESERVED_IP/actions/$ACTION_ID`.</td>
+</tr>
+<tr>
+    <td><a href="#reserved_ips_actions_list"><CopyableCode code="reserved_ips_actions_list" /></a></td>
+    <td><CopyableCode code="select" /></td>
+    <td><a href="#parameter-reserved_ip"><code>reserved_ip</code></a></td>
+    <td></td>
+    <td>To retrieve all actions that have been executed on a reserved IP, send a GET request to `/v2/reserved_ips/$RESERVED_IP/actions`.</td>
 </tr>
 <tr>
     <td><a href="#reserved_ips_actions_post"><CopyableCode code="reserved_ips_actions_post" /></a></td>
@@ -140,33 +190,41 @@ Parameters can be passed in the `WHERE` clause of a query. Check the [Methods](#
 ## `SELECT` examples
 
 <Tabs
-    defaultValue="reserved_ips_actions_list"
+    defaultValue="reserved_ips_actions_get"
     values={[
-        { label: 'reserved_ips_actions_list', value: 'reserved_ips_actions_list' },
-        { label: 'reserved_ips_actions_get', value: 'reserved_ips_actions_get' }
+        { label: 'reserved_ips_actions_get', value: 'reserved_ips_actions_get' },
+        { label: 'reserved_ips_actions_list', value: 'reserved_ips_actions_list' }
     ]}
 >
-<TabItem value="reserved_ips_actions_list">
-
-To retrieve all actions that have been executed on a reserved IP, send a GET request to `/v2/reserved_ips/$RESERVED_IP/actions`.
-
-```sql
-SELECT
-*
-FROM digitalocean.compute.reserved_ip_actions
-WHERE reserved_ip = '{{ reserved_ip }}' -- required;
-```
-</TabItem>
 <TabItem value="reserved_ips_actions_get">
 
 To retrieve the status of a reserved IP action, send a GET request to `/v2/reserved_ips/$RESERVED_IP/actions/$ACTION_ID`.
 
 ```sql
 SELECT
-*
+action
 FROM digitalocean.compute.reserved_ip_actions
 WHERE reserved_ip = '{{ reserved_ip }}' -- required
 AND action_id = '{{ action_id }}' -- required;
+```
+</TabItem>
+<TabItem value="reserved_ips_actions_list">
+
+To retrieve all actions that have been executed on a reserved IP, send a GET request to `/v2/reserved_ips/$RESERVED_IP/actions`.
+
+```sql
+SELECT
+id,
+resource_id,
+completed_at,
+region,
+region_slug,
+resource_type,
+started_at,
+status,
+type
+FROM digitalocean.compute.reserved_ip_actions
+WHERE reserved_ip = '{{ reserved_ip }}' -- required;
 ```
 </TabItem>
 </Tabs>

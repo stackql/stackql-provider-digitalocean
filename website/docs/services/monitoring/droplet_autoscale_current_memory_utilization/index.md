@@ -50,6 +50,16 @@ The response will be a JSON object with a key called `data` and `status`.
     </tr>
 </thead>
 <tbody>
+<tr>
+    <td><CopyableCode code="data" /></td>
+    <td><code>object</code></td>
+    <td></td>
+</tr>
+<tr>
+    <td><CopyableCode code="status" /></td>
+    <td><code>string</code></td>
+    <td> (example: success)</td>
+</tr>
 </tbody>
 </table>
 </TabItem>
@@ -125,7 +135,8 @@ To retrieve the current average memory utilization for a given Droplet Autoscale
 
 ```sql
 SELECT
-*
+data,
+status
 FROM digitalocean.monitoring.droplet_autoscale_current_memory_utilization
 WHERE autoscale_pool_id = '{{ autoscale_pool_id }}' -- required
 AND start = '{{ start }}' -- required

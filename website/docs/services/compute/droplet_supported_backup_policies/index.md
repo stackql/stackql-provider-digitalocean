@@ -50,6 +50,31 @@ A JSON object with an `supported_policies` key set to an array of objects descri
     </tr>
 </thead>
 <tbody>
+<tr>
+    <td><CopyableCode code="name" /></td>
+    <td><code>string</code></td>
+    <td>The name of the Droplet backup plan. (example: daily)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="possible_days" /></td>
+    <td><code>array</code></td>
+    <td>The day of the week the backup will occur.</td>
+</tr>
+<tr>
+    <td><CopyableCode code="possible_window_starts" /></td>
+    <td><code>array</code></td>
+    <td>An array of integers representing the hours of the day that a backup can start. </td>
+</tr>
+<tr>
+    <td><CopyableCode code="retention_period_days" /></td>
+    <td><code>integer</code></td>
+    <td>The number of days that a backup will be kept.</td>
+</tr>
+<tr>
+    <td><CopyableCode code="window_length_hours" /></td>
+    <td><code>integer</code></td>
+    <td>The number of hours that a backup window is open.</td>
+</tr>
 </tbody>
 </table>
 </TabItem>
@@ -110,7 +135,11 @@ To retrieve a list of all supported Droplet backup policies, send a GET<br />req
 
 ```sql
 SELECT
-*
+name,
+possible_days,
+possible_window_starts,
+retention_period_days,
+window_length_hours
 FROM digitalocean.compute.droplet_supported_backup_policies;
 ```
 </TabItem>

@@ -32,12 +32,12 @@ Creates, updates, deletes, gets or lists an <code>opensearch_indexes</code> reso
 The following fields are returned by `SELECT` queries:
 
 <Tabs
-    defaultValue="databases_list_opeasearch_indexes"
+    defaultValue="databases_list_opensearch_indexes"
     values={[
-        { label: 'databases_list_opeasearch_indexes', value: 'databases_list_opeasearch_indexes' }
+        { label: 'databases_list_opensearch_indexes', value: 'databases_list_opensearch_indexes' }
     ]}
 >
-<TabItem value="databases_list_opeasearch_indexes">
+<TabItem value="databases_list_opensearch_indexes">
 
 A JSON object with a key of `indexes`.
 
@@ -50,6 +50,41 @@ A JSON object with a key of `indexes`.
     </tr>
 </thead>
 <tbody>
+<tr>
+    <td><CopyableCode code="index_name" /></td>
+    <td><code>string</code></td>
+    <td>The name of the opensearch index. (example: events)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="created_time" /></td>
+    <td><code>string (date-time)</code></td>
+    <td>The date and time the index was created. (example: 2021-01-01T00:00:00Z)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="health" /></td>
+    <td><code>string</code></td>
+    <td>The health of the OpenSearch index. (example: green)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="number_of_replicas" /></td>
+    <td><code>integer</code></td>
+    <td>The number of replicas for the index.</td>
+</tr>
+<tr>
+    <td><CopyableCode code="number_of_shards" /></td>
+    <td><code>integer</code></td>
+    <td>The number of shards for the index.</td>
+</tr>
+<tr>
+    <td><CopyableCode code="size" /></td>
+    <td><code>integer</code></td>
+    <td>The size of the index.</td>
+</tr>
+<tr>
+    <td><CopyableCode code="status" /></td>
+    <td><code>string</code></td>
+    <td>The status of the OpenSearch index. (example: open)</td>
+</tr>
 </tbody>
 </table>
 </TabItem>
@@ -71,7 +106,7 @@ The following methods are available for this resource:
 </thead>
 <tbody>
 <tr>
-    <td><a href="#databases_list_opeasearch_indexes"><CopyableCode code="databases_list_opeasearch_indexes" /></a></td>
+    <td><a href="#databases_list_opensearch_indexes"><CopyableCode code="databases_list_opensearch_indexes" /></a></td>
     <td><CopyableCode code="select" /></td>
     <td><a href="#parameter-database_cluster_uuid"><code>database_cluster_uuid</code></a></td>
     <td></td>
@@ -116,18 +151,24 @@ Parameters can be passed in the `WHERE` clause of a query. Check the [Methods](#
 ## `SELECT` examples
 
 <Tabs
-    defaultValue="databases_list_opeasearch_indexes"
+    defaultValue="databases_list_opensearch_indexes"
     values={[
-        { label: 'databases_list_opeasearch_indexes', value: 'databases_list_opeasearch_indexes' }
+        { label: 'databases_list_opensearch_indexes', value: 'databases_list_opensearch_indexes' }
     ]}
 >
-<TabItem value="databases_list_opeasearch_indexes">
+<TabItem value="databases_list_opensearch_indexes">
 
 To list all of a OpenSearch cluster's indexes, send a GET request to<br />`/v2/databases/$DATABASE_ID/indexes`.<br /><br />The result will be a JSON object with a `indexes` key.<br />
 
 ```sql
 SELECT
-*
+index_name,
+created_time,
+health,
+number_of_replicas,
+number_of_shards,
+size,
+status
 FROM digitalocean.databases.opensearch_indexes
 WHERE database_cluster_uuid = '{{ database_cluster_uuid }}' -- required;
 ```

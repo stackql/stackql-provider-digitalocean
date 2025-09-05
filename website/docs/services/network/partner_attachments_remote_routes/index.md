@@ -50,6 +50,11 @@ The response will be a JSON object with a `remote_routes` array containing <br /
     </tr>
 </thead>
 <tbody>
+<tr>
+    <td><CopyableCode code="cidr" /></td>
+    <td><code>string</code></td>
+    <td>A CIDR block representing a remote route. (example: 10.10.10.0/24)</td>
+</tr>
 </tbody>
 </table>
 </TabItem>
@@ -125,7 +130,7 @@ To list all remote routes associated with a partner attachment, send a `GET` req
 
 ```sql
 SELECT
-*
+cidr
 FROM digitalocean.network.partner_attachments_remote_routes
 WHERE pa_id = '{{ pa_id }}' -- required
 AND per_page = '{{ per_page }}'

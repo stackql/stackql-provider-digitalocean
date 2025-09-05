@@ -38,13 +38,13 @@ providerServices:
     title: compute API
     version: v00.00.00000
     description: digitalocean API
-  container_registries:
-    id: container_registries:v00.00.00000
-    name: container_registries
+  container_registry:
+    id: container_registry:v00.00.00000
+    name: container_registry
     preferred: true
     service:
-      $ref: digitalocean/v00.00.00000/services/container_registries.yaml
-    title: registry API
+      $ref: digitalocean/v00.00.00000/services/container_registry.yaml
+    title: container_registry API
     version: v00.00.00000
     description: digitalocean API
   databases:

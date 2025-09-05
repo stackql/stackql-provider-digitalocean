@@ -50,6 +50,21 @@ The response will be a JSON object with a key called members. This will be set<b
     </tr>
 </thead>
 <tbody>
+<tr>
+    <td><CopyableCode code="name" /></td>
+    <td><code>string</code></td>
+    <td>The name of the resource. (example: nyc1-load-balancer-01)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="created_at" /></td>
+    <td><code>string</code></td>
+    <td>A time value given in ISO8601 combined date and time format that represents when the resource was created. (example: 2020-03-13T19:30:48Z)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="urn" /></td>
+    <td><code>string</code></td>
+    <td>The uniform resource name (URN) for the resource in the format do:resource_type:resource_id. (pattern: ^do:(dbaas|domain|droplet|floatingip|loadbalancer|space|volume|kubernetes|vpc):.*, example: do:droplet:13457723)</td>
+</tr>
 </tbody>
 </table>
 </TabItem>
@@ -130,7 +145,9 @@ To list all of the resources that are members of a VPC, send a GET request to<br
 
 ```sql
 SELECT
-*
+name,
+created_at,
+urn
 FROM digitalocean.vpcs.members
 WHERE vpc_id = '{{ vpc_id }}' -- required
 AND resource_type = '{{ resource_type }}'

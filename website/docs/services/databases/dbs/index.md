@@ -32,28 +32,12 @@ Creates, updates, deletes, gets or lists a <code>dbs</code> resource.
 The following fields are returned by `SELECT` queries:
 
 <Tabs
-    defaultValue="databases_list"
+    defaultValue="databases_get"
     values={[
-        { label: 'databases_list', value: 'databases_list' },
-        { label: 'databases_get', value: 'databases_get' }
+        { label: 'databases_get', value: 'databases_get' },
+        { label: 'databases_list', value: 'databases_list' }
     ]}
 >
-<TabItem value="databases_list">
-
-A JSON object with a key of `databases`.
-
-<table>
-<thead>
-    <tr>
-    <th>Name</th>
-    <th>Datatype</th>
-    <th>Description</th>
-    </tr>
-</thead>
-<tbody>
-</tbody>
-</table>
-</TabItem>
 <TabItem value="databases_get">
 
 A JSON object with a key of `db`.
@@ -67,6 +51,32 @@ A JSON object with a key of `db`.
     </tr>
 </thead>
 <tbody>
+<tr>
+    <td><CopyableCode code="name" /></td>
+    <td><code>string</code></td>
+    <td>The name of the database. (example: alpha)</td>
+</tr>
+</tbody>
+</table>
+</TabItem>
+<TabItem value="databases_list">
+
+A JSON object with a key of `databases`.
+
+<table>
+<thead>
+    <tr>
+    <th>Name</th>
+    <th>Datatype</th>
+    <th>Description</th>
+    </tr>
+</thead>
+<tbody>
+<tr>
+    <td><CopyableCode code="name" /></td>
+    <td><code>string</code></td>
+    <td>The name of the database. (example: alpha)</td>
+</tr>
 </tbody>
 </table>
 </TabItem>
@@ -88,18 +98,18 @@ The following methods are available for this resource:
 </thead>
 <tbody>
 <tr>
-    <td><a href="#databases_list"><CopyableCode code="databases_list" /></a></td>
-    <td><CopyableCode code="select" /></td>
-    <td><a href="#parameter-database_cluster_uuid"><code>database_cluster_uuid</code></a></td>
-    <td></td>
-    <td>To list all of the databases in a clusters, send a GET request to<br />`/v2/databases/$DATABASE_ID/dbs`.<br /><br />The result will be a JSON object with a `dbs` key. This will be set to an array<br />of database objects, each of which will contain the standard database attributes.<br /><br />Note: Database management is not supported for Caching or Valkey clusters.<br /></td>
-</tr>
-<tr>
     <td><a href="#databases_get"><CopyableCode code="databases_get" /></a></td>
     <td><CopyableCode code="select" /></td>
     <td><a href="#parameter-database_cluster_uuid"><code>database_cluster_uuid</code></a>, <a href="#parameter-database_name"><code>database_name</code></a></td>
     <td></td>
     <td>To show information about an existing database cluster, send a GET request to<br />`/v2/databases/$DATABASE_ID/dbs/$DB_NAME`.<br /><br />Note: Database management is not supported for Caching or Valkey clusters.<br /><br />The response will be a JSON object with a `db` key. This will be set to an object<br />containing the standard database attributes.<br /></td>
+</tr>
+<tr>
+    <td><a href="#databases_list"><CopyableCode code="databases_list" /></a></td>
+    <td><CopyableCode code="select" /></td>
+    <td><a href="#parameter-database_cluster_uuid"><code>database_cluster_uuid</code></a></td>
+    <td></td>
+    <td>To list all of the databases in a clusters, send a GET request to<br />`/v2/databases/$DATABASE_ID/dbs`.<br /><br />The result will be a JSON object with a `dbs` key. This will be set to an array<br />of database objects, each of which will contain the standard database attributes.<br /><br />Note: Database management is not supported for Caching or Valkey clusters.<br /></td>
 </tr>
 <tr>
     <td><a href="#databases_add"><CopyableCode code="databases_add" /></a></td>
@@ -147,33 +157,33 @@ Parameters can be passed in the `WHERE` clause of a query. Check the [Methods](#
 ## `SELECT` examples
 
 <Tabs
-    defaultValue="databases_list"
+    defaultValue="databases_get"
     values={[
-        { label: 'databases_list', value: 'databases_list' },
-        { label: 'databases_get', value: 'databases_get' }
+        { label: 'databases_get', value: 'databases_get' },
+        { label: 'databases_list', value: 'databases_list' }
     ]}
 >
-<TabItem value="databases_list">
-
-To list all of the databases in a clusters, send a GET request to<br />`/v2/databases/$DATABASE_ID/dbs`.<br /><br />The result will be a JSON object with a `dbs` key. This will be set to an array<br />of database objects, each of which will contain the standard database attributes.<br /><br />Note: Database management is not supported for Caching or Valkey clusters.<br />
-
-```sql
-SELECT
-*
-FROM digitalocean.databases.dbs
-WHERE database_cluster_uuid = '{{ database_cluster_uuid }}' -- required;
-```
-</TabItem>
 <TabItem value="databases_get">
 
 To show information about an existing database cluster, send a GET request to<br />`/v2/databases/$DATABASE_ID/dbs/$DB_NAME`.<br /><br />Note: Database management is not supported for Caching or Valkey clusters.<br /><br />The response will be a JSON object with a `db` key. This will be set to an object<br />containing the standard database attributes.<br />
 
 ```sql
 SELECT
-*
+name
 FROM digitalocean.databases.dbs
 WHERE database_cluster_uuid = '{{ database_cluster_uuid }}' -- required
 AND database_name = '{{ database_name }}' -- required;
+```
+</TabItem>
+<TabItem value="databases_list">
+
+To list all of the databases in a clusters, send a GET request to<br />`/v2/databases/$DATABASE_ID/dbs`.<br /><br />The result will be a JSON object with a `dbs` key. This will be set to an array<br />of database objects, each of which will contain the standard database attributes.<br /><br />Note: Database management is not supported for Caching or Valkey clusters.<br />
+
+```sql
+SELECT
+name
+FROM digitalocean.databases.dbs
+WHERE database_cluster_uuid = '{{ database_cluster_uuid }}' -- required;
 ```
 </TabItem>
 </Tabs>
@@ -200,6 +210,8 @@ database_cluster_uuid
 SELECT 
 '{{ name }}' --required,
 '{{ database_cluster_uuid }}'
+RETURNING
+db
 ;
 ```
 </TabItem>

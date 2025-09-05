@@ -50,6 +50,36 @@ A JSON object containing credentials for a cluster.
     </tr>
 </thead>
 <tbody>
+<tr>
+    <td><CopyableCode code="certificate_authority_data" /></td>
+    <td><code>string (byte)</code></td>
+    <td>A base64 encoding of bytes representing the certificate authority data for accessing the cluster. (example: LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSURKekNDQWcrZ0F3SUJBZ0lDQm5Vd0RRWUpLb1pJaHZjTkFRRUxCUUF3TXpFVk1CTUdBMVVFQ2hNTVJHbG4KYVhSaGJFOWpaV0Z1TVJvd0dBWURWUVFERXhGck9ITmhZWE1nUTJ4MWMzUmxjaUJEUVRBZUZ3MHlNREE0TURNeApOVEkxTWpoYUZ3MDBNREE0TURNeE5USTFNamhhTURNeEZUQVRCZ05WQkFvVERFUnBaMmwwWVd4UFkyVmhiakVhCk1CZ0dBMVVFQXhNUmF6aHpZV0Z6SUVOc2RYTjBaWElnUTBFd2dnRWlNQTBHQ1NxR1NJYjNEUUVCQVFVQUE0SUIKRHdBd2dnRUtBb0lCQVFDc21oa2JrSEpUcGhZQlN0R05VVE1ORVZTd2N3bmRtajArelQvcUZaNGsrOVNxUnYrSgpBd0lCaGpBU0JnTlZIUk1CQWY4RUNEQUdBUUgvQWdFQU1CMEdBMVVkRGdRV0JCUlRzazhhZ1hCUnFyZXdlTXJxClhwa3E1NXg5dVRBTkJna3Foa2lHOXcwQkFRc0ZBQU9DQVFFQXB6V2F6bXNqYWxXTEx3ZjVpbWdDblNINDlKcGkKYWkvbzFMdEJvVEpleGdqZzE1ZVppaG5BMUJMc0lWNE9BZGM3UEFsL040L0hlbENrTDVxandjamRnNVdaYnMzYwozcFVUQ0g5bVVwMFg1SVdhT1VKV292Q1hGUlM1R2VKYXlkSDVPUXhqTURzR2N2UlNvZGQrVnQ2MXE3aWdFZ2I1CjBOZ1l5RnRnc2p0MHpJN3hURzZFNnlsOVYvUmFoS3lIQks2eExlM1RnUGU4SXhWa2RwT3QzR0FhSDRaK0pLR3gKYisyMVZia1NnRE1QQTlyR0VKNVZwVXlBV0FEVXZDRVFHV0hmNGpQN2ZGZlc3T050S0JWY3h3YWFjcVBVdUhzWApwRG5DZVR3V1NuUVp6L05xNmQxWUtsMFdtbkwzTEowemJzRVFGbEQ4MkkwL09MY2dZSDVxMklOZHhBPT0KLS0tLS1FTkQgQ0VSVElGSUNBVEUtLS0tLQo=)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="client_certificate_data" /></td>
+    <td><code>string (byte)</code></td>
+    <td>A base64 encoding of bytes representing the x509 client certificate data for access the cluster. This is only returned for clusters without support for token-based authentication.  Newly created Kubernetes clusters do not return credentials using certificate-based authentication. For additional information, [see here](https://docs.digitalocean.com/products/kubernetes/how-to/connect-to-cluster/#authenticate). </td>
+</tr>
+<tr>
+    <td><CopyableCode code="client_key_data" /></td>
+    <td><code>string (byte)</code></td>
+    <td>A base64 encoding of bytes representing the x509 client key data for access the cluster. This is only returned for clusters without support for token-based authentication.  Newly created Kubernetes clusters do not return credentials using certificate-based authentication. For additional information, [see here](https://docs.digitalocean.com/products/kubernetes/how-to/connect-to-cluster/#authenticate). </td>
+</tr>
+<tr>
+    <td><CopyableCode code="expires_at" /></td>
+    <td><code>string (date-time)</code></td>
+    <td>A time value given in ISO8601 combined date and time format that represents when the access token expires. (example: 2019-11-09T11:50:28.889080521Z)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="server" /></td>
+    <td><code>string (uri)</code></td>
+    <td>The URL used to access the cluster API server. (example: https://bd5f5959-5e1e-4205-a714-a914373942af.k8s.ondigitalocean.com)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="token" /></td>
+    <td><code>string</code></td>
+    <td>An access token used to authenticate with the cluster. This is only returned for clusters with support for token-based authentication. (example: $DIGITALOCEAN_TOKEN)</td>
+</tr>
 </tbody>
 </table>
 </TabItem>
@@ -120,7 +150,12 @@ This endpoint returns a JSON object . It can be used to programmatically<br />co
 
 ```sql
 SELECT
-*
+certificate_authority_data,
+client_certificate_data,
+client_key_data,
+expires_at,
+server,
+token
 FROM digitalocean.kubernetes.credentials
 WHERE cluster_id = '{{ cluster_id }}' -- required
 AND expiry_seconds = '{{ expiry_seconds }}';

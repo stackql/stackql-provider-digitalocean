@@ -50,6 +50,51 @@ A JSON object that has a key called `firewalls`.
     </tr>
 </thead>
 <tbody>
+<tr>
+    <td><CopyableCode code="id" /></td>
+    <td><code>string</code></td>
+    <td>A unique ID that can be used to identify and reference a firewall. (example: bb4b2611-3d72-467b-8602-280330ecd65c)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="name" /></td>
+    <td><code>string</code></td>
+    <td>A human-readable name for a firewall. The name must begin with an alphanumeric character. Subsequent characters must either be alphanumeric characters, a period (.), or a dash (-). (pattern: ^[a-zA-Z0-9][a-zA-Z0-9\.-]+$, example: firewall)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="created_at" /></td>
+    <td><code>string (date-time)</code></td>
+    <td>A time value given in ISO8601 combined date and time format that represents when the firewall was created. (example: 2020-05-23T21:24:00Z)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="droplet_ids" /></td>
+    <td><code>array</code></td>
+    <td>An array containing the IDs of the Droplets assigned to the firewall. <br /><br />Requires `droplet:read` scope.</td>
+</tr>
+<tr>
+    <td><CopyableCode code="inbound_rules" /></td>
+    <td><code>array</code></td>
+    <td></td>
+</tr>
+<tr>
+    <td><CopyableCode code="outbound_rules" /></td>
+    <td><code>array</code></td>
+    <td></td>
+</tr>
+<tr>
+    <td><CopyableCode code="pending_changes" /></td>
+    <td><code>array</code></td>
+    <td>An array of objects each containing the fields "droplet_id", "removing", and "status". It is provided to detail exactly which Droplets are having their security policies updated. When empty, all changes have been successfully applied.</td>
+</tr>
+<tr>
+    <td><CopyableCode code="status" /></td>
+    <td><code>string</code></td>
+    <td>A status string indicating the current state of the firewall. This can be "waiting", "succeeded", or "failed". (example: waiting)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="tags" /></td>
+    <td><code>array</code></td>
+    <td>A flat array of tag names as strings to be applied to the resource. Tag names must exist in order to be referenced in a request. <br /><br />Requires `tag:create` and `tag:read` scopes.</td>
+</tr>
 </tbody>
 </table>
 </TabItem>
@@ -125,7 +170,15 @@ To retrieve a list of all firewalls available to a Droplet, send a GET request<b
 
 ```sql
 SELECT
-*
+id,
+name,
+created_at,
+droplet_ids,
+inbound_rules,
+outbound_rules,
+pending_changes,
+status,
+tags
 FROM digitalocean.compute.droplets_firewalls
 WHERE droplet_id = '{{ droplet_id }}' -- required
 AND per_page = '{{ per_page }}'

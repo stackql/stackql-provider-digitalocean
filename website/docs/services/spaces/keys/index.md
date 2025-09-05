@@ -32,28 +32,12 @@ Creates, updates, deletes, gets or lists a <code>keys</code> resource.
 The following fields are returned by `SELECT` queries:
 
 <Tabs
-    defaultValue="spaces_key_list"
+    defaultValue="spaces_key_get"
     values={[
-        { label: 'spaces_key_list', value: 'spaces_key_list' },
-        { label: 'spaces_key_get', value: 'spaces_key_get' }
+        { label: 'spaces_key_get', value: 'spaces_key_get' },
+        { label: 'spaces_key_list', value: 'spaces_key_list' }
     ]}
 >
-<TabItem value="spaces_key_list">
-
-A JSON response containing a list of keys.
-
-<table>
-<thead>
-    <tr>
-    <th>Name</th>
-    <th>Datatype</th>
-    <th>Description</th>
-    </tr>
-</thead>
-<tbody>
-</tbody>
-</table>
-</TabItem>
 <TabItem value="spaces_key_get">
 
 A JSON response containing details about the key.
@@ -67,6 +51,62 @@ A JSON response containing details about the key.
     </tr>
 </thead>
 <tbody>
+<tr>
+    <td><CopyableCode code="name" /></td>
+    <td><code>string</code></td>
+    <td>The access key's name. (example: my-access-key)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="access_key" /></td>
+    <td><code>string</code></td>
+    <td>The Access Key ID used to access a bucket. (example: DOACCESSKEYEXAMPLE)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="created_at" /></td>
+    <td><code>string (date-time)</code></td>
+    <td>The date and time the key was created. (example: 2018-07-19T15:04:16Z)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="grants" /></td>
+    <td><code>array</code></td>
+    <td>The list of permissions for the access key.</td>
+</tr>
+</tbody>
+</table>
+</TabItem>
+<TabItem value="spaces_key_list">
+
+A JSON response containing a list of keys.
+
+<table>
+<thead>
+    <tr>
+    <th>Name</th>
+    <th>Datatype</th>
+    <th>Description</th>
+    </tr>
+</thead>
+<tbody>
+<tr>
+    <td><CopyableCode code="name" /></td>
+    <td><code>string</code></td>
+    <td>The access key's name. (example: my-access-key)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="access_key" /></td>
+    <td><code>string</code></td>
+    <td>The Access Key ID used to access a bucket. (example: DOACCESSKEYEXAMPLE)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="created_at" /></td>
+    <td><code>string (date-time)</code></td>
+    <td>The date and time the key was created. (example: 2018-07-19T15:04:16Z)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="grants" /></td>
+    <td><code>array</code></td>
+    <td>The list of permissions for the access key.</td>
+</tr>
 </tbody>
 </table>
 </TabItem>
@@ -88,18 +128,18 @@ The following methods are available for this resource:
 </thead>
 <tbody>
 <tr>
-    <td><a href="#spaces_key_list"><CopyableCode code="spaces_key_list" /></a></td>
-    <td><CopyableCode code="select" /></td>
-    <td></td>
-    <td><a href="#parameter-per_page"><code>per_page</code></a>, <a href="#parameter-page"><code>page</code></a>, <a href="#parameter-sort"><code>sort</code></a>, <a href="#parameter-sort_direction"><code>sort_direction</code></a>, <a href="#parameter-name"><code>name</code></a>, <a href="#parameter-bucket"><code>bucket</code></a>, <a href="#parameter-permission"><code>permission</code></a></td>
-    <td>To list Spaces Access Key, send a GET request to `/v2/spaces/keys`. Sort parameter must be used with Sort Direction.<br /></td>
-</tr>
-<tr>
     <td><a href="#spaces_key_get"><CopyableCode code="spaces_key_get" /></a></td>
     <td><CopyableCode code="select" /></td>
     <td><a href="#parameter-access_key"><code>access_key</code></a></td>
     <td></td>
     <td>To get a Spaces Access Key, send a GET request to `/v2/spaces/keys/$ACCESS_KEY`.<br /><br />A successful request will return the Access Key.<br /></td>
+</tr>
+<tr>
+    <td><a href="#spaces_key_list"><CopyableCode code="spaces_key_list" /></a></td>
+    <td><CopyableCode code="select" /></td>
+    <td></td>
+    <td><a href="#parameter-per_page"><code>per_page</code></a>, <a href="#parameter-page"><code>page</code></a>, <a href="#parameter-sort"><code>sort</code></a>, <a href="#parameter-sort_direction"><code>sort_direction</code></a>, <a href="#parameter-name"><code>name</code></a>, <a href="#parameter-bucket"><code>bucket</code></a>, <a href="#parameter-permission"><code>permission</code></a></td>
+    <td>To list Spaces Access Key, send a GET request to `/v2/spaces/keys`. Sort parameter must be used with Sort Direction.<br /></td>
 </tr>
 <tr>
     <td><a href="#spaces_key_create"><CopyableCode code="spaces_key_create" /></a></td>
@@ -191,19 +231,36 @@ Parameters can be passed in the `WHERE` clause of a query. Check the [Methods](#
 ## `SELECT` examples
 
 <Tabs
-    defaultValue="spaces_key_list"
+    defaultValue="spaces_key_get"
     values={[
-        { label: 'spaces_key_list', value: 'spaces_key_list' },
-        { label: 'spaces_key_get', value: 'spaces_key_get' }
+        { label: 'spaces_key_get', value: 'spaces_key_get' },
+        { label: 'spaces_key_list', value: 'spaces_key_list' }
     ]}
 >
+<TabItem value="spaces_key_get">
+
+To get a Spaces Access Key, send a GET request to `/v2/spaces/keys/$ACCESS_KEY`.<br /><br />A successful request will return the Access Key.<br />
+
+```sql
+SELECT
+name,
+access_key,
+created_at,
+grants
+FROM digitalocean.spaces.keys
+WHERE access_key = '{{ access_key }}' -- required;
+```
+</TabItem>
 <TabItem value="spaces_key_list">
 
 To list Spaces Access Key, send a GET request to `/v2/spaces/keys`. Sort parameter must be used with Sort Direction.<br />
 
 ```sql
 SELECT
-*
+name,
+access_key,
+created_at,
+grants
 FROM digitalocean.spaces.keys
 WHERE per_page = '{{ per_page }}'
 AND page = '{{ page }}'
@@ -212,17 +269,6 @@ AND sort_direction = '{{ sort_direction }}'
 AND name = '{{ name }}'
 AND bucket = '{{ bucket }}'
 AND permission = '{{ permission }}';
-```
-</TabItem>
-<TabItem value="spaces_key_get">
-
-To get a Spaces Access Key, send a GET request to `/v2/spaces/keys/$ACCESS_KEY`.<br /><br />A successful request will return the Access Key.<br />
-
-```sql
-SELECT
-*
-FROM digitalocean.spaces.keys
-WHERE access_key = '{{ access_key }}' -- required;
 ```
 </TabItem>
 </Tabs>
@@ -249,6 +295,8 @@ data__grants
 SELECT 
 '{{ name }}',
 '{{ grants }}'
+RETURNING
+key
 ;
 ```
 </TabItem>
@@ -292,7 +340,9 @@ SET
 data__name = '{{ name }}',
 data__grants = '{{ grants }}'
 WHERE 
-access_key = '{{ access_key }}' --required;
+access_key = '{{ access_key }}' --required
+RETURNING
+key;
 ```
 </TabItem>
 </Tabs>
@@ -316,7 +366,9 @@ SET
 data__name = '{{ name }}',
 data__grants = '{{ grants }}'
 WHERE 
-access_key = '{{ access_key }}' --required;
+access_key = '{{ access_key }}' --required
+RETURNING
+key;
 ```
 </TabItem>
 </Tabs>

@@ -51,9 +51,29 @@ A successful response.
 </thead>
 <tbody>
 <tr>
-    <td><CopyableCode code="regions" /></td>
-    <td><code>array</code></td>
-    <td>Region code</td>
+    <td><CopyableCode code="inference_url" /></td>
+    <td><code>string</code></td>
+    <td>Url for inference server (example: example string)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="region" /></td>
+    <td><code>string</code></td>
+    <td>Region code (example: example string)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="serves_batch" /></td>
+    <td><code>boolean</code></td>
+    <td>This datacenter is capable of running batch jobs</td>
+</tr>
+<tr>
+    <td><CopyableCode code="serves_inference" /></td>
+    <td><code>boolean</code></td>
+    <td>This datacenter is capable of serving inference</td>
+</tr>
+<tr>
+    <td><CopyableCode code="stream_inference_url" /></td>
+    <td><code>string</code></td>
+    <td>The url for the inference streaming server (example: example string)</td>
 </tr>
 </tbody>
 </table>
@@ -125,7 +145,11 @@ To list all datacenter regions, send a GET request to `/v2/gen-ai/regions`.
 
 ```sql
 SELECT
-regions
+inference_url,
+region,
+serves_batch,
+serves_inference,
+stream_inference_url
 FROM digitalocean.genai.datacenter_regions
 WHERE serves_inference = '{{ serves_inference }}'
 AND serves_batch = '{{ serves_batch }}';

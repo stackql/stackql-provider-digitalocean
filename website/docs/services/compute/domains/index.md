@@ -32,28 +32,12 @@ Creates, updates, deletes, gets or lists a <code>domains</code> resource.
 The following fields are returned by `SELECT` queries:
 
 <Tabs
-    defaultValue="domains_list"
+    defaultValue="domains_get"
     values={[
-        { label: 'domains_list', value: 'domains_list' },
-        { label: 'domains_get', value: 'domains_get' }
+        { label: 'domains_get', value: 'domains_get' },
+        { label: 'domains_list', value: 'domains_list' }
     ]}
 >
-<TabItem value="domains_list">
-
-The response will be a JSON object with a key called `domains`. The value of this will be an array of Domain objects, each of which contain the standard domain attributes.
-
-<table>
-<thead>
-    <tr>
-    <th>Name</th>
-    <th>Datatype</th>
-    <th>Description</th>
-    </tr>
-</thead>
-<tbody>
-</tbody>
-</table>
-</TabItem>
 <TabItem value="domains_get">
 
 The response will be a JSON object with a key called `domain`. The value of this will be an object that contains the standard attributes defined for a domain.
@@ -67,6 +51,62 @@ The response will be a JSON object with a key called `domain`. The value of this
     </tr>
 </thead>
 <tbody>
+<tr>
+    <td><CopyableCode code="name" /></td>
+    <td><code>string</code></td>
+    <td>The name of the domain itself. This should follow the standard domain format of domain.TLD. For instance, `example.com` is a valid domain name. (example: example.com)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="ip_address" /></td>
+    <td><code>string</code></td>
+    <td>This optional attribute may contain an IP address. When provided, an A record will be automatically created pointing to the apex domain. (example: 192.0.2.1)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="ttl" /></td>
+    <td><code>integer</code></td>
+    <td>This value is the time to live for the records on this domain, in seconds. This defines the time frame that clients can cache queried information before a refresh should be requested.</td>
+</tr>
+<tr>
+    <td><CopyableCode code="zone_file" /></td>
+    <td><code>string</code></td>
+    <td>This attribute contains the complete contents of the zone file for the selected domain. Individual domain record resources should be used to get more granular control over records. However, this attribute can also be used to get information about the SOA record, which is created automatically and is not accessible as an individual record resource. (example: $ORIGIN example.com.<br />$TTL 1800<br />example.com. IN SOA ns1.digitalocean.com. hostmaster.example.com. 1415982609 10800 3600 604800 1800<br />example.com. 1800 IN NS ns1.digitalocean.com.<br />example.com. 1800 IN NS ns2.digitalocean.com.<br />example.com. 1800 IN NS ns3.digitalocean.com.<br />example.com. 1800 IN A 1.2.3.4<br />)</td>
+</tr>
+</tbody>
+</table>
+</TabItem>
+<TabItem value="domains_list">
+
+The response will be a JSON object with a key called `domains`. The value of this will be an array of Domain objects, each of which contain the standard domain attributes.
+
+<table>
+<thead>
+    <tr>
+    <th>Name</th>
+    <th>Datatype</th>
+    <th>Description</th>
+    </tr>
+</thead>
+<tbody>
+<tr>
+    <td><CopyableCode code="name" /></td>
+    <td><code>string</code></td>
+    <td>The name of the domain itself. This should follow the standard domain format of domain.TLD. For instance, `example.com` is a valid domain name. (example: example.com)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="ip_address" /></td>
+    <td><code>string</code></td>
+    <td>This optional attribute may contain an IP address. When provided, an A record will be automatically created pointing to the apex domain. (example: 192.0.2.1)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="ttl" /></td>
+    <td><code>integer</code></td>
+    <td>This value is the time to live for the records on this domain, in seconds. This defines the time frame that clients can cache queried information before a refresh should be requested.</td>
+</tr>
+<tr>
+    <td><CopyableCode code="zone_file" /></td>
+    <td><code>string</code></td>
+    <td>This attribute contains the complete contents of the zone file for the selected domain. Individual domain record resources should be used to get more granular control over records. However, this attribute can also be used to get information about the SOA record, which is created automatically and is not accessible as an individual record resource. (example: $ORIGIN example.com.<br />$TTL 1800<br />example.com. IN SOA ns1.digitalocean.com. hostmaster.example.com. 1415982609 10800 3600 604800 1800<br />example.com. 1800 IN NS ns1.digitalocean.com.<br />example.com. 1800 IN NS ns2.digitalocean.com.<br />example.com. 1800 IN NS ns3.digitalocean.com.<br />example.com. 1800 IN A 1.2.3.4<br />)</td>
+</tr>
 </tbody>
 </table>
 </TabItem>
@@ -88,18 +128,18 @@ The following methods are available for this resource:
 </thead>
 <tbody>
 <tr>
-    <td><a href="#domains_list"><CopyableCode code="domains_list" /></a></td>
-    <td><CopyableCode code="select" /></td>
-    <td></td>
-    <td><a href="#parameter-per_page"><code>per_page</code></a>, <a href="#parameter-page"><code>page</code></a></td>
-    <td>To retrieve a list of all of the domains in your account, send a GET request to `/v2/domains`.</td>
-</tr>
-<tr>
     <td><a href="#domains_get"><CopyableCode code="domains_get" /></a></td>
     <td><CopyableCode code="select" /></td>
     <td><a href="#parameter-domain_name"><code>domain_name</code></a></td>
     <td></td>
     <td>To get details about a specific domain, send a GET request to `/v2/domains/$DOMAIN_NAME`.</td>
+</tr>
+<tr>
+    <td><a href="#domains_list"><CopyableCode code="domains_list" /></a></td>
+    <td><CopyableCode code="select" /></td>
+    <td></td>
+    <td><a href="#parameter-per_page"><code>per_page</code></a>, <a href="#parameter-page"><code>page</code></a></td>
+    <td>To retrieve a list of all of the domains in your account, send a GET request to `/v2/domains`.</td>
 </tr>
 <tr>
     <td><a href="#domains_create"><CopyableCode code="domains_create" /></a></td>
@@ -152,33 +192,39 @@ Parameters can be passed in the `WHERE` clause of a query. Check the [Methods](#
 ## `SELECT` examples
 
 <Tabs
-    defaultValue="domains_list"
+    defaultValue="domains_get"
     values={[
-        { label: 'domains_list', value: 'domains_list' },
-        { label: 'domains_get', value: 'domains_get' }
+        { label: 'domains_get', value: 'domains_get' },
+        { label: 'domains_list', value: 'domains_list' }
     ]}
 >
-<TabItem value="domains_list">
-
-To retrieve a list of all of the domains in your account, send a GET request to `/v2/domains`.
-
-```sql
-SELECT
-*
-FROM digitalocean.compute.domains
-WHERE per_page = '{{ per_page }}'
-AND page = '{{ page }}';
-```
-</TabItem>
 <TabItem value="domains_get">
 
 To get details about a specific domain, send a GET request to `/v2/domains/$DOMAIN_NAME`.
 
 ```sql
 SELECT
-*
+name,
+ip_address,
+ttl,
+zone_file
 FROM digitalocean.compute.domains
 WHERE domain_name = '{{ domain_name }}' -- required;
+```
+</TabItem>
+<TabItem value="domains_list">
+
+To retrieve a list of all of the domains in your account, send a GET request to `/v2/domains`.
+
+```sql
+SELECT
+name,
+ip_address,
+ttl,
+zone_file
+FROM digitalocean.compute.domains
+WHERE per_page = '{{ per_page }}'
+AND page = '{{ page }}';
 ```
 </TabItem>
 </Tabs>
@@ -205,6 +251,8 @@ data__ip_address
 SELECT 
 '{{ name }}',
 '{{ ip_address }}'
+RETURNING
+domain
 ;
 ```
 </TabItem>

@@ -50,6 +50,16 @@ The response will be a JSON object with a key called `data` and `status`.
     </tr>
 </thead>
 <tbody>
+<tr>
+    <td><CopyableCode code="data" /></td>
+    <td><code>object</code></td>
+    <td></td>
+</tr>
+<tr>
+    <td><CopyableCode code="status" /></td>
+    <td><code>string</code></td>
+    <td> (example: success)</td>
+</tr>
 </tbody>
 </table>
 </TabItem>
@@ -125,7 +135,8 @@ To retrieve Droplets average HTTP session duration in seconds for a given load b
 
 ```sql
 SELECT
-*
+data,
+status
 FROM digitalocean.monitoring.lb_droplets_http_session_duration_avg
 WHERE lb_id = '{{ lb_id }}' -- required
 AND start = '{{ start }}' -- required

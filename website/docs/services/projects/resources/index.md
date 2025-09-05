@@ -50,6 +50,26 @@ The response will be a JSON object with a key called `resources`.<br />The value
     </tr>
 </thead>
 <tbody>
+<tr>
+    <td><CopyableCode code="assigned_at" /></td>
+    <td><code>string (date-time)</code></td>
+    <td>A time value given in ISO8601 combined date and time format that represents when the project was created. (example: 2018-09-28T19:26:37Z)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="links" /></td>
+    <td><code>object</code></td>
+    <td>The links object contains the `self` object, which contains the resource relationship.</td>
+</tr>
+<tr>
+    <td><CopyableCode code="status" /></td>
+    <td><code>string</code></td>
+    <td>The status of assigning and fetching the resources. (example: ok)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="urn" /></td>
+    <td><code>string</code></td>
+    <td>The uniform resource name (URN) for the resource in the format do:resource_type:resource_id. (pattern: ^do:(dbaas|domain|droplet|floatingip|loadbalancer|space|volume|kubernetes|vpc):.*, example: do:droplet:13457723)</td>
+</tr>
 </tbody>
 </table>
 </TabItem>
@@ -82,7 +102,7 @@ The following methods are available for this resource:
     <td><CopyableCode code="insert" /></td>
     <td><a href="#parameter-project_id"><code>project_id</code></a></td>
     <td></td>
-    <td>To assign resources to a project, send a POST request to `/v2/projects/$PROJECT_ID/resources`.<br /><br />You must have both `project:update` and `&lt;resource&gt;:read` scopes to assign new resources. For example, to assign a Droplet to a project, include both the `project:update` and `droplet:read` scopes.<br /></td>
+    <td>To assign resources to a project, send a POST request to `/v2/projects/$PROJECT_ID/resources`.<br /><br />You must have both `project:update` and `<resource>:read` scopes to assign new resources. For example, to assign a Droplet to a project, include both the `project:update` and `droplet:read` scopes.<br /></td>
 </tr>
 </tbody>
 </table>
@@ -132,7 +152,10 @@ To list all your resources in a project, send a GET request to `/v2/projects/$PR
 
 ```sql
 SELECT
-*
+assigned_at,
+links,
+status,
+urn
 FROM digitalocean.projects.resources
 WHERE project_id = '{{ project_id }}' -- required
 AND per_page = '{{ per_page }}'
@@ -153,7 +176,7 @@ AND page = '{{ page }}';
 >
 <TabItem value="projects_assign_resources">
 
-To assign resources to a project, send a POST request to `/v2/projects/$PROJECT_ID/resources`.<br /><br />You must have both `project:update` and `&lt;resource&gt;:read` scopes to assign new resources. For example, to assign a Droplet to a project, include both the `project:update` and `droplet:read` scopes.<br />
+To assign resources to a project, send a POST request to `/v2/projects/$PROJECT_ID/resources`.<br /><br />You must have both `project:update` and `<resource>:read` scopes to assign new resources. For example, to assign a Droplet to a project, include both the `project:update` and `droplet:read` scopes.<br />
 
 ```sql
 INSERT INTO digitalocean.projects.resources (
@@ -163,6 +186,8 @@ project_id
 SELECT 
 '{{ resources }}',
 '{{ project_id }}'
+RETURNING
+resources
 ;
 ```
 </TabItem>

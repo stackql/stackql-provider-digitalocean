@@ -4,7 +4,7 @@ hide_title: false
 hide_table_of_contents: false
 keywords:
   - registries
-  - container_registries
+  - container_registry
   - digitalocean
   - infrastructure-as-code
   - configuration-as-data
@@ -24,7 +24,7 @@ Creates, updates, deletes, gets or lists a <code>registries</code> resource.
 <table><tbody>
 <tr><td><b>Name</b></td><td><code>registries</code></td></tr>
 <tr><td><b>Type</b></td><td>Resource</td></tr>
-<tr><td><b>Id</b></td><td><CopyableCode code="digitalocean.container_registries.registries" /></td></tr>
+<tr><td><b>Id</b></td><td><CopyableCode code="digitalocean.container_registry.registries" /></td></tr>
 </tbody></table>
 
 ## Fields
@@ -32,13 +32,13 @@ Creates, updates, deletes, gets or lists a <code>registries</code> resource.
 The following fields are returned by `SELECT` queries:
 
 <Tabs
-    defaultValue="registries_list"
+    defaultValue="registries_get"
     values={[
-        { label: 'registries_list', value: 'registries_list' },
-        { label: 'registries_get', value: 'registries_get' }
+        { label: 'registries_get', value: 'registries_get' },
+        { label: 'registries_list', value: 'registries_list' }
     ]}
 >
-<TabItem value="registries_list">
+<TabItem value="registries_get">
 
 The response will be a JSON object with the key `registry` containing information about your registry.
 
@@ -51,10 +51,35 @@ The response will be a JSON object with the key `registry` containing informatio
     </tr>
 </thead>
 <tbody>
+<tr>
+    <td><CopyableCode code="name" /></td>
+    <td><code>string</code></td>
+    <td>A globally unique name for the container registry. Must be lowercase and be composed only of numbers, letters and `-`, up to a limit of 63 characters. (pattern: ^[a-z0-9-]&#123;1,63&#125;$, example: example)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="created_at" /></td>
+    <td><code>string (date-time)</code></td>
+    <td>A time value given in ISO8601 combined date and time format that represents when the registry was created. (example: 2020-03-21T16:02:37Z)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="region" /></td>
+    <td><code>string</code></td>
+    <td>Slug of the region where registry data is stored (example: fra1)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="storage_usage_bytes" /></td>
+    <td><code>integer</code></td>
+    <td>The amount of storage used in the registry in bytes.</td>
+</tr>
+<tr>
+    <td><CopyableCode code="storage_usage_bytes_updated_at" /></td>
+    <td><code>string (date-time)</code></td>
+    <td>The time at which the storage usage was updated. Storage usage is calculated asynchronously, and may not immediately reflect pushes to the registry. (example: 2020-11-04T21:39:49.530562231Z)</td>
+</tr>
 </tbody>
 </table>
 </TabItem>
-<TabItem value="registries_get">
+<TabItem value="registries_list">
 
 The response will be a JSON object with the key `registry` containing information about your registry.
 
@@ -88,18 +113,18 @@ The following methods are available for this resource:
 </thead>
 <tbody>
 <tr>
-    <td><a href="#registries_list"><CopyableCode code="registries_list" /></a></td>
-    <td><CopyableCode code="select" /></td>
-    <td></td>
-    <td></td>
-    <td>To get information about any container registry in your account, send a GET request to `/v2/registries/`.</td>
-</tr>
-<tr>
     <td><a href="#registries_get"><CopyableCode code="registries_get" /></a></td>
     <td><CopyableCode code="select" /></td>
     <td><a href="#parameter-registry_name"><code>registry_name</code></a></td>
     <td></td>
     <td>To get information about any container registry in your account, send a GET request to `/v2/registries/&#123;registry_name&#125;`.</td>
+</tr>
+<tr>
+    <td><a href="#registries_list"><CopyableCode code="registries_list" /></a></td>
+    <td><CopyableCode code="select" /></td>
+    <td></td>
+    <td></td>
+    <td>To get information about any container registry in your account, send a GET request to `/v2/registries/`.</td>
 </tr>
 <tr>
     <td><a href="#registries_create"><CopyableCode code="registries_create" /></a></td>
@@ -177,12 +202,27 @@ Parameters can be passed in the `WHERE` clause of a query. Check the [Methods](#
 ## `SELECT` examples
 
 <Tabs
-    defaultValue="registries_list"
+    defaultValue="registries_get"
     values={[
-        { label: 'registries_list', value: 'registries_list' },
-        { label: 'registries_get', value: 'registries_get' }
+        { label: 'registries_get', value: 'registries_get' },
+        { label: 'registries_list', value: 'registries_list' }
     ]}
 >
+<TabItem value="registries_get">
+
+To get information about any container registry in your account, send a GET request to `/v2/registries/&#123;registry_name&#125;`.
+
+```sql
+SELECT
+name,
+created_at,
+region,
+storage_usage_bytes,
+storage_usage_bytes_updated_at
+FROM digitalocean.container_registry.registries
+WHERE registry_name = '{{ registry_name }}' -- required;
+```
+</TabItem>
 <TabItem value="registries_list">
 
 To get information about any container registry in your account, send a GET request to `/v2/registries/`.
@@ -190,18 +230,7 @@ To get information about any container registry in your account, send a GET requ
 ```sql
 SELECT
 *
-FROM digitalocean.container_registries.registries;
-```
-</TabItem>
-<TabItem value="registries_get">
-
-To get information about any container registry in your account, send a GET request to `/v2/registries/&#123;registry_name&#125;`.
-
-```sql
-SELECT
-*
-FROM digitalocean.container_registries.registries
-WHERE registry_name = '{{ registry_name }}' -- required;
+FROM digitalocean.container_registry.registries;
 ```
 </TabItem>
 </Tabs>
@@ -221,7 +250,7 @@ WHERE registry_name = '{{ registry_name }}' -- required;
 To create your container registry, send a POST request to `/v2/registries`.<br /><br />The `name` becomes part of the URL for images stored in the registry. For<br />example, if your registry is called `example`, an image in it will have the<br />URL `registry.digitalocean.com/example/image:tag`.<br />
 
 ```sql
-INSERT INTO digitalocean.container_registries.registries (
+INSERT INTO digitalocean.container_registry.registries (
 data__name,
 data__subscription_tier_slug,
 data__region
@@ -230,6 +259,8 @@ SELECT
 '{{ name }}' --required,
 '{{ subscription_tier_slug }}',
 '{{ region }}'
+RETURNING
+registry
 ;
 ```
 </TabItem>
@@ -274,7 +305,7 @@ SELECT
 To delete your container registry, destroying all container image data stored in it, send a DELETE request to `/v2/registries/&#123;registry_name&#125;`.
 
 ```sql
-DELETE FROM digitalocean.container_registries.registries
+DELETE FROM digitalocean.container_registry.registries
 WHERE registry_name = '{{ registry_name }}' --required;
 ```
 </TabItem>
@@ -298,7 +329,7 @@ WHERE registry_name = '{{ registry_name }}' --required;
 To validate that a container registry name is available for use, send a POST<br />request to `/v2/registries/validate-name`.<br /><br />If the name is both formatted correctly and available, the response code will<br />be 204 and contain no body. If the name is already in use, the response will<br />be a 409 Conflict. <br /><br />It is similar to `/v2/registry/validate-name` and exists for backward compatibility.<br />
 
 ```sql
-EXEC digitalocean.container_registries.registries.registries_validate_name 
+EXEC digitalocean.container_registry.registries.registries_validate_name 
 @@json=
 '{
 "name": "{{ name }}"
@@ -310,7 +341,7 @@ EXEC digitalocean.container_registries.registries.registries_validate_name
 To get information about your container registry, send a GET request to `/v2/registry`.<br />This operation is not compatible with multiple registries in a DO account. You should use `/v2/registries/&#123;registry_name&#125;` instead.
 
 ```sql
-EXEC digitalocean.container_registries.registries.registry_get_legacy 
+EXEC digitalocean.container_registry.registries.registry_get_legacy 
 ;
 ```
 </TabItem>
@@ -319,7 +350,7 @@ EXEC digitalocean.container_registries.registries.registry_get_legacy
 To create your container registry, send a POST request to `/v2/registry`.<br /><br />The `name` becomes part of the URL for images stored in the registry. For<br />example, if your registry is called `example`, an image in it will have the<br />URL `registry.digitalocean.com/example/image:tag`.<br />
 
 ```sql
-EXEC digitalocean.container_registries.registries.registry_create_legacy 
+EXEC digitalocean.container_registry.registries.registry_create_legacy 
 @@json=
 '{
 "name": "{{ name }}", 
@@ -333,7 +364,7 @@ EXEC digitalocean.container_registries.registries.registry_create_legacy
 To delete your container registry, destroying all container image data stored in it, send a DELETE request to `/v2/registry`.<br />This operation is not compatible with multiple registries in a DO account. You should use `/v2/registries/&#123;registry_name&#125;` instead.
 
 ```sql
-EXEC digitalocean.container_registries.registries.registry_delete_legacy 
+EXEC digitalocean.container_registry.registries.registry_delete_legacy 
 ;
 ```
 </TabItem>
@@ -342,7 +373,7 @@ EXEC digitalocean.container_registries.registries.registry_delete_legacy
 To validate that a container registry name is available for use, send a POST<br />request to `/v2/registry/validate-name`.<br /><br />If the name is both formatted correctly and available, the response code will<br />be 204 and contain no body. If the name is already in use, the response will<br />be a 409 Conflict.<br />
 
 ```sql
-EXEC digitalocean.container_registries.registries.registry_validate_name_legacy 
+EXEC digitalocean.container_registry.registries.registry_validate_name_legacy 
 @@json=
 '{
 "name": "{{ name }}"
