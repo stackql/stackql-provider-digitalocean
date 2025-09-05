@@ -32,15 +32,15 @@ Creates, updates, deletes, gets or lists a <code>firewalls</code> resource.
 The following fields are returned by `SELECT` queries:
 
 <Tabs
-    defaultValue="firewalls_list"
+    defaultValue="firewalls_get"
     values={[
-        { label: 'firewalls_list', value: 'firewalls_list' },
-        { label: 'firewalls_get', value: 'firewalls_get' }
+        { label: 'firewalls_get', value: 'firewalls_get' },
+        { label: 'firewalls_list', value: 'firewalls_list' }
     ]}
 >
-<TabItem value="firewalls_list">
+<TabItem value="firewalls_get">
 
-To list all of the firewalls available on your account, send a GET request to `/v2/firewalls`.&lt;br&gt;&lt;br&gt;Firewalls responses will include only the resources that you are granted to see. Ensure that your API token includes all necessary `&lt;resource&gt;:read` permissions for requested firewall.
+The response will be a JSON object with a firewall key. This will be set to an object containing the standard firewall attributes.<br /><br />Firewalls responses will include only the resources that you are granted to see. Ensure that your API token includes all necessary `<resource>:read` permissions for requested firewall.
 
 <table>
 <thead>
@@ -51,12 +51,57 @@ To list all of the firewalls available on your account, send a GET request to `/
     </tr>
 </thead>
 <tbody>
+<tr>
+    <td><CopyableCode code="id" /></td>
+    <td><code>string</code></td>
+    <td>A unique ID that can be used to identify and reference a firewall. (example: bb4b2611-3d72-467b-8602-280330ecd65c)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="name" /></td>
+    <td><code>string</code></td>
+    <td>A human-readable name for a firewall. The name must begin with an alphanumeric character. Subsequent characters must either be alphanumeric characters, a period (.), or a dash (-). (pattern: ^[a-zA-Z0-9][a-zA-Z0-9\.-]+$, example: firewall)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="created_at" /></td>
+    <td><code>string (date-time)</code></td>
+    <td>A time value given in ISO8601 combined date and time format that represents when the firewall was created. (example: 2020-05-23T21:24:00Z)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="droplet_ids" /></td>
+    <td><code>array</code></td>
+    <td>An array containing the IDs of the Droplets assigned to the firewall. <br /><br />Requires `droplet:read` scope.</td>
+</tr>
+<tr>
+    <td><CopyableCode code="inbound_rules" /></td>
+    <td><code>array</code></td>
+    <td></td>
+</tr>
+<tr>
+    <td><CopyableCode code="outbound_rules" /></td>
+    <td><code>array</code></td>
+    <td></td>
+</tr>
+<tr>
+    <td><CopyableCode code="pending_changes" /></td>
+    <td><code>array</code></td>
+    <td>An array of objects each containing the fields "droplet_id", "removing", and "status". It is provided to detail exactly which Droplets are having their security policies updated. When empty, all changes have been successfully applied.</td>
+</tr>
+<tr>
+    <td><CopyableCode code="status" /></td>
+    <td><code>string</code></td>
+    <td>A status string indicating the current state of the firewall. This can be "waiting", "succeeded", or "failed". (example: waiting)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="tags" /></td>
+    <td><code>array</code></td>
+    <td>A flat array of tag names as strings to be applied to the resource. Tag names must exist in order to be referenced in a request. <br /><br />Requires `tag:create` and `tag:read` scopes.</td>
+</tr>
 </tbody>
 </table>
 </TabItem>
-<TabItem value="firewalls_get">
+<TabItem value="firewalls_list">
 
-The response will be a JSON object with a firewall key. This will be set to an object containing the standard firewall attributes.&lt;br&gt;&lt;br&gt;Firewalls responses will include only the resources that you are granted to see. Ensure that your API token includes all necessary `&lt;resource&gt;:read` permissions for requested firewall.
+To list all of the firewalls available on your account, send a GET request to `/v2/firewalls`.<br /><br />Firewalls responses will include only the resources that you are granted to see. Ensure that your API token includes all necessary `<resource>:read` permissions for requested firewall.
 
 <table>
 <thead>
@@ -67,6 +112,51 @@ The response will be a JSON object with a firewall key. This will be set to an o
     </tr>
 </thead>
 <tbody>
+<tr>
+    <td><CopyableCode code="id" /></td>
+    <td><code>string</code></td>
+    <td>A unique ID that can be used to identify and reference a firewall. (example: bb4b2611-3d72-467b-8602-280330ecd65c)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="name" /></td>
+    <td><code>string</code></td>
+    <td>A human-readable name for a firewall. The name must begin with an alphanumeric character. Subsequent characters must either be alphanumeric characters, a period (.), or a dash (-). (pattern: ^[a-zA-Z0-9][a-zA-Z0-9\.-]+$, example: firewall)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="created_at" /></td>
+    <td><code>string (date-time)</code></td>
+    <td>A time value given in ISO8601 combined date and time format that represents when the firewall was created. (example: 2020-05-23T21:24:00Z)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="droplet_ids" /></td>
+    <td><code>array</code></td>
+    <td>An array containing the IDs of the Droplets assigned to the firewall. <br /><br />Requires `droplet:read` scope.</td>
+</tr>
+<tr>
+    <td><CopyableCode code="inbound_rules" /></td>
+    <td><code>array</code></td>
+    <td></td>
+</tr>
+<tr>
+    <td><CopyableCode code="outbound_rules" /></td>
+    <td><code>array</code></td>
+    <td></td>
+</tr>
+<tr>
+    <td><CopyableCode code="pending_changes" /></td>
+    <td><code>array</code></td>
+    <td>An array of objects each containing the fields "droplet_id", "removing", and "status". It is provided to detail exactly which Droplets are having their security policies updated. When empty, all changes have been successfully applied.</td>
+</tr>
+<tr>
+    <td><CopyableCode code="status" /></td>
+    <td><code>string</code></td>
+    <td>A status string indicating the current state of the firewall. This can be "waiting", "succeeded", or "failed". (example: waiting)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="tags" /></td>
+    <td><code>array</code></td>
+    <td>A flat array of tag names as strings to be applied to the resource. Tag names must exist in order to be referenced in a request. <br /><br />Requires `tag:create` and `tag:read` scopes.</td>
+</tr>
 </tbody>
 </table>
 </TabItem>
@@ -88,18 +178,18 @@ The following methods are available for this resource:
 </thead>
 <tbody>
 <tr>
-    <td><a href="#firewalls_list"><CopyableCode code="firewalls_list" /></a></td>
-    <td><CopyableCode code="select" /></td>
-    <td></td>
-    <td><a href="#parameter-per_page"><code>per_page</code></a>, <a href="#parameter-page"><code>page</code></a></td>
-    <td>To list all of the firewalls available on your account, send a GET request to `/v2/firewalls`.</td>
-</tr>
-<tr>
     <td><a href="#firewalls_get"><CopyableCode code="firewalls_get" /></a></td>
     <td><CopyableCode code="select" /></td>
     <td><a href="#parameter-firewall_id"><code>firewall_id</code></a></td>
     <td></td>
     <td>To show information about an existing firewall, send a GET request to `/v2/firewalls/$FIREWALL_ID`.</td>
+</tr>
+<tr>
+    <td><a href="#firewalls_list"><CopyableCode code="firewalls_list" /></a></td>
+    <td><CopyableCode code="select" /></td>
+    <td></td>
+    <td><a href="#parameter-per_page"><code>per_page</code></a>, <a href="#parameter-page"><code>page</code></a></td>
+    <td>To list all of the firewalls available on your account, send a GET request to `/v2/firewalls`.</td>
 </tr>
 <tr>
     <td><a href="#firewalls_create"><CopyableCode code="firewalls_create" /></a></td>
@@ -113,7 +203,7 @@ The following methods are available for this resource:
     <td><CopyableCode code="replace" /></td>
     <td><a href="#parameter-firewall_id"><code>firewall_id</code></a>, <a href="#parameter-data__name"><code>data__name</code></a></td>
     <td></td>
-    <td>To update the configuration of an existing firewall, send a PUT request to<br />`/v2/firewalls/$FIREWALL_ID`. The request should contain a full representation<br />of the firewall including existing attributes. **Note that any attributes that<br />are not provided will be reset to their default values.**<br />&lt;br&gt;&lt;br&gt;You must have read access (e.g. `droplet:read`) to all resources attached<br />to the firewall to successfully update the firewall.<br /></td>
+    <td>To update the configuration of an existing firewall, send a PUT request to<br />`/v2/firewalls/$FIREWALL_ID`. The request should contain a full representation<br />of the firewall including existing attributes. **Note that any attributes that<br />are not provided will be reset to their default values.**<br /><br /><br />You must have read access (e.g. `droplet:read`) to all resources attached<br />to the firewall to successfully update the firewall.<br /></td>
 </tr>
 <tr>
     <td><a href="#firewalls_delete"><CopyableCode code="firewalls_delete" /></a></td>
@@ -173,33 +263,49 @@ Parameters can be passed in the `WHERE` clause of a query. Check the [Methods](#
 ## `SELECT` examples
 
 <Tabs
-    defaultValue="firewalls_list"
+    defaultValue="firewalls_get"
     values={[
-        { label: 'firewalls_list', value: 'firewalls_list' },
-        { label: 'firewalls_get', value: 'firewalls_get' }
+        { label: 'firewalls_get', value: 'firewalls_get' },
+        { label: 'firewalls_list', value: 'firewalls_list' }
     ]}
 >
-<TabItem value="firewalls_list">
-
-To list all of the firewalls available on your account, send a GET request to `/v2/firewalls`.
-
-```sql
-SELECT
-*
-FROM digitalocean.compute.firewalls
-WHERE per_page = '{{ per_page }}'
-AND page = '{{ page }}';
-```
-</TabItem>
 <TabItem value="firewalls_get">
 
 To show information about an existing firewall, send a GET request to `/v2/firewalls/$FIREWALL_ID`.
 
 ```sql
 SELECT
-*
+id,
+name,
+created_at,
+droplet_ids,
+inbound_rules,
+outbound_rules,
+pending_changes,
+status,
+tags
 FROM digitalocean.compute.firewalls
 WHERE firewall_id = '{{ firewall_id }}' -- required;
+```
+</TabItem>
+<TabItem value="firewalls_list">
+
+To list all of the firewalls available on your account, send a GET request to `/v2/firewalls`.
+
+```sql
+SELECT
+id,
+name,
+created_at,
+droplet_ids,
+inbound_rules,
+outbound_rules,
+pending_changes,
+status,
+tags
+FROM digitalocean.compute.firewalls
+WHERE per_page = '{{ per_page }}'
+AND page = '{{ page }}';
 ```
 </TabItem>
 </Tabs>
@@ -232,6 +338,8 @@ SELECT
 '{{ tags }}',
 '{{ inbound_rules }}',
 '{{ outbound_rules }}'
+RETURNING
+firewall
 ;
 ```
 </TabItem>
@@ -275,7 +383,7 @@ SELECT
 >
 <TabItem value="firewalls_update">
 
-To update the configuration of an existing firewall, send a PUT request to<br />`/v2/firewalls/$FIREWALL_ID`. The request should contain a full representation<br />of the firewall including existing attributes. **Note that any attributes that<br />are not provided will be reset to their default values.**<br />&lt;br&gt;&lt;br&gt;You must have read access (e.g. `droplet:read`) to all resources attached<br />to the firewall to successfully update the firewall.<br />
+To update the configuration of an existing firewall, send a PUT request to<br />`/v2/firewalls/$FIREWALL_ID`. The request should contain a full representation<br />of the firewall including existing attributes. **Note that any attributes that<br />are not provided will be reset to their default values.**<br /><br /><br />You must have read access (e.g. `droplet:read`) to all resources attached<br />to the firewall to successfully update the firewall.<br />
 
 ```sql
 REPLACE digitalocean.compute.firewalls
@@ -287,7 +395,9 @@ data__inbound_rules = '{{ inbound_rules }}',
 data__outbound_rules = '{{ outbound_rules }}'
 WHERE 
 firewall_id = '{{ firewall_id }}' --required
-AND data__name = '{{ name }}' --required;
+AND data__name = '{{ name }}' --required
+RETURNING
+firewall;
 ```
 </TabItem>
 </Tabs>

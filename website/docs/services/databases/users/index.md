@@ -32,28 +32,12 @@ Creates, updates, deletes, gets or lists a <code>users</code> resource.
 The following fields are returned by `SELECT` queries:
 
 <Tabs
-    defaultValue="databases_list_users"
+    defaultValue="databases_get_user"
     values={[
-        { label: 'databases_list_users', value: 'databases_list_users' },
-        { label: 'databases_get_user', value: 'databases_get_user' }
+        { label: 'databases_get_user', value: 'databases_get_user' },
+        { label: 'databases_list_users', value: 'databases_list_users' }
     ]}
 >
-<TabItem value="databases_list_users">
-
-A JSON object with a key of `users`.
-
-<table>
-<thead>
-    <tr>
-    <th>Name</th>
-    <th>Datatype</th>
-    <th>Description</th>
-    </tr>
-</thead>
-<tbody>
-</tbody>
-</table>
-</TabItem>
 <TabItem value="databases_get_user">
 
 A JSON object with a key of `user`.
@@ -67,6 +51,92 @@ A JSON object with a key of `user`.
     </tr>
 </thead>
 <tbody>
+<tr>
+    <td><CopyableCode code="name" /></td>
+    <td><code>string</code></td>
+    <td>The name of a database user. (example: app-01)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="access_cert" /></td>
+    <td><code>string</code></td>
+    <td>Access certificate for TLS client authentication. (Kafka only) (example: -----BEGIN CERTIFICATE-----<br />MIIFFjCCA/6gAwIBAgISA0AznUJmXhu08/89ZuSPC/kRMA0GCSqGSIb3DQEBCwUA<br />MEoxCzAJBgNVBAYTAlVTMRYwFAYDVQQKEw1MZXQncyBFbmNyeXB0MSMwIQYDVQQD<br />ExpMZXQncyBFbmNyeXB0IEF1dGhvcml0eSBYMzAeFw0xNjExMjQwMDIzMDBaFw0x<br />NzAyMjIwMDIzMDBaMCQxIjAgBgNVBAMTGWNsb3VkLmFuZHJld3NvbWV0aGluZy5j<br />b20wggEiMA0GCSqGSIb3DQEBAQUAA4IBDwAwggEKAoIBAQDBIZMz8pnK6V52SVf+<br />CYssOfCQHAx5f0Ou5rYbq3xNh8VWHIYJCQ1QxQIxKSP6+uODSYrb2KWyurP1DwGb<br />8OYm0J3syEDtCUQik1cpCzpeNlAZ2f8FzXyYQAqPopxdRpsFz8DtZnVvu86XwrE4<br />oFPl9MReICmZfBNWylpV5qgFPoXyJ70ZAsTm3cEe3n+LBXEnY4YrVDRWxA3wZ2mz<br />Z03HZ1hHrxK9CMnS829U+8sK+UneZpCO7yLRPuxwhmps0wpK/YuZZfRAKF1FZRna<br />k/SIQ28rnWufmdg16YqqHgl5JOgnb3aslKRvL4dI2Gwnkd2IHtpZnTR0gxFXfqqb<br />QwuRAgMBAAGjggIaMIICFjAOBgNVHQ8BAf8EBAMCBaAwHQYDVR0lBBYwFAYIKwYB<br />BQUHAwEGCCsGAQUFBwMCMAwGA1UdEwEB/wQCMAAwHQYDVR0OBBYEFLsAFcxAhFX1<br />MbCnzr9hEO5rL4jqMB8GA1UdIwQYMBaAFKhKamMEfd265tE5t6ZFZe/zqOyhMHAG<br />CCsGAQUFBwEBBGQwYjAvBggrBgEFBQcwAYYjaHR0cDovL29jc3AuaW50LXgzLmxl<br />dHNlbmNyeXB0Lm9yZy8wLwYIKwYBBQUHMAKGI2h0dHA6Ly9jZXJ0LmludC14My5s<br />ZXRzZW5jcnlwdC5vcmcvMCQGA1UdEQQdMBuCGWNsb3VkLmFuZHJld3NvbWV0aGlu<br />Zy5jb20wgf4GA1UdIASB9jCB8zAIBgZngQwBAgWrgeYGCysGAQQBgt8TAQEBMIHW<br />MCYGCCsGAQUFBwIBFhpodHRwOi8vY3BzLmxldHNlbmNyeXB0Lm9yZzCBqwYIKwYB<br />BQUHAgIwgZ4MgZtUaGlzIENlcnRpZmljYXRlIG1heSBvbmx5IGJlIHJlbGllZCB1<br />cG9uIGJ5IFJlbHlpbmcgUGFydGllcyBhbmQgb25seSQ2ziBhY2NvcmRhbmNlIHdp<br />dGggdGhlIENlcnRpZmljYXRlIFBvbGljeSBmb3VuZCBhdCBodHRwczovL2xldHNl<br />bmNyeXB0Lm9yZy9yZXBvc2l0b3J5LzANBgkqhkiG9w0BAQsFAAOCAQEAOZVQvrjM<br />PKXLARTjB5XsgfyDN3/qwLl7SmwGkPe+B+9FJpfScYG1JzVuCj/SoaPaK34G4x/e<br />iXwlwOXtMOtqjQYzNu2Pr2C+I+rVmaxIrCUXFmC205IMuUBEeWXG9Y/HvXQLPabD<br />D3Gdl5+Feink9SDRP7G0HaAwq13hI7ARxkL9p+UIY39X0dV3WOboW2Re8nrkFXJ7<br />q9Z6shK5QgpBfsLjtjNsQzaGV3ve1gOg25aTJGearBWOvEjJNA1wGMoKVXOtYwm/<br />WyWoVdCQ8HmconcbJB6xc0UZ1EjvzRr5ZIvSa5uHZD0L3m7/kpPWlAlFJ7hHASPu<br />UlF1zblDmg2Iaw==<br />-----END CERTIFICATE-----)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="access_key" /></td>
+    <td><code>string</code></td>
+    <td>Access key for TLS client authentication. (Kafka only) (example: -----BEGIN PRIVATE KEY-----<br />MIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQDBIZMz8pnK6V52<br />SVf+CYssOfCQHAx5f0Ou5rYbq3xNh8VHAIYJCQ1QxQIxKSP6+uODSYrb2KWyurP1<br />DwGb8OYm0J3syEDtCUQik1cpCzpeNlAZ2f8FzXyYQAqPopxdRpsFz8DtZnVvu86X<br />wrE4oFPl9MReICmZfBNWylpV5qgFPoXyJ70ZAsTm3cEe3n+LBXEnY4YrVDRWxA3w<br />Z2mzZ03HZ1hHrxK9CMnS829U+8sK+UneZpCO7yLRPuxwhmps0wpK/YuZZfRAKF1F<br />ZRnak/SIQ28rnWufmdg16YqqHgl5JOgnb3aslKRvL4dI2Gwnkd2IHtpZnTR0gxFX<br />fqqbQwuRAgMBAAECggEBAILLmkW0JzOkmLTDNzR0giyRkLoIROqDpfLtjKdwm95l<br />9NUBJcU4vCvXQITKt/NhtnNTexcowg8pInb0ksJpg3UGE+4oMNBXVi2UW5MQZ5cm<br />cVkQqgXkBF2YAY8FMaB6EML+0En2+dGR/3gIAr221xsFiXe1kHbB8Nb2c/d5HpFt<br />eRpLVJnK+TxSr78PcZA8DDGlSgwvgimdAaFUNO2OqB9/0E9UPyKk2ycdff/Z6ldF<br />0hkCLtdYTTl8Kf/OwjcuTgmA2O3Y8/CoQX/L+oP9Rvt9pWCEfuebiOmHJVPO6Y6x<br />gtQVEXwmF1pDHH4Qtz/e6UZTdYeMl9G4aNO2CawwcaYECgYEA57imgSOG4XsJLRh<br />GGncV9R/xhy4AbDWLtAMzQRX4ktvKCaHWyQV2XK2we/cu29NLv2Y89WmerTNPOU+<br />P8+pB31uty2ELySVn15QhKpQClVEAlxCnnNjXYrii5LOM80+lVmxvQwxVd8Yz8nj<br />IntyioXNBEnYS7V2RxxFGgFun1cCgYEA1V3W+Uyamhq8JS5EY0FhyGcXdHd70K49<br />W1ou7McIpncf9tM9acLS1hkI98rd2T69Zo8mKoV1V2hjFaKUYfNys6tTkYWeZCcJ<br />3rW44j9DTD+FmmjcX6b8DzfybGLehfNbCw6n67/r45DXIV/fk6XZfkx6IEGO4ODt<br />Nfnvx4TuI1cCgYBACDiKqwSUvmkUuweOo4IuCxyb5Ee8v98P5JIE/VRDxlCbKbpx<br />pxEam6aBBQVcDi+n8o0H3WjjlKc6UqbW/01YMoMrvzotxNBLz8Y0QtQHZvR6KoCG<br />RKCKstxTcWflzKuknbqN4RapAhNbKBDJ8PMSWfyDWNyaXzSmBdvaidbF1QKBgDI0<br />o4oD0Xkjg1QIYAUu9FBQmb9JAjRnW36saNBEQS/SZg4RRKknM683MtoDvVIKJk0E<br />sAlfX+4SXQZRPDMUMtA+Jyrd0xhj6zmhbwClvDMr20crF3fWdgcqtft1BEFmsuyW<br />JUMe5OWmRkjPI2+9ncDPRAllA7a8lnSV/Crph5N/AoGBAIK249temKrGe9pmsmAo<br />QbNuYSmwpnMoAqdHTrl70HEmK7ob6SIVmsR8QFAkH7xkYZc4Bxbx4h1bdpozGB+/<br />AangbiaYJcAOD1QyfiFbflvI1RFeHgrk7VIafeSeQv6qu0LLMi2zUbpgVzxt78Wg<br />eTuK2xNR0PIM8OI7pRpgyj1I<br />-----END PRIVATE KEY-----)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="mysql_settings" /></td>
+    <td><code>object</code></td>
+    <td></td>
+</tr>
+<tr>
+    <td><CopyableCode code="password" /></td>
+    <td><code>string</code></td>
+    <td>A randomly generated password for the database user.<br />Requires `database:view_credentials` scope. (example: jge5lfxtzhx42iff)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="role" /></td>
+    <td><code>string</code></td>
+    <td>A string representing the database user's role. The value will be either "primary" or "normal".  (example: normal)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="settings" /></td>
+    <td><code>object</code></td>
+    <td></td>
+</tr>
+</tbody>
+</table>
+</TabItem>
+<TabItem value="databases_list_users">
+
+A JSON object with a key of `users`.
+
+<table>
+<thead>
+    <tr>
+    <th>Name</th>
+    <th>Datatype</th>
+    <th>Description</th>
+    </tr>
+</thead>
+<tbody>
+<tr>
+    <td><CopyableCode code="name" /></td>
+    <td><code>string</code></td>
+    <td>The name of a database user. (example: app-01)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="access_cert" /></td>
+    <td><code>string</code></td>
+    <td>Access certificate for TLS client authentication. (Kafka only) (example: -----BEGIN CERTIFICATE-----<br />MIIFFjCCA/6gAwIBAgISA0AznUJmXhu08/89ZuSPC/kRMA0GCSqGSIb3DQEBCwUA<br />MEoxCzAJBgNVBAYTAlVTMRYwFAYDVQQKEw1MZXQncyBFbmNyeXB0MSMwIQYDVQQD<br />ExpMZXQncyBFbmNyeXB0IEF1dGhvcml0eSBYMzAeFw0xNjExMjQwMDIzMDBaFw0x<br />NzAyMjIwMDIzMDBaMCQxIjAgBgNVBAMTGWNsb3VkLmFuZHJld3NvbWV0aGluZy5j<br />b20wggEiMA0GCSqGSIb3DQEBAQUAA4IBDwAwggEKAoIBAQDBIZMz8pnK6V52SVf+<br />CYssOfCQHAx5f0Ou5rYbq3xNh8VWHIYJCQ1QxQIxKSP6+uODSYrb2KWyurP1DwGb<br />8OYm0J3syEDtCUQik1cpCzpeNlAZ2f8FzXyYQAqPopxdRpsFz8DtZnVvu86XwrE4<br />oFPl9MReICmZfBNWylpV5qgFPoXyJ70ZAsTm3cEe3n+LBXEnY4YrVDRWxA3wZ2mz<br />Z03HZ1hHrxK9CMnS829U+8sK+UneZpCO7yLRPuxwhmps0wpK/YuZZfRAKF1FZRna<br />k/SIQ28rnWufmdg16YqqHgl5JOgnb3aslKRvL4dI2Gwnkd2IHtpZnTR0gxFXfqqb<br />QwuRAgMBAAGjggIaMIICFjAOBgNVHQ8BAf8EBAMCBaAwHQYDVR0lBBYwFAYIKwYB<br />BQUHAwEGCCsGAQUFBwMCMAwGA1UdEwEB/wQCMAAwHQYDVR0OBBYEFLsAFcxAhFX1<br />MbCnzr9hEO5rL4jqMB8GA1UdIwQYMBaAFKhKamMEfd265tE5t6ZFZe/zqOyhMHAG<br />CCsGAQUFBwEBBGQwYjAvBggrBgEFBQcwAYYjaHR0cDovL29jc3AuaW50LXgzLmxl<br />dHNlbmNyeXB0Lm9yZy8wLwYIKwYBBQUHMAKGI2h0dHA6Ly9jZXJ0LmludC14My5s<br />ZXRzZW5jcnlwdC5vcmcvMCQGA1UdEQQdMBuCGWNsb3VkLmFuZHJld3NvbWV0aGlu<br />Zy5jb20wgf4GA1UdIASB9jCB8zAIBgZngQwBAgWrgeYGCysGAQQBgt8TAQEBMIHW<br />MCYGCCsGAQUFBwIBFhpodHRwOi8vY3BzLmxldHNlbmNyeXB0Lm9yZzCBqwYIKwYB<br />BQUHAgIwgZ4MgZtUaGlzIENlcnRpZmljYXRlIG1heSBvbmx5IGJlIHJlbGllZCB1<br />cG9uIGJ5IFJlbHlpbmcgUGFydGllcyBhbmQgb25seSQ2ziBhY2NvcmRhbmNlIHdp<br />dGggdGhlIENlcnRpZmljYXRlIFBvbGljeSBmb3VuZCBhdCBodHRwczovL2xldHNl<br />bmNyeXB0Lm9yZy9yZXBvc2l0b3J5LzANBgkqhkiG9w0BAQsFAAOCAQEAOZVQvrjM<br />PKXLARTjB5XsgfyDN3/qwLl7SmwGkPe+B+9FJpfScYG1JzVuCj/SoaPaK34G4x/e<br />iXwlwOXtMOtqjQYzNu2Pr2C+I+rVmaxIrCUXFmC205IMuUBEeWXG9Y/HvXQLPabD<br />D3Gdl5+Feink9SDRP7G0HaAwq13hI7ARxkL9p+UIY39X0dV3WOboW2Re8nrkFXJ7<br />q9Z6shK5QgpBfsLjtjNsQzaGV3ve1gOg25aTJGearBWOvEjJNA1wGMoKVXOtYwm/<br />WyWoVdCQ8HmconcbJB6xc0UZ1EjvzRr5ZIvSa5uHZD0L3m7/kpPWlAlFJ7hHASPu<br />UlF1zblDmg2Iaw==<br />-----END CERTIFICATE-----)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="access_key" /></td>
+    <td><code>string</code></td>
+    <td>Access key for TLS client authentication. (Kafka only) (example: -----BEGIN PRIVATE KEY-----<br />MIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQDBIZMz8pnK6V52<br />SVf+CYssOfCQHAx5f0Ou5rYbq3xNh8VHAIYJCQ1QxQIxKSP6+uODSYrb2KWyurP1<br />DwGb8OYm0J3syEDtCUQik1cpCzpeNlAZ2f8FzXyYQAqPopxdRpsFz8DtZnVvu86X<br />wrE4oFPl9MReICmZfBNWylpV5qgFPoXyJ70ZAsTm3cEe3n+LBXEnY4YrVDRWxA3w<br />Z2mzZ03HZ1hHrxK9CMnS829U+8sK+UneZpCO7yLRPuxwhmps0wpK/YuZZfRAKF1F<br />ZRnak/SIQ28rnWufmdg16YqqHgl5JOgnb3aslKRvL4dI2Gwnkd2IHtpZnTR0gxFX<br />fqqbQwuRAgMBAAECggEBAILLmkW0JzOkmLTDNzR0giyRkLoIROqDpfLtjKdwm95l<br />9NUBJcU4vCvXQITKt/NhtnNTexcowg8pInb0ksJpg3UGE+4oMNBXVi2UW5MQZ5cm<br />cVkQqgXkBF2YAY8FMaB6EML+0En2+dGR/3gIAr221xsFiXe1kHbB8Nb2c/d5HpFt<br />eRpLVJnK+TxSr78PcZA8DDGlSgwvgimdAaFUNO2OqB9/0E9UPyKk2ycdff/Z6ldF<br />0hkCLtdYTTl8Kf/OwjcuTgmA2O3Y8/CoQX/L+oP9Rvt9pWCEfuebiOmHJVPO6Y6x<br />gtQVEXwmF1pDHH4Qtz/e6UZTdYeMl9G4aNO2CawwcaYECgYEA57imgSOG4XsJLRh<br />GGncV9R/xhy4AbDWLtAMzQRX4ktvKCaHWyQV2XK2we/cu29NLv2Y89WmerTNPOU+<br />P8+pB31uty2ELySVn15QhKpQClVEAlxCnnNjXYrii5LOM80+lVmxvQwxVd8Yz8nj<br />IntyioXNBEnYS7V2RxxFGgFun1cCgYEA1V3W+Uyamhq8JS5EY0FhyGcXdHd70K49<br />W1ou7McIpncf9tM9acLS1hkI98rd2T69Zo8mKoV1V2hjFaKUYfNys6tTkYWeZCcJ<br />3rW44j9DTD+FmmjcX6b8DzfybGLehfNbCw6n67/r45DXIV/fk6XZfkx6IEGO4ODt<br />Nfnvx4TuI1cCgYBACDiKqwSUvmkUuweOo4IuCxyb5Ee8v98P5JIE/VRDxlCbKbpx<br />pxEam6aBBQVcDi+n8o0H3WjjlKc6UqbW/01YMoMrvzotxNBLz8Y0QtQHZvR6KoCG<br />RKCKstxTcWflzKuknbqN4RapAhNbKBDJ8PMSWfyDWNyaXzSmBdvaidbF1QKBgDI0<br />o4oD0Xkjg1QIYAUu9FBQmb9JAjRnW36saNBEQS/SZg4RRKknM683MtoDvVIKJk0E<br />sAlfX+4SXQZRPDMUMtA+Jyrd0xhj6zmhbwClvDMr20crF3fWdgcqtft1BEFmsuyW<br />JUMe5OWmRkjPI2+9ncDPRAllA7a8lnSV/Crph5N/AoGBAIK249temKrGe9pmsmAo<br />QbNuYSmwpnMoAqdHTrl70HEmK7ob6SIVmsR8QFAkH7xkYZc4Bxbx4h1bdpozGB+/<br />AangbiaYJcAOD1QyfiFbflvI1RFeHgrk7VIafeSeQv6qu0LLMi2zUbpgVzxt78Wg<br />eTuK2xNR0PIM8OI7pRpgyj1I<br />-----END PRIVATE KEY-----)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="mysql_settings" /></td>
+    <td><code>object</code></td>
+    <td></td>
+</tr>
+<tr>
+    <td><CopyableCode code="password" /></td>
+    <td><code>string</code></td>
+    <td>A randomly generated password for the database user.<br />Requires `database:view_credentials` scope. (example: jge5lfxtzhx42iff)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="role" /></td>
+    <td><code>string</code></td>
+    <td>A string representing the database user's role. The value will be either "primary" or "normal".  (example: normal)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="settings" /></td>
+    <td><code>object</code></td>
+    <td></td>
+</tr>
 </tbody>
 </table>
 </TabItem>
@@ -88,18 +158,18 @@ The following methods are available for this resource:
 </thead>
 <tbody>
 <tr>
-    <td><a href="#databases_list_users"><CopyableCode code="databases_list_users" /></a></td>
-    <td><CopyableCode code="select" /></td>
-    <td><a href="#parameter-database_cluster_uuid"><code>database_cluster_uuid</code></a></td>
-    <td></td>
-    <td>To list all of the users for your database cluster, send a GET request to<br />`/v2/databases/$DATABASE_ID/users`.<br /><br />Note: User management is not supported for Caching or Valkey clusters.<br /><br />The result will be a JSON object with a `users` key. This will be set to an array<br />of database user objects, each of which will contain the standard database user attributes.<br />User passwords will not show without the `database:view_credentials` scope.<br /><br />For MySQL clusters, additional options will be contained in the mysql_settings object.<br /><br />For MongoDB clusters, additional information will be contained in the mongo_user_settings object<br /></td>
-</tr>
-<tr>
     <td><a href="#databases_get_user"><CopyableCode code="databases_get_user" /></a></td>
     <td><CopyableCode code="select" /></td>
     <td><a href="#parameter-database_cluster_uuid"><code>database_cluster_uuid</code></a>, <a href="#parameter-username"><code>username</code></a></td>
     <td></td>
     <td>To show information about an existing database user, send a GET request to<br />`/v2/databases/$DATABASE_ID/users/$USERNAME`.<br /><br />Note: User management is not supported for Caching or Valkey clusters.<br /><br />The response will be a JSON object with a `user` key. This will be set to an object<br />containing the standard database user attributes. The user's password will not show<br />up unless the `database:view_credentials` scope is present.<br /><br />For MySQL clusters, additional options will be contained in the `mysql_settings`<br />object.<br /><br />For Kafka clusters, additional options will be contained in the `settings` object.<br /><br />For MongoDB clusters, additional information will be contained in the mongo_user_settings object<br /></td>
+</tr>
+<tr>
+    <td><a href="#databases_list_users"><CopyableCode code="databases_list_users" /></a></td>
+    <td><CopyableCode code="select" /></td>
+    <td><a href="#parameter-database_cluster_uuid"><code>database_cluster_uuid</code></a></td>
+    <td></td>
+    <td>To list all of the users for your database cluster, send a GET request to<br />`/v2/databases/$DATABASE_ID/users`.<br /><br />Note: User management is not supported for Caching or Valkey clusters.<br /><br />The result will be a JSON object with a `users` key. This will be set to an array<br />of database user objects, each of which will contain the standard database user attributes.<br />User passwords will not show without the `database:view_credentials` scope.<br /><br />For MySQL clusters, additional options will be contained in the mysql_settings object.<br /><br />For MongoDB clusters, additional information will be contained in the mongo_user_settings object<br /></td>
 </tr>
 <tr>
     <td><a href="#databases_add_user"><CopyableCode code="databases_add_user" /></a></td>
@@ -161,33 +231,45 @@ Parameters can be passed in the `WHERE` clause of a query. Check the [Methods](#
 ## `SELECT` examples
 
 <Tabs
-    defaultValue="databases_list_users"
+    defaultValue="databases_get_user"
     values={[
-        { label: 'databases_list_users', value: 'databases_list_users' },
-        { label: 'databases_get_user', value: 'databases_get_user' }
+        { label: 'databases_get_user', value: 'databases_get_user' },
+        { label: 'databases_list_users', value: 'databases_list_users' }
     ]}
 >
-<TabItem value="databases_list_users">
-
-To list all of the users for your database cluster, send a GET request to<br />`/v2/databases/$DATABASE_ID/users`.<br /><br />Note: User management is not supported for Caching or Valkey clusters.<br /><br />The result will be a JSON object with a `users` key. This will be set to an array<br />of database user objects, each of which will contain the standard database user attributes.<br />User passwords will not show without the `database:view_credentials` scope.<br /><br />For MySQL clusters, additional options will be contained in the mysql_settings object.<br /><br />For MongoDB clusters, additional information will be contained in the mongo_user_settings object<br />
-
-```sql
-SELECT
-*
-FROM digitalocean.databases.users
-WHERE database_cluster_uuid = '{{ database_cluster_uuid }}' -- required;
-```
-</TabItem>
 <TabItem value="databases_get_user">
 
 To show information about an existing database user, send a GET request to<br />`/v2/databases/$DATABASE_ID/users/$USERNAME`.<br /><br />Note: User management is not supported for Caching or Valkey clusters.<br /><br />The response will be a JSON object with a `user` key. This will be set to an object<br />containing the standard database user attributes. The user's password will not show<br />up unless the `database:view_credentials` scope is present.<br /><br />For MySQL clusters, additional options will be contained in the `mysql_settings`<br />object.<br /><br />For Kafka clusters, additional options will be contained in the `settings` object.<br /><br />For MongoDB clusters, additional information will be contained in the mongo_user_settings object<br />
 
 ```sql
 SELECT
-*
+name,
+access_cert,
+access_key,
+mysql_settings,
+password,
+role,
+settings
 FROM digitalocean.databases.users
 WHERE database_cluster_uuid = '{{ database_cluster_uuid }}' -- required
 AND username = '{{ username }}' -- required;
+```
+</TabItem>
+<TabItem value="databases_list_users">
+
+To list all of the users for your database cluster, send a GET request to<br />`/v2/databases/$DATABASE_ID/users`.<br /><br />Note: User management is not supported for Caching or Valkey clusters.<br /><br />The result will be a JSON object with a `users` key. This will be set to an array<br />of database user objects, each of which will contain the standard database user attributes.<br />User passwords will not show without the `database:view_credentials` scope.<br /><br />For MySQL clusters, additional options will be contained in the mysql_settings object.<br /><br />For MongoDB clusters, additional information will be contained in the mongo_user_settings object<br />
+
+```sql
+SELECT
+name,
+access_cert,
+access_key,
+mysql_settings,
+password,
+role,
+settings
+FROM digitalocean.databases.users
+WHERE database_cluster_uuid = '{{ database_cluster_uuid }}' -- required;
 ```
 </TabItem>
 </Tabs>
@@ -220,6 +302,8 @@ SELECT
 '{{ settings }}',
 {{ readonly }},
 '{{ database_cluster_uuid }}'
+RETURNING
+user
 ;
 ```
 </TabItem>
@@ -273,7 +357,9 @@ data__settings = '{{ settings }}'
 WHERE 
 database_cluster_uuid = '{{ database_cluster_uuid }}' --required
 AND username = '{{ username }}' --required
-AND data__settings = '{{ settings }}' --required;
+AND data__settings = '{{ settings }}' --required
+RETURNING
+user;
 ```
 </TabItem>
 </Tabs>

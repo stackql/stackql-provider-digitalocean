@@ -50,6 +50,11 @@ A JSON object with a key of `credentials`.
     </tr>
 </thead>
 <tbody>
+<tr>
+    <td><CopyableCode code="credentials" /></td>
+    <td><code>object</code></td>
+    <td></td>
+</tr>
 </tbody>
 </table>
 </TabItem>
@@ -117,7 +122,7 @@ To show the credentials for all database clusters' metrics endpoints, send a GET
 
 ```sql
 SELECT
-*
+credentials
 FROM digitalocean.databases.cluster_metrics_credentials;
 ```
 </TabItem>

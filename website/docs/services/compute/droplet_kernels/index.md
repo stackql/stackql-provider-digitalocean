@@ -50,6 +50,21 @@ A JSON object that has a key called `kernels`.
     </tr>
 </thead>
 <tbody>
+<tr>
+    <td><CopyableCode code="id" /></td>
+    <td><code>integer</code></td>
+    <td>A unique number used to identify and reference a specific kernel.</td>
+</tr>
+<tr>
+    <td><CopyableCode code="name" /></td>
+    <td><code>string</code></td>
+    <td>The display name of the kernel. This is shown in the web UI and is generally a descriptive title for the kernel in question. (example: DigitalOcean GrubLoader v0.2 (20160714))</td>
+</tr>
+<tr>
+    <td><CopyableCode code="version" /></td>
+    <td><code>string</code></td>
+    <td>A standard kernel version string representing the version, patch, and release information. (example: 2016.07.13-DigitalOcean_loader_Ubuntu)</td>
+</tr>
 </tbody>
 </table>
 </TabItem>
@@ -125,7 +140,9 @@ To retrieve a list of all kernels available to a Droplet, send a GET request<br 
 
 ```sql
 SELECT
-*
+id,
+name,
+version
 FROM digitalocean.compute.droplet_kernels
 WHERE droplet_id = '{{ droplet_id }}' -- required
 AND per_page = '{{ per_page }}'

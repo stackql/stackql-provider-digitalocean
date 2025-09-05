@@ -50,6 +50,41 @@ A JSON object with a key of `history`.
     </tr>
 </thead>
 <tbody>
+<tr>
+    <td><CopyableCode code="history_event_id" /></td>
+    <td><code>string</code></td>
+    <td>The unique identifier of the history event. (example: 01936530-4471-7b86-9634-32d8fcfecbc6)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="created_at" /></td>
+    <td><code>string (date-time)</code></td>
+    <td>The creation time of the history event in ISO8601 combined date and time format. (example: 2020-07-28T18:00:00Z)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="current_instance_count" /></td>
+    <td><code>integer</code></td>
+    <td>The current number of Droplets in the autoscale pool.</td>
+</tr>
+<tr>
+    <td><CopyableCode code="desired_instance_count" /></td>
+    <td><code>integer</code></td>
+    <td>The target number of Droplets for the autoscale pool after the scaling event.</td>
+</tr>
+<tr>
+    <td><CopyableCode code="reason" /></td>
+    <td><code>string</code></td>
+    <td>The reason for the scaling event. (example: CONFIGURATION_CHANGE)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="status" /></td>
+    <td><code>string</code></td>
+    <td>The status of the scaling event. (example: success)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="updated_at" /></td>
+    <td><code>string (date-time)</code></td>
+    <td>The last updated time of the history event in ISO8601 combined date and time format. (example: 2020-07-28T18:00:00Z)</td>
+</tr>
 </tbody>
 </table>
 </TabItem>
@@ -125,7 +160,13 @@ To list all of the scaling history events of an autoscale pool, send a GET reque
 
 ```sql
 SELECT
-*
+history_event_id,
+created_at,
+current_instance_count,
+desired_instance_count,
+reason,
+status,
+updated_at
 FROM digitalocean.compute.droplet_autoscale_pool_history
 WHERE autoscale_pool_id = '{{ autoscale_pool_id }}' -- required
 AND per_page = '{{ per_page }}'

@@ -50,6 +50,31 @@ The response will be a JSON object with a key called `peerings`. This  will be s
     </tr>
 </thead>
 <tbody>
+<tr>
+    <td><CopyableCode code="id" /></td>
+    <td><code>string (uuid)</code></td>
+    <td>A unique ID that can be used to identify and reference the VPC peering. (example: 5a4981aa-9653-4bd1-bef5-d6bff52042e4)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="name" /></td>
+    <td><code>string</code></td>
+    <td>The name of the VPC peering. Must be unique within the team and may only contain alphanumeric characters and dashes. (pattern: ^[a-zA-Z0-9\-]+$, example: nyc1-blr1-peering)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="created_at" /></td>
+    <td><code>string (date-time)</code></td>
+    <td>A time value given in ISO8601 combined date and time format. (example: 2020-03-13T19:20:47.442049222Z)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="status" /></td>
+    <td><code>string</code></td>
+    <td>The current status of the VPC peering. (example: ACTIVE)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="vpc_ids" /></td>
+    <td><code>array</code></td>
+    <td>An array of the two peered VPCs IDs.</td>
+</tr>
 </tbody>
 </table>
 </TabItem>
@@ -144,7 +169,11 @@ To list all of a VPC's peerings, send a GET request to<br />`/v2/vpcs/$VPC_ID/pe
 
 ```sql
 SELECT
-*
+id,
+name,
+created_at,
+status,
+vpc_ids
 FROM digitalocean.vpcs.peerings
 WHERE vpc_id = '{{ vpc_id }}' -- required
 AND per_page = '{{ per_page }}'
@@ -177,6 +206,8 @@ SELECT
 '{{ name }}' --required,
 '{{ vpc_id }}' --required,
 '{{ vpc_id }}'
+RETURNING
+peering
 ;
 ```
 </TabItem>
@@ -223,7 +254,9 @@ data__name = '{{ name }}'
 WHERE 
 vpc_id = '{{ vpc_id }}' --required
 AND vpc_peering_id = '{{ vpc_peering_id }}' --required
-AND data__name = '{{ name }}' --required;
+AND data__name = '{{ name }}' --required
+RETURNING
+peering;
 ```
 </TabItem>
 </Tabs>

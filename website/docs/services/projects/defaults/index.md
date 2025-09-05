@@ -50,6 +50,56 @@ The response will be a JSON object with a key called `project`. The value of thi
     </tr>
 </thead>
 <tbody>
+<tr>
+    <td><CopyableCode code="id" /></td>
+    <td><code>string (uuid)</code></td>
+    <td>The unique universal identifier of this project. (example: 4e1bfbc3-dc3e-41f2-a18f-1b4d7ba71679)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="name" /></td>
+    <td><code>string</code></td>
+    <td>The human-readable name for the project. The maximum length is 175 characters and the name must be unique. (example: my-web-api)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="owner_id" /></td>
+    <td><code>integer</code></td>
+    <td>The integer id of the project owner.</td>
+</tr>
+<tr>
+    <td><CopyableCode code="created_at" /></td>
+    <td><code>string (date-time)</code></td>
+    <td>A time value given in ISO8601 combined date and time format that represents when the project was created. (example: 2018-09-27T20:10:35Z)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="description" /></td>
+    <td><code>string</code></td>
+    <td>The description of the project. The maximum length is 255 characters. (example: My website API)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="environment" /></td>
+    <td><code>string</code></td>
+    <td>The environment of the project's resources. (example: Production)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="is_default" /></td>
+    <td><code>boolean</code></td>
+    <td>If true, all resources will be added to this project if no project is specified.</td>
+</tr>
+<tr>
+    <td><CopyableCode code="owner_uuid" /></td>
+    <td><code>string</code></td>
+    <td>The unique universal identifier of the project owner. (example: 99525febec065ca37b2ffe4f852fd2b2581895e7)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="purpose" /></td>
+    <td><code>string</code></td>
+    <td>The purpose of the project. The maximum length is 255 characters. It can have one of the following values:  - Just trying out DigitalOcean - Class project / Educational purposes - Website or blog - Web Application - Service or API - Mobile Application - Machine learning / AI / Data processing - IoT - Operational / Developer tooling  If another value for purpose is specified, for example, "your custom purpose", your purpose will be stored as `Other: your custom purpose`.  (example: Service or API)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="updated_at" /></td>
+    <td><code>string (date-time)</code></td>
+    <td>A time value given in ISO8601 combined date and time format that represents when the project was updated. (example: 2018-09-27T20:10:35Z)</td>
+</tr>
 </tbody>
 </table>
 </TabItem>
@@ -124,7 +174,16 @@ To get your default project, send a GET request to `/v2/projects/default`.
 
 ```sql
 SELECT
-*
+id,
+name,
+owner_id,
+created_at,
+description,
+environment,
+is_default,
+owner_uuid,
+purpose,
+updated_at
 FROM digitalocean.projects.defaults;
 ```
 </TabItem>
@@ -152,7 +211,9 @@ data__purpose = '{{ purpose }}',
 data__environment = '{{ environment }}',
 data__is_default = {{ is_default }}
 WHERE 
-;
+
+RETURNING
+project;
 ```
 </TabItem>
 </Tabs>
@@ -183,7 +244,9 @@ data__name = '{{ name }}' --required
 AND data__description = '{{ description }}' --required
 AND data__purpose = '{{ purpose }}' --required
 AND data__environment = '{{ environment }}' --required
-AND data__is_default = {{ is_default }} --required;
+AND data__is_default = {{ is_default }} --required
+RETURNING
+project;
 ```
 </TabItem>
 </Tabs>

@@ -50,6 +50,16 @@ The response is a JSON object which contains status messages for a Kubernetes cl
     </tr>
 </thead>
 <tbody>
+<tr>
+    <td><CopyableCode code="message" /></td>
+    <td><code>string</code></td>
+    <td>Status information about the cluster which impacts it's lifecycle. (example: Resource provisioning may be delayed while our team resolves an incident)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="timestamp" /></td>
+    <td><code>string (date-time)</code></td>
+    <td>A timestamp in ISO8601 format that represents when the status message was emitted. (example: 2018-11-15T16:00:11Z)</td>
+</tr>
 </tbody>
 </table>
 </TabItem>
@@ -120,7 +130,8 @@ To retrieve status messages for a Kubernetes cluster, send a GET request to<br /
 
 ```sql
 SELECT
-*
+message,
+timestamp
 FROM digitalocean.kubernetes.status_messages
 WHERE cluster_id = '{{ cluster_id }}' -- required
 AND since = '{{ since }}';

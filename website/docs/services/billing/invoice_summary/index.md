@@ -50,6 +50,66 @@ To retrieve a summary for an invoice, send a GET request to  `/v2/customers/my/i
     </tr>
 </thead>
 <tbody>
+<tr>
+    <td><CopyableCode code="invoice_id" /></td>
+    <td><code>string</code></td>
+    <td>ID of the invoice (example: 123456789)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="user_name" /></td>
+    <td><code>string</code></td>
+    <td>Name of the DigitalOcean customer being invoiced. (example: Sammy Shark)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="amount" /></td>
+    <td><code>string</code></td>
+    <td>Total amount of the invoice, in USD.  This will reflect month-to-date usage in the invoice preview. (example: 27.13)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="billing_period" /></td>
+    <td><code>string</code></td>
+    <td>Billing period of usage for which the invoice is issued, in `YYYY-MM`  format. (example: 2020-01)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="credits_and_adjustments" /></td>
+    <td><code>object</code></td>
+    <td>A summary of the credits and adjustments contributing to the invoice.</td>
+</tr>
+<tr>
+    <td><CopyableCode code="invoice_uuid" /></td>
+    <td><code>string</code></td>
+    <td>UUID of the invoice (example: 22737513-0ea7-4206-8ceb-98a575af7681)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="overages" /></td>
+    <td><code>object</code></td>
+    <td>A summary of the overages contributing to the invoice.</td>
+</tr>
+<tr>
+    <td><CopyableCode code="product_charges" /></td>
+    <td><code>object</code></td>
+    <td>A summary of the product usage charges contributing to the invoice.  This will include an amount, and grouped aggregates by resource type  under the `items` key.</td>
+</tr>
+<tr>
+    <td><CopyableCode code="taxes" /></td>
+    <td><code>object</code></td>
+    <td>A summary of the taxes contributing to the invoice.</td>
+</tr>
+<tr>
+    <td><CopyableCode code="user_billing_address" /></td>
+    <td><code>object</code></td>
+    <td>The billing address of the customer being invoiced.</td>
+</tr>
+<tr>
+    <td><CopyableCode code="user_company" /></td>
+    <td><code>string</code></td>
+    <td>Company of the DigitalOcean customer being invoiced, if set. (example: DigitalOcean)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="user_email" /></td>
+    <td><code>string</code></td>
+    <td>Email of the DigitalOcean customer being invoiced. (example: sammy@digitalocean.com)</td>
+</tr>
 </tbody>
 </table>
 </TabItem>
@@ -115,7 +175,18 @@ To retrieve a summary for an invoice, send a GET request to `/v2/customers/my/in
 
 ```sql
 SELECT
-*
+invoice_id,
+user_name,
+amount,
+billing_period,
+credits_and_adjustments,
+invoice_uuid,
+overages,
+product_charges,
+taxes,
+user_billing_address,
+user_company,
+user_email
 FROM digitalocean.billing.invoice_summary
 WHERE invoice_uuid = '{{ invoice_uuid }}' -- required;
 ```

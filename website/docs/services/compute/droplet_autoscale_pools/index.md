@@ -32,28 +32,12 @@ Creates, updates, deletes, gets or lists a <code>droplet_autoscale_pools</code> 
 The following fields are returned by `SELECT` queries:
 
 <Tabs
-    defaultValue="autoscalepools_list"
+    defaultValue="autoscalepools_get"
     values={[
-        { label: 'autoscalepools_list', value: 'autoscalepools_list' },
-        { label: 'autoscalepools_get', value: 'autoscalepools_get' }
+        { label: 'autoscalepools_get', value: 'autoscalepools_get' },
+        { label: 'autoscalepools_list', value: 'autoscalepools_list' }
     ]}
 >
-<TabItem value="autoscalepools_list">
-
-A JSON object with a key of `autoscale_pools`.
-
-<table>
-<thead>
-    <tr>
-    <th>Name</th>
-    <th>Datatype</th>
-    <th>Description</th>
-    </tr>
-</thead>
-<tbody>
-</tbody>
-</table>
-</TabItem>
 <TabItem value="autoscalepools_get">
 
 The response will be a JSON object with a key called `autoscale_pool`. This will be<br />set to a JSON object that contains the standard autoscale pool attributes.<br />
@@ -67,6 +51,112 @@ The response will be a JSON object with a key called `autoscale_pool`. This will
     </tr>
 </thead>
 <tbody>
+<tr>
+    <td><CopyableCode code="id" /></td>
+    <td><code>string</code></td>
+    <td>A unique identifier for each autoscale pool instance. This is automatically generated upon autoscale pool creation. (example: 0d3db13e-a604-4944-9827-7ec2642d32ac)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="name" /></td>
+    <td><code>string</code></td>
+    <td>The human-readable name set for the autoscale pool. (example: my-autoscale-pool)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="active_resources_count" /></td>
+    <td><code>integer</code></td>
+    <td>The number of active Droplets in the autoscale pool.</td>
+</tr>
+<tr>
+    <td><CopyableCode code="config" /></td>
+    <td><code>object</code></td>
+    <td>The scaling configuration for an autoscale pool, which is how the pool scales up and down (either by resource utilization or static configuration).</td>
+</tr>
+<tr>
+    <td><CopyableCode code="created_at" /></td>
+    <td><code>string (date-time)</code></td>
+    <td>A time value given in ISO8601 combined date and time format that represents when the autoscale pool was created. (title: The creation time of the autoscale pool, example: 2020-07-28T18:00:00Z)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="current_utilization" /></td>
+    <td><code>object</code></td>
+    <td></td>
+</tr>
+<tr>
+    <td><CopyableCode code="droplet_template" /></td>
+    <td><code>object</code></td>
+    <td></td>
+</tr>
+<tr>
+    <td><CopyableCode code="status" /></td>
+    <td><code>string</code></td>
+    <td>The current status of the autoscale pool. (example: active)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="updated_at" /></td>
+    <td><code>string (date-time)</code></td>
+    <td>A time value given in ISO8601 combined date and time format that represents when the autoscale pool was last updated. (title: When the autoscale pool was last updated, example: 2020-07-28T18:00:00Z)</td>
+</tr>
+</tbody>
+</table>
+</TabItem>
+<TabItem value="autoscalepools_list">
+
+A JSON object with a key of `autoscale_pools`.
+
+<table>
+<thead>
+    <tr>
+    <th>Name</th>
+    <th>Datatype</th>
+    <th>Description</th>
+    </tr>
+</thead>
+<tbody>
+<tr>
+    <td><CopyableCode code="id" /></td>
+    <td><code>string</code></td>
+    <td>A unique identifier for each autoscale pool instance. This is automatically generated upon autoscale pool creation. (example: 0d3db13e-a604-4944-9827-7ec2642d32ac)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="name" /></td>
+    <td><code>string</code></td>
+    <td>The human-readable name set for the autoscale pool. (example: my-autoscale-pool)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="active_resources_count" /></td>
+    <td><code>integer</code></td>
+    <td>The number of active Droplets in the autoscale pool.</td>
+</tr>
+<tr>
+    <td><CopyableCode code="config" /></td>
+    <td><code>object</code></td>
+    <td>The scaling configuration for an autoscale pool, which is how the pool scales up and down (either by resource utilization or static configuration).</td>
+</tr>
+<tr>
+    <td><CopyableCode code="created_at" /></td>
+    <td><code>string (date-time)</code></td>
+    <td>A time value given in ISO8601 combined date and time format that represents when the autoscale pool was created. (title: The creation time of the autoscale pool, example: 2020-07-28T18:00:00Z)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="current_utilization" /></td>
+    <td><code>object</code></td>
+    <td></td>
+</tr>
+<tr>
+    <td><CopyableCode code="droplet_template" /></td>
+    <td><code>object</code></td>
+    <td></td>
+</tr>
+<tr>
+    <td><CopyableCode code="status" /></td>
+    <td><code>string</code></td>
+    <td>The current status of the autoscale pool. (example: active)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="updated_at" /></td>
+    <td><code>string (date-time)</code></td>
+    <td>A time value given in ISO8601 combined date and time format that represents when the autoscale pool was last updated. (title: When the autoscale pool was last updated, example: 2020-07-28T18:00:00Z)</td>
+</tr>
 </tbody>
 </table>
 </TabItem>
@@ -88,18 +178,18 @@ The following methods are available for this resource:
 </thead>
 <tbody>
 <tr>
-    <td><a href="#autoscalepools_list"><CopyableCode code="autoscalepools_list" /></a></td>
-    <td><CopyableCode code="select" /></td>
-    <td></td>
-    <td><a href="#parameter-per_page"><code>per_page</code></a>, <a href="#parameter-page"><code>page</code></a>, <a href="#parameter-name"><code>name</code></a></td>
-    <td>To list all autoscale pools in your team, send a GET request to `/v2/droplets/autoscale`.<br />The response body will be a JSON object with a key of `autoscale_pools` containing an array of autoscale pool objects.<br />These each contain the standard autoscale pool attributes.<br /></td>
-</tr>
-<tr>
     <td><a href="#autoscalepools_get"><CopyableCode code="autoscalepools_get" /></a></td>
     <td><CopyableCode code="select" /></td>
     <td><a href="#parameter-autoscale_pool_id"><code>autoscale_pool_id</code></a></td>
     <td></td>
     <td>To show information about an individual autoscale pool, send a GET request to<br />`/v2/droplets/autoscale/$AUTOSCALE_POOL_ID`.<br /></td>
+</tr>
+<tr>
+    <td><a href="#autoscalepools_list"><CopyableCode code="autoscalepools_list" /></a></td>
+    <td><CopyableCode code="select" /></td>
+    <td></td>
+    <td><a href="#parameter-per_page"><code>per_page</code></a>, <a href="#parameter-page"><code>page</code></a>, <a href="#parameter-name"><code>name</code></a></td>
+    <td>To list all autoscale pools in your team, send a GET request to `/v2/droplets/autoscale`.<br />The response body will be a JSON object with a key of `autoscale_pools` containing an array of autoscale pool objects.<br />These each contain the standard autoscale pool attributes.<br /></td>
 </tr>
 <tr>
     <td><a href="#autoscalepools_create"><CopyableCode code="autoscalepools_create" /></a></td>
@@ -176,34 +266,50 @@ Parameters can be passed in the `WHERE` clause of a query. Check the [Methods](#
 ## `SELECT` examples
 
 <Tabs
-    defaultValue="autoscalepools_list"
+    defaultValue="autoscalepools_get"
     values={[
-        { label: 'autoscalepools_list', value: 'autoscalepools_list' },
-        { label: 'autoscalepools_get', value: 'autoscalepools_get' }
+        { label: 'autoscalepools_get', value: 'autoscalepools_get' },
+        { label: 'autoscalepools_list', value: 'autoscalepools_list' }
     ]}
 >
-<TabItem value="autoscalepools_list">
-
-To list all autoscale pools in your team, send a GET request to `/v2/droplets/autoscale`.<br />The response body will be a JSON object with a key of `autoscale_pools` containing an array of autoscale pool objects.<br />These each contain the standard autoscale pool attributes.<br />
-
-```sql
-SELECT
-*
-FROM digitalocean.compute.droplet_autoscale_pools
-WHERE per_page = '{{ per_page }}'
-AND page = '{{ page }}'
-AND name = '{{ name }}';
-```
-</TabItem>
 <TabItem value="autoscalepools_get">
 
 To show information about an individual autoscale pool, send a GET request to<br />`/v2/droplets/autoscale/$AUTOSCALE_POOL_ID`.<br />
 
 ```sql
 SELECT
-*
+id,
+name,
+active_resources_count,
+config,
+created_at,
+current_utilization,
+droplet_template,
+status,
+updated_at
 FROM digitalocean.compute.droplet_autoscale_pools
 WHERE autoscale_pool_id = '{{ autoscale_pool_id }}' -- required;
+```
+</TabItem>
+<TabItem value="autoscalepools_list">
+
+To list all autoscale pools in your team, send a GET request to `/v2/droplets/autoscale`.<br />The response body will be a JSON object with a key of `autoscale_pools` containing an array of autoscale pool objects.<br />These each contain the standard autoscale pool attributes.<br />
+
+```sql
+SELECT
+id,
+name,
+active_resources_count,
+config,
+created_at,
+current_utilization,
+droplet_template,
+status,
+updated_at
+FROM digitalocean.compute.droplet_autoscale_pools
+WHERE per_page = '{{ per_page }}'
+AND page = '{{ page }}'
+AND name = '{{ name }}';
 ```
 </TabItem>
 </Tabs>
@@ -232,6 +338,8 @@ SELECT
 '{{ name }}' --required,
 '{{ config }}' --required,
 '{{ droplet_template }}' --required
+RETURNING
+autoscale_pool
 ;
 ```
 </TabItem>
@@ -280,7 +388,9 @@ WHERE
 autoscale_pool_id = '{{ autoscale_pool_id }}' --required
 AND data__name = '{{ name }}' --required
 AND data__config = '{{ config }}' --required
-AND data__droplet_template = '{{ droplet_template }}' --required;
+AND data__droplet_template = '{{ droplet_template }}' --required
+RETURNING
+autoscale_pool;
 ```
 </TabItem>
 </Tabs>

@@ -4,7 +4,7 @@ hide_title: false
 hide_table_of_contents: false
 keywords:
   - repositories
-  - container_registries
+  - container_registry
   - digitalocean
   - infrastructure-as-code
   - configuration-as-data
@@ -24,7 +24,7 @@ Creates, updates, deletes, gets or lists a <code>repositories</code> resource.
 <table><tbody>
 <tr><td><b>Name</b></td><td><code>repositories</code></td></tr>
 <tr><td><b>Type</b></td><td>Resource</td></tr>
-<tr><td><b>Id</b></td><td><CopyableCode code="digitalocean.container_registries.repositories" /></td></tr>
+<tr><td><b>Id</b></td><td><CopyableCode code="digitalocean.container_registry.repositories" /></td></tr>
 </tbody></table>
 
 ## Fields
@@ -50,6 +50,31 @@ The response body will be a JSON object with a key of `repositories`. This will 
     </tr>
 </thead>
 <tbody>
+<tr>
+    <td><CopyableCode code="name" /></td>
+    <td><code>string</code></td>
+    <td>The name of the repository. (example: repo-1)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="registry_name" /></td>
+    <td><code>string</code></td>
+    <td>The name of the container registry. (example: example)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="latest_manifest" /></td>
+    <td><code>object</code></td>
+    <td></td>
+</tr>
+<tr>
+    <td><CopyableCode code="manifest_count" /></td>
+    <td><code>integer</code></td>
+    <td>The number of manifests in the repository.</td>
+</tr>
+<tr>
+    <td><CopyableCode code="tag_count" /></td>
+    <td><code>integer</code></td>
+    <td>The number of tags in the repository.</td>
+</tr>
 </tbody>
 </table>
 </TabItem>
@@ -156,8 +181,12 @@ To list all repositories in your container registry, send a GET request to `/v2/
 
 ```sql
 SELECT
-*
-FROM digitalocean.container_registries.repositories
+name,
+registry_name,
+latest_manifest,
+manifest_count,
+tag_count
+FROM digitalocean.container_registry.repositories
 WHERE registry_name = '{{ registry_name }}' -- required
 AND per_page = '{{ per_page }}'
 AND page = '{{ page }}'
@@ -180,7 +209,7 @@ AND page_token = '{{ page_token }}';
 To delete a container repository including all of its tags, send a DELETE request to<br />`/v2/registries/$REGISTRY_NAME/repositories/$REPOSITORY_NAME`.<br /><br />A successful request will receive a 204 status code with no body in response.<br />This indicates that the request was processed successfully.<br />
 
 ```sql
-DELETE FROM digitalocean.container_registries.repositories
+DELETE FROM digitalocean.container_registry.repositories
 WHERE registry_name = '{{ registry_name }}' --required
 AND repository_name = '{{ repository_name }}' --required;
 ```
@@ -202,7 +231,7 @@ AND repository_name = '{{ repository_name }}' --required;
 This endpoint has been deprecated in favor of the _List All Container Registry Repositories [V2]_ endpoint.<br /><br />To list all repositories in your container registry, send a GET<br />request to `/v2/registry/$REGISTRY_NAME/repositories`.<br />
 
 ```sql
-EXEC digitalocean.container_registries.repositories.registry_list_repositories_legacy 
+EXEC digitalocean.container_registry.repositories.registry_list_repositories_legacy 
 @registry_name='{{ registry_name }}' --required, 
 @per_page='{{ per_page }}', 
 @page='{{ page }}';
@@ -213,7 +242,7 @@ EXEC digitalocean.container_registries.repositories.registry_list_repositories_l
 To list all repositories in your container registry, send a GET request to `/v2/registry/$REGISTRY_NAME/repositoriesV2`.
 
 ```sql
-EXEC digitalocean.container_registries.repositories.registry_list_repositories_v2_legacy 
+EXEC digitalocean.container_registry.repositories.registry_list_repositories_v2_legacy 
 @registry_name='{{ registry_name }}' --required, 
 @per_page='{{ per_page }}', 
 @page='{{ page }}', 

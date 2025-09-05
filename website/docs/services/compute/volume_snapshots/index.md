@@ -51,6 +51,51 @@ You will get back a JSON object that has a `snapshot` key. This will contain the
     </tr>
 </thead>
 <tbody>
+<tr>
+    <td><CopyableCode code="id" /></td>
+    <td><code>string</code></td>
+    <td>The unique identifier for the snapshot. (example: 6372321)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="name" /></td>
+    <td><code>string</code></td>
+    <td>A human-readable name for the snapshot. (example: web-01-1595954862243)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="resource_id" /></td>
+    <td><code>string</code></td>
+    <td>The unique identifier for the resource that the snapshot originated from. (example: 200776916)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="created_at" /></td>
+    <td><code>string (date-time)</code></td>
+    <td>A time value given in ISO8601 combined date and time format that represents when the snapshot was created. (example: 2020-07-28T16:47:44Z)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="min_disk_size" /></td>
+    <td><code>integer</code></td>
+    <td>The minimum size in GB required for a volume or Droplet to use this snapshot.</td>
+</tr>
+<tr>
+    <td><CopyableCode code="regions" /></td>
+    <td><code>array</code></td>
+    <td>An array of the regions that the snapshot is available in. The regions are represented by their identifying slug values.</td>
+</tr>
+<tr>
+    <td><CopyableCode code="resource_type" /></td>
+    <td><code>string</code></td>
+    <td>The type of resource that the snapshot originated from. (example: droplet)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="size_gigabytes" /></td>
+    <td><code>number (float)</code></td>
+    <td>The billable size of the snapshot in gigabytes.</td>
+</tr>
+<tr>
+    <td><CopyableCode code="tags" /></td>
+    <td><code>array</code></td>
+    <td>An array of Tags the snapshot has been tagged with.<br /><br />Requires `tag:read` scope.</td>
+</tr>
 </tbody>
 </table>
 </TabItem>
@@ -67,6 +112,51 @@ You will get back a JSON object that has a `snapshots` key. This will be set to 
     </tr>
 </thead>
 <tbody>
+<tr>
+    <td><CopyableCode code="id" /></td>
+    <td><code>string</code></td>
+    <td>The unique identifier for the snapshot. (example: 6372321)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="name" /></td>
+    <td><code>string</code></td>
+    <td>A human-readable name for the snapshot. (example: web-01-1595954862243)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="resource_id" /></td>
+    <td><code>string</code></td>
+    <td>The unique identifier for the resource that the snapshot originated from. (example: 200776916)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="created_at" /></td>
+    <td><code>string (date-time)</code></td>
+    <td>A time value given in ISO8601 combined date and time format that represents when the snapshot was created. (example: 2020-07-28T16:47:44Z)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="min_disk_size" /></td>
+    <td><code>integer</code></td>
+    <td>The minimum size in GB required for a volume or Droplet to use this snapshot.</td>
+</tr>
+<tr>
+    <td><CopyableCode code="regions" /></td>
+    <td><code>array</code></td>
+    <td>An array of the regions that the snapshot is available in. The regions are represented by their identifying slug values.</td>
+</tr>
+<tr>
+    <td><CopyableCode code="resource_type" /></td>
+    <td><code>string</code></td>
+    <td>The type of resource that the snapshot originated from. (example: droplet)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="size_gigabytes" /></td>
+    <td><code>number (float)</code></td>
+    <td>The billable size of the snapshot in gigabytes.</td>
+</tr>
+<tr>
+    <td><CopyableCode code="tags" /></td>
+    <td><code>array</code></td>
+    <td>An array of Tags the snapshot has been tagged with.<br /><br />Requires `tag:read` scope.</td>
+</tr>
 </tbody>
 </table>
 </TabItem>
@@ -169,7 +259,15 @@ To retrieve the details of a snapshot that has been created from a volume, send 
 
 ```sql
 SELECT
-*
+id,
+name,
+resource_id,
+created_at,
+min_disk_size,
+regions,
+resource_type,
+size_gigabytes,
+tags
 FROM digitalocean.compute.volume_snapshots
 WHERE snapshot_id = '{{ snapshot_id }}' -- required;
 ```
@@ -180,7 +278,15 @@ To retrieve the snapshots that have been created from a volume, send a GET reque
 
 ```sql
 SELECT
-*
+id,
+name,
+resource_id,
+created_at,
+min_disk_size,
+regions,
+resource_type,
+size_gigabytes,
+tags
 FROM digitalocean.compute.volume_snapshots
 WHERE volume_id = '{{ volume_id }}' -- required
 AND per_page = '{{ per_page }}'
@@ -213,6 +319,8 @@ SELECT
 '{{ name }}' --required,
 '{{ tags }}',
 '{{ volume_id }}'
+RETURNING
+snapshot
 ;
 ```
 </TabItem>

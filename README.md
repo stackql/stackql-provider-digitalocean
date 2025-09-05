@@ -75,8 +75,8 @@ npm run split -- \
   "functions": "serverless",
   "floating_ips": "network",
   "floating_ip_actions": "network",      
-  "container_registries": "container_registries",
-  "container_registry": "container_registries"
+  "container_registries": "container_registry",
+  "container_registry": "container_registry"
 }
 EOF
 )"
@@ -125,7 +125,8 @@ npm run generate-provider -- \
 Make necessary updates to the output docs:
 
 ```bash
-sh provider-dev/scripts/post_processing.sh
+node provider-dev/scripts/flatten_allOf.cjs
+sh provider-dev/scripts/fix_broken_links.sh
 ```
 
 The `--servers` parameter defines the base URL for API requests. For DigitalOcean, this sets the API endpoint to the v2 API.
@@ -298,7 +299,7 @@ Under __Pages__ in the repository, in the __Build and deployment__ section selec
 
 | Source Domain | Record Type  | Target |
 |---------------|--------------|--------|
-| digitalocean-provider.stackql.io | CNAME | stackql.github.io |
+| digitalocean-provider.stackql.io | CNAME | stackql.github.io. |
 
 ## License
 

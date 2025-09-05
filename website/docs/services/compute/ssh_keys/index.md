@@ -32,28 +32,12 @@ Creates, updates, deletes, gets or lists a <code>ssh_keys</code> resource.
 The following fields are returned by `SELECT` queries:
 
 <Tabs
-    defaultValue="ssh_keys_list"
+    defaultValue="ssh_keys_get"
     values={[
-        { label: 'ssh_keys_list', value: 'ssh_keys_list' },
-        { label: 'ssh_keys_get', value: 'ssh_keys_get' }
+        { label: 'ssh_keys_get', value: 'ssh_keys_get' },
+        { label: 'ssh_keys_list', value: 'ssh_keys_list' }
     ]}
 >
-<TabItem value="ssh_keys_list">
-
-A JSON object with the key set to `ssh_keys`. The value is an array of `ssh_key` objects, each of which contains the standard `ssh_key` attributes.
-
-<table>
-<thead>
-    <tr>
-    <th>Name</th>
-    <th>Datatype</th>
-    <th>Description</th>
-    </tr>
-</thead>
-<tbody>
-</tbody>
-</table>
-</TabItem>
 <TabItem value="ssh_keys_get">
 
 A JSON object with the key set to `ssh_key`. The value is an `ssh_key` object containing the standard `ssh_key` attributes.
@@ -67,6 +51,62 @@ A JSON object with the key set to `ssh_key`. The value is an `ssh_key` object co
     </tr>
 </thead>
 <tbody>
+<tr>
+    <td><CopyableCode code="id" /></td>
+    <td><code>integer</code></td>
+    <td>A unique identification number for this key. Can be used to embed a  specific SSH key into a Droplet.</td>
+</tr>
+<tr>
+    <td><CopyableCode code="name" /></td>
+    <td><code>string</code></td>
+    <td>A human-readable display name for this key, used to easily identify the SSH keys when they are displayed. (example: My SSH Public Key)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="fingerprint" /></td>
+    <td><code>string</code></td>
+    <td>A unique identifier that differentiates this key from other keys using  a format that SSH recognizes. The fingerprint is created when the key is added to your account. (example: 3b:16:bf:e4:8b:00:8b:b8:59:8c:a9:d3:f0:19:45:fa)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="public_key" /></td>
+    <td><code>string</code></td>
+    <td>The entire public key string that was uploaded. Embedded into the root user's `authorized_keys` file if you include this key during Droplet creation. (example: ssh-rsa AEXAMPLEaC1yc2EAAAADAQABAAAAQQDDHr/jh2Jy4yALcK4JyWbVkPRaWmhck3IgCoeOO3z1e2dBowLh64QAM+Qb72pxekALga2oi4GvT+TlWNhzPH4V example)</td>
+</tr>
+</tbody>
+</table>
+</TabItem>
+<TabItem value="ssh_keys_list">
+
+A JSON object with the key set to `ssh_keys`. The value is an array of `ssh_key` objects, each of which contains the standard `ssh_key` attributes.
+
+<table>
+<thead>
+    <tr>
+    <th>Name</th>
+    <th>Datatype</th>
+    <th>Description</th>
+    </tr>
+</thead>
+<tbody>
+<tr>
+    <td><CopyableCode code="id" /></td>
+    <td><code>integer</code></td>
+    <td>A unique identification number for this key. Can be used to embed a  specific SSH key into a Droplet.</td>
+</tr>
+<tr>
+    <td><CopyableCode code="name" /></td>
+    <td><code>string</code></td>
+    <td>A human-readable display name for this key, used to easily identify the SSH keys when they are displayed. (example: My SSH Public Key)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="fingerprint" /></td>
+    <td><code>string</code></td>
+    <td>A unique identifier that differentiates this key from other keys using  a format that SSH recognizes. The fingerprint is created when the key is added to your account. (example: 3b:16:bf:e4:8b:00:8b:b8:59:8c:a9:d3:f0:19:45:fa)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="public_key" /></td>
+    <td><code>string</code></td>
+    <td>The entire public key string that was uploaded. Embedded into the root user's `authorized_keys` file if you include this key during Droplet creation. (example: ssh-rsa AEXAMPLEaC1yc2EAAAADAQABAAAAQQDDHr/jh2Jy4yALcK4JyWbVkPRaWmhck3IgCoeOO3z1e2dBowLh64QAM+Qb72pxekALga2oi4GvT+TlWNhzPH4V example)</td>
+</tr>
 </tbody>
 </table>
 </TabItem>
@@ -88,18 +128,18 @@ The following methods are available for this resource:
 </thead>
 <tbody>
 <tr>
-    <td><a href="#ssh_keys_list"><CopyableCode code="ssh_keys_list" /></a></td>
-    <td><CopyableCode code="select" /></td>
-    <td></td>
-    <td><a href="#parameter-per_page"><code>per_page</code></a>, <a href="#parameter-page"><code>page</code></a></td>
-    <td>To list all of the keys in your account, send a GET request to `/v2/account/keys`. The response will be a JSON object with a key set to `ssh_keys`. The value of this will be an array of ssh_key objects, each of which contains the standard ssh_key attributes.</td>
-</tr>
-<tr>
     <td><a href="#ssh_keys_get"><CopyableCode code="ssh_keys_get" /></a></td>
     <td><CopyableCode code="select" /></td>
     <td><a href="#parameter-ssh_key_identifier"><code>ssh_key_identifier</code></a></td>
     <td></td>
     <td>To get information about a key, send a GET request to `/v2/account/keys/$KEY_ID` or `/v2/account/keys/$KEY_FINGERPRINT`.<br />The response will be a JSON object with the key `ssh_key` and value an ssh_key object which contains the standard ssh_key attributes.</td>
+</tr>
+<tr>
+    <td><a href="#ssh_keys_list"><CopyableCode code="ssh_keys_list" /></a></td>
+    <td><CopyableCode code="select" /></td>
+    <td></td>
+    <td><a href="#parameter-per_page"><code>per_page</code></a>, <a href="#parameter-page"><code>page</code></a></td>
+    <td>To list all of the keys in your account, send a GET request to `/v2/account/keys`. The response will be a JSON object with a key set to `ssh_keys`. The value of this will be an array of ssh_key objects, each of which contains the standard ssh_key attributes.</td>
 </tr>
 <tr>
     <td><a href="#ssh_keys_create"><CopyableCode code="ssh_keys_create" /></a></td>
@@ -159,33 +199,39 @@ Parameters can be passed in the `WHERE` clause of a query. Check the [Methods](#
 ## `SELECT` examples
 
 <Tabs
-    defaultValue="ssh_keys_list"
+    defaultValue="ssh_keys_get"
     values={[
-        { label: 'ssh_keys_list', value: 'ssh_keys_list' },
-        { label: 'ssh_keys_get', value: 'ssh_keys_get' }
+        { label: 'ssh_keys_get', value: 'ssh_keys_get' },
+        { label: 'ssh_keys_list', value: 'ssh_keys_list' }
     ]}
 >
-<TabItem value="ssh_keys_list">
-
-To list all of the keys in your account, send a GET request to `/v2/account/keys`. The response will be a JSON object with a key set to `ssh_keys`. The value of this will be an array of ssh_key objects, each of which contains the standard ssh_key attributes.
-
-```sql
-SELECT
-*
-FROM digitalocean.compute.ssh_keys
-WHERE per_page = '{{ per_page }}'
-AND page = '{{ page }}';
-```
-</TabItem>
 <TabItem value="ssh_keys_get">
 
 To get information about a key, send a GET request to `/v2/account/keys/$KEY_ID` or `/v2/account/keys/$KEY_FINGERPRINT`.<br />The response will be a JSON object with the key `ssh_key` and value an ssh_key object which contains the standard ssh_key attributes.
 
 ```sql
 SELECT
-*
+id,
+name,
+fingerprint,
+public_key
 FROM digitalocean.compute.ssh_keys
 WHERE ssh_key_identifier = '{{ ssh_key_identifier }}' -- required;
+```
+</TabItem>
+<TabItem value="ssh_keys_list">
+
+To list all of the keys in your account, send a GET request to `/v2/account/keys`. The response will be a JSON object with a key set to `ssh_keys`. The value of this will be an array of ssh_key objects, each of which contains the standard ssh_key attributes.
+
+```sql
+SELECT
+id,
+name,
+fingerprint,
+public_key
+FROM digitalocean.compute.ssh_keys
+WHERE per_page = '{{ per_page }}'
+AND page = '{{ page }}';
 ```
 </TabItem>
 </Tabs>
@@ -212,6 +258,8 @@ data__name
 SELECT 
 '{{ public_key }}' --required,
 '{{ name }}' --required
+RETURNING
+ssh_key
 ;
 ```
 </TabItem>
@@ -253,7 +301,9 @@ REPLACE digitalocean.compute.ssh_keys
 SET 
 data__name = '{{ name }}'
 WHERE 
-ssh_key_identifier = '{{ ssh_key_identifier }}' --required;
+ssh_key_identifier = '{{ ssh_key_identifier }}' --required
+RETURNING
+ssh_key;
 ```
 </TabItem>
 </Tabs>

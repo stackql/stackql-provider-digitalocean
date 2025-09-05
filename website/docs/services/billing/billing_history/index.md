@@ -50,6 +50,36 @@ The response will be a JSON object that contains the following attributes
     </tr>
 </thead>
 <tbody>
+<tr>
+    <td><CopyableCode code="invoice_id" /></td>
+    <td><code>string</code></td>
+    <td>ID of the invoice associated with the billing history entry, if  applicable. (example: 123)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="amount" /></td>
+    <td><code>string</code></td>
+    <td>Amount of the billing history entry. (example: 12.34)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="date" /></td>
+    <td><code>string (date-time)</code></td>
+    <td>Time the billing history entry occurred. (example: 2018-06-01T08:44:38Z)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="description" /></td>
+    <td><code>string</code></td>
+    <td>Description of the billing history entry. (example: Invoice for May 2018)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="invoice_uuid" /></td>
+    <td><code>string</code></td>
+    <td>UUID of the invoice associated with the billing history entry, if  applicable. (example: example-uuid)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="type" /></td>
+    <td><code>string</code></td>
+    <td>Type of billing history entry. (example: Invoice)</td>
+</tr>
 </tbody>
 </table>
 </TabItem>
@@ -110,7 +140,12 @@ To retrieve a list of all billing history entries, send a GET request to `/v2/cu
 
 ```sql
 SELECT
-*
+invoice_id,
+amount,
+date,
+description,
+invoice_uuid,
+type
 FROM digitalocean.billing.billing_history;
 ```
 </TabItem>

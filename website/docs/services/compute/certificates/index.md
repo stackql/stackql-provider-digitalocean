@@ -32,28 +32,12 @@ Creates, updates, deletes, gets or lists a <code>certificates</code> resource.
 The following fields are returned by `SELECT` queries:
 
 <Tabs
-    defaultValue="certificates_list"
+    defaultValue="certificates_get"
     values={[
-        { label: 'certificates_list', value: 'certificates_list' },
-        { label: 'certificates_get', value: 'certificates_get' }
+        { label: 'certificates_get', value: 'certificates_get' },
+        { label: 'certificates_list', value: 'certificates_list' }
     ]}
 >
-<TabItem value="certificates_list">
-
-The result will be a JSON object with a `certificates` key. This will be set to an array of certificate objects, each of which will contain the standard certificate attributes.
-
-<table>
-<thead>
-    <tr>
-    <th>Name</th>
-    <th>Datatype</th>
-    <th>Description</th>
-    </tr>
-</thead>
-<tbody>
-</tbody>
-</table>
-</TabItem>
 <TabItem value="certificates_get">
 
 The response will be a JSON object with a `certificate` key. This will be set to an object containing the standard certificate attributes.
@@ -67,6 +51,102 @@ The response will be a JSON object with a `certificate` key. This will be set to
     </tr>
 </thead>
 <tbody>
+<tr>
+    <td><CopyableCode code="id" /></td>
+    <td><code>string (uuid)</code></td>
+    <td>A unique ID that can be used to identify and reference a certificate. (example: 892071a0-bb95-49bc-8021-3afd67a210bf)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="name" /></td>
+    <td><code>string</code></td>
+    <td>A unique human-readable name referring to a certificate. (example: web-cert-01)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="created_at" /></td>
+    <td><code>string (date-time)</code></td>
+    <td>A time value given in ISO8601 combined date and time format that represents when the certificate was created. (example: 2017-02-08T16:02:37Z)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="dns_names" /></td>
+    <td><code>array</code></td>
+    <td>An array of fully qualified domain names (FQDNs) for which the certificate was issued.</td>
+</tr>
+<tr>
+    <td><CopyableCode code="not_after" /></td>
+    <td><code>string (date-time)</code></td>
+    <td>A time value given in ISO8601 combined date and time format that represents the certificate's expiration date. (example: 2017-02-22T00:23:00Z)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="sha1_fingerprint" /></td>
+    <td><code>string</code></td>
+    <td>A unique identifier generated from the SHA-1 fingerprint of the certificate. (example: dfcc9f57d86bf58e321c2c6c31c7a971be244ac7)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="state" /></td>
+    <td><code>string</code></td>
+    <td>A string representing the current state of the certificate. It may be `pending`, `verified`, or `error`. (example: verified)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="type" /></td>
+    <td><code>string</code></td>
+    <td>A string representing the type of the certificate. The value will be `custom` for a user-uploaded certificate or `lets_encrypt` for one automatically generated with Let's Encrypt. (example: lets_encrypt)</td>
+</tr>
+</tbody>
+</table>
+</TabItem>
+<TabItem value="certificates_list">
+
+The result will be a JSON object with a `certificates` key. This will be set to an array of certificate objects, each of which will contain the standard certificate attributes.
+
+<table>
+<thead>
+    <tr>
+    <th>Name</th>
+    <th>Datatype</th>
+    <th>Description</th>
+    </tr>
+</thead>
+<tbody>
+<tr>
+    <td><CopyableCode code="id" /></td>
+    <td><code>string (uuid)</code></td>
+    <td>A unique ID that can be used to identify and reference a certificate. (example: 892071a0-bb95-49bc-8021-3afd67a210bf)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="name" /></td>
+    <td><code>string</code></td>
+    <td>A unique human-readable name referring to a certificate. (example: web-cert-01)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="created_at" /></td>
+    <td><code>string (date-time)</code></td>
+    <td>A time value given in ISO8601 combined date and time format that represents when the certificate was created. (example: 2017-02-08T16:02:37Z)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="dns_names" /></td>
+    <td><code>array</code></td>
+    <td>An array of fully qualified domain names (FQDNs) for which the certificate was issued.</td>
+</tr>
+<tr>
+    <td><CopyableCode code="not_after" /></td>
+    <td><code>string (date-time)</code></td>
+    <td>A time value given in ISO8601 combined date and time format that represents the certificate's expiration date. (example: 2017-02-22T00:23:00Z)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="sha1_fingerprint" /></td>
+    <td><code>string</code></td>
+    <td>A unique identifier generated from the SHA-1 fingerprint of the certificate. (example: dfcc9f57d86bf58e321c2c6c31c7a971be244ac7)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="state" /></td>
+    <td><code>string</code></td>
+    <td>A string representing the current state of the certificate. It may be `pending`, `verified`, or `error`. (example: verified)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="type" /></td>
+    <td><code>string</code></td>
+    <td>A string representing the type of the certificate. The value will be `custom` for a user-uploaded certificate or `lets_encrypt` for one automatically generated with Let's Encrypt. (example: lets_encrypt)</td>
+</tr>
 </tbody>
 </table>
 </TabItem>
@@ -88,18 +168,18 @@ The following methods are available for this resource:
 </thead>
 <tbody>
 <tr>
-    <td><a href="#certificates_list"><CopyableCode code="certificates_list" /></a></td>
-    <td><CopyableCode code="select" /></td>
-    <td></td>
-    <td><a href="#parameter-per_page"><code>per_page</code></a>, <a href="#parameter-page"><code>page</code></a>, <a href="#parameter-name"><code>name</code></a></td>
-    <td>To list all of the certificates available on your account, send a GET request to `/v2/certificates`.</td>
-</tr>
-<tr>
     <td><a href="#certificates_get"><CopyableCode code="certificates_get" /></a></td>
     <td><CopyableCode code="select" /></td>
     <td><a href="#parameter-certificate_id"><code>certificate_id</code></a></td>
     <td></td>
     <td>To show information about an existing certificate, send a GET request to `/v2/certificates/$CERTIFICATE_ID`.</td>
+</tr>
+<tr>
+    <td><a href="#certificates_list"><CopyableCode code="certificates_list" /></a></td>
+    <td><CopyableCode code="select" /></td>
+    <td></td>
+    <td><a href="#parameter-per_page"><code>per_page</code></a>, <a href="#parameter-page"><code>page</code></a>, <a href="#parameter-name"><code>name</code></a></td>
+    <td>To list all of the certificates available on your account, send a GET request to `/v2/certificates`.</td>
 </tr>
 <tr>
     <td><a href="#certificates_create"><CopyableCode code="certificates_create" /></a></td>
@@ -157,34 +237,48 @@ Parameters can be passed in the `WHERE` clause of a query. Check the [Methods](#
 ## `SELECT` examples
 
 <Tabs
-    defaultValue="certificates_list"
+    defaultValue="certificates_get"
     values={[
-        { label: 'certificates_list', value: 'certificates_list' },
-        { label: 'certificates_get', value: 'certificates_get' }
+        { label: 'certificates_get', value: 'certificates_get' },
+        { label: 'certificates_list', value: 'certificates_list' }
     ]}
 >
-<TabItem value="certificates_list">
-
-To list all of the certificates available on your account, send a GET request to `/v2/certificates`.
-
-```sql
-SELECT
-*
-FROM digitalocean.compute.certificates
-WHERE per_page = '{{ per_page }}'
-AND page = '{{ page }}'
-AND name = '{{ name }}';
-```
-</TabItem>
 <TabItem value="certificates_get">
 
 To show information about an existing certificate, send a GET request to `/v2/certificates/$CERTIFICATE_ID`.
 
 ```sql
 SELECT
-*
+id,
+name,
+created_at,
+dns_names,
+not_after,
+sha1_fingerprint,
+state,
+type
 FROM digitalocean.compute.certificates
 WHERE certificate_id = '{{ certificate_id }}' -- required;
+```
+</TabItem>
+<TabItem value="certificates_list">
+
+To list all of the certificates available on your account, send a GET request to `/v2/certificates`.
+
+```sql
+SELECT
+id,
+name,
+created_at,
+dns_names,
+not_after,
+sha1_fingerprint,
+state,
+type
+FROM digitalocean.compute.certificates
+WHERE per_page = '{{ per_page }}'
+AND page = '{{ page }}'
+AND name = '{{ name }}';
 ```
 </TabItem>
 </Tabs>
@@ -209,6 +303,8 @@ INSERT INTO digitalocean.compute.certificates (
 )
 SELECT 
 
+RETURNING
+certificate
 ;
 ```
 </TabItem>

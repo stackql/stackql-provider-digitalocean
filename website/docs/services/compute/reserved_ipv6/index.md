@@ -32,28 +32,12 @@ Creates, updates, deletes, gets or lists a <code>reserved_ipv6</code> resource.
 The following fields are returned by `SELECT` queries:
 
 <Tabs
-    defaultValue="reserved_ipv6_list"
+    defaultValue="reserved_ipv6_get"
     values={[
-        { label: 'reserved_ipv6_list', value: 'reserved_ipv6_list' },
-        { label: 'reserved_ipv6_get', value: 'reserved_ipv6_get' }
+        { label: 'reserved_ipv6_get', value: 'reserved_ipv6_get' },
+        { label: 'reserved_ipv6_list', value: 'reserved_ipv6_list' }
     ]}
 >
-<TabItem value="reserved_ipv6_list">
-
-The response will be a JSON object with a key called `reserved_ipv6s`. This will be set to an array of reserved IP objects, each of which will contain the standard reserved IP attributes
-
-<table>
-<thead>
-    <tr>
-    <th>Name</th>
-    <th>Datatype</th>
-    <th>Description</th>
-    </tr>
-</thead>
-<tbody>
-</tbody>
-</table>
-</TabItem>
 <TabItem value="reserved_ipv6_get">
 
 The response will be a JSON object with key `reserved_ipv6`. The value of this will be an object that contains the standard attributes associated with a reserved IPv6.
@@ -67,6 +51,57 @@ The response will be a JSON object with key `reserved_ipv6`. The value of this w
     </tr>
 </thead>
 <tbody>
+<tr>
+    <td><CopyableCode code="droplet" /></td>
+    <td><code></code></td>
+    <td></td>
+</tr>
+<tr>
+    <td><CopyableCode code="ip" /></td>
+    <td><code>string (ipv6)</code></td>
+    <td>The public IP address of the reserved IPv6. It also serves as its identifier. (example: 2409:40d0:f7:1017:74b4:3a96:105e:4c6e)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="region_slug" /></td>
+    <td><code>string</code></td>
+    <td>The region that the reserved IPv6 is reserved to. When you query a reserved IPv6,the region_slug will be returned. (example: nyc3)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="reserved_at" /></td>
+    <td><code>string (date-time)</code></td>
+    <td>The date and time when the reserved IPv6 was reserved. (example: 2024-11-20T11:08:30Z)</td>
+</tr>
+</tbody>
+</table>
+</TabItem>
+<TabItem value="reserved_ipv6_list">
+
+The response will be a JSON object with a key called `reserved_ipv6s`. This will be set to an array of reserved IP objects, each of which will contain the standard reserved IP attributes
+
+<table>
+<thead>
+    <tr>
+    <th>Name</th>
+    <th>Datatype</th>
+    <th>Description</th>
+    </tr>
+</thead>
+<tbody>
+<tr>
+    <td><CopyableCode code="links" /></td>
+    <td><code>object</code></td>
+    <td></td>
+</tr>
+<tr>
+    <td><CopyableCode code="meta" /></td>
+    <td><code>object</code></td>
+    <td>Information about the response itself.</td>
+</tr>
+<tr>
+    <td><CopyableCode code="reserved_ipv6s" /></td>
+    <td><code>array</code></td>
+    <td></td>
+</tr>
 </tbody>
 </table>
 </TabItem>
@@ -88,18 +123,18 @@ The following methods are available for this resource:
 </thead>
 <tbody>
 <tr>
-    <td><a href="#reserved_ipv6_list"><CopyableCode code="reserved_ipv6_list" /></a></td>
-    <td><CopyableCode code="select" /></td>
-    <td></td>
-    <td><a href="#parameter-per_page"><code>per_page</code></a>, <a href="#parameter-page"><code>page</code></a></td>
-    <td>To list all of the reserved IPv6s available on your account, send a GET request to `/v2/reserved_ipv6`.</td>
-</tr>
-<tr>
     <td><a href="#reserved_ipv6_get"><CopyableCode code="reserved_ipv6_get" /></a></td>
     <td><CopyableCode code="select" /></td>
     <td><a href="#parameter-reserved_ipv6"><code>reserved_ipv6</code></a></td>
     <td></td>
     <td>To show information about a reserved IPv6, send a GET request to `/v2/reserved_ipv6/$RESERVED_IPV6`.</td>
+</tr>
+<tr>
+    <td><a href="#reserved_ipv6_list"><CopyableCode code="reserved_ipv6_list" /></a></td>
+    <td><CopyableCode code="select" /></td>
+    <td></td>
+    <td><a href="#parameter-per_page"><code>per_page</code></a>, <a href="#parameter-page"><code>page</code></a></td>
+    <td>To list all of the reserved IPv6s available on your account, send a GET request to `/v2/reserved_ipv6`.</td>
 </tr>
 <tr>
     <td><a href="#reserved_ipv6_create"><CopyableCode code="reserved_ipv6_create" /></a></td>
@@ -159,33 +194,38 @@ Parameters can be passed in the `WHERE` clause of a query. Check the [Methods](#
 ## `SELECT` examples
 
 <Tabs
-    defaultValue="reserved_ipv6_list"
+    defaultValue="reserved_ipv6_get"
     values={[
-        { label: 'reserved_ipv6_list', value: 'reserved_ipv6_list' },
-        { label: 'reserved_ipv6_get', value: 'reserved_ipv6_get' }
+        { label: 'reserved_ipv6_get', value: 'reserved_ipv6_get' },
+        { label: 'reserved_ipv6_list', value: 'reserved_ipv6_list' }
     ]}
 >
-<TabItem value="reserved_ipv6_list">
-
-To list all of the reserved IPv6s available on your account, send a GET request to `/v2/reserved_ipv6`.
-
-```sql
-SELECT
-*
-FROM digitalocean.compute.reserved_ipv6
-WHERE per_page = '{{ per_page }}'
-AND page = '{{ page }}';
-```
-</TabItem>
 <TabItem value="reserved_ipv6_get">
 
 To show information about a reserved IPv6, send a GET request to `/v2/reserved_ipv6/$RESERVED_IPV6`.
 
 ```sql
 SELECT
-*
+droplet,
+ip,
+region_slug,
+reserved_at
 FROM digitalocean.compute.reserved_ipv6
 WHERE reserved_ipv6 = '{{ reserved_ipv6 }}' -- required;
+```
+</TabItem>
+<TabItem value="reserved_ipv6_list">
+
+To list all of the reserved IPv6s available on your account, send a GET request to `/v2/reserved_ipv6`.
+
+```sql
+SELECT
+links,
+meta,
+reserved_ipv6s
+FROM digitalocean.compute.reserved_ipv6
+WHERE per_page = '{{ per_page }}'
+AND page = '{{ page }}';
 ```
 </TabItem>
 </Tabs>
@@ -210,6 +250,8 @@ data__region_slug
 )
 SELECT 
 '{{ region_slug }}' --required
+RETURNING
+reserved_ipv6
 ;
 ```
 </TabItem>

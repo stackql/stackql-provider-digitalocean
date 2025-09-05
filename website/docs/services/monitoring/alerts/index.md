@@ -32,28 +32,12 @@ Creates, updates, deletes, gets or lists an <code>alerts</code> resource.
 The following fields are returned by `SELECT` queries:
 
 <Tabs
-    defaultValue="uptime_list_alerts"
+    defaultValue="uptime_get_alert"
     values={[
-        { label: 'uptime_list_alerts', value: 'uptime_list_alerts' },
-        { label: 'uptime_get_alert', value: 'uptime_get_alert' }
+        { label: 'uptime_get_alert', value: 'uptime_get_alert' },
+        { label: 'uptime_list_alerts', value: 'uptime_list_alerts' }
     ]}
 >
-<TabItem value="uptime_list_alerts">
-
-The response will be a JSON object with a key called `alerts`. This will be set to an array of objects, each of which will contain the standard attributes associated with an uptime alert.
-
-<table>
-<thead>
-    <tr>
-    <th>Name</th>
-    <th>Datatype</th>
-    <th>Description</th>
-    </tr>
-</thead>
-<tbody>
-</tbody>
-</table>
-</TabItem>
 <TabItem value="uptime_get_alert">
 
 The response will be a JSON object with a key called `alert`. The value of this will be an object that contains the standard attributes associated with an uptime alert.
@@ -67,6 +51,92 @@ The response will be a JSON object with a key called `alert`. The value of this 
     </tr>
 </thead>
 <tbody>
+<tr>
+    <td><CopyableCode code="id" /></td>
+    <td><code>string (uuid)</code></td>
+    <td>A unique ID that can be used to identify and reference the alert. (example: 5a4981aa-9653-4bd1-bef5-d6bff52042e4)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="name" /></td>
+    <td><code>string</code></td>
+    <td>A human-friendly display name. (example: Landing page degraded performance)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="comparison" /></td>
+    <td><code>string</code></td>
+    <td>The comparison operator used against the alert's threshold. (example: greater_than)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="notifications" /></td>
+    <td><code>object</code></td>
+    <td>The notification settings for a trigger alert.</td>
+</tr>
+<tr>
+    <td><CopyableCode code="period" /></td>
+    <td><code>string</code></td>
+    <td>Period of time the threshold must be exceeded to trigger the alert. (example: 2m)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="threshold" /></td>
+    <td><code>integer</code></td>
+    <td>The threshold at which the alert will enter a trigger state. The specific threshold is dependent on the alert type.</td>
+</tr>
+<tr>
+    <td><CopyableCode code="type" /></td>
+    <td><code>string</code></td>
+    <td>The type of alert. (example: latency)</td>
+</tr>
+</tbody>
+</table>
+</TabItem>
+<TabItem value="uptime_list_alerts">
+
+The response will be a JSON object with a key called `alerts`. This will be set to an array of objects, each of which will contain the standard attributes associated with an uptime alert.
+
+<table>
+<thead>
+    <tr>
+    <th>Name</th>
+    <th>Datatype</th>
+    <th>Description</th>
+    </tr>
+</thead>
+<tbody>
+<tr>
+    <td><CopyableCode code="id" /></td>
+    <td><code>string (uuid)</code></td>
+    <td>A unique ID that can be used to identify and reference the alert. (example: 5a4981aa-9653-4bd1-bef5-d6bff52042e4)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="name" /></td>
+    <td><code>string</code></td>
+    <td>A human-friendly display name. (example: Landing page degraded performance)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="comparison" /></td>
+    <td><code>string</code></td>
+    <td>The comparison operator used against the alert's threshold. (example: greater_than)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="notifications" /></td>
+    <td><code>object</code></td>
+    <td>The notification settings for a trigger alert.</td>
+</tr>
+<tr>
+    <td><CopyableCode code="period" /></td>
+    <td><code>string</code></td>
+    <td>Period of time the threshold must be exceeded to trigger the alert. (example: 2m)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="threshold" /></td>
+    <td><code>integer</code></td>
+    <td>The threshold at which the alert will enter a trigger state. The specific threshold is dependent on the alert type.</td>
+</tr>
+<tr>
+    <td><CopyableCode code="type" /></td>
+    <td><code>string</code></td>
+    <td>The type of alert. (example: latency)</td>
+</tr>
 </tbody>
 </table>
 </TabItem>
@@ -88,18 +158,18 @@ The following methods are available for this resource:
 </thead>
 <tbody>
 <tr>
-    <td><a href="#uptime_list_alerts"><CopyableCode code="uptime_list_alerts" /></a></td>
-    <td><CopyableCode code="select" /></td>
-    <td><a href="#parameter-check_id"><code>check_id</code></a></td>
-    <td><a href="#parameter-per_page"><code>per_page</code></a>, <a href="#parameter-page"><code>page</code></a></td>
-    <td>To list all of the alerts for an Uptime check, send a GET request to `/v2/uptime/checks/$CHECK_ID/alerts`.</td>
-</tr>
-<tr>
     <td><a href="#uptime_get_alert"><CopyableCode code="uptime_get_alert" /></a></td>
     <td><CopyableCode code="select" /></td>
     <td><a href="#parameter-check_id"><code>check_id</code></a>, <a href="#parameter-alert_id"><code>alert_id</code></a></td>
     <td></td>
     <td>To show information about an existing alert, send a GET request to `/v2/uptime/checks/$CHECK_ID/alerts/$ALERT_ID`.</td>
+</tr>
+<tr>
+    <td><a href="#uptime_list_alerts"><CopyableCode code="uptime_list_alerts" /></a></td>
+    <td><CopyableCode code="select" /></td>
+    <td><a href="#parameter-check_id"><code>check_id</code></a></td>
+    <td><a href="#parameter-per_page"><code>per_page</code></a>, <a href="#parameter-page"><code>page</code></a></td>
+    <td>To list all of the alerts for an Uptime check, send a GET request to `/v2/uptime/checks/$CHECK_ID/alerts`.</td>
 </tr>
 <tr>
     <td><a href="#uptime_create_alert"><CopyableCode code="uptime_create_alert" /></a></td>
@@ -164,35 +234,47 @@ Parameters can be passed in the `WHERE` clause of a query. Check the [Methods](#
 ## `SELECT` examples
 
 <Tabs
-    defaultValue="uptime_list_alerts"
+    defaultValue="uptime_get_alert"
     values={[
-        { label: 'uptime_list_alerts', value: 'uptime_list_alerts' },
-        { label: 'uptime_get_alert', value: 'uptime_get_alert' }
+        { label: 'uptime_get_alert', value: 'uptime_get_alert' },
+        { label: 'uptime_list_alerts', value: 'uptime_list_alerts' }
     ]}
 >
-<TabItem value="uptime_list_alerts">
-
-To list all of the alerts for an Uptime check, send a GET request to `/v2/uptime/checks/$CHECK_ID/alerts`.
-
-```sql
-SELECT
-*
-FROM digitalocean.monitoring.alerts
-WHERE check_id = '{{ check_id }}' -- required
-AND per_page = '{{ per_page }}'
-AND page = '{{ page }}';
-```
-</TabItem>
 <TabItem value="uptime_get_alert">
 
 To show information about an existing alert, send a GET request to `/v2/uptime/checks/$CHECK_ID/alerts/$ALERT_ID`.
 
 ```sql
 SELECT
-*
+id,
+name,
+comparison,
+notifications,
+period,
+threshold,
+type
 FROM digitalocean.monitoring.alerts
 WHERE check_id = '{{ check_id }}' -- required
 AND alert_id = '{{ alert_id }}' -- required;
+```
+</TabItem>
+<TabItem value="uptime_list_alerts">
+
+To list all of the alerts for an Uptime check, send a GET request to `/v2/uptime/checks/$CHECK_ID/alerts`.
+
+```sql
+SELECT
+id,
+name,
+comparison,
+notifications,
+period,
+threshold,
+type
+FROM digitalocean.monitoring.alerts
+WHERE check_id = '{{ check_id }}' -- required
+AND per_page = '{{ per_page }}'
+AND page = '{{ page }}';
 ```
 </TabItem>
 </Tabs>
@@ -229,6 +311,8 @@ SELECT
 '{{ notifications }}' --required,
 '{{ period }}' --required,
 '{{ check_id }}'
+RETURNING
+alert
 ;
 ```
 </TabItem>
@@ -306,7 +390,9 @@ AND alert_id = '{{ alert_id }}' --required
 AND data__name = '{{ name }}' --required
 AND data__type = '{{ type }}' --required
 AND data__notifications = '{{ notifications }}' --required
-AND data__period = '{{ period }}' --required;
+AND data__period = '{{ period }}' --required
+RETURNING
+alert;
 ```
 </TabItem>
 </Tabs>

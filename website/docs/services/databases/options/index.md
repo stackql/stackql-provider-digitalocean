@@ -50,6 +50,16 @@ A JSON string with a key of `options`.
     </tr>
 </thead>
 <tbody>
+<tr>
+    <td><CopyableCode code="options" /></td>
+    <td><code>object</code></td>
+    <td></td>
+</tr>
+<tr>
+    <td><CopyableCode code="version_availability" /></td>
+    <td><code>object</code></td>
+    <td></td>
+</tr>
 </tbody>
 </table>
 </TabItem>
@@ -110,7 +120,8 @@ To list all of the options available for the offered database engines, send a GE
 
 ```sql
 SELECT
-*
+options,
+version_availability
 FROM digitalocean.databases.options;
 ```
 </TabItem>

@@ -50,6 +50,26 @@ The response will be a JSON object that contains the following attributes
     </tr>
 </thead>
 <tbody>
+<tr>
+    <td><CopyableCode code="account_balance" /></td>
+    <td><code>string</code></td>
+    <td>Current balance of the customer's most recent billing activity.  Does not reflect `month_to_date_usage`. (example: 12.23)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="generated_at" /></td>
+    <td><code>string (date-time)</code></td>
+    <td>The time at which balances were most recently generated. (example: 2019-07-09T15:01:12Z)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="month_to_date_balance" /></td>
+    <td><code>string</code></td>
+    <td>Balance as of the `generated_at` time.  This value includes the `account_balance` and `month_to_date_usage`. (example: 23.44)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="month_to_date_usage" /></td>
+    <td><code>string</code></td>
+    <td>Amount used in the current billing period as of the `generated_at` time. (example: 11.21)</td>
+</tr>
 </tbody>
 </table>
 </TabItem>
@@ -110,7 +130,10 @@ To retrieve the balances on a customer's account, send a GET request to `/v2/cus
 
 ```sql
 SELECT
-*
+account_balance,
+generated_at,
+month_to_date_balance,
+month_to_date_usage
 FROM digitalocean.billing.balances;
 ```
 </TabItem>

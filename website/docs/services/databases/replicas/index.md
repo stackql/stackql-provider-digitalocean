@@ -32,28 +32,12 @@ Creates, updates, deletes, gets or lists a <code>replicas</code> resource.
 The following fields are returned by `SELECT` queries:
 
 <Tabs
-    defaultValue="databases_list_replicas"
+    defaultValue="databases_get_replica"
     values={[
-        { label: 'databases_list_replicas', value: 'databases_list_replicas' },
-        { label: 'databases_get_replica', value: 'databases_get_replica' }
+        { label: 'databases_get_replica', value: 'databases_get_replica' },
+        { label: 'databases_list_replicas', value: 'databases_list_replicas' }
     ]}
 >
-<TabItem value="databases_list_replicas">
-
-A JSON object with a key of `replicas`.
-
-<table>
-<thead>
-    <tr>
-    <th>Name</th>
-    <th>Datatype</th>
-    <th>Description</th>
-    </tr>
-</thead>
-<tbody>
-</tbody>
-</table>
-</TabItem>
 <TabItem value="databases_get_replica">
 
 A JSON object with a key of `replica`.
@@ -67,6 +51,132 @@ A JSON object with a key of `replica`.
     </tr>
 </thead>
 <tbody>
+<tr>
+    <td><CopyableCode code="id" /></td>
+    <td><code>string (uuid)</code></td>
+    <td>A unique ID that can be used to identify and reference a database replica. (example: 9cc10173-e9ea-4176-9dbc-a4cee4c4ff30)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="name" /></td>
+    <td><code>string</code></td>
+    <td>The name to give the read-only replicating (example: read-nyc3-01)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="connection" /></td>
+    <td><code>object</code></td>
+    <td></td>
+</tr>
+<tr>
+    <td><CopyableCode code="created_at" /></td>
+    <td><code>string (date-time)</code></td>
+    <td>A time value given in ISO8601 combined date and time format that represents when the database cluster was created. (example: 2019-01-11T18:37:36Z)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="private_connection" /></td>
+    <td><code>object</code></td>
+    <td></td>
+</tr>
+<tr>
+    <td><CopyableCode code="private_network_uuid" /></td>
+    <td><code>string</code></td>
+    <td>A string specifying the UUID of the VPC to which the read-only replica will be assigned. If excluded, the replica will be assigned to your account's default VPC for the region. <br /><br />Requires `vpc:read` scope. (example: 9423cbad-9211-442f-820b-ef6915e99b5f)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="region" /></td>
+    <td><code>string</code></td>
+    <td>A slug identifier for the region where the read-only replica will be located. If excluded, the replica will be placed in the same region as the cluster. (example: nyc3)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="size" /></td>
+    <td><code>string</code></td>
+    <td>A slug identifier representing the size of the node for the read-only replica. The size of the replica must be at least as large as the node size for the database cluster from which it is replicating. (example: db-s-2vcpu-4gb)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="status" /></td>
+    <td><code>string</code></td>
+    <td>A string representing the current status of the database cluster. (example: creating)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="storage_size_mib" /></td>
+    <td><code>integer</code></td>
+    <td>Additional storage added to the cluster, in MiB. If null, no additional storage is added to the cluster, beyond what is provided as a base amount from the 'size' and any previously added additional storage.</td>
+</tr>
+<tr>
+    <td><CopyableCode code="tags" /></td>
+    <td><code>array</code></td>
+    <td>A flat array of tag names as strings applied to the read-only replica.<br /><br />Requires `tag:read` scope.</td>
+</tr>
+</tbody>
+</table>
+</TabItem>
+<TabItem value="databases_list_replicas">
+
+A JSON object with a key of `replicas`.
+
+<table>
+<thead>
+    <tr>
+    <th>Name</th>
+    <th>Datatype</th>
+    <th>Description</th>
+    </tr>
+</thead>
+<tbody>
+<tr>
+    <td><CopyableCode code="id" /></td>
+    <td><code>string (uuid)</code></td>
+    <td>A unique ID that can be used to identify and reference a database replica. (example: 9cc10173-e9ea-4176-9dbc-a4cee4c4ff30)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="name" /></td>
+    <td><code>string</code></td>
+    <td>The name to give the read-only replicating (example: read-nyc3-01)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="connection" /></td>
+    <td><code>object</code></td>
+    <td></td>
+</tr>
+<tr>
+    <td><CopyableCode code="created_at" /></td>
+    <td><code>string (date-time)</code></td>
+    <td>A time value given in ISO8601 combined date and time format that represents when the database cluster was created. (example: 2019-01-11T18:37:36Z)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="private_connection" /></td>
+    <td><code>object</code></td>
+    <td></td>
+</tr>
+<tr>
+    <td><CopyableCode code="private_network_uuid" /></td>
+    <td><code>string</code></td>
+    <td>A string specifying the UUID of the VPC to which the read-only replica will be assigned. If excluded, the replica will be assigned to your account's default VPC for the region. <br /><br />Requires `vpc:read` scope. (example: 9423cbad-9211-442f-820b-ef6915e99b5f)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="region" /></td>
+    <td><code>string</code></td>
+    <td>A slug identifier for the region where the read-only replica will be located. If excluded, the replica will be placed in the same region as the cluster. (example: nyc3)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="size" /></td>
+    <td><code>string</code></td>
+    <td>A slug identifier representing the size of the node for the read-only replica. The size of the replica must be at least as large as the node size for the database cluster from which it is replicating. (example: db-s-2vcpu-4gb)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="status" /></td>
+    <td><code>string</code></td>
+    <td>A string representing the current status of the database cluster. (example: creating)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="storage_size_mib" /></td>
+    <td><code>integer</code></td>
+    <td>Additional storage added to the cluster, in MiB. If null, no additional storage is added to the cluster, beyond what is provided as a base amount from the 'size' and any previously added additional storage.</td>
+</tr>
+<tr>
+    <td><CopyableCode code="tags" /></td>
+    <td><code>array</code></td>
+    <td>A flat array of tag names as strings applied to the read-only replica.<br /><br />Requires `tag:read` scope.</td>
+</tr>
 </tbody>
 </table>
 </TabItem>
@@ -88,18 +198,18 @@ The following methods are available for this resource:
 </thead>
 <tbody>
 <tr>
-    <td><a href="#databases_list_replicas"><CopyableCode code="databases_list_replicas" /></a></td>
-    <td><CopyableCode code="select" /></td>
-    <td><a href="#parameter-database_cluster_uuid"><code>database_cluster_uuid</code></a></td>
-    <td></td>
-    <td>To list all of the read-only replicas associated with a database cluster, send a GET request to `/v2/databases/$DATABASE_ID/replicas`.<br /><br />**Note**: Read-only replicas are not supported for Caching or Valkey clusters.<br /><br />The result will be a JSON object with a `replicas` key. This will be set to an array of database replica objects, each of which will contain the standard database replica attributes.</td>
-</tr>
-<tr>
     <td><a href="#databases_get_replica"><CopyableCode code="databases_get_replica" /></a></td>
     <td><CopyableCode code="select" /></td>
     <td><a href="#parameter-database_cluster_uuid"><code>database_cluster_uuid</code></a>, <a href="#parameter-replica_name"><code>replica_name</code></a></td>
     <td></td>
     <td>To show information about an existing database replica, send a GET request to `/v2/databases/$DATABASE_ID/replicas/$REPLICA_NAME`.<br /><br />**Note**: Read-only replicas are not supported for Caching or Valkey clusters.<br /><br />The response will be a JSON object with a `replica key`. This will be set to an object containing the standard database replica attributes.</td>
+</tr>
+<tr>
+    <td><a href="#databases_list_replicas"><CopyableCode code="databases_list_replicas" /></a></td>
+    <td><CopyableCode code="select" /></td>
+    <td><a href="#parameter-database_cluster_uuid"><code>database_cluster_uuid</code></a></td>
+    <td></td>
+    <td>To list all of the read-only replicas associated with a database cluster, send a GET request to `/v2/databases/$DATABASE_ID/replicas`.<br /><br />**Note**: Read-only replicas are not supported for Caching or Valkey clusters.<br /><br />The result will be a JSON object with a `replicas` key. This will be set to an array of database replica objects, each of which will contain the standard database replica attributes.</td>
 </tr>
 <tr>
     <td><a href="#databases_create_replica"><CopyableCode code="databases_create_replica" /></a></td>
@@ -154,33 +264,53 @@ Parameters can be passed in the `WHERE` clause of a query. Check the [Methods](#
 ## `SELECT` examples
 
 <Tabs
-    defaultValue="databases_list_replicas"
+    defaultValue="databases_get_replica"
     values={[
-        { label: 'databases_list_replicas', value: 'databases_list_replicas' },
-        { label: 'databases_get_replica', value: 'databases_get_replica' }
+        { label: 'databases_get_replica', value: 'databases_get_replica' },
+        { label: 'databases_list_replicas', value: 'databases_list_replicas' }
     ]}
 >
-<TabItem value="databases_list_replicas">
-
-To list all of the read-only replicas associated with a database cluster, send a GET request to `/v2/databases/$DATABASE_ID/replicas`.<br /><br />**Note**: Read-only replicas are not supported for Caching or Valkey clusters.<br /><br />The result will be a JSON object with a `replicas` key. This will be set to an array of database replica objects, each of which will contain the standard database replica attributes.
-
-```sql
-SELECT
-*
-FROM digitalocean.databases.replicas
-WHERE database_cluster_uuid = '{{ database_cluster_uuid }}' -- required;
-```
-</TabItem>
 <TabItem value="databases_get_replica">
 
 To show information about an existing database replica, send a GET request to `/v2/databases/$DATABASE_ID/replicas/$REPLICA_NAME`.<br /><br />**Note**: Read-only replicas are not supported for Caching or Valkey clusters.<br /><br />The response will be a JSON object with a `replica key`. This will be set to an object containing the standard database replica attributes.
 
 ```sql
 SELECT
-*
+id,
+name,
+connection,
+created_at,
+private_connection,
+private_network_uuid,
+region,
+size,
+status,
+storage_size_mib,
+tags
 FROM digitalocean.databases.replicas
 WHERE database_cluster_uuid = '{{ database_cluster_uuid }}' -- required
 AND replica_name = '{{ replica_name }}' -- required;
+```
+</TabItem>
+<TabItem value="databases_list_replicas">
+
+To list all of the read-only replicas associated with a database cluster, send a GET request to `/v2/databases/$DATABASE_ID/replicas`.<br /><br />**Note**: Read-only replicas are not supported for Caching or Valkey clusters.<br /><br />The result will be a JSON object with a `replicas` key. This will be set to an array of database replica objects, each of which will contain the standard database replica attributes.
+
+```sql
+SELECT
+id,
+name,
+connection,
+created_at,
+private_connection,
+private_network_uuid,
+region,
+size,
+status,
+storage_size_mib,
+tags
+FROM digitalocean.databases.replicas
+WHERE database_cluster_uuid = '{{ database_cluster_uuid }}' -- required;
 ```
 </TabItem>
 </Tabs>
@@ -217,6 +347,8 @@ SELECT
 '{{ private_network_uuid }}',
 {{ storage_size_mib }},
 '{{ database_cluster_uuid }}'
+RETURNING
+replica
 ;
 ```
 </TabItem>

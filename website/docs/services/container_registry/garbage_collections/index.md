@@ -4,7 +4,7 @@ hide_title: false
 hide_table_of_contents: false
 keywords:
   - garbage_collections
-  - container_registries
+  - container_registry
   - digitalocean
   - infrastructure-as-code
   - configuration-as-data
@@ -24,7 +24,7 @@ Creates, updates, deletes, gets or lists a <code>garbage_collections</code> reso
 <table><tbody>
 <tr><td><b>Name</b></td><td><code>garbage_collections</code></td></tr>
 <tr><td><b>Type</b></td><td>Resource</td></tr>
-<tr><td><b>Id</b></td><td><CopyableCode code="digitalocean.container_registries.garbage_collections" /></td></tr>
+<tr><td><b>Id</b></td><td><CopyableCode code="digitalocean.container_registry.garbage_collections" /></td></tr>
 </tbody></table>
 
 ## Fields
@@ -50,6 +50,41 @@ The response will be a JSON object with a key of `garbage_collections`. This wil
     </tr>
 </thead>
 <tbody>
+<tr>
+    <td><CopyableCode code="registry_name" /></td>
+    <td><code>string</code></td>
+    <td>The name of the container registry. (example: example)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="blobs_deleted" /></td>
+    <td><code>integer</code></td>
+    <td>The number of blobs deleted as a result of this garbage collection.</td>
+</tr>
+<tr>
+    <td><CopyableCode code="created_at" /></td>
+    <td><code>string (date-time)</code></td>
+    <td>The time the garbage collection was created. (example: 2020-10-30T21:03:24Z)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="freed_bytes" /></td>
+    <td><code>integer</code></td>
+    <td>The number of bytes freed as a result of this garbage collection.</td>
+</tr>
+<tr>
+    <td><CopyableCode code="status" /></td>
+    <td><code>string</code></td>
+    <td>The current status of this garbage collection. (example: requested)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="updated_at" /></td>
+    <td><code>string (date-time)</code></td>
+    <td>The time the garbage collection was last updated. (example: 2020-10-30T21:03:44Z)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="uuid" /></td>
+    <td><code>string</code></td>
+    <td>A string specifying the UUID of the garbage collection. (example: eff0feee-49c7-4e8f-ba5c-a320c109c8a8)</td>
+</tr>
 </tbody>
 </table>
 </TabItem>
@@ -172,8 +207,14 @@ To get information about past garbage collections for a registry, send a GET req
 
 ```sql
 SELECT
-*
-FROM digitalocean.container_registries.garbage_collections
+registry_name,
+blobs_deleted,
+created_at,
+freed_bytes,
+status,
+updated_at,
+uuid
+FROM digitalocean.container_registry.garbage_collections
 WHERE registry_name = '{{ registry_name }}' -- required
 AND per_page = '{{ per_page }}'
 AND page = '{{ page }}';
@@ -195,12 +236,14 @@ AND page = '{{ page }}';
 To cancel the currently-active garbage collection for a registry, send a PUT request to `/v2/registries/$REGISTRY_NAME/garbage-collection/$GC_UUID` and specify one or more of the attributes below. It is similar to PUT `/v2/registries/$REGISTRY_NAME/garbage-collection/$GC_UUID` and exists for backward compatibility.
 
 ```sql
-REPLACE digitalocean.container_registries.garbage_collections
+REPLACE digitalocean.container_registry.garbage_collections
 SET 
 data__cancel = {{ cancel }}
 WHERE 
 registry_name = '{{ registry_name }}' --required
-AND garbage_collection_uuid = '{{ garbage_collection_uuid }}' --required;
+AND garbage_collection_uuid = '{{ garbage_collection_uuid }}' --required
+RETURNING
+garbage_collection;
 ```
 </TabItem>
 </Tabs>
@@ -223,7 +266,7 @@ AND garbage_collection_uuid = '{{ garbage_collection_uuid }}' --required;
 Garbage collection enables users to clear out unreferenced blobs (layer &<br />manifest data) after deleting one or more manifests from a repository. If<br />there are no unreferenced blobs resulting from the deletion of one or more<br />manifests, garbage collection is effectively a noop.<br />[See here for more information](https://docs.digitalocean.com/products/container-registry/how-to/clean-up-container-registry/)<br />about how and why you should clean up your container registry periodically.<br /><br />To request a garbage collection run on your registry, send a POST request to<br />`/v2/registries/$REGISTRY_NAME/garbage-collection`. This will initiate the<br />following sequence of events on your registry.<br /><br />* Set the registry to read-only mode, meaning no further write-scoped<br />  JWTs will be issued to registry clients. Existing write-scoped JWTs will<br />  continue to work until they expire which can take up to 15 minutes.<br />* Wait until all existing write-scoped JWTs have expired.<br />* Scan all registry manifests to determine which blobs are unreferenced.<br />* Delete all unreferenced blobs from the registry.<br />* Record the number of blobs deleted and bytes freed, mark the garbage<br />  collection status as `success`.<br />* Remove the read-only mode restriction from the registry, meaning write-scoped<br />  JWTs will once again be issued to registry clients.<br />
 
 ```sql
-EXEC digitalocean.container_registries.garbage_collections.registries_run_garbage_collection 
+EXEC digitalocean.container_registry.garbage_collections.registries_run_garbage_collection 
 @registry_name='{{ registry_name }}' --required;
 ```
 </TabItem>
@@ -232,7 +275,7 @@ EXEC digitalocean.container_registries.garbage_collections.registries_run_garbag
 Garbage collection enables users to clear out unreferenced blobs (layer &<br />manifest data) after deleting one or more manifests from a repository. If<br />there are no unreferenced blobs resulting from the deletion of one or more<br />manifests, garbage collection is effectively a noop.<br />[See here for more information](https://docs.digitalocean.com/products/container-registry/how-to/clean-up-container-registry/)<br />about how and why you should clean up your container registry periodically.<br /><br />To request a garbage collection run on your registry, send a POST request to<br />`/v2/registry/$REGISTRY_NAME/garbage-collection`. This will initiate the<br />following sequence of events on your registry.<br /><br />* Set the registry to read-only mode, meaning no further write-scoped<br />  JWTs will be issued to registry clients. Existing write-scoped JWTs will<br />  continue to work until they expire which can take up to 15 minutes.<br />* Wait until all existing write-scoped JWTs have expired.<br />* Scan all registry manifests to determine which blobs are unreferenced.<br />* Delete all unreferenced blobs from the registry.<br />* Record the number of blobs deleted and bytes freed, mark the garbage<br />  collection status as `success`.<br />* Remove the read-only mode restriction from the registry, meaning write-scoped<br />  JWTs will once again be issued to registry clients.<br />
 
 ```sql
-EXEC digitalocean.container_registries.garbage_collections.registry_run_garbage_collection_legacy 
+EXEC digitalocean.container_registry.garbage_collections.registry_run_garbage_collection_legacy 
 @registry_name='{{ registry_name }}' --required 
 @@json=
 '{
@@ -245,7 +288,7 @@ EXEC digitalocean.container_registries.garbage_collections.registry_run_garbage_
 To get information about the currently-active garbage collection for a registry, send a GET request to `/v2/registry/$REGISTRY_NAME/garbage-collection`.
 
 ```sql
-EXEC digitalocean.container_registries.garbage_collections.registry_get_garbage_collection_legacy 
+EXEC digitalocean.container_registry.garbage_collections.registry_get_garbage_collection_legacy 
 @registry_name='{{ registry_name }}' --required;
 ```
 </TabItem>
@@ -254,7 +297,7 @@ EXEC digitalocean.container_registries.garbage_collections.registry_get_garbage_
 To get information about past garbage collections for a registry, send a GET request to `/v2/registry/$REGISTRY_NAME/garbage-collections`.
 
 ```sql
-EXEC digitalocean.container_registries.garbage_collections.registry_list_garbage_collections_legacy 
+EXEC digitalocean.container_registry.garbage_collections.registry_list_garbage_collections_legacy 
 @registry_name='{{ registry_name }}' --required, 
 @per_page='{{ per_page }}', 
 @page='{{ page }}';
@@ -265,7 +308,7 @@ EXEC digitalocean.container_registries.garbage_collections.registry_list_garbage
 To cancel the currently-active garbage collection for a registry, send a PUT request to `/v2/registry/$REGISTRY_NAME/garbage-collection/$GC_UUID` and specify one or more of the attributes below.
 
 ```sql
-EXEC digitalocean.container_registries.garbage_collections.registry_update_garbage_collection_legacy 
+EXEC digitalocean.container_registry.garbage_collections.registry_update_garbage_collection_legacy 
 @registry_name='{{ registry_name }}' --required, 
 @garbage_collection_uuid='{{ garbage_collection_uuid }}' --required 
 @@json=

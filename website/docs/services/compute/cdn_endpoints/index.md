@@ -32,28 +32,12 @@ Creates, updates, deletes, gets or lists a <code>cdn_endpoints</code> resource.
 The following fields are returned by `SELECT` queries:
 
 <Tabs
-    defaultValue="cdn_list_endpoints"
+    defaultValue="cdn_get_endpoint"
     values={[
-        { label: 'cdn_list_endpoints', value: 'cdn_list_endpoints' },
-        { label: 'cdn_get_endpoint', value: 'cdn_get_endpoint' }
+        { label: 'cdn_get_endpoint', value: 'cdn_get_endpoint' },
+        { label: 'cdn_list_endpoints', value: 'cdn_list_endpoints' }
     ]}
 >
-<TabItem value="cdn_list_endpoints">
-
-The result will be a JSON object with an `endpoints` key. This will be set to an array of endpoint objects, each of which will contain the standard CDN endpoint attributes.
-
-<table>
-<thead>
-    <tr>
-    <th>Name</th>
-    <th>Datatype</th>
-    <th>Description</th>
-    </tr>
-</thead>
-<tbody>
-</tbody>
-</table>
-</TabItem>
 <TabItem value="cdn_get_endpoint">
 
 The response will be a JSON object with an `endpoint` key. This will be set to an object containing the standard CDN endpoint attributes.
@@ -67,6 +51,92 @@ The response will be a JSON object with an `endpoint` key. This will be set to a
     </tr>
 </thead>
 <tbody>
+<tr>
+    <td><CopyableCode code="id" /></td>
+    <td><code>string (uuid)</code></td>
+    <td>A unique ID that can be used to identify and reference a CDN endpoint. (example: 892071a0-bb95-49bc-8021-3afd67a210bf)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="certificate_id" /></td>
+    <td><code>string (uuid)</code></td>
+    <td>The ID of a DigitalOcean managed TLS certificate used for SSL when a custom subdomain is provided. (example: 892071a0-bb95-49bc-8021-3afd67a210bf)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="created_at" /></td>
+    <td><code>string (date-time)</code></td>
+    <td>A time value given in ISO8601 combined date and time format that represents when the CDN endpoint was created. (example: 2018-03-21T16:02:37Z)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="custom_domain" /></td>
+    <td><code>string (hostname)</code></td>
+    <td>The fully qualified domain name (FQDN) of the custom subdomain used with the CDN endpoint. (example: static.example.com)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="endpoint" /></td>
+    <td><code>string (hostname)</code></td>
+    <td>The fully qualified domain name (FQDN) from which the CDN-backed content is served. (example: static-images.nyc3.cdn.digitaloceanspaces.com)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="origin" /></td>
+    <td><code>string (hostname)</code></td>
+    <td>The fully qualified domain name (FQDN) for the origin server which provides the content for the CDN. This is currently restricted to a Space. (example: static-images.nyc3.digitaloceanspaces.com)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="ttl" /></td>
+    <td><code>integer</code></td>
+    <td>The amount of time the content is cached by the CDN's edge servers in seconds. TTL must be one of 60, 600, 3600, 86400, or 604800. Defaults to 3600 (one hour) when excluded.</td>
+</tr>
+</tbody>
+</table>
+</TabItem>
+<TabItem value="cdn_list_endpoints">
+
+The result will be a JSON object with an `endpoints` key. This will be set to an array of endpoint objects, each of which will contain the standard CDN endpoint attributes.
+
+<table>
+<thead>
+    <tr>
+    <th>Name</th>
+    <th>Datatype</th>
+    <th>Description</th>
+    </tr>
+</thead>
+<tbody>
+<tr>
+    <td><CopyableCode code="id" /></td>
+    <td><code>string (uuid)</code></td>
+    <td>A unique ID that can be used to identify and reference a CDN endpoint. (example: 892071a0-bb95-49bc-8021-3afd67a210bf)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="certificate_id" /></td>
+    <td><code>string (uuid)</code></td>
+    <td>The ID of a DigitalOcean managed TLS certificate used for SSL when a custom subdomain is provided. (example: 892071a0-bb95-49bc-8021-3afd67a210bf)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="created_at" /></td>
+    <td><code>string (date-time)</code></td>
+    <td>A time value given in ISO8601 combined date and time format that represents when the CDN endpoint was created. (example: 2018-03-21T16:02:37Z)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="custom_domain" /></td>
+    <td><code>string (hostname)</code></td>
+    <td>The fully qualified domain name (FQDN) of the custom subdomain used with the CDN endpoint. (example: static.example.com)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="endpoint" /></td>
+    <td><code>string (hostname)</code></td>
+    <td>The fully qualified domain name (FQDN) from which the CDN-backed content is served. (example: static-images.nyc3.cdn.digitaloceanspaces.com)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="origin" /></td>
+    <td><code>string (hostname)</code></td>
+    <td>The fully qualified domain name (FQDN) for the origin server which provides the content for the CDN. This is currently restricted to a Space. (example: static-images.nyc3.digitaloceanspaces.com)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="ttl" /></td>
+    <td><code>integer</code></td>
+    <td>The amount of time the content is cached by the CDN's edge servers in seconds. TTL must be one of 60, 600, 3600, 86400, or 604800. Defaults to 3600 (one hour) when excluded.</td>
+</tr>
 </tbody>
 </table>
 </TabItem>
@@ -88,18 +158,18 @@ The following methods are available for this resource:
 </thead>
 <tbody>
 <tr>
-    <td><a href="#cdn_list_endpoints"><CopyableCode code="cdn_list_endpoints" /></a></td>
-    <td><CopyableCode code="select" /></td>
-    <td></td>
-    <td><a href="#parameter-per_page"><code>per_page</code></a>, <a href="#parameter-page"><code>page</code></a></td>
-    <td>To list all of the CDN endpoints available on your account, send a GET request to `/v2/cdn/endpoints`.</td>
-</tr>
-<tr>
     <td><a href="#cdn_get_endpoint"><CopyableCode code="cdn_get_endpoint" /></a></td>
     <td><CopyableCode code="select" /></td>
     <td><a href="#parameter-cdn_id"><code>cdn_id</code></a></td>
     <td></td>
     <td>To show information about an existing CDN endpoint, send a GET request to `/v2/cdn/endpoints/$ENDPOINT_ID`.</td>
+</tr>
+<tr>
+    <td><a href="#cdn_list_endpoints"><CopyableCode code="cdn_list_endpoints" /></a></td>
+    <td><CopyableCode code="select" /></td>
+    <td></td>
+    <td><a href="#parameter-per_page"><code>per_page</code></a>, <a href="#parameter-page"><code>page</code></a></td>
+    <td>To list all of the CDN endpoints available on your account, send a GET request to `/v2/cdn/endpoints`.</td>
 </tr>
 <tr>
     <td><a href="#cdn_create_endpoint"><CopyableCode code="cdn_create_endpoint" /></a></td>
@@ -166,33 +236,45 @@ Parameters can be passed in the `WHERE` clause of a query. Check the [Methods](#
 ## `SELECT` examples
 
 <Tabs
-    defaultValue="cdn_list_endpoints"
+    defaultValue="cdn_get_endpoint"
     values={[
-        { label: 'cdn_list_endpoints', value: 'cdn_list_endpoints' },
-        { label: 'cdn_get_endpoint', value: 'cdn_get_endpoint' }
+        { label: 'cdn_get_endpoint', value: 'cdn_get_endpoint' },
+        { label: 'cdn_list_endpoints', value: 'cdn_list_endpoints' }
     ]}
 >
-<TabItem value="cdn_list_endpoints">
-
-To list all of the CDN endpoints available on your account, send a GET request to `/v2/cdn/endpoints`.
-
-```sql
-SELECT
-*
-FROM digitalocean.compute.cdn_endpoints
-WHERE per_page = '{{ per_page }}'
-AND page = '{{ page }}';
-```
-</TabItem>
 <TabItem value="cdn_get_endpoint">
 
 To show information about an existing CDN endpoint, send a GET request to `/v2/cdn/endpoints/$ENDPOINT_ID`.
 
 ```sql
 SELECT
-*
+id,
+certificate_id,
+created_at,
+custom_domain,
+endpoint,
+origin,
+ttl
 FROM digitalocean.compute.cdn_endpoints
 WHERE cdn_id = '{{ cdn_id }}' -- required;
+```
+</TabItem>
+<TabItem value="cdn_list_endpoints">
+
+To list all of the CDN endpoints available on your account, send a GET request to `/v2/cdn/endpoints`.
+
+```sql
+SELECT
+id,
+certificate_id,
+created_at,
+custom_domain,
+endpoint,
+origin,
+ttl
+FROM digitalocean.compute.cdn_endpoints
+WHERE per_page = '{{ per_page }}'
+AND page = '{{ page }}';
 ```
 </TabItem>
 </Tabs>
@@ -223,6 +305,8 @@ SELECT
 {{ ttl }},
 '{{ certificate_id }}',
 '{{ custom_domain }}'
+RETURNING
+endpoint
 ;
 ```
 </TabItem>
@@ -278,7 +362,9 @@ data__ttl = {{ ttl }},
 data__certificate_id = '{{ certificate_id }}',
 data__custom_domain = '{{ custom_domain }}'
 WHERE 
-cdn_id = '{{ cdn_id }}' --required;
+cdn_id = '{{ cdn_id }}' --required
+RETURNING
+endpoint;
 ```
 </TabItem>
 </Tabs>

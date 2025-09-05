@@ -50,6 +50,26 @@ The response will be a JSON object with a key called `resources`.<br />The value
     </tr>
 </thead>
 <tbody>
+<tr>
+    <td><CopyableCode code="assigned_at" /></td>
+    <td><code>string (date-time)</code></td>
+    <td>A time value given in ISO8601 combined date and time format that represents when the project was created. (example: 2018-09-28T19:26:37Z)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="links" /></td>
+    <td><code>object</code></td>
+    <td>The links object contains the `self` object, which contains the resource relationship.</td>
+</tr>
+<tr>
+    <td><CopyableCode code="status" /></td>
+    <td><code>string</code></td>
+    <td>The status of assigning and fetching the resources. (example: ok)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="urn" /></td>
+    <td><code>string</code></td>
+    <td>The uniform resource name (URN) for the resource in the format do:resource_type:resource_id. (pattern: ^do:(dbaas|domain|droplet|floatingip|loadbalancer|space|volume|kubernetes|vpc):.*, example: do:droplet:13457723)</td>
+</tr>
 </tbody>
 </table>
 </TabItem>
@@ -117,7 +137,10 @@ To list all your resources in your default project, send a GET request to `/v2/p
 
 ```sql
 SELECT
-*
+assigned_at,
+links,
+status,
+urn
 FROM digitalocean.projects.default_resources;
 ```
 </TabItem>
@@ -143,6 +166,8 @@ data__resources
 )
 SELECT 
 '{{ resources }}'
+RETURNING
+resources
 ;
 ```
 </TabItem>

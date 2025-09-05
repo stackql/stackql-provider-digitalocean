@@ -50,6 +50,11 @@ A JSON object with a key of `config`.
     </tr>
 </thead>
 <tbody>
+<tr>
+    <td><CopyableCode code="config" /></td>
+    <td><code></code></td>
+    <td></td>
+</tr>
 </tbody>
 </table>
 </TabItem>
@@ -122,7 +127,7 @@ Shows configuration parameters for an existing database cluster by sending a GET
 
 ```sql
 SELECT
-*
+config
 FROM digitalocean.databases.cluster_config
 WHERE database_cluster_uuid = '{{ database_cluster_uuid }}' -- required;
 ```

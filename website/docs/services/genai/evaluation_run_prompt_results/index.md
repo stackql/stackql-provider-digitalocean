@@ -51,9 +51,44 @@ A successful response.
 </thead>
 <tbody>
 <tr>
-    <td><CopyableCode code="prompt" /></td>
-    <td><code>object</code></td>
-    <td></td>
+    <td><CopyableCode code="prompt_id" /></td>
+    <td><code>integer (int64)</code></td>
+    <td>Prompt ID</td>
+</tr>
+<tr>
+    <td><CopyableCode code="ground_truth" /></td>
+    <td><code>string</code></td>
+    <td>The ground truth for the prompt. (example: example string)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="input" /></td>
+    <td><code>string</code></td>
+    <td> (example: example string)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="input_tokens" /></td>
+    <td><code>string (uint64)</code></td>
+    <td>The number of input tokens used in the prompt. (example: 12345)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="output" /></td>
+    <td><code>string</code></td>
+    <td> (example: example string)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="output_tokens" /></td>
+    <td><code>string (uint64)</code></td>
+    <td>The number of output tokens used in the prompt. (example: 12345)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="prompt_chunks" /></td>
+    <td><code>array</code></td>
+    <td>The list of prompt chunks.</td>
+</tr>
+<tr>
+    <td><CopyableCode code="prompt_level_metric_results" /></td>
+    <td><code>array</code></td>
+    <td>The metric results for the prompt.</td>
 </tr>
 </tbody>
 </table>
@@ -125,7 +160,14 @@ To retrieve results of an evaluation run, send a GET request to `/v2/gen-ai/eval
 
 ```sql
 SELECT
-prompt
+prompt_id,
+ground_truth,
+input,
+input_tokens,
+output,
+output_tokens,
+prompt_chunks,
+prompt_level_metric_results
 FROM digitalocean.genai.evaluation_run_prompt_results
 WHERE evaluation_run_uuid = '{{ evaluation_run_uuid }}' -- required
 AND prompt_id = '{{ prompt_id }}' -- required;

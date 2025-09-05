@@ -4,7 +4,7 @@ hide_title: false
 hide_table_of_contents: false
 keywords:
   - subscriptions
-  - container_registries
+  - container_registry
   - digitalocean
   - infrastructure-as-code
   - configuration-as-data
@@ -24,7 +24,7 @@ Creates, updates, deletes, gets or lists a <code>subscriptions</code> resource.
 <table><tbody>
 <tr><td><b>Name</b></td><td><code>subscriptions</code></td></tr>
 <tr><td><b>Type</b></td><td>Resource</td></tr>
-<tr><td><b>Id</b></td><td><CopyableCode code="digitalocean.container_registries.subscriptions" /></td></tr>
+<tr><td><b>Id</b></td><td><CopyableCode code="digitalocean.container_registry.subscriptions" /></td></tr>
 </tbody></table>
 
 ## Fields
@@ -50,6 +50,21 @@ The response will be a JSON object with a key called `subscription` containing i
     </tr>
 </thead>
 <tbody>
+<tr>
+    <td><CopyableCode code="created_at" /></td>
+    <td><code>string (date-time)</code></td>
+    <td>The time at which the subscription was created. (example: 2020-01-23T21:19:12Z)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="tier" /></td>
+    <td><code>object</code></td>
+    <td></td>
+</tr>
+<tr>
+    <td><CopyableCode code="updated_at" /></td>
+    <td><code>string (date-time)</code></td>
+    <td>The time at which the subscription was last updated. (example: 2020-11-05T15:53:24Z)</td>
+</tr>
 </tbody>
 </table>
 </TabItem>
@@ -131,8 +146,10 @@ A subscription is automatically created when you configure your container regist
 
 ```sql
 SELECT
-*
-FROM digitalocean.container_registries.subscriptions;
+created_at,
+tier,
+updated_at
+FROM digitalocean.container_registry.subscriptions;
 ```
 </TabItem>
 </Tabs>
@@ -152,11 +169,13 @@ FROM digitalocean.container_registries.subscriptions;
 After creating your registry, you can switch to a different subscription tier to better suit your needs. To do this, send a POST request to `/v2/registries/subscription`. It is similar to POST `/v2/registry/subscription` and exists for backward compatibility.
 
 ```sql
-INSERT INTO digitalocean.container_registries.subscriptions (
+INSERT INTO digitalocean.container_registry.subscriptions (
 data__tier_slug
 )
 SELECT 
 '{{ tier_slug }}'
+RETURNING
+subscription
 ;
 ```
 </TabItem>
@@ -191,7 +210,7 @@ SELECT
 A subscription is automatically created when you configure your container registry. To get information about your subscription, send a GET request to `/v2/registry/subscription`.
 
 ```sql
-EXEC digitalocean.container_registries.subscriptions.registry_get_subscription_legacy 
+EXEC digitalocean.container_registry.subscriptions.registry_get_subscription_legacy 
 ;
 ```
 </TabItem>
@@ -200,7 +219,7 @@ EXEC digitalocean.container_registries.subscriptions.registry_get_subscription_l
 After creating your registry, you can switch to a different subscription tier to better suit your needs. To do this, send a POST request to `/v2/registry/subscription`.
 
 ```sql
-EXEC digitalocean.container_registries.subscriptions.registry_update_subscription_legacy 
+EXEC digitalocean.container_registry.subscriptions.registry_update_subscription_legacy 
 @@json=
 '{
 "tier_slug": "{{ tier_slug }}"

@@ -50,6 +50,36 @@ A JSON object with a key of `droplets`.
     </tr>
 </thead>
 <tbody>
+<tr>
+    <td><CopyableCode code="droplet_id" /></td>
+    <td><code>integer</code></td>
+    <td>The unique identifier of the Droplet.</td>
+</tr>
+<tr>
+    <td><CopyableCode code="created_at" /></td>
+    <td><code>string (date-time)</code></td>
+    <td>The creation time of the Droplet in ISO8601 combined date and time format. (example: 2020-07-28T18:00:00Z)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="current_utilization" /></td>
+    <td><code>object</code></td>
+    <td></td>
+</tr>
+<tr>
+    <td><CopyableCode code="health_status" /></td>
+    <td><code>string</code></td>
+    <td>The health status of the Droplet. (example: active)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="status" /></td>
+    <td><code>string</code></td>
+    <td>The power status of the Droplet. (example: active)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="updated_at" /></td>
+    <td><code>string (date-time)</code></td>
+    <td>The last updated time of the Droplet in ISO8601 combined date and time format. (example: 2020-07-28T18:00:00Z)</td>
+</tr>
 </tbody>
 </table>
 </TabItem>
@@ -125,7 +155,12 @@ To list the Droplets in an autoscale pool, send a GET request to `/v2/droplets/a
 
 ```sql
 SELECT
-*
+droplet_id,
+created_at,
+current_utilization,
+health_status,
+status,
+updated_at
 FROM digitalocean.compute.droplet_autoscale_pool_members
 WHERE autoscale_pool_id = '{{ autoscale_pool_id }}' -- required
 AND per_page = '{{ per_page }}'

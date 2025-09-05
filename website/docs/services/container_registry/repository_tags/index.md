@@ -4,7 +4,7 @@ hide_title: false
 hide_table_of_contents: false
 keywords:
   - repository_tags
-  - container_registries
+  - container_registry
   - digitalocean
   - infrastructure-as-code
   - configuration-as-data
@@ -24,7 +24,7 @@ Creates, updates, deletes, gets or lists a <code>repository_tags</code> resource
 <table><tbody>
 <tr><td><b>Name</b></td><td><code>repository_tags</code></td></tr>
 <tr><td><b>Type</b></td><td>Resource</td></tr>
-<tr><td><b>Id</b></td><td><CopyableCode code="digitalocean.container_registries.repository_tags" /></td></tr>
+<tr><td><b>Id</b></td><td><CopyableCode code="digitalocean.container_registry.repository_tags" /></td></tr>
 </tbody></table>
 
 ## Fields
@@ -50,6 +50,41 @@ The response body will be a JSON object with a key of `tags`. This will be set t
     </tr>
 </thead>
 <tbody>
+<tr>
+    <td><CopyableCode code="registry_name" /></td>
+    <td><code>string</code></td>
+    <td>The name of the container registry. (example: example)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="compressed_size_bytes" /></td>
+    <td><code>integer</code></td>
+    <td>The compressed size of the tag in bytes.</td>
+</tr>
+<tr>
+    <td><CopyableCode code="manifest_digest" /></td>
+    <td><code>string</code></td>
+    <td>The digest of the manifest associated with the tag. (example: sha256:cb8a924afdf0229ef7515d9e5b3024e23b3eb03ddbba287f4a19c6ac90b8d221)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="repository" /></td>
+    <td><code>string</code></td>
+    <td>The name of the repository. (example: repo-1)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="size_bytes" /></td>
+    <td><code>integer</code></td>
+    <td>The uncompressed size of the tag in bytes (this size is calculated asynchronously so it may not be immediately available).</td>
+</tr>
+<tr>
+    <td><CopyableCode code="tag" /></td>
+    <td><code>string</code></td>
+    <td>The name of the tag. (example: latest)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="updated_at" /></td>
+    <td><code>string (date-time)</code></td>
+    <td>The time the tag was last updated. (example: 2020-04-09T23:54:25Z)</td>
+</tr>
 </tbody>
 </table>
 </TabItem>
@@ -156,8 +191,14 @@ To list all tags in one of your container registry's repository, send a GET<br /
 
 ```sql
 SELECT
-*
-FROM digitalocean.container_registries.repository_tags
+registry_name,
+compressed_size_bytes,
+manifest_digest,
+repository,
+size_bytes,
+tag,
+updated_at
+FROM digitalocean.container_registry.repository_tags
 WHERE registry_name = '{{ registry_name }}' -- required
 AND repository_name = '{{ repository_name }}' -- required
 AND per_page = '{{ per_page }}'
@@ -180,7 +221,7 @@ AND page = '{{ page }}';
 To delete a container repository tag in on of our container registries, send a DELETE request to<br />`/v2/registries/$REGISTRY_NAME/repositories/$REPOSITORY_NAME/tags/$TAG`.<br /><br />Note that if your repository name contains `/` characters, it must be<br />URL-encoded in the request URL. For example, to delete<br />`registry.digitalocean.com/example/my/repo:mytag`, the path would be<br />`/v2/registry/example/repositories/my%2Frepo/tags/mytag`.<br /><br />A successful request will receive a 204 status code with no body in response.<br />This indicates that the request was processed successfully. It is similar to DELETE `/v2/registry/$REGISTRY_NAME/repositories/$REPOSITORY_NAME/tags/$TAG` and exists for backward compatibility.<br />
 
 ```sql
-DELETE FROM digitalocean.container_registries.repository_tags
+DELETE FROM digitalocean.container_registry.repository_tags
 WHERE registry_name = '{{ registry_name }}' --required
 AND repository_name = '{{ repository_name }}' --required
 AND repository_tag = '{{ repository_tag }}' --required;
@@ -203,7 +244,7 @@ AND repository_tag = '{{ repository_tag }}' --required;
 To list all tags in your container registry repository, send a GET<br />request to `/v2/registry/$REGISTRY_NAME/repositories/$REPOSITORY_NAME/tags`.<br /><br />Note that if your repository name contains `/` characters, it must be<br />URL-encoded in the request URL. For example, to list tags for<br />`registry.digitalocean.com/example/my/repo`, the path would be<br />`/v2/registry/example/repositories/my%2Frepo/tags`.<br />
 
 ```sql
-EXEC digitalocean.container_registries.repository_tags.registry_list_repository_tags_legacy 
+EXEC digitalocean.container_registry.repository_tags.registry_list_repository_tags_legacy 
 @registry_name='{{ registry_name }}' --required, 
 @repository_name='{{ repository_name }}' --required, 
 @per_page='{{ per_page }}', 
@@ -215,7 +256,7 @@ EXEC digitalocean.container_registries.repository_tags.registry_list_repository_
 To delete a container repository tag, send a DELETE request to<br />`/v2/registry/$REGISTRY_NAME/repositories/$REPOSITORY_NAME/tags/$TAG`.<br /><br />Note that if your repository name contains `/` characters, it must be<br />URL-encoded in the request URL. For example, to delete<br />`registry.digitalocean.com/example/my/repo:mytag`, the path would be<br />`/v2/registry/example/repositories/my%2Frepo/tags/mytag`.<br /><br />A successful request will receive a 204 status code with no body in response.<br />This indicates that the request was processed successfully.<br />
 
 ```sql
-EXEC digitalocean.container_registries.repository_tags.registry_delete_repository_tag_legacy 
+EXEC digitalocean.container_registry.repository_tags.registry_delete_repository_tag_legacy 
 @registry_name='{{ registry_name }}' --required, 
 @repository_name='{{ repository_name }}' --required, 
 @repository_tag='{{ repository_tag }}' --required;

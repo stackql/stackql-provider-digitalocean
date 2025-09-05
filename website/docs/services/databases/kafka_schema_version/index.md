@@ -50,6 +50,31 @@ A JSON object.
     </tr>
 </thead>
 <tbody>
+<tr>
+    <td><CopyableCode code="schema_id" /></td>
+    <td><code>integer</code></td>
+    <td>The id for schema.</td>
+</tr>
+<tr>
+    <td><CopyableCode code="subject_name" /></td>
+    <td><code>string</code></td>
+    <td>The name of the schema subject. (example: customer-schema)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="schema" /></td>
+    <td><code>string</code></td>
+    <td>The schema definition in the specified format. (example: &#123;<br />  "type": "record",<br />  "name": "Customer",<br />  "fields": [  <br />    &#123;"name": "id", "type": "int"&#125;,<br />    &#123;"name": "name", "type": "string"&#125;<br />  ]<br />&#125; )</td>
+</tr>
+<tr>
+    <td><CopyableCode code="schema_type" /></td>
+    <td><code>string</code></td>
+    <td>The type of the schema. (example: AVRO)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="version" /></td>
+    <td><code>string</code></td>
+    <td>The version of the schema. (example: 1)</td>
+</tr>
 </tbody>
 </table>
 </TabItem>
@@ -125,7 +150,11 @@ To get a specific schema by subject name for a Kafka cluster, send a GET request
 
 ```sql
 SELECT
-*
+schema_id,
+subject_name,
+schema,
+schema_type,
+version
 FROM digitalocean.databases.kafka_schema_version
 WHERE database_cluster_uuid = '{{ database_cluster_uuid }}' -- required
 AND subject_name = '{{ subject_name }}' -- required

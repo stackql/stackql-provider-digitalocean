@@ -32,28 +32,12 @@ Creates, updates, deletes, gets or lists a <code>vpc_peerings</code> resource.
 The following fields are returned by `SELECT` queries:
 
 <Tabs
-    defaultValue="vpc_peerings_list"
+    defaultValue="vpc_peerings_get"
     values={[
-        { label: 'vpc_peerings_list', value: 'vpc_peerings_list' },
-        { label: 'vpc_peerings_get', value: 'vpc_peerings_get' }
+        { label: 'vpc_peerings_get', value: 'vpc_peerings_get' },
+        { label: 'vpc_peerings_list', value: 'vpc_peerings_list' }
     ]}
 >
-<TabItem value="vpc_peerings_list">
-
-The response will be a JSON object with a key called `vpc_peerings`. This  will be set to an array of objects, each of which will contain the standard  attributes associated with a VPC peering.
-
-<table>
-<thead>
-    <tr>
-    <th>Name</th>
-    <th>Datatype</th>
-    <th>Description</th>
-    </tr>
-</thead>
-<tbody>
-</tbody>
-</table>
-</TabItem>
 <TabItem value="vpc_peerings_get">
 
 The response will be a JSON object with a key called `vpc_peering`. The value of this will be an object that contains the standard attributes associated with a VPC peering.
@@ -67,6 +51,72 @@ The response will be a JSON object with a key called `vpc_peering`. The value of
     </tr>
 </thead>
 <tbody>
+<tr>
+    <td><CopyableCode code="id" /></td>
+    <td><code>string (uuid)</code></td>
+    <td>A unique ID that can be used to identify and reference the VPC peering. (example: 5a4981aa-9653-4bd1-bef5-d6bff52042e4)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="name" /></td>
+    <td><code>string</code></td>
+    <td>The name of the VPC peering. Must be unique within the team and may only contain alphanumeric characters and dashes. (pattern: ^[a-zA-Z0-9\-]+$, example: nyc1-blr1-peering)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="created_at" /></td>
+    <td><code>string (date-time)</code></td>
+    <td>A time value given in ISO8601 combined date and time format. (example: 2020-03-13T19:20:47.442049222Z)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="status" /></td>
+    <td><code>string</code></td>
+    <td>The current status of the VPC peering. (example: ACTIVE)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="vpc_ids" /></td>
+    <td><code>array</code></td>
+    <td>An array of the two peered VPCs IDs.</td>
+</tr>
+</tbody>
+</table>
+</TabItem>
+<TabItem value="vpc_peerings_list">
+
+The response will be a JSON object with a key called `vpc_peerings`. This  will be set to an array of objects, each of which will contain the standard  attributes associated with a VPC peering.
+
+<table>
+<thead>
+    <tr>
+    <th>Name</th>
+    <th>Datatype</th>
+    <th>Description</th>
+    </tr>
+</thead>
+<tbody>
+<tr>
+    <td><CopyableCode code="id" /></td>
+    <td><code>string (uuid)</code></td>
+    <td>A unique ID that can be used to identify and reference the VPC peering. (example: 5a4981aa-9653-4bd1-bef5-d6bff52042e4)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="name" /></td>
+    <td><code>string</code></td>
+    <td>The name of the VPC peering. Must be unique within the team and may only contain alphanumeric characters and dashes. (pattern: ^[a-zA-Z0-9\-]+$, example: nyc1-blr1-peering)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="created_at" /></td>
+    <td><code>string (date-time)</code></td>
+    <td>A time value given in ISO8601 combined date and time format. (example: 2020-03-13T19:20:47.442049222Z)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="status" /></td>
+    <td><code>string</code></td>
+    <td>The current status of the VPC peering. (example: ACTIVE)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="vpc_ids" /></td>
+    <td><code>array</code></td>
+    <td>An array of the two peered VPCs IDs.</td>
+</tr>
 </tbody>
 </table>
 </TabItem>
@@ -88,18 +138,18 @@ The following methods are available for this resource:
 </thead>
 <tbody>
 <tr>
-    <td><a href="#vpc_peerings_list"><CopyableCode code="vpc_peerings_list" /></a></td>
-    <td><CopyableCode code="select" /></td>
-    <td></td>
-    <td><a href="#parameter-per_page"><code>per_page</code></a>, <a href="#parameter-page"><code>page</code></a>, <a href="#parameter-region"><code>region</code></a></td>
-    <td>To list all of the VPC peerings on your account, send a GET request to `/v2/vpc_peerings`.</td>
-</tr>
-<tr>
     <td><a href="#vpc_peerings_get"><CopyableCode code="vpc_peerings_get" /></a></td>
     <td><CopyableCode code="select" /></td>
     <td><a href="#parameter-vpc_peering_id"><code>vpc_peering_id</code></a></td>
     <td></td>
     <td>To show information about an existing VPC Peering, send a GET request to `/v2/vpc_peerings/$VPC_PEERING_ID`.<br /></td>
+</tr>
+<tr>
+    <td><a href="#vpc_peerings_list"><CopyableCode code="vpc_peerings_list" /></a></td>
+    <td><CopyableCode code="select" /></td>
+    <td></td>
+    <td><a href="#parameter-per_page"><code>per_page</code></a>, <a href="#parameter-page"><code>page</code></a>, <a href="#parameter-region"><code>region</code></a></td>
+    <td>To list all of the VPC peerings on your account, send a GET request to `/v2/vpc_peerings`.</td>
 </tr>
 <tr>
     <td><a href="#vpc_peerings_create"><CopyableCode code="vpc_peerings_create" /></a></td>
@@ -164,34 +214,42 @@ Parameters can be passed in the `WHERE` clause of a query. Check the [Methods](#
 ## `SELECT` examples
 
 <Tabs
-    defaultValue="vpc_peerings_list"
+    defaultValue="vpc_peerings_get"
     values={[
-        { label: 'vpc_peerings_list', value: 'vpc_peerings_list' },
-        { label: 'vpc_peerings_get', value: 'vpc_peerings_get' }
+        { label: 'vpc_peerings_get', value: 'vpc_peerings_get' },
+        { label: 'vpc_peerings_list', value: 'vpc_peerings_list' }
     ]}
 >
-<TabItem value="vpc_peerings_list">
-
-To list all of the VPC peerings on your account, send a GET request to `/v2/vpc_peerings`.
-
-```sql
-SELECT
-*
-FROM digitalocean.vpcs.vpc_peerings
-WHERE per_page = '{{ per_page }}'
-AND page = '{{ page }}'
-AND region = '{{ region }}';
-```
-</TabItem>
 <TabItem value="vpc_peerings_get">
 
 To show information about an existing VPC Peering, send a GET request to `/v2/vpc_peerings/$VPC_PEERING_ID`.<br />
 
 ```sql
 SELECT
-*
+id,
+name,
+created_at,
+status,
+vpc_ids
 FROM digitalocean.vpcs.vpc_peerings
 WHERE vpc_peering_id = '{{ vpc_peering_id }}' -- required;
+```
+</TabItem>
+<TabItem value="vpc_peerings_list">
+
+To list all of the VPC peerings on your account, send a GET request to `/v2/vpc_peerings`.
+
+```sql
+SELECT
+id,
+name,
+created_at,
+status,
+vpc_ids
+FROM digitalocean.vpcs.vpc_peerings
+WHERE per_page = '{{ per_page }}'
+AND page = '{{ page }}'
+AND region = '{{ region }}';
 ```
 </TabItem>
 </Tabs>
@@ -218,6 +276,8 @@ data__vpc_ids
 SELECT 
 '{{ name }}' --required,
 '{{ vpc_ids }}' --required
+RETURNING
+vpc_peering
 ;
 ```
 </TabItem>
@@ -260,7 +320,9 @@ SET
 data__name = '{{ name }}'
 WHERE 
 vpc_peering_id = '{{ vpc_peering_id }}' --required
-AND data__name = '{{ name }}' --required;
+AND data__name = '{{ name }}' --required
+RETURNING
+vpc_peering;
 ```
 </TabItem>
 </Tabs>

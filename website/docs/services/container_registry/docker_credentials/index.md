@@ -4,7 +4,7 @@ hide_title: false
 hide_table_of_contents: false
 keywords:
   - docker_credentials
-  - container_registries
+  - container_registry
   - digitalocean
   - infrastructure-as-code
   - configuration-as-data
@@ -24,7 +24,7 @@ Creates, updates, deletes, gets or lists a <code>docker_credentials</code> resou
 <table><tbody>
 <tr><td><b>Name</b></td><td><code>docker_credentials</code></td></tr>
 <tr><td><b>Type</b></td><td>Resource</td></tr>
-<tr><td><b>Id</b></td><td><CopyableCode code="digitalocean.container_registries.docker_credentials" /></td></tr>
+<tr><td><b>Id</b></td><td><CopyableCode code="digitalocean.container_registry.docker_credentials" /></td></tr>
 </tbody></table>
 
 ## Fields
@@ -50,6 +50,11 @@ A Docker `config.json` file for the container registry.
     </tr>
 </thead>
 <tbody>
+<tr>
+    <td><CopyableCode code="registry.digitalocean.com" /></td>
+    <td><code>object</code></td>
+    <td></td>
+</tr>
 </tbody>
 </table>
 </TabItem>
@@ -132,8 +137,8 @@ In order to access your container registry with the Docker client or from a<br /
 
 ```sql
 SELECT
-*
-FROM digitalocean.container_registries.docker_credentials
+registry.digitalocean.com
+FROM digitalocean.container_registry.docker_credentials
 WHERE registry_name = '{{ registry_name }}' -- required;
 ```
 </TabItem>
@@ -153,7 +158,7 @@ WHERE registry_name = '{{ registry_name }}' -- required;
 In order to access your container registry with the Docker client or from a<br />Kubernetes cluster, you will need to configure authentication. The necessary<br />JSON configuration can be retrieved by sending a GET request to<br />`/v2/registry/docker-credentials`.<br /><br />The response will be in the format of a Docker `config.json` file. To use the<br />config in your Kubernetes cluster, create a Secret with:<br /><br />    kubectl create secret generic docr \<br />      --from-file=.dockerconfigjson=config.json \<br />      --type=kubernetes.io/dockerconfigjson<br /><br />By default, the returned credentials have read-only access to your registry<br />and cannot be used to push images. This is appropriate for most Kubernetes<br />clusters. To retrieve read/write credentials, suitable for use with the Docker<br />client or in a CI system, read_write may be provided as query parameter. For<br />example: `/v2/registry/docker-credentials?read_write=true`<br /><br />By default, the returned credentials will not expire. To retrieve credentials<br />with an expiry set, expiry_seconds may be provided as a query parameter. For<br />example: `/v2/registry/docker-credentials?expiry_seconds=3600` will return<br />credentials that expire after one hour.<br />
 
 ```sql
-EXEC digitalocean.container_registries.docker_credentials.registry_get_docker_credentials_legacy 
+EXEC digitalocean.container_registry.docker_credentials.registry_get_docker_credentials_legacy 
 @expiry_seconds='{{ expiry_seconds }}', 
 @read_write={{ read_write }};
 ```

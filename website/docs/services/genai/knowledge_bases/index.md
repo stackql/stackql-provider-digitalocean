@@ -32,12 +32,38 @@ Creates, updates, deletes, gets or lists a <code>knowledge_bases</code> resource
 The following fields are returned by `SELECT` queries:
 
 <Tabs
-    defaultValue="genai_list_knowledge_bases"
+    defaultValue="genai_get_knowledge_base"
     values={[
-        { label: 'genai_list_knowledge_bases', value: 'genai_list_knowledge_bases' },
-        { label: 'genai_get_knowledge_base', value: 'genai_get_knowledge_base' }
+        { label: 'genai_get_knowledge_base', value: 'genai_get_knowledge_base' },
+        { label: 'genai_list_knowledge_bases', value: 'genai_list_knowledge_bases' }
     ]}
 >
+<TabItem value="genai_get_knowledge_base">
+
+A successful response.
+
+<table>
+<thead>
+    <tr>
+    <th>Name</th>
+    <th>Datatype</th>
+    <th>Description</th>
+    </tr>
+</thead>
+<tbody>
+<tr>
+    <td><CopyableCode code="database_status" /></td>
+    <td><code>string</code></td>
+    <td> (default: CREATING, example: CREATING)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="knowledge_base" /></td>
+    <td><code>object</code></td>
+    <td>Knowledgebase Description</td>
+</tr>
+</tbody>
+</table>
+</TabItem>
 <TabItem value="genai_list_knowledge_bases">
 
 A successful response.
@@ -69,32 +95,6 @@ A successful response.
 </tbody>
 </table>
 </TabItem>
-<TabItem value="genai_get_knowledge_base">
-
-A successful response.
-
-<table>
-<thead>
-    <tr>
-    <th>Name</th>
-    <th>Datatype</th>
-    <th>Description</th>
-    </tr>
-</thead>
-<tbody>
-<tr>
-    <td><CopyableCode code="database_status" /></td>
-    <td><code>string</code></td>
-    <td> (default: CREATING, example: CREATING)</td>
-</tr>
-<tr>
-    <td><CopyableCode code="knowledge_base" /></td>
-    <td><code>object</code></td>
-    <td>Knowledgebase Description</td>
-</tr>
-</tbody>
-</table>
-</TabItem>
 </Tabs>
 
 ## Methods
@@ -113,18 +113,18 @@ The following methods are available for this resource:
 </thead>
 <tbody>
 <tr>
-    <td><a href="#genai_list_knowledge_bases"><CopyableCode code="genai_list_knowledge_bases" /></a></td>
-    <td><CopyableCode code="select" /></td>
-    <td></td>
-    <td><a href="#parameter-page"><code>page</code></a>, <a href="#parameter-per_page"><code>per_page</code></a></td>
-    <td>To list all knowledge bases, send a GET request to `/v2/gen-ai/knowledge_bases`.</td>
-</tr>
-<tr>
     <td><a href="#genai_get_knowledge_base"><CopyableCode code="genai_get_knowledge_base" /></a></td>
     <td><CopyableCode code="select" /></td>
     <td><a href="#parameter-uuid"><code>uuid</code></a></td>
     <td></td>
     <td>To retrive information about an existing knowledge base, send a GET request to `/v2/gen-ai/knowledge_bases/&#123;uuid&#125;`.</td>
+</tr>
+<tr>
+    <td><a href="#genai_list_knowledge_bases"><CopyableCode code="genai_list_knowledge_bases" /></a></td>
+    <td><CopyableCode code="select" /></td>
+    <td></td>
+    <td><a href="#parameter-page"><code>page</code></a>, <a href="#parameter-per_page"><code>per_page</code></a></td>
+    <td>To list all knowledge bases, send a GET request to `/v2/gen-ai/knowledge_bases`.</td>
 </tr>
 <tr>
     <td><a href="#genai_create_knowledge_base"><CopyableCode code="genai_create_knowledge_base" /></a></td>
@@ -215,12 +215,24 @@ Parameters can be passed in the `WHERE` clause of a query. Check the [Methods](#
 ## `SELECT` examples
 
 <Tabs
-    defaultValue="genai_list_knowledge_bases"
+    defaultValue="genai_get_knowledge_base"
     values={[
-        { label: 'genai_list_knowledge_bases', value: 'genai_list_knowledge_bases' },
-        { label: 'genai_get_knowledge_base', value: 'genai_get_knowledge_base' }
+        { label: 'genai_get_knowledge_base', value: 'genai_get_knowledge_base' },
+        { label: 'genai_list_knowledge_bases', value: 'genai_list_knowledge_bases' }
     ]}
 >
+<TabItem value="genai_get_knowledge_base">
+
+To retrive information about an existing knowledge base, send a GET request to `/v2/gen-ai/knowledge_bases/&#123;uuid&#125;`.
+
+```sql
+SELECT
+database_status,
+knowledge_base
+FROM digitalocean.genai.knowledge_bases
+WHERE uuid = '{{ uuid }}' -- required;
+```
+</TabItem>
 <TabItem value="genai_list_knowledge_bases">
 
 To list all knowledge bases, send a GET request to `/v2/gen-ai/knowledge_bases`.
@@ -233,18 +245,6 @@ meta
 FROM digitalocean.genai.knowledge_bases
 WHERE page = '{{ page }}'
 AND per_page = '{{ per_page }}';
-```
-</TabItem>
-<TabItem value="genai_get_knowledge_base">
-
-To retrive information about an existing knowledge base, send a GET request to `/v2/gen-ai/knowledge_bases/&#123;uuid&#125;`.
-
-```sql
-SELECT
-database_status,
-knowledge_base
-FROM digitalocean.genai.knowledge_bases
-WHERE uuid = '{{ uuid }}' -- required;
 ```
 </TabItem>
 </Tabs>

@@ -32,28 +32,12 @@ Creates, updates, deletes, gets or lists a <code>projects</code> resource.
 The following fields are returned by `SELECT` queries:
 
 <Tabs
-    defaultValue="projects_list"
+    defaultValue="projects_get"
     values={[
-        { label: 'projects_list', value: 'projects_list' },
-        { label: 'projects_get', value: 'projects_get' }
+        { label: 'projects_get', value: 'projects_get' },
+        { label: 'projects_list', value: 'projects_list' }
     ]}
 >
-<TabItem value="projects_list">
-
-The response will be a JSON object with a key called `projects`. The value of this will be an object with the standard project attributes
-
-<table>
-<thead>
-    <tr>
-    <th>Name</th>
-    <th>Datatype</th>
-    <th>Description</th>
-    </tr>
-</thead>
-<tbody>
-</tbody>
-</table>
-</TabItem>
 <TabItem value="projects_get">
 
 The response will be a JSON object with a key called `project`. The value of this will be an object with the standard project attributes
@@ -67,6 +51,122 @@ The response will be a JSON object with a key called `project`. The value of thi
     </tr>
 </thead>
 <tbody>
+<tr>
+    <td><CopyableCode code="id" /></td>
+    <td><code>string (uuid)</code></td>
+    <td>The unique universal identifier of this project. (example: 4e1bfbc3-dc3e-41f2-a18f-1b4d7ba71679)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="name" /></td>
+    <td><code>string</code></td>
+    <td>The human-readable name for the project. The maximum length is 175 characters and the name must be unique. (example: my-web-api)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="owner_id" /></td>
+    <td><code>integer</code></td>
+    <td>The integer id of the project owner.</td>
+</tr>
+<tr>
+    <td><CopyableCode code="created_at" /></td>
+    <td><code>string (date-time)</code></td>
+    <td>A time value given in ISO8601 combined date and time format that represents when the project was created. (example: 2018-09-27T20:10:35Z)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="description" /></td>
+    <td><code>string</code></td>
+    <td>The description of the project. The maximum length is 255 characters. (example: My website API)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="environment" /></td>
+    <td><code>string</code></td>
+    <td>The environment of the project's resources. (example: Production)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="is_default" /></td>
+    <td><code>boolean</code></td>
+    <td>If true, all resources will be added to this project if no project is specified.</td>
+</tr>
+<tr>
+    <td><CopyableCode code="owner_uuid" /></td>
+    <td><code>string</code></td>
+    <td>The unique universal identifier of the project owner. (example: 99525febec065ca37b2ffe4f852fd2b2581895e7)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="purpose" /></td>
+    <td><code>string</code></td>
+    <td>The purpose of the project. The maximum length is 255 characters. It can have one of the following values:  - Just trying out DigitalOcean - Class project / Educational purposes - Website or blog - Web Application - Service or API - Mobile Application - Machine learning / AI / Data processing - IoT - Operational / Developer tooling  If another value for purpose is specified, for example, "your custom purpose", your purpose will be stored as `Other: your custom purpose`.  (example: Service or API)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="updated_at" /></td>
+    <td><code>string (date-time)</code></td>
+    <td>A time value given in ISO8601 combined date and time format that represents when the project was updated. (example: 2018-09-27T20:10:35Z)</td>
+</tr>
+</tbody>
+</table>
+</TabItem>
+<TabItem value="projects_list">
+
+The response will be a JSON object with a key called `projects`. The value of this will be an object with the standard project attributes
+
+<table>
+<thead>
+    <tr>
+    <th>Name</th>
+    <th>Datatype</th>
+    <th>Description</th>
+    </tr>
+</thead>
+<tbody>
+<tr>
+    <td><CopyableCode code="id" /></td>
+    <td><code>string (uuid)</code></td>
+    <td>The unique universal identifier of this project. (example: 4e1bfbc3-dc3e-41f2-a18f-1b4d7ba71679)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="name" /></td>
+    <td><code>string</code></td>
+    <td>The human-readable name for the project. The maximum length is 175 characters and the name must be unique. (example: my-web-api)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="owner_id" /></td>
+    <td><code>integer</code></td>
+    <td>The integer id of the project owner.</td>
+</tr>
+<tr>
+    <td><CopyableCode code="created_at" /></td>
+    <td><code>string (date-time)</code></td>
+    <td>A time value given in ISO8601 combined date and time format that represents when the project was created. (example: 2018-09-27T20:10:35Z)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="description" /></td>
+    <td><code>string</code></td>
+    <td>The description of the project. The maximum length is 255 characters. (example: My website API)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="environment" /></td>
+    <td><code>string</code></td>
+    <td>The environment of the project's resources. (example: Production)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="is_default" /></td>
+    <td><code>boolean</code></td>
+    <td>If true, all resources will be added to this project if no project is specified.</td>
+</tr>
+<tr>
+    <td><CopyableCode code="owner_uuid" /></td>
+    <td><code>string</code></td>
+    <td>The unique universal identifier of the project owner. (example: 99525febec065ca37b2ffe4f852fd2b2581895e7)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="purpose" /></td>
+    <td><code>string</code></td>
+    <td>The purpose of the project. The maximum length is 255 characters. It can have one of the following values:  - Just trying out DigitalOcean - Class project / Educational purposes - Website or blog - Web Application - Service or API - Mobile Application - Machine learning / AI / Data processing - IoT - Operational / Developer tooling  If another value for purpose is specified, for example, "your custom purpose", your purpose will be stored as `Other: your custom purpose`.  (example: Service or API)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="updated_at" /></td>
+    <td><code>string (date-time)</code></td>
+    <td>A time value given in ISO8601 combined date and time format that represents when the project was updated. (example: 2018-09-27T20:10:35Z)</td>
+</tr>
 </tbody>
 </table>
 </TabItem>
@@ -88,18 +188,18 @@ The following methods are available for this resource:
 </thead>
 <tbody>
 <tr>
-    <td><a href="#projects_list"><CopyableCode code="projects_list" /></a></td>
-    <td><CopyableCode code="select" /></td>
-    <td></td>
-    <td><a href="#parameter-per_page"><code>per_page</code></a>, <a href="#parameter-page"><code>page</code></a></td>
-    <td>To list all your projects, send a GET request to `/v2/projects`.</td>
-</tr>
-<tr>
     <td><a href="#projects_get"><CopyableCode code="projects_get" /></a></td>
     <td><CopyableCode code="select" /></td>
     <td><a href="#parameter-project_id"><code>project_id</code></a></td>
     <td></td>
     <td>To get a project, send a GET request to `/v2/projects/$PROJECT_ID`.</td>
+</tr>
+<tr>
+    <td><a href="#projects_list"><CopyableCode code="projects_list" /></a></td>
+    <td><CopyableCode code="select" /></td>
+    <td></td>
+    <td><a href="#parameter-per_page"><code>per_page</code></a>, <a href="#parameter-page"><code>page</code></a></td>
+    <td>To list all your projects, send a GET request to `/v2/projects`.</td>
 </tr>
 <tr>
     <td><a href="#projects_create"><CopyableCode code="projects_create" /></a></td>
@@ -166,33 +266,51 @@ Parameters can be passed in the `WHERE` clause of a query. Check the [Methods](#
 ## `SELECT` examples
 
 <Tabs
-    defaultValue="projects_list"
+    defaultValue="projects_get"
     values={[
-        { label: 'projects_list', value: 'projects_list' },
-        { label: 'projects_get', value: 'projects_get' }
+        { label: 'projects_get', value: 'projects_get' },
+        { label: 'projects_list', value: 'projects_list' }
     ]}
 >
-<TabItem value="projects_list">
-
-To list all your projects, send a GET request to `/v2/projects`.
-
-```sql
-SELECT
-*
-FROM digitalocean.projects.projects
-WHERE per_page = '{{ per_page }}'
-AND page = '{{ page }}';
-```
-</TabItem>
 <TabItem value="projects_get">
 
 To get a project, send a GET request to `/v2/projects/$PROJECT_ID`.
 
 ```sql
 SELECT
-*
+id,
+name,
+owner_id,
+created_at,
+description,
+environment,
+is_default,
+owner_uuid,
+purpose,
+updated_at
 FROM digitalocean.projects.projects
 WHERE project_id = '{{ project_id }}' -- required;
+```
+</TabItem>
+<TabItem value="projects_list">
+
+To list all your projects, send a GET request to `/v2/projects`.
+
+```sql
+SELECT
+id,
+name,
+owner_id,
+created_at,
+description,
+environment,
+is_default,
+owner_uuid,
+purpose,
+updated_at
+FROM digitalocean.projects.projects
+WHERE per_page = '{{ per_page }}'
+AND page = '{{ page }}';
 ```
 </TabItem>
 </Tabs>
@@ -223,6 +341,8 @@ SELECT
 '{{ description }}',
 '{{ purpose }}' --required,
 '{{ environment }}'
+RETURNING
+project
 ;
 ```
 </TabItem>
@@ -293,7 +413,9 @@ data__purpose = '{{ purpose }}',
 data__environment = '{{ environment }}',
 data__is_default = {{ is_default }}
 WHERE 
-project_id = '{{ project_id }}' --required;
+project_id = '{{ project_id }}' --required
+RETURNING
+project;
 ```
 </TabItem>
 </Tabs>
@@ -325,7 +447,9 @@ AND data__name = '{{ name }}' --required
 AND data__description = '{{ description }}' --required
 AND data__purpose = '{{ purpose }}' --required
 AND data__environment = '{{ environment }}' --required
-AND data__is_default = {{ is_default }} --required;
+AND data__is_default = {{ is_default }} --required
+RETURNING
+project;
 ```
 </TabItem>
 </Tabs>

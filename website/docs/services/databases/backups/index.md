@@ -50,6 +50,16 @@ A JSON object with a key of `database_backups`.
     </tr>
 </thead>
 <tbody>
+<tr>
+    <td><CopyableCode code="created_at" /></td>
+    <td><code>string (date-time)</code></td>
+    <td>A time value given in ISO8601 combined date and time format at which the backup was created. (example: 2019-01-31T19:25:22Z)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="size_gigabytes" /></td>
+    <td><code>number</code></td>
+    <td>The size of the database backup in GBs.</td>
+</tr>
 </tbody>
 </table>
 </TabItem>
@@ -115,7 +125,8 @@ To list all of the available backups of a PostgreSQL or MySQL database cluster, 
 
 ```sql
 SELECT
-*
+created_at,
+size_gigabytes
 FROM digitalocean.databases.backups
 WHERE database_cluster_uuid = '{{ database_cluster_uuid }}' -- required;
 ```

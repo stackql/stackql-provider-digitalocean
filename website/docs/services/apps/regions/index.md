@@ -50,6 +50,46 @@ A JSON object with key `regions`
     </tr>
 </thead>
 <tbody>
+<tr>
+    <td><CopyableCode code="continent" /></td>
+    <td><code>string</code></td>
+    <td> (title: The continent that this region is in, example: europe)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="data_centers" /></td>
+    <td><code>array</code></td>
+    <td> (title: Data centers that are in this region)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="default" /></td>
+    <td><code>boolean</code></td>
+    <td>Whether or not the region is presented as the default.</td>
+</tr>
+<tr>
+    <td><CopyableCode code="disabled" /></td>
+    <td><code>boolean</code></td>
+    <td> (title: Whether or not the region is open for new apps)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="flag" /></td>
+    <td><code>string</code></td>
+    <td> (title: The flag of this region, example: ams)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="label" /></td>
+    <td><code>string</code></td>
+    <td> (title: A human-readable name of the region, example: ams)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="reason" /></td>
+    <td><code>string</code></td>
+    <td> (title: Reason that this region is not available, example: to crowded)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="slug" /></td>
+    <td><code>string</code></td>
+    <td> (title: The slug form of the region name, example: basic)</td>
+</tr>
 </tbody>
 </table>
 </TabItem>
@@ -110,7 +150,14 @@ List all regions supported by App Platform.
 
 ```sql
 SELECT
-*
+continent,
+data_centers,
+default,
+disabled,
+flag,
+label,
+reason,
+slug
 FROM digitalocean.apps.regions;
 ```
 </TabItem>

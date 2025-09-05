@@ -50,6 +50,41 @@ A JSON object with an `backups` key.
     </tr>
 </thead>
 <tbody>
+<tr>
+    <td><CopyableCode code="id" /></td>
+    <td><code>integer</code></td>
+    <td>The unique identifier for the snapshot or backup.</td>
+</tr>
+<tr>
+    <td><CopyableCode code="name" /></td>
+    <td><code>string</code></td>
+    <td>A human-readable name for the snapshot. (example: web-01-1595954862243)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="created_at" /></td>
+    <td><code>string (date-time)</code></td>
+    <td>A time value given in ISO8601 combined date and time format that represents when the snapshot was created. (example: 2020-07-28T16:47:44Z)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="min_disk_size" /></td>
+    <td><code>integer</code></td>
+    <td>The minimum size in GB required for a volume or Droplet to use this snapshot.</td>
+</tr>
+<tr>
+    <td><CopyableCode code="regions" /></td>
+    <td><code>array</code></td>
+    <td>An array of the regions that the snapshot is available in. The regions are represented by their identifying slug values.</td>
+</tr>
+<tr>
+    <td><CopyableCode code="size_gigabytes" /></td>
+    <td><code>number (float)</code></td>
+    <td>The billable size of the snapshot in gigabytes.</td>
+</tr>
+<tr>
+    <td><CopyableCode code="type" /></td>
+    <td><code>string</code></td>
+    <td>Describes the kind of image. It may be one of `snapshot` or `backup`. This specifies whether an image is a user-generated Droplet snapshot or automatically created Droplet backup. (example: snapshot)</td>
+</tr>
 </tbody>
 </table>
 </TabItem>
@@ -125,7 +160,13 @@ To retrieve any backups associated with a Droplet, send a GET request to<br />`/
 
 ```sql
 SELECT
-*
+id,
+name,
+created_at,
+min_disk_size,
+regions,
+size_gigabytes,
+type
 FROM digitalocean.compute.droplet_backups
 WHERE droplet_id = '{{ droplet_id }}' -- required
 AND per_page = '{{ per_page }}'

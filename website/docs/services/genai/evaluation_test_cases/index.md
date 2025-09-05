@@ -32,35 +32,14 @@ Creates, updates, deletes, gets or lists an <code>evaluation_test_cases</code> r
 The following fields are returned by `SELECT` queries:
 
 <Tabs
-    defaultValue="genai_list_evaluation_test_cases"
+    defaultValue="genai_list_evaluation_runs_by_test_case"
     values={[
-        { label: 'genai_list_evaluation_test_cases', value: 'genai_list_evaluation_test_cases' },
         { label: 'genai_list_evaluation_runs_by_test_case', value: 'genai_list_evaluation_runs_by_test_case' },
         { label: 'genai_get_evaluation_test_case', value: 'genai_get_evaluation_test_case' },
-        { label: 'genai_list_evaluation_test_cases_by_workspace', value: 'genai_list_evaluation_test_cases_by_workspace' }
+        { label: 'genai_list_evaluation_test_cases_by_workspace', value: 'genai_list_evaluation_test_cases_by_workspace' },
+        { label: 'genai_list_evaluation_test_cases', value: 'genai_list_evaluation_test_cases' }
     ]}
 >
-<TabItem value="genai_list_evaluation_test_cases">
-
-A successful response.
-
-<table>
-<thead>
-    <tr>
-    <th>Name</th>
-    <th>Datatype</th>
-    <th>Description</th>
-    </tr>
-</thead>
-<tbody>
-<tr>
-    <td><CopyableCode code="evaluation_test_cases" /></td>
-    <td><code>array</code></td>
-    <td>Alternative way of authentication for internal usage only - should not be exposed to public api</td>
-</tr>
-</tbody>
-</table>
-</TabItem>
 <TabItem value="genai_list_evaluation_runs_by_test_case">
 
 A successful response.
@@ -75,9 +54,114 @@ A successful response.
 </thead>
 <tbody>
 <tr>
-    <td><CopyableCode code="evaluation_runs" /></td>
+    <td><CopyableCode code="created_by_user_id" /></td>
+    <td><code>string (uint64)</code></td>
+    <td> (example: 12345)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="agent_name" /></td>
+    <td><code>string</code></td>
+    <td>Agent name (example: example name)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="run_name" /></td>
+    <td><code>string</code></td>
+    <td>Run name. (example: example name)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="test_case_name" /></td>
+    <td><code>string</code></td>
+    <td>Test case name. (example: example name)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="agent_deleted" /></td>
+    <td><code>boolean</code></td>
+    <td>Whether agent is deleted</td>
+</tr>
+<tr>
+    <td><CopyableCode code="agent_uuid" /></td>
+    <td><code>string</code></td>
+    <td>Agent UUID. (example: 123e4567-e89b-12d3-a456-426614174000)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="agent_version_hash" /></td>
+    <td><code>string</code></td>
+    <td>Version hash (example: example string)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="agent_workspace_uuid" /></td>
+    <td><code>string</code></td>
+    <td>Agent workspace uuid (example: 123e4567-e89b-12d3-a456-426614174000)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="created_by_user_email" /></td>
+    <td><code>string</code></td>
+    <td> (example: example@example.com)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="error_description" /></td>
+    <td><code>string</code></td>
+    <td>The error description (example: example string)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="evaluation_run_uuid" /></td>
+    <td><code>string</code></td>
+    <td>Evaluation run UUID. (example: 123e4567-e89b-12d3-a456-426614174000)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="evaluation_test_case_workspace_uuid" /></td>
+    <td><code>string</code></td>
+    <td>Evaluation test case workspace uuid (example: 123e4567-e89b-12d3-a456-426614174000)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="finished_at" /></td>
+    <td><code>string (date-time)</code></td>
+    <td>Run end time. (example: 2023-01-01T00:00:00Z)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="pass_status" /></td>
+    <td><code>boolean</code></td>
+    <td>The pass status of the evaluation run based on the star metric.</td>
+</tr>
+<tr>
+    <td><CopyableCode code="queued_at" /></td>
+    <td><code>string (date-time)</code></td>
+    <td>Run queued time. (example: 2023-01-01T00:00:00Z)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="run_level_metric_results" /></td>
     <td><code>array</code></td>
-    <td>List of evaluation runs.</td>
+    <td></td>
+</tr>
+<tr>
+    <td><CopyableCode code="star_metric_result" /></td>
+    <td><code>object</code></td>
+    <td></td>
+</tr>
+<tr>
+    <td><CopyableCode code="started_at" /></td>
+    <td><code>string (date-time)</code></td>
+    <td>Run start time. (example: 2023-01-01T00:00:00Z)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="status" /></td>
+    <td><code>string</code></td>
+    <td>Evaluation Run Statuses (default: EVALUATION_RUN_STATUS_UNSPECIFIED, example: EVALUATION_RUN_STATUS_UNSPECIFIED)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="test_case_description" /></td>
+    <td><code>string</code></td>
+    <td>Test case description. (example: example string)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="test_case_uuid" /></td>
+    <td><code>string</code></td>
+    <td>Test-case UUID. (example: 123e4567-e89b-12d3-a456-426614174000)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="test_case_version" /></td>
+    <td><code>integer (int64)</code></td>
+    <td>Test-case-version.</td>
 </tr>
 </tbody>
 </table>
@@ -96,8 +180,93 @@ A successful response.
 </thead>
 <tbody>
 <tr>
-    <td><CopyableCode code="evaluation_test_case" /></td>
+    <td><CopyableCode code="name" /></td>
+    <td><code>string</code></td>
+    <td> (example: example name)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="created_by_user_id" /></td>
+    <td><code>string (uint64)</code></td>
+    <td> (example: 12345)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="updated_by_user_id" /></td>
+    <td><code>string (uint64)</code></td>
+    <td> (example: 12345)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="dataset_name" /></td>
+    <td><code>string</code></td>
+    <td> (example: example name)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="archived_at" /></td>
+    <td><code>string (date-time)</code></td>
+    <td> (example: 2023-01-01T00:00:00Z)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="created_at" /></td>
+    <td><code>string (date-time)</code></td>
+    <td> (example: 2023-01-01T00:00:00Z)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="created_by_user_email" /></td>
+    <td><code>string</code></td>
+    <td> (example: example@example.com)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="dataset" /></td>
     <td><code>object</code></td>
+    <td></td>
+</tr>
+<tr>
+    <td><CopyableCode code="dataset_uuid" /></td>
+    <td><code>string</code></td>
+    <td> (example: 123e4567-e89b-12d3-a456-426614174000)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="description" /></td>
+    <td><code>string</code></td>
+    <td> (example: example string)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="latest_version_number_of_runs" /></td>
+    <td><code>integer (int32)</code></td>
+    <td></td>
+</tr>
+<tr>
+    <td><CopyableCode code="metrics" /></td>
+    <td><code>array</code></td>
+    <td></td>
+</tr>
+<tr>
+    <td><CopyableCode code="star_metric" /></td>
+    <td><code>object</code></td>
+    <td></td>
+</tr>
+<tr>
+    <td><CopyableCode code="test_case_uuid" /></td>
+    <td><code>string</code></td>
+    <td> (example: 123e4567-e89b-12d3-a456-426614174000)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="total_runs" /></td>
+    <td><code>integer (int32)</code></td>
+    <td></td>
+</tr>
+<tr>
+    <td><CopyableCode code="updated_at" /></td>
+    <td><code>string (date-time)</code></td>
+    <td> (example: 2023-01-01T00:00:00Z)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="updated_by_user_email" /></td>
+    <td><code>string</code></td>
+    <td> (example: example@example.com)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="version" /></td>
+    <td><code>integer (int64)</code></td>
     <td></td>
 </tr>
 </tbody>
@@ -117,8 +286,199 @@ A successful response.
 </thead>
 <tbody>
 <tr>
-    <td><CopyableCode code="evaluation_test_cases" /></td>
+    <td><CopyableCode code="name" /></td>
+    <td><code>string</code></td>
+    <td> (example: example name)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="created_by_user_id" /></td>
+    <td><code>string (uint64)</code></td>
+    <td> (example: 12345)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="updated_by_user_id" /></td>
+    <td><code>string (uint64)</code></td>
+    <td> (example: 12345)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="dataset_name" /></td>
+    <td><code>string</code></td>
+    <td> (example: example name)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="archived_at" /></td>
+    <td><code>string (date-time)</code></td>
+    <td> (example: 2023-01-01T00:00:00Z)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="created_at" /></td>
+    <td><code>string (date-time)</code></td>
+    <td> (example: 2023-01-01T00:00:00Z)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="created_by_user_email" /></td>
+    <td><code>string</code></td>
+    <td> (example: example@example.com)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="dataset" /></td>
+    <td><code>object</code></td>
+    <td></td>
+</tr>
+<tr>
+    <td><CopyableCode code="dataset_uuid" /></td>
+    <td><code>string</code></td>
+    <td> (example: 123e4567-e89b-12d3-a456-426614174000)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="description" /></td>
+    <td><code>string</code></td>
+    <td> (example: example string)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="latest_version_number_of_runs" /></td>
+    <td><code>integer (int32)</code></td>
+    <td></td>
+</tr>
+<tr>
+    <td><CopyableCode code="metrics" /></td>
     <td><code>array</code></td>
+    <td></td>
+</tr>
+<tr>
+    <td><CopyableCode code="star_metric" /></td>
+    <td><code>object</code></td>
+    <td></td>
+</tr>
+<tr>
+    <td><CopyableCode code="test_case_uuid" /></td>
+    <td><code>string</code></td>
+    <td> (example: 123e4567-e89b-12d3-a456-426614174000)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="total_runs" /></td>
+    <td><code>integer (int32)</code></td>
+    <td></td>
+</tr>
+<tr>
+    <td><CopyableCode code="updated_at" /></td>
+    <td><code>string (date-time)</code></td>
+    <td> (example: 2023-01-01T00:00:00Z)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="updated_by_user_email" /></td>
+    <td><code>string</code></td>
+    <td> (example: example@example.com)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="version" /></td>
+    <td><code>integer (int64)</code></td>
+    <td></td>
+</tr>
+</tbody>
+</table>
+</TabItem>
+<TabItem value="genai_list_evaluation_test_cases">
+
+A successful response.
+
+<table>
+<thead>
+    <tr>
+    <th>Name</th>
+    <th>Datatype</th>
+    <th>Description</th>
+    </tr>
+</thead>
+<tbody>
+<tr>
+    <td><CopyableCode code="name" /></td>
+    <td><code>string</code></td>
+    <td> (example: example name)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="created_by_user_id" /></td>
+    <td><code>string (uint64)</code></td>
+    <td> (example: 12345)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="updated_by_user_id" /></td>
+    <td><code>string (uint64)</code></td>
+    <td> (example: 12345)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="dataset_name" /></td>
+    <td><code>string</code></td>
+    <td> (example: example name)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="archived_at" /></td>
+    <td><code>string (date-time)</code></td>
+    <td> (example: 2023-01-01T00:00:00Z)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="created_at" /></td>
+    <td><code>string (date-time)</code></td>
+    <td> (example: 2023-01-01T00:00:00Z)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="created_by_user_email" /></td>
+    <td><code>string</code></td>
+    <td> (example: example@example.com)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="dataset" /></td>
+    <td><code>object</code></td>
+    <td></td>
+</tr>
+<tr>
+    <td><CopyableCode code="dataset_uuid" /></td>
+    <td><code>string</code></td>
+    <td> (example: 123e4567-e89b-12d3-a456-426614174000)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="description" /></td>
+    <td><code>string</code></td>
+    <td> (example: example string)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="latest_version_number_of_runs" /></td>
+    <td><code>integer (int32)</code></td>
+    <td></td>
+</tr>
+<tr>
+    <td><CopyableCode code="metrics" /></td>
+    <td><code>array</code></td>
+    <td></td>
+</tr>
+<tr>
+    <td><CopyableCode code="star_metric" /></td>
+    <td><code>object</code></td>
+    <td></td>
+</tr>
+<tr>
+    <td><CopyableCode code="test_case_uuid" /></td>
+    <td><code>string</code></td>
+    <td> (example: 123e4567-e89b-12d3-a456-426614174000)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="total_runs" /></td>
+    <td><code>integer (int32)</code></td>
+    <td></td>
+</tr>
+<tr>
+    <td><CopyableCode code="updated_at" /></td>
+    <td><code>string (date-time)</code></td>
+    <td> (example: 2023-01-01T00:00:00Z)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="updated_by_user_email" /></td>
+    <td><code>string</code></td>
+    <td> (example: example@example.com)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="version" /></td>
+    <td><code>integer (int64)</code></td>
     <td></td>
 </tr>
 </tbody>
@@ -142,13 +502,6 @@ The following methods are available for this resource:
 </thead>
 <tbody>
 <tr>
-    <td><a href="#genai_list_evaluation_test_cases"><CopyableCode code="genai_list_evaluation_test_cases" /></a></td>
-    <td><CopyableCode code="select" /></td>
-    <td></td>
-    <td></td>
-    <td>To list all evaluation test cases, send a GET request to `/v2/gen-ai/evaluation_test_cases`.</td>
-</tr>
-<tr>
     <td><a href="#genai_list_evaluation_runs_by_test_case"><CopyableCode code="genai_list_evaluation_runs_by_test_case" /></a></td>
     <td><CopyableCode code="select" /></td>
     <td><a href="#parameter-evaluation_test_case_uuid"><code>evaluation_test_case_uuid</code></a></td>
@@ -168,6 +521,13 @@ The following methods are available for this resource:
     <td><a href="#parameter-workspace_uuid"><code>workspace_uuid</code></a></td>
     <td></td>
     <td>To list all evaluation test cases by a workspace, send a GET request to `/v2/gen-ai/workspaces/&#123;workspace_uuid&#125;/evaluation_test_cases`.</td>
+</tr>
+<tr>
+    <td><a href="#genai_list_evaluation_test_cases"><CopyableCode code="genai_list_evaluation_test_cases" /></a></td>
+    <td><CopyableCode code="select" /></td>
+    <td></td>
+    <td></td>
+    <td>To list all evaluation test cases, send a GET request to `/v2/gen-ai/evaluation_test_cases`.</td>
 </tr>
 <tr>
     <td><a href="#genai_create_evaluation_test_case"><CopyableCode code="genai_create_evaluation_test_case" /></a></td>
@@ -225,31 +585,42 @@ Parameters can be passed in the `WHERE` clause of a query. Check the [Methods](#
 ## `SELECT` examples
 
 <Tabs
-    defaultValue="genai_list_evaluation_test_cases"
+    defaultValue="genai_list_evaluation_runs_by_test_case"
     values={[
-        { label: 'genai_list_evaluation_test_cases', value: 'genai_list_evaluation_test_cases' },
         { label: 'genai_list_evaluation_runs_by_test_case', value: 'genai_list_evaluation_runs_by_test_case' },
         { label: 'genai_get_evaluation_test_case', value: 'genai_get_evaluation_test_case' },
-        { label: 'genai_list_evaluation_test_cases_by_workspace', value: 'genai_list_evaluation_test_cases_by_workspace' }
+        { label: 'genai_list_evaluation_test_cases_by_workspace', value: 'genai_list_evaluation_test_cases_by_workspace' },
+        { label: 'genai_list_evaluation_test_cases', value: 'genai_list_evaluation_test_cases' }
     ]}
 >
-<TabItem value="genai_list_evaluation_test_cases">
-
-To list all evaluation test cases, send a GET request to `/v2/gen-ai/evaluation_test_cases`.
-
-```sql
-SELECT
-evaluation_test_cases
-FROM digitalocean.genai.evaluation_test_cases;
-```
-</TabItem>
 <TabItem value="genai_list_evaluation_runs_by_test_case">
 
 To list all evaluation runs by test case, send a GET request to `/v2/gen-ai/evaluation_test_cases/&#123;evaluation_test_case_uuid&#125;/evaluation_runs`.
 
 ```sql
 SELECT
-evaluation_runs
+created_by_user_id,
+agent_name,
+run_name,
+test_case_name,
+agent_deleted,
+agent_uuid,
+agent_version_hash,
+agent_workspace_uuid,
+created_by_user_email,
+error_description,
+evaluation_run_uuid,
+evaluation_test_case_workspace_uuid,
+finished_at,
+pass_status,
+queued_at,
+run_level_metric_results,
+star_metric_result,
+started_at,
+status,
+test_case_description,
+test_case_uuid,
+test_case_version
 FROM digitalocean.genai.evaluation_test_cases
 WHERE evaluation_test_case_uuid = '{{ evaluation_test_case_uuid }}' -- required
 AND evaluation_test_case_version = '{{ evaluation_test_case_version }}';
@@ -261,7 +632,24 @@ To retrive information about an existing evaluation test case, send a GET reques
 
 ```sql
 SELECT
-evaluation_test_case
+name,
+created_by_user_id,
+updated_by_user_id,
+dataset_name,
+archived_at,
+created_at,
+created_by_user_email,
+dataset,
+dataset_uuid,
+description,
+latest_version_number_of_runs,
+metrics,
+star_metric,
+test_case_uuid,
+total_runs,
+updated_at,
+updated_by_user_email,
+version
 FROM digitalocean.genai.evaluation_test_cases
 WHERE test_case_uuid = '{{ test_case_uuid }}' -- required
 AND evaluation_test_case_version = '{{ evaluation_test_case_version }}';
@@ -273,9 +661,53 @@ To list all evaluation test cases by a workspace, send a GET request to `/v2/gen
 
 ```sql
 SELECT
-evaluation_test_cases
+name,
+created_by_user_id,
+updated_by_user_id,
+dataset_name,
+archived_at,
+created_at,
+created_by_user_email,
+dataset,
+dataset_uuid,
+description,
+latest_version_number_of_runs,
+metrics,
+star_metric,
+test_case_uuid,
+total_runs,
+updated_at,
+updated_by_user_email,
+version
 FROM digitalocean.genai.evaluation_test_cases
 WHERE workspace_uuid = '{{ workspace_uuid }}' -- required;
+```
+</TabItem>
+<TabItem value="genai_list_evaluation_test_cases">
+
+To list all evaluation test cases, send a GET request to `/v2/gen-ai/evaluation_test_cases`.
+
+```sql
+SELECT
+name,
+created_by_user_id,
+updated_by_user_id,
+dataset_name,
+archived_at,
+created_at,
+created_by_user_email,
+dataset,
+dataset_uuid,
+description,
+latest_version_number_of_runs,
+metrics,
+star_metric,
+test_case_uuid,
+total_runs,
+updated_at,
+updated_by_user_email,
+version
+FROM digitalocean.genai.evaluation_test_cases;
 ```
 </TabItem>
 </Tabs>

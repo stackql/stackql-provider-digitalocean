@@ -32,28 +32,12 @@ Creates, updates, deletes, gets or lists a <code>destinations</code> resource.
 The following fields are returned by `SELECT` queries:
 
 <Tabs
-    defaultValue="monitoring_list_destinations"
+    defaultValue="monitoring_get_destination"
     values={[
-        { label: 'monitoring_list_destinations', value: 'monitoring_list_destinations' },
-        { label: 'monitoring_get_destination', value: 'monitoring_get_destination' }
+        { label: 'monitoring_get_destination', value: 'monitoring_get_destination' },
+        { label: 'monitoring_list_destinations', value: 'monitoring_list_destinations' }
     ]}
 >
-<TabItem value="monitoring_list_destinations">
-
-The response is a JSON object with a `destinations` key.
-
-<table>
-<thead>
-    <tr>
-    <th>Name</th>
-    <th>Datatype</th>
-    <th>Description</th>
-    </tr>
-</thead>
-<tbody>
-</tbody>
-</table>
-</TabItem>
 <TabItem value="monitoring_get_destination">
 
 The response is a JSON object with a `destination` key.
@@ -67,6 +51,62 @@ The response is a JSON object with a `destination` key.
     </tr>
 </thead>
 <tbody>
+<tr>
+    <td><CopyableCode code="id" /></td>
+    <td><code>string</code></td>
+    <td>A unique identifier for a destination. (example: 01f30bfa-319a-4769-ba95-9d43971fb514)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="name" /></td>
+    <td><code>string</code></td>
+    <td>destination name (example: managed_opensearch_cluster)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="config" /></td>
+    <td><code>object</code></td>
+    <td>OpenSearch destination configuration with `credentials` omitted.</td>
+</tr>
+<tr>
+    <td><CopyableCode code="type" /></td>
+    <td><code>string</code></td>
+    <td>The destination type. `opensearch_dbaas` for a DigitalOcean managed OpenSearch cluster or `opensearch_ext` for an externally managed one.  (example: opensearch_dbaas)</td>
+</tr>
+</tbody>
+</table>
+</TabItem>
+<TabItem value="monitoring_list_destinations">
+
+The response is a JSON object with a `destinations` key.
+
+<table>
+<thead>
+    <tr>
+    <th>Name</th>
+    <th>Datatype</th>
+    <th>Description</th>
+    </tr>
+</thead>
+<tbody>
+<tr>
+    <td><CopyableCode code="id" /></td>
+    <td><code>string</code></td>
+    <td>A unique identifier for a destination. (example: 01f30bfa-319a-4769-ba95-9d43971fb514)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="name" /></td>
+    <td><code>string</code></td>
+    <td>destination name (example: managed_opensearch_cluster)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="config" /></td>
+    <td><code>object</code></td>
+    <td>OpenSearch destination configuration with `credentials` omitted.</td>
+</tr>
+<tr>
+    <td><CopyableCode code="type" /></td>
+    <td><code>string</code></td>
+    <td>The destination type. `opensearch_dbaas` for a DigitalOcean managed OpenSearch cluster or `opensearch_ext` for an externally managed one.  (example: opensearch_dbaas)</td>
+</tr>
 </tbody>
 </table>
 </TabItem>
@@ -88,13 +128,6 @@ The following methods are available for this resource:
 </thead>
 <tbody>
 <tr>
-    <td><a href="#monitoring_list_destinations"><CopyableCode code="monitoring_list_destinations" /></a></td>
-    <td><CopyableCode code="select" /></td>
-    <td></td>
-    <td></td>
-    <td>To list all logging destinations, send a GET request to `/v2/monitoring/sinks/destinations`.</td>
-</tr>
-<tr>
     <td><a href="#monitoring_get_destination"><CopyableCode code="monitoring_get_destination" /></a></td>
     <td><CopyableCode code="select" /></td>
     <td><a href="#parameter-destination_uuid"><code>destination_uuid</code></a></td>
@@ -102,11 +135,11 @@ The following methods are available for this resource:
     <td>To get the details of a destination, send a GET request to `/v2/monitoring/sinks/destinations/$&#123;destination_uuid&#125;`.</td>
 </tr>
 <tr>
-    <td><a href="#monitoring_create_destination"><CopyableCode code="monitoring_create_destination" /></a></td>
-    <td><CopyableCode code="insert" /></td>
-    <td><a href="#parameter-data__config"><code>data__config</code></a>, <a href="#parameter-data__type"><code>data__type</code></a></td>
+    <td><a href="#monitoring_list_destinations"><CopyableCode code="monitoring_list_destinations" /></a></td>
+    <td><CopyableCode code="select" /></td>
     <td></td>
-    <td>To create a new destination, send a POST request to `/v2/monitoring/sinks/destinations`.</td>
+    <td></td>
+    <td>To list all logging destinations, send a GET request to `/v2/monitoring/sinks/destinations`.</td>
 </tr>
 <tr>
     <td><a href="#monitoring_update_destination"><CopyableCode code="monitoring_update_destination" /></a></td>
@@ -114,6 +147,13 @@ The following methods are available for this resource:
     <td><a href="#parameter-destination_uuid"><code>destination_uuid</code></a>, <a href="#parameter-data__config"><code>data__config</code></a>, <a href="#parameter-data__type"><code>data__type</code></a></td>
     <td></td>
     <td>To update the details of a destination, send a PATCH request to `/v2/monitoring/sinks/destinations/$&#123;destination_uuid&#125;`.</td>
+</tr>
+<tr>
+    <td><a href="#monitoring_create_destination"><CopyableCode code="monitoring_create_destination" /></a></td>
+    <td><CopyableCode code="insert" /></td>
+    <td><a href="#parameter-data__config"><code>data__config</code></a>, <a href="#parameter-data__type"><code>data__type</code></a></td>
+    <td></td>
+    <td>To create a new destination, send a POST request to `/v2/monitoring/sinks/destinations`.</td>
 </tr>
 <tr>
     <td><a href="#monitoring_delete_destination"><CopyableCode code="monitoring_delete_destination" /></a></td>
@@ -149,31 +189,37 @@ Parameters can be passed in the `WHERE` clause of a query. Check the [Methods](#
 ## `SELECT` examples
 
 <Tabs
-    defaultValue="monitoring_list_destinations"
+    defaultValue="monitoring_get_destination"
     values={[
-        { label: 'monitoring_list_destinations', value: 'monitoring_list_destinations' },
-        { label: 'monitoring_get_destination', value: 'monitoring_get_destination' }
+        { label: 'monitoring_get_destination', value: 'monitoring_get_destination' },
+        { label: 'monitoring_list_destinations', value: 'monitoring_list_destinations' }
     ]}
 >
-<TabItem value="monitoring_list_destinations">
-
-To list all logging destinations, send a GET request to `/v2/monitoring/sinks/destinations`.
-
-```sql
-SELECT
-*
-FROM digitalocean.monitoring.destinations;
-```
-</TabItem>
 <TabItem value="monitoring_get_destination">
 
 To get the details of a destination, send a GET request to `/v2/monitoring/sinks/destinations/$&#123;destination_uuid&#125;`.
 
 ```sql
 SELECT
-*
+id,
+name,
+config,
+type
 FROM digitalocean.monitoring.destinations
 WHERE destination_uuid = '{{ destination_uuid }}' -- required;
+```
+</TabItem>
+<TabItem value="monitoring_list_destinations">
+
+To list all logging destinations, send a GET request to `/v2/monitoring/sinks/destinations`.
+
+```sql
+SELECT
+id,
+name,
+config,
+type
+FROM digitalocean.monitoring.destinations;
 ```
 </TabItem>
 </Tabs>
@@ -182,30 +228,13 @@ WHERE destination_uuid = '{{ destination_uuid }}' -- required;
 ## `INSERT` examples
 
 <Tabs
-    defaultValue="monitoring_create_destination"
+    defaultValue="monitoring_update_destination"
     values={[
-        { label: 'monitoring_create_destination', value: 'monitoring_create_destination' },
         { label: 'monitoring_update_destination', value: 'monitoring_update_destination' },
+        { label: 'monitoring_create_destination', value: 'monitoring_create_destination' },
         { label: 'Manifest', value: 'manifest' }
     ]}
 >
-<TabItem value="monitoring_create_destination">
-
-To create a new destination, send a POST request to `/v2/monitoring/sinks/destinations`.
-
-```sql
-INSERT INTO digitalocean.monitoring.destinations (
-data__name,
-data__type,
-data__config
-)
-SELECT 
-'{{ name }}',
-'{{ type }}' --required,
-'{{ config }}' --required
-;
-```
-</TabItem>
 <TabItem value="monitoring_update_destination">
 
 To update the details of a destination, send a PATCH request to `/v2/monitoring/sinks/destinations/$&#123;destination_uuid&#125;`.
@@ -222,6 +251,25 @@ SELECT
 '{{ type }}' --required,
 '{{ config }}' --required,
 '{{ destination_uuid }}'
+;
+```
+</TabItem>
+<TabItem value="monitoring_create_destination">
+
+To create a new destination, send a POST request to `/v2/monitoring/sinks/destinations`.
+
+```sql
+INSERT INTO digitalocean.monitoring.destinations (
+data__name,
+data__type,
+data__config
+)
+SELECT 
+'{{ name }}',
+'{{ type }}' --required,
+'{{ config }}' --required
+RETURNING
+destination
 ;
 ```
 </TabItem>

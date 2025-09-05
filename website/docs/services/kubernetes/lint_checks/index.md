@@ -50,6 +50,26 @@ The response is a JSON object which contains the diagnostics on Kubernetes<br />
     </tr>
 </thead>
 <tbody>
+<tr>
+    <td><CopyableCode code="run_id" /></td>
+    <td><code>string</code></td>
+    <td>Id of the clusterlint run that can be used later to fetch the diagnostics. (example: 50c2f44c-011d-493e-aee5-361a4a0d1844)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="completed_at" /></td>
+    <td><code>string (date-time)</code></td>
+    <td>A time value given in ISO8601 combined date and time format that represents when the schedule clusterlint run request was completed. (example: 2019-10-30T05:34:11Z)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="diagnostics" /></td>
+    <td><code>array</code></td>
+    <td>An array of diagnostics reporting potential problems for the given cluster.</td>
+</tr>
+<tr>
+    <td><CopyableCode code="requested_at" /></td>
+    <td><code>string (date-time)</code></td>
+    <td>A time value given in ISO8601 combined date and time format that represents when the schedule clusterlint run request was made. (example: 2019-10-30T05:34:07Z)</td>
+</tr>
 </tbody>
 </table>
 </TabItem>
@@ -127,7 +147,10 @@ To request clusterlint diagnostics for your cluster, send a GET request to<br />
 
 ```sql
 SELECT
-*
+run_id,
+completed_at,
+diagnostics,
+requested_at
 FROM digitalocean.kubernetes.lint_checks
 WHERE cluster_id = '{{ cluster_id }}' -- required
 AND run_id = '{{ run_id }}';

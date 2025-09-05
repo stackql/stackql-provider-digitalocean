@@ -51,6 +51,26 @@ The response will be a JSON object with a key called `policy`. This will be<br /
     </tr>
 </thead>
 <tbody>
+<tr>
+    <td><CopyableCode code="droplet_id" /></td>
+    <td><code>integer</code></td>
+    <td>The unique identifier for the Droplet.</td>
+</tr>
+<tr>
+    <td><CopyableCode code="backup_enabled" /></td>
+    <td><code>boolean</code></td>
+    <td>A boolean value indicating whether backups are enabled for the Droplet.</td>
+</tr>
+<tr>
+    <td><CopyableCode code="backup_policy" /></td>
+    <td><code>object</code></td>
+    <td>An object specifying the backup policy for the Droplet.</td>
+</tr>
+<tr>
+    <td><CopyableCode code="next_backup_window" /></td>
+    <td><code>object</code></td>
+    <td>An object containing keys with the start and end times of the window during which the backup will occur.</td>
+</tr>
 </tbody>
 </table>
 </TabItem>
@@ -150,7 +170,10 @@ To show information about an individual Droplet's backup policy, send a GET<br /
 
 ```sql
 SELECT
-*
+droplet_id,
+backup_enabled,
+backup_policy,
+next_backup_window
 FROM digitalocean.compute.droplet_backup_policies
 WHERE droplet_id = '{{ droplet_id }}' -- required;
 ```

@@ -50,6 +50,41 @@ A JSON object with a `alerts` key. This is list of object `alerts`.
     </tr>
 </thead>
 <tbody>
+<tr>
+    <td><CopyableCode code="id" /></td>
+    <td><code>string</code></td>
+    <td> (title: The ID of the alert, example: 4f6c71e2-1e90-4762-9fee-6cc4a0a9f2cf)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="component_name" /></td>
+    <td><code>string</code></td>
+    <td> (title: Name of component the alert belongs to, example: backend)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="emails" /></td>
+    <td><code>array</code></td>
+    <td> (title: Emails for alerts to go to)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="phase" /></td>
+    <td><code>string</code></td>
+    <td> (default: UNKNOWN, example: ACTIVE)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="progress" /></td>
+    <td><code>object</code></td>
+    <td></td>
+</tr>
+<tr>
+    <td><CopyableCode code="slack_webhooks" /></td>
+    <td><code>array</code></td>
+    <td> (title: Slack Webhooks to send alerts to)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="spec" /></td>
+    <td><code>object</code></td>
+    <td></td>
+</tr>
 </tbody>
 </table>
 </TabItem>
@@ -115,7 +150,13 @@ List alerts associated to the app and any components. This includes configuratio
 
 ```sql
 SELECT
-*
+id,
+component_name,
+emails,
+phase,
+progress,
+slack_webhooks,
+spec
 FROM digitalocean.apps.alerts
 WHERE app_id = '{{ app_id }}' -- required;
 ```

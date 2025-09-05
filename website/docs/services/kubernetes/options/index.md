@@ -50,6 +50,21 @@ The response will be a JSON object with a key called `options` which contains<br
     </tr>
 </thead>
 <tbody>
+<tr>
+    <td><CopyableCode code="regions" /></td>
+    <td><code>array</code></td>
+    <td></td>
+</tr>
+<tr>
+    <td><CopyableCode code="sizes" /></td>
+    <td><code>array</code></td>
+    <td></td>
+</tr>
+<tr>
+    <td><CopyableCode code="versions" /></td>
+    <td><code>array</code></td>
+    <td></td>
+</tr>
 </tbody>
 </table>
 </TabItem>
@@ -110,7 +125,9 @@ To list the versions of Kubernetes available for use, the regions that support K
 
 ```sql
 SELECT
-*
+regions,
+sizes,
+versions
 FROM digitalocean.kubernetes.options;
 ```
 </TabItem>

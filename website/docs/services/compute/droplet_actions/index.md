@@ -32,28 +32,12 @@ Creates, updates, deletes, gets or lists a <code>droplet_actions</code> resource
 The following fields are returned by `SELECT` queries:
 
 <Tabs
-    defaultValue="droplet_actions_list"
+    defaultValue="droplet_actions_get"
     values={[
-        { label: 'droplet_actions_list', value: 'droplet_actions_list' },
-        { label: 'droplet_actions_get', value: 'droplet_actions_get' }
+        { label: 'droplet_actions_get', value: 'droplet_actions_get' },
+        { label: 'droplet_actions_list', value: 'droplet_actions_list' }
     ]}
 >
-<TabItem value="droplet_actions_list">
-
-A JSON object with an `actions` key.
-
-<table>
-<thead>
-    <tr>
-    <th>Name</th>
-    <th>Datatype</th>
-    <th>Description</th>
-    </tr>
-</thead>
-<tbody>
-</tbody>
-</table>
-</TabItem>
 <TabItem value="droplet_actions_get">
 
 The result will be a JSON object with an action key.  This will be set to an action object containing the standard action attributes.
@@ -67,6 +51,112 @@ The result will be a JSON object with an action key.  This will be set to an act
     </tr>
 </thead>
 <tbody>
+<tr>
+    <td><CopyableCode code="id" /></td>
+    <td><code>integer</code></td>
+    <td>A unique numeric ID that can be used to identify and reference an action.</td>
+</tr>
+<tr>
+    <td><CopyableCode code="resource_id" /></td>
+    <td><code>integer</code></td>
+    <td>A unique identifier for the resource that the action is associated with.</td>
+</tr>
+<tr>
+    <td><CopyableCode code="completed_at" /></td>
+    <td><code>string (date-time)</code></td>
+    <td>A time value given in ISO8601 combined date and time format that represents when the action was completed. (example: 2020-11-14T16:30:06Z)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="region" /></td>
+    <td><code>object</code></td>
+    <td></td>
+</tr>
+<tr>
+    <td><CopyableCode code="region_slug" /></td>
+    <td><code>string</code></td>
+    <td>A human-readable string that is used as a unique identifier for each region. (example: nyc3)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="resource_type" /></td>
+    <td><code>string</code></td>
+    <td>The type of resource that the action is associated with. (example: droplet)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="started_at" /></td>
+    <td><code>string (date-time)</code></td>
+    <td>A time value given in ISO8601 combined date and time format that represents when the action was initiated. (example: 2020-11-14T16:29:21Z)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="status" /></td>
+    <td><code>string</code></td>
+    <td>The current status of the action. This can be "in-progress", "completed", or "errored". (example: completed, default: in-progress)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="type" /></td>
+    <td><code>string</code></td>
+    <td>This is the type of action that the object represents. For example, this could be "transfer" to represent the state of an image transfer action. (example: create)</td>
+</tr>
+</tbody>
+</table>
+</TabItem>
+<TabItem value="droplet_actions_list">
+
+A JSON object with an `actions` key.
+
+<table>
+<thead>
+    <tr>
+    <th>Name</th>
+    <th>Datatype</th>
+    <th>Description</th>
+    </tr>
+</thead>
+<tbody>
+<tr>
+    <td><CopyableCode code="id" /></td>
+    <td><code>integer</code></td>
+    <td>A unique numeric ID that can be used to identify and reference an action.</td>
+</tr>
+<tr>
+    <td><CopyableCode code="resource_id" /></td>
+    <td><code>integer</code></td>
+    <td>A unique identifier for the resource that the action is associated with.</td>
+</tr>
+<tr>
+    <td><CopyableCode code="completed_at" /></td>
+    <td><code>string (date-time)</code></td>
+    <td>A time value given in ISO8601 combined date and time format that represents when the action was completed. (example: 2020-11-14T16:30:06Z)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="region" /></td>
+    <td><code>object</code></td>
+    <td></td>
+</tr>
+<tr>
+    <td><CopyableCode code="region_slug" /></td>
+    <td><code>string</code></td>
+    <td>A human-readable string that is used as a unique identifier for each region. (example: nyc3)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="resource_type" /></td>
+    <td><code>string</code></td>
+    <td>The type of resource that the action is associated with. (example: droplet)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="started_at" /></td>
+    <td><code>string (date-time)</code></td>
+    <td>A time value given in ISO8601 combined date and time format that represents when the action was initiated. (example: 2020-11-14T16:29:21Z)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="status" /></td>
+    <td><code>string</code></td>
+    <td>The current status of the action. This can be "in-progress", "completed", or "errored". (example: completed, default: in-progress)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="type" /></td>
+    <td><code>string</code></td>
+    <td>This is the type of action that the object represents. For example, this could be "transfer" to represent the state of an image transfer action. (example: create)</td>
+</tr>
 </tbody>
 </table>
 </TabItem>
@@ -88,18 +178,18 @@ The following methods are available for this resource:
 </thead>
 <tbody>
 <tr>
-    <td><a href="#droplet_actions_list"><CopyableCode code="droplet_actions_list" /></a></td>
-    <td><CopyableCode code="select" /></td>
-    <td><a href="#parameter-droplet_id"><code>droplet_id</code></a></td>
-    <td><a href="#parameter-per_page"><code>per_page</code></a>, <a href="#parameter-page"><code>page</code></a></td>
-    <td>To retrieve a list of all actions that have been executed for a Droplet, send<br />a GET request to `/v2/droplets/$DROPLET_ID/actions`.<br /><br />The results will be returned as a JSON object with an `actions` key. This will<br />be set to an array filled with `action` objects containing the standard<br />`action` attributes.<br /></td>
-</tr>
-<tr>
     <td><a href="#droplet_actions_get"><CopyableCode code="droplet_actions_get" /></a></td>
     <td><CopyableCode code="select" /></td>
     <td><a href="#parameter-droplet_id"><code>droplet_id</code></a>, <a href="#parameter-action_id"><code>action_id</code></a></td>
     <td></td>
     <td>To retrieve a Droplet action, send a GET request to<br />`/v2/droplets/$DROPLET_ID/actions/$ACTION_ID`.<br /><br />The response will be a JSON object with a key called `action`. The value will<br />be a Droplet action object.<br /></td>
+</tr>
+<tr>
+    <td><a href="#droplet_actions_list"><CopyableCode code="droplet_actions_list" /></a></td>
+    <td><CopyableCode code="select" /></td>
+    <td><a href="#parameter-droplet_id"><code>droplet_id</code></a></td>
+    <td><a href="#parameter-per_page"><code>per_page</code></a>, <a href="#parameter-page"><code>page</code></a></td>
+    <td>To retrieve a list of all actions that have been executed for a Droplet, send<br />a GET request to `/v2/droplets/$DROPLET_ID/actions`.<br /><br />The results will be returned as a JSON object with an `actions` key. This will<br />be set to an array filled with `action` objects containing the standard<br />`action` attributes.<br /></td>
 </tr>
 <tr>
     <td><a href="#droplet_actions_post"><CopyableCode code="droplet_actions_post" /></a></td>
@@ -154,7 +244,7 @@ Parameters can be passed in the `WHERE` clause of a query. Check the [Methods](#
 <tr id="parameter-tag_name">
     <td><CopyableCode code="tag_name" /></td>
     <td><code>string</code></td>
-    <td>Used to filter Droplets by a specific tag. Can not be combined with `name` or `type`.&lt;br&gt;Requires `tag:read` scope. (example: env:prod)</td>
+    <td>Used to filter Droplets by a specific tag. Can not be combined with `name` or `type`.<br />Requires `tag:read` scope. (example: env:prod)</td>
 </tr>
 </tbody>
 </table>
@@ -162,35 +252,51 @@ Parameters can be passed in the `WHERE` clause of a query. Check the [Methods](#
 ## `SELECT` examples
 
 <Tabs
-    defaultValue="droplet_actions_list"
+    defaultValue="droplet_actions_get"
     values={[
-        { label: 'droplet_actions_list', value: 'droplet_actions_list' },
-        { label: 'droplet_actions_get', value: 'droplet_actions_get' }
+        { label: 'droplet_actions_get', value: 'droplet_actions_get' },
+        { label: 'droplet_actions_list', value: 'droplet_actions_list' }
     ]}
 >
-<TabItem value="droplet_actions_list">
-
-To retrieve a list of all actions that have been executed for a Droplet, send<br />a GET request to `/v2/droplets/$DROPLET_ID/actions`.<br /><br />The results will be returned as a JSON object with an `actions` key. This will<br />be set to an array filled with `action` objects containing the standard<br />`action` attributes.<br />
-
-```sql
-SELECT
-*
-FROM digitalocean.compute.droplet_actions
-WHERE droplet_id = '{{ droplet_id }}' -- required
-AND per_page = '{{ per_page }}'
-AND page = '{{ page }}';
-```
-</TabItem>
 <TabItem value="droplet_actions_get">
 
 To retrieve a Droplet action, send a GET request to<br />`/v2/droplets/$DROPLET_ID/actions/$ACTION_ID`.<br /><br />The response will be a JSON object with a key called `action`. The value will<br />be a Droplet action object.<br />
 
 ```sql
 SELECT
-*
+id,
+resource_id,
+completed_at,
+region,
+region_slug,
+resource_type,
+started_at,
+status,
+type
 FROM digitalocean.compute.droplet_actions
 WHERE droplet_id = '{{ droplet_id }}' -- required
 AND action_id = '{{ action_id }}' -- required;
+```
+</TabItem>
+<TabItem value="droplet_actions_list">
+
+To retrieve a list of all actions that have been executed for a Droplet, send<br />a GET request to `/v2/droplets/$DROPLET_ID/actions`.<br /><br />The results will be returned as a JSON object with an `actions` key. This will<br />be set to an array filled with `action` objects containing the standard<br />`action` attributes.<br />
+
+```sql
+SELECT
+id,
+resource_id,
+completed_at,
+region,
+region_slug,
+resource_type,
+started_at,
+status,
+type
+FROM digitalocean.compute.droplet_actions
+WHERE droplet_id = '{{ droplet_id }}' -- required
+AND per_page = '{{ per_page }}'
+AND page = '{{ page }}';
 ```
 </TabItem>
 </Tabs>

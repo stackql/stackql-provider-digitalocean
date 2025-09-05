@@ -32,28 +32,12 @@ Creates, updates, deletes, gets or lists a <code>byoip_prefixes</code> resource.
 The following fields are returned by `SELECT` queries:
 
 <Tabs
-    defaultValue="byoip_prefixes_list"
+    defaultValue="byoip_prefixes_get"
     values={[
-        { label: 'byoip_prefixes_list', value: 'byoip_prefixes_list' },
-        { label: 'byoip_prefixes_get', value: 'byoip_prefixes_get' }
+        { label: 'byoip_prefixes_get', value: 'byoip_prefixes_get' },
+        { label: 'byoip_prefixes_list', value: 'byoip_prefixes_list' }
     ]}
 >
-<TabItem value="byoip_prefixes_list">
-
-List of BYOIP prefixes as an array of BYOIP prefix JSON objects
-
-<table>
-<thead>
-    <tr>
-    <th>Name</th>
-    <th>Datatype</th>
-    <th>Description</th>
-    </tr>
-</thead>
-<tbody>
-</tbody>
-</table>
-</TabItem>
 <TabItem value="byoip_prefixes_get">
 
 Details of the requested BYOIP prefix
@@ -67,6 +51,122 @@ Details of the requested BYOIP prefix
     </tr>
 </thead>
 <tbody>
+<tr>
+    <td><CopyableCode code="name" /></td>
+    <td><code>string</code></td>
+    <td>Name of the BYOIP prefix (example: )</td>
+</tr>
+<tr>
+    <td><CopyableCode code="project_id" /></td>
+    <td><code>string</code></td>
+    <td>The ID of the project associated with the BYOIP prefix (example: 12345678-1234-1234-1234-123456789012)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="advertised" /></td>
+    <td><code>boolean</code></td>
+    <td>Whether the BYOIP prefix is being advertised</td>
+</tr>
+<tr>
+    <td><CopyableCode code="failure_reason" /></td>
+    <td><code>string</code></td>
+    <td>Reason for failure, if applicable (example: )</td>
+</tr>
+<tr>
+    <td><CopyableCode code="locked" /></td>
+    <td><code>boolean</code></td>
+    <td>Whether the BYOIP prefix is locked</td>
+</tr>
+<tr>
+    <td><CopyableCode code="prefix" /></td>
+    <td><code>string</code></td>
+    <td>The IP prefix in CIDR notation (example: 203.0.113.0/24)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="region" /></td>
+    <td><code>string</code></td>
+    <td>Region where the BYOIP prefix is located (example: nyc3)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="status" /></td>
+    <td><code>string</code></td>
+    <td>Status of the BYOIP prefix (example: active)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="uuid" /></td>
+    <td><code>string</code></td>
+    <td>Unique identifier for the BYOIP prefix (example: f47ac10b-58cc-4372-a567-0e02b2c3d479)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="validations" /></td>
+    <td><code>array</code></td>
+    <td>List of validation statuses for the BYOIP prefix</td>
+</tr>
+</tbody>
+</table>
+</TabItem>
+<TabItem value="byoip_prefixes_list">
+
+List of BYOIP prefixes as an array of BYOIP prefix JSON objects
+
+<table>
+<thead>
+    <tr>
+    <th>Name</th>
+    <th>Datatype</th>
+    <th>Description</th>
+    </tr>
+</thead>
+<tbody>
+<tr>
+    <td><CopyableCode code="name" /></td>
+    <td><code>string</code></td>
+    <td>Name of the BYOIP prefix (example: )</td>
+</tr>
+<tr>
+    <td><CopyableCode code="project_id" /></td>
+    <td><code>string</code></td>
+    <td>The ID of the project associated with the BYOIP prefix (example: 12345678-1234-1234-1234-123456789012)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="advertised" /></td>
+    <td><code>boolean</code></td>
+    <td>Whether the BYOIP prefix is being advertised</td>
+</tr>
+<tr>
+    <td><CopyableCode code="failure_reason" /></td>
+    <td><code>string</code></td>
+    <td>Reason for failure, if applicable (example: )</td>
+</tr>
+<tr>
+    <td><CopyableCode code="locked" /></td>
+    <td><code>boolean</code></td>
+    <td>Whether the BYOIP prefix is locked</td>
+</tr>
+<tr>
+    <td><CopyableCode code="prefix" /></td>
+    <td><code>string</code></td>
+    <td>The IP prefix in CIDR notation (example: 203.0.113.0/24)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="region" /></td>
+    <td><code>string</code></td>
+    <td>Region where the BYOIP prefix is located (example: nyc3)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="status" /></td>
+    <td><code>string</code></td>
+    <td>Status of the BYOIP prefix (example: active)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="uuid" /></td>
+    <td><code>string</code></td>
+    <td>Unique identifier for the BYOIP prefix (example: f47ac10b-58cc-4372-a567-0e02b2c3d479)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="validations" /></td>
+    <td><code>array</code></td>
+    <td>List of validation statuses for the BYOIP prefix</td>
+</tr>
 </tbody>
 </table>
 </TabItem>
@@ -88,18 +188,18 @@ The following methods are available for this resource:
 </thead>
 <tbody>
 <tr>
-    <td><a href="#byoip_prefixes_list"><CopyableCode code="byoip_prefixes_list" /></a></td>
-    <td><CopyableCode code="select" /></td>
-    <td></td>
-    <td><a href="#parameter-per_page"><code>per_page</code></a>, <a href="#parameter-page"><code>page</code></a></td>
-    <td>To list all BYOIP prefixes, send a GET request to `/v2/byoip_prefixes`.<br />A successful response will return a list of all BYOIP prefixes associated with the account.<br /></td>
-</tr>
-<tr>
     <td><a href="#byoip_prefixes_get"><CopyableCode code="byoip_prefixes_get" /></a></td>
     <td><CopyableCode code="select" /></td>
     <td><a href="#parameter-byoip_prefix_uuid"><code>byoip_prefix_uuid</code></a></td>
     <td></td>
     <td>To get a BYOIP prefix, send a GET request to `/v2/byoip_prefixes/$byoip_prefix_uuid`. <br /><br />A successful response will return the details of the specified BYOIP prefix.<br /></td>
+</tr>
+<tr>
+    <td><a href="#byoip_prefixes_list"><CopyableCode code="byoip_prefixes_list" /></a></td>
+    <td><CopyableCode code="select" /></td>
+    <td></td>
+    <td><a href="#parameter-per_page"><code>per_page</code></a>, <a href="#parameter-page"><code>page</code></a></td>
+    <td>To list all BYOIP prefixes, send a GET request to `/v2/byoip_prefixes`.<br />A successful response will return a list of all BYOIP prefixes associated with the account.<br /></td>
 </tr>
 <tr>
     <td><a href="#byoip_prefixes_create"><CopyableCode code="byoip_prefixes_create" /></a></td>
@@ -159,33 +259,51 @@ Parameters can be passed in the `WHERE` clause of a query. Check the [Methods](#
 ## `SELECT` examples
 
 <Tabs
-    defaultValue="byoip_prefixes_list"
+    defaultValue="byoip_prefixes_get"
     values={[
-        { label: 'byoip_prefixes_list', value: 'byoip_prefixes_list' },
-        { label: 'byoip_prefixes_get', value: 'byoip_prefixes_get' }
+        { label: 'byoip_prefixes_get', value: 'byoip_prefixes_get' },
+        { label: 'byoip_prefixes_list', value: 'byoip_prefixes_list' }
     ]}
 >
-<TabItem value="byoip_prefixes_list">
-
-To list all BYOIP prefixes, send a GET request to `/v2/byoip_prefixes`.<br />A successful response will return a list of all BYOIP prefixes associated with the account.<br />
-
-```sql
-SELECT
-*
-FROM digitalocean.network.byoip_prefixes
-WHERE per_page = '{{ per_page }}'
-AND page = '{{ page }}';
-```
-</TabItem>
 <TabItem value="byoip_prefixes_get">
 
 To get a BYOIP prefix, send a GET request to `/v2/byoip_prefixes/$byoip_prefix_uuid`. <br /><br />A successful response will return the details of the specified BYOIP prefix.<br />
 
 ```sql
 SELECT
-*
+name,
+project_id,
+advertised,
+failure_reason,
+locked,
+prefix,
+region,
+status,
+uuid,
+validations
 FROM digitalocean.network.byoip_prefixes
 WHERE byoip_prefix_uuid = '{{ byoip_prefix_uuid }}' -- required;
+```
+</TabItem>
+<TabItem value="byoip_prefixes_list">
+
+To list all BYOIP prefixes, send a GET request to `/v2/byoip_prefixes`.<br />A successful response will return a list of all BYOIP prefixes associated with the account.<br />
+
+```sql
+SELECT
+name,
+project_id,
+advertised,
+failure_reason,
+locked,
+prefix,
+region,
+status,
+uuid,
+validations
+FROM digitalocean.network.byoip_prefixes
+WHERE per_page = '{{ per_page }}'
+AND page = '{{ page }}';
 ```
 </TabItem>
 </Tabs>
@@ -214,6 +332,10 @@ SELECT
 '{{ prefix }}' --required,
 '{{ region }}' --required,
 '{{ signature }}' --required
+RETURNING
+region,
+status,
+uuid
 ;
 ```
 </TabItem>
@@ -260,7 +382,9 @@ UPDATE digitalocean.network.byoip_prefixes
 SET 
 data__advertise = {{ advertise }}
 WHERE 
-byoip_prefix_uuid = '{{ byoip_prefix_uuid }}' --required;
+byoip_prefix_uuid = '{{ byoip_prefix_uuid }}' --required
+RETURNING
+byoip_prefix;
 ```
 </TabItem>
 </Tabs>

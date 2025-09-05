@@ -50,6 +50,31 @@ A JSON object with a key of `rules`.
     </tr>
 </thead>
 <tbody>
+<tr>
+    <td><CopyableCode code="cluster_uuid" /></td>
+    <td><code>string</code></td>
+    <td>A unique ID for the database cluster to which the rule is applied. (pattern: ^$|[0-9a-f]&#123;8&#125;\b-[0-9a-f]&#123;4&#125;-[0-9a-f]&#123;4&#125;-[0-9a-f]&#123;4&#125;-\b[0-9a-f]&#123;12&#125;, example: 9cc10173-e9ea-4176-9dbc-a4cee4c4ff30)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="created_at" /></td>
+    <td><code>string (date-time)</code></td>
+    <td>A time value given in ISO8601 combined date and time format that represents when the firewall rule was created. (example: 2019-01-11T18:37:36Z)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="type" /></td>
+    <td><code>string</code></td>
+    <td>The type of resource that the firewall rule allows to access the database cluster. (example: droplet)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="uuid" /></td>
+    <td><code>string</code></td>
+    <td>A unique ID for the firewall rule itself. (pattern: ^$|[0-9a-f]&#123;8&#125;\b-[0-9a-f]&#123;4&#125;-[0-9a-f]&#123;4&#125;-[0-9a-f]&#123;4&#125;-\b[0-9a-f]&#123;12&#125;, example: 79f26d28-ea8a-41f2-8ad8-8cfcdd020095)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="value" /></td>
+    <td><code>string</code></td>
+    <td>The ID of the specific resource, the name of a tag applied to a group of resources, or the IP address that the firewall rule allows to access the database cluster. (example: ff2a6c52-5a44-4b63-b99c-0e98e7a63d61)</td>
+</tr>
 </tbody>
 </table>
 </TabItem>
@@ -122,7 +147,11 @@ To list all of a database cluster's firewall rules (known as "trusted sources" i
 
 ```sql
 SELECT
-*
+cluster_uuid,
+created_at,
+type,
+uuid,
+value
 FROM digitalocean.databases.firewall_rules
 WHERE database_cluster_uuid = '{{ database_cluster_uuid }}' -- required;
 ```

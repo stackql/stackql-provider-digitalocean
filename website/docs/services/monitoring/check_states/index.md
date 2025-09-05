@@ -50,6 +50,16 @@ The response will be a JSON object with a key called `state`. The value of this 
     </tr>
 </thead>
 <tbody>
+<tr>
+    <td><CopyableCode code="previous_outage" /></td>
+    <td><code>object</code></td>
+    <td></td>
+</tr>
+<tr>
+    <td><CopyableCode code="regions" /></td>
+    <td><code>object</code></td>
+    <td>A map of region to regional state</td>
+</tr>
 </tbody>
 </table>
 </TabItem>
@@ -115,7 +125,8 @@ To show information about an existing check's state, send a GET request to `/v2/
 
 ```sql
 SELECT
-*
+previous_outage,
+regions
 FROM digitalocean.monitoring.check_states
 WHERE check_id = '{{ check_id }}' -- required;
 ```

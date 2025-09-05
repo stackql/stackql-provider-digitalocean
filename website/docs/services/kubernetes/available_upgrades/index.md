@@ -50,6 +50,21 @@ The response will be a JSON object with a key called<br />`available_upgrade_ver
     </tr>
 </thead>
 <tbody>
+<tr>
+    <td><CopyableCode code="kubernetes_version" /></td>
+    <td><code>string</code></td>
+    <td>The upstream version string for the version of Kubernetes provided by a given slug. (example: 1.16.13)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="slug" /></td>
+    <td><code>string</code></td>
+    <td>The slug identifier for an available version of Kubernetes for use when creating or updating a cluster. The string contains both the upstream version of Kubernetes as well as the DigitalOcean revision. (example: 1.16.13-do.0)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="supported_features" /></td>
+    <td><code>array</code></td>
+    <td>The features available with the version of Kubernetes provided by a given slug.</td>
+</tr>
 </tbody>
 </table>
 </TabItem>
@@ -115,7 +130,9 @@ To determine whether a cluster can be upgraded, and the versions to which it<br 
 
 ```sql
 SELECT
-*
+kubernetes_version,
+slug,
+supported_features
 FROM digitalocean.kubernetes.available_upgrades
 WHERE cluster_id = '{{ cluster_id }}' -- required;
 ```

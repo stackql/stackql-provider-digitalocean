@@ -32,28 +32,12 @@ Creates, updates, deletes, gets or lists a <code>connection_pools</code> resourc
 The following fields are returned by `SELECT` queries:
 
 <Tabs
-    defaultValue="databases_list_connection_pools"
+    defaultValue="databases_get_connection_pool"
     values={[
-        { label: 'databases_list_connection_pools', value: 'databases_list_connection_pools' },
-        { label: 'databases_get_connection_pool', value: 'databases_get_connection_pool' }
+        { label: 'databases_get_connection_pool', value: 'databases_get_connection_pool' },
+        { label: 'databases_list_connection_pools', value: 'databases_list_connection_pools' }
     ]}
 >
-<TabItem value="databases_list_connection_pools">
-
-A JSON object with a key of `pools`.
-
-<table>
-<thead>
-    <tr>
-    <th>Name</th>
-    <th>Datatype</th>
-    <th>Description</th>
-    </tr>
-</thead>
-<tbody>
-</tbody>
-</table>
-</TabItem>
 <TabItem value="databases_get_connection_pool">
 
 A JSON object with a key of `pool`.
@@ -67,6 +51,112 @@ A JSON object with a key of `pool`.
     </tr>
 </thead>
 <tbody>
+<tr>
+    <td><CopyableCode code="name" /></td>
+    <td><code>string</code></td>
+    <td>A unique name for the connection pool. Must be between 3 and 60 characters. (example: backend-pool)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="connection" /></td>
+    <td><code>object</code></td>
+    <td></td>
+</tr>
+<tr>
+    <td><CopyableCode code="db" /></td>
+    <td><code>string</code></td>
+    <td>The database for use with the connection pool. (example: defaultdb)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="mode" /></td>
+    <td><code>string</code></td>
+    <td>The PGBouncer transaction mode for the connection pool. The allowed values are session, transaction, and statement. (example: transaction)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="private_connection" /></td>
+    <td><code>object</code></td>
+    <td></td>
+</tr>
+<tr>
+    <td><CopyableCode code="size" /></td>
+    <td><code>integer (int32)</code></td>
+    <td>The desired size of the PGBouncer connection pool. The maximum allowed size is determined by the size of the cluster's primary node. 25 backend server connections are allowed for every 1GB of RAM. Three are reserved for maintenance. For example, a primary node with 1 GB of RAM allows for a maximum of 22 backend server connections while one with 4 GB would allow for 97. Note that these are shared across all connection pools in a cluster.</td>
+</tr>
+<tr>
+    <td><CopyableCode code="standby_connection" /></td>
+    <td><code>object</code></td>
+    <td></td>
+</tr>
+<tr>
+    <td><CopyableCode code="standby_private_connection" /></td>
+    <td><code>object</code></td>
+    <td></td>
+</tr>
+<tr>
+    <td><CopyableCode code="user" /></td>
+    <td><code>string</code></td>
+    <td>The name of the user for use with the connection pool. When excluded, all sessions connect to the database as the inbound user. (example: doadmin)</td>
+</tr>
+</tbody>
+</table>
+</TabItem>
+<TabItem value="databases_list_connection_pools">
+
+A JSON object with a key of `pools`.
+
+<table>
+<thead>
+    <tr>
+    <th>Name</th>
+    <th>Datatype</th>
+    <th>Description</th>
+    </tr>
+</thead>
+<tbody>
+<tr>
+    <td><CopyableCode code="name" /></td>
+    <td><code>string</code></td>
+    <td>A unique name for the connection pool. Must be between 3 and 60 characters. (example: backend-pool)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="connection" /></td>
+    <td><code>object</code></td>
+    <td></td>
+</tr>
+<tr>
+    <td><CopyableCode code="db" /></td>
+    <td><code>string</code></td>
+    <td>The database for use with the connection pool. (example: defaultdb)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="mode" /></td>
+    <td><code>string</code></td>
+    <td>The PGBouncer transaction mode for the connection pool. The allowed values are session, transaction, and statement. (example: transaction)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="private_connection" /></td>
+    <td><code>object</code></td>
+    <td></td>
+</tr>
+<tr>
+    <td><CopyableCode code="size" /></td>
+    <td><code>integer (int32)</code></td>
+    <td>The desired size of the PGBouncer connection pool. The maximum allowed size is determined by the size of the cluster's primary node. 25 backend server connections are allowed for every 1GB of RAM. Three are reserved for maintenance. For example, a primary node with 1 GB of RAM allows for a maximum of 22 backend server connections while one with 4 GB would allow for 97. Note that these are shared across all connection pools in a cluster.</td>
+</tr>
+<tr>
+    <td><CopyableCode code="standby_connection" /></td>
+    <td><code>object</code></td>
+    <td></td>
+</tr>
+<tr>
+    <td><CopyableCode code="standby_private_connection" /></td>
+    <td><code>object</code></td>
+    <td></td>
+</tr>
+<tr>
+    <td><CopyableCode code="user" /></td>
+    <td><code>string</code></td>
+    <td>The name of the user for use with the connection pool. When excluded, all sessions connect to the database as the inbound user. (example: doadmin)</td>
+</tr>
 </tbody>
 </table>
 </TabItem>
@@ -88,18 +178,18 @@ The following methods are available for this resource:
 </thead>
 <tbody>
 <tr>
-    <td><a href="#databases_list_connection_pools"><CopyableCode code="databases_list_connection_pools" /></a></td>
-    <td><CopyableCode code="select" /></td>
-    <td><a href="#parameter-database_cluster_uuid"><code>database_cluster_uuid</code></a></td>
-    <td></td>
-    <td>To list all of the connection pools available to a PostgreSQL database cluster, send a GET request to `/v2/databases/$DATABASE_ID/pools`.<br />The result will be a JSON object with a `pools` key. This will be set to an array of connection pool objects.</td>
-</tr>
-<tr>
     <td><a href="#databases_get_connection_pool"><CopyableCode code="databases_get_connection_pool" /></a></td>
     <td><CopyableCode code="select" /></td>
     <td><a href="#parameter-database_cluster_uuid"><code>database_cluster_uuid</code></a>, <a href="#parameter-pool_name"><code>pool_name</code></a></td>
     <td></td>
     <td>To show information about an existing connection pool for a PostgreSQL database cluster, send a GET request to `/v2/databases/$DATABASE_ID/pools/$POOL_NAME`.<br />The response will be a JSON object with a `pool` key.</td>
+</tr>
+<tr>
+    <td><a href="#databases_list_connection_pools"><CopyableCode code="databases_list_connection_pools" /></a></td>
+    <td><CopyableCode code="select" /></td>
+    <td><a href="#parameter-database_cluster_uuid"><code>database_cluster_uuid</code></a></td>
+    <td></td>
+    <td>To list all of the connection pools available to a PostgreSQL database cluster, send a GET request to `/v2/databases/$DATABASE_ID/pools`.<br />The result will be a JSON object with a `pools` key. This will be set to an array of connection pool objects.</td>
 </tr>
 <tr>
     <td><a href="#databases_add_connection_pool"><CopyableCode code="databases_add_connection_pool" /></a></td>
@@ -154,33 +244,49 @@ Parameters can be passed in the `WHERE` clause of a query. Check the [Methods](#
 ## `SELECT` examples
 
 <Tabs
-    defaultValue="databases_list_connection_pools"
+    defaultValue="databases_get_connection_pool"
     values={[
-        { label: 'databases_list_connection_pools', value: 'databases_list_connection_pools' },
-        { label: 'databases_get_connection_pool', value: 'databases_get_connection_pool' }
+        { label: 'databases_get_connection_pool', value: 'databases_get_connection_pool' },
+        { label: 'databases_list_connection_pools', value: 'databases_list_connection_pools' }
     ]}
 >
-<TabItem value="databases_list_connection_pools">
-
-To list all of the connection pools available to a PostgreSQL database cluster, send a GET request to `/v2/databases/$DATABASE_ID/pools`.<br />The result will be a JSON object with a `pools` key. This will be set to an array of connection pool objects.
-
-```sql
-SELECT
-*
-FROM digitalocean.databases.connection_pools
-WHERE database_cluster_uuid = '{{ database_cluster_uuid }}' -- required;
-```
-</TabItem>
 <TabItem value="databases_get_connection_pool">
 
 To show information about an existing connection pool for a PostgreSQL database cluster, send a GET request to `/v2/databases/$DATABASE_ID/pools/$POOL_NAME`.<br />The response will be a JSON object with a `pool` key.
 
 ```sql
 SELECT
-*
+name,
+connection,
+db,
+mode,
+private_connection,
+size,
+standby_connection,
+standby_private_connection,
+user
 FROM digitalocean.databases.connection_pools
 WHERE database_cluster_uuid = '{{ database_cluster_uuid }}' -- required
 AND pool_name = '{{ pool_name }}' -- required;
+```
+</TabItem>
+<TabItem value="databases_list_connection_pools">
+
+To list all of the connection pools available to a PostgreSQL database cluster, send a GET request to `/v2/databases/$DATABASE_ID/pools`.<br />The result will be a JSON object with a `pools` key. This will be set to an array of connection pool objects.
+
+```sql
+SELECT
+name,
+connection,
+db,
+mode,
+private_connection,
+size,
+standby_connection,
+standby_private_connection,
+user
+FROM digitalocean.databases.connection_pools
+WHERE database_cluster_uuid = '{{ database_cluster_uuid }}' -- required;
 ```
 </TabItem>
 </Tabs>
@@ -215,6 +321,8 @@ SELECT
 '{{ db }}' --required,
 '{{ user }}',
 '{{ database_cluster_uuid }}'
+RETURNING
+pool
 ;
 ```
 </TabItem>

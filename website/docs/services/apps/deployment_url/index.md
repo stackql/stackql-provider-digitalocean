@@ -32,28 +32,12 @@ Creates, updates, deletes, gets or lists a <code>deployment_url</code> resource.
 The following fields are returned by `SELECT` queries:
 
 <Tabs
-    defaultValue="apps_get_exec_active_deployment"
+    defaultValue="apps_get_exec"
     values={[
-        { label: 'apps_get_exec_active_deployment', value: 'apps_get_exec_active_deployment' },
-        { label: 'apps_get_exec', value: 'apps_get_exec' }
+        { label: 'apps_get_exec', value: 'apps_get_exec' },
+        { label: 'apps_get_exec_active_deployment', value: 'apps_get_exec_active_deployment' }
     ]}
 >
-<TabItem value="apps_get_exec_active_deployment">
-
-A JSON object with a websocket URL that allows sending/receiving console input and output.
-
-<table>
-<thead>
-    <tr>
-    <th>Name</th>
-    <th>Datatype</th>
-    <th>Description</th>
-    </tr>
-</thead>
-<tbody>
-</tbody>
-</table>
-</TabItem>
 <TabItem value="apps_get_exec">
 
 A JSON object with a websocket URL that allows sending/receiving console input and output.
@@ -67,6 +51,32 @@ A JSON object with a websocket URL that allows sending/receiving console input a
     </tr>
 </thead>
 <tbody>
+<tr>
+    <td><CopyableCode code="url" /></td>
+    <td><code>string</code></td>
+    <td>A websocket URL that allows sending/receiving console input and receiving console output. (example: wss://exec/?token=xxx)</td>
+</tr>
+</tbody>
+</table>
+</TabItem>
+<TabItem value="apps_get_exec_active_deployment">
+
+A JSON object with a websocket URL that allows sending/receiving console input and output.
+
+<table>
+<thead>
+    <tr>
+    <th>Name</th>
+    <th>Datatype</th>
+    <th>Description</th>
+    </tr>
+</thead>
+<tbody>
+<tr>
+    <td><CopyableCode code="url" /></td>
+    <td><code>string</code></td>
+    <td>A websocket URL that allows sending/receiving console input and receiving console output. (example: wss://exec/?token=xxx)</td>
+</tr>
 </tbody>
 </table>
 </TabItem>
@@ -88,18 +98,18 @@ The following methods are available for this resource:
 </thead>
 <tbody>
 <tr>
-    <td><a href="#apps_get_exec_active_deployment"><CopyableCode code="apps_get_exec_active_deployment" /></a></td>
-    <td><CopyableCode code="select" /></td>
-    <td><a href="#parameter-app_id"><code>app_id</code></a>, <a href="#parameter-component_name"><code>component_name</code></a></td>
-    <td><a href="#parameter-instance_name"><code>instance_name</code></a></td>
-    <td>Returns a websocket URL that allows sending/receiving console input and output to a component of the active deployment if one exists.</td>
-</tr>
-<tr>
     <td><a href="#apps_get_exec"><CopyableCode code="apps_get_exec" /></a></td>
     <td><CopyableCode code="select" /></td>
     <td><a href="#parameter-app_id"><code>app_id</code></a>, <a href="#parameter-deployment_id"><code>deployment_id</code></a>, <a href="#parameter-component_name"><code>component_name</code></a></td>
     <td><a href="#parameter-instance_name"><code>instance_name</code></a></td>
     <td>Returns a websocket URL that allows sending/receiving console input and output to a component of the specified deployment if one exists. Optionally, the instance_name parameter can be provided to retrieve the exec URL for a specific instance. Note that instances are ephemeral; therefore, we recommended to avoid making persistent changes or such scripting around them.</td>
+</tr>
+<tr>
+    <td><a href="#apps_get_exec_active_deployment"><CopyableCode code="apps_get_exec_active_deployment" /></a></td>
+    <td><CopyableCode code="select" /></td>
+    <td><a href="#parameter-app_id"><code>app_id</code></a>, <a href="#parameter-component_name"><code>component_name</code></a></td>
+    <td><a href="#parameter-instance_name"><code>instance_name</code></a></td>
+    <td>Returns a websocket URL that allows sending/receiving console input and output to a component of the active deployment if one exists.</td>
 </tr>
 </tbody>
 </table>
@@ -143,35 +153,35 @@ Parameters can be passed in the `WHERE` clause of a query. Check the [Methods](#
 ## `SELECT` examples
 
 <Tabs
-    defaultValue="apps_get_exec_active_deployment"
+    defaultValue="apps_get_exec"
     values={[
-        { label: 'apps_get_exec_active_deployment', value: 'apps_get_exec_active_deployment' },
-        { label: 'apps_get_exec', value: 'apps_get_exec' }
+        { label: 'apps_get_exec', value: 'apps_get_exec' },
+        { label: 'apps_get_exec_active_deployment', value: 'apps_get_exec_active_deployment' }
     ]}
 >
-<TabItem value="apps_get_exec_active_deployment">
-
-Returns a websocket URL that allows sending/receiving console input and output to a component of the active deployment if one exists.
-
-```sql
-SELECT
-*
-FROM digitalocean.apps.deployment_url
-WHERE app_id = '{{ app_id }}' -- required
-AND component_name = '{{ component_name }}' -- required
-AND instance_name = '{{ instance_name }}';
-```
-</TabItem>
 <TabItem value="apps_get_exec">
 
 Returns a websocket URL that allows sending/receiving console input and output to a component of the specified deployment if one exists. Optionally, the instance_name parameter can be provided to retrieve the exec URL for a specific instance. Note that instances are ephemeral; therefore, we recommended to avoid making persistent changes or such scripting around them.
 
 ```sql
 SELECT
-*
+url
 FROM digitalocean.apps.deployment_url
 WHERE app_id = '{{ app_id }}' -- required
 AND deployment_id = '{{ deployment_id }}' -- required
+AND component_name = '{{ component_name }}' -- required
+AND instance_name = '{{ instance_name }}';
+```
+</TabItem>
+<TabItem value="apps_get_exec_active_deployment">
+
+Returns a websocket URL that allows sending/receiving console input and output to a component of the active deployment if one exists.
+
+```sql
+SELECT
+url
+FROM digitalocean.apps.deployment_url
+WHERE app_id = '{{ app_id }}' -- required
 AND component_name = '{{ component_name }}' -- required
 AND instance_name = '{{ instance_name }}';
 ```

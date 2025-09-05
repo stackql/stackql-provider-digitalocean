@@ -32,12 +32,103 @@ Creates, updates, deletes, gets or lists an <code>indexing_jobs</code> resource.
 The following fields are returned by `SELECT` queries:
 
 <Tabs
-    defaultValue="genai_list_indexing_jobs"
+    defaultValue="genai_get_indexing_job"
     values={[
-        { label: 'genai_list_indexing_jobs', value: 'genai_list_indexing_jobs' },
-        { label: 'genai_get_indexing_job', value: 'genai_get_indexing_job' }
+        { label: 'genai_get_indexing_job', value: 'genai_get_indexing_job' },
+        { label: 'genai_list_indexing_jobs', value: 'genai_list_indexing_jobs' }
     ]}
 >
+<TabItem value="genai_get_indexing_job">
+
+A successful response.
+
+<table>
+<thead>
+    <tr>
+    <th>Name</th>
+    <th>Datatype</th>
+    <th>Description</th>
+    </tr>
+</thead>
+<tbody>
+<tr>
+    <td><CopyableCode code="completed_datasources" /></td>
+    <td><code>integer (int64)</code></td>
+    <td>Number of datasources indexed completed</td>
+</tr>
+<tr>
+    <td><CopyableCode code="created_at" /></td>
+    <td><code>string (date-time)</code></td>
+    <td>Creation date / time (example: 2023-01-01T00:00:00Z)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="data_source_uuids" /></td>
+    <td><code>array</code></td>
+    <td></td>
+</tr>
+<tr>
+    <td><CopyableCode code="finished_at" /></td>
+    <td><code>string (date-time)</code></td>
+    <td> (example: 2023-01-01T00:00:00Z)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="knowledge_base_uuid" /></td>
+    <td><code>string</code></td>
+    <td>Knowledge base id (example: 123e4567-e89b-12d3-a456-426614174000)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="phase" /></td>
+    <td><code>string</code></td>
+    <td> (default: BATCH_JOB_PHASE_UNKNOWN, example: BATCH_JOB_PHASE_UNKNOWN)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="started_at" /></td>
+    <td><code>string (date-time)</code></td>
+    <td> (example: 2023-01-01T00:00:00Z)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="status" /></td>
+    <td><code>string</code></td>
+    <td> (default: INDEX_JOB_STATUS_UNKNOWN, example: INDEX_JOB_STATUS_UNKNOWN)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="tokens" /></td>
+    <td><code>integer (int64)</code></td>
+    <td>Number of tokens</td>
+</tr>
+<tr>
+    <td><CopyableCode code="total_datasources" /></td>
+    <td><code>integer (int64)</code></td>
+    <td>Number of datasources being indexed</td>
+</tr>
+<tr>
+    <td><CopyableCode code="total_items_failed" /></td>
+    <td><code>string (uint64)</code></td>
+    <td>Total Items Failed (example: 12345)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="total_items_indexed" /></td>
+    <td><code>string (uint64)</code></td>
+    <td>Total Items Indexed (example: 12345)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="total_items_skipped" /></td>
+    <td><code>string (uint64)</code></td>
+    <td>Total Items Skipped (example: 12345)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="updated_at" /></td>
+    <td><code>string (date-time)</code></td>
+    <td>Last modified (example: 2023-01-01T00:00:00Z)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="uuid" /></td>
+    <td><code>string</code></td>
+    <td>Unique id (example: 123e4567-e89b-12d3-a456-426614174000)</td>
+</tr>
+</tbody>
+</table>
+</TabItem>
 <TabItem value="genai_list_indexing_jobs">
 
 A successful response.
@@ -69,27 +160,6 @@ A successful response.
 </tbody>
 </table>
 </TabItem>
-<TabItem value="genai_get_indexing_job">
-
-A successful response.
-
-<table>
-<thead>
-    <tr>
-    <th>Name</th>
-    <th>Datatype</th>
-    <th>Description</th>
-    </tr>
-</thead>
-<tbody>
-<tr>
-    <td><CopyableCode code="job" /></td>
-    <td><code>object</code></td>
-    <td>IndexingJob description</td>
-</tr>
-</tbody>
-</table>
-</TabItem>
 </Tabs>
 
 ## Methods
@@ -108,18 +178,18 @@ The following methods are available for this resource:
 </thead>
 <tbody>
 <tr>
-    <td><a href="#genai_list_indexing_jobs"><CopyableCode code="genai_list_indexing_jobs" /></a></td>
-    <td><CopyableCode code="select" /></td>
-    <td></td>
-    <td><a href="#parameter-page"><code>page</code></a>, <a href="#parameter-per_page"><code>per_page</code></a></td>
-    <td>To list all indexing jobs for a knowledge base, send a GET request to `/v2/gen-ai/indexing_jobs`.</td>
-</tr>
-<tr>
     <td><a href="#genai_get_indexing_job"><CopyableCode code="genai_get_indexing_job" /></a></td>
     <td><CopyableCode code="select" /></td>
     <td><a href="#parameter-uuid"><code>uuid</code></a></td>
     <td></td>
     <td>To get status of an indexing Job for a knowledge base, send a GET request to `/v2/gen-ai/indexing_jobs/&#123;uuid&#125;`.</td>
+</tr>
+<tr>
+    <td><a href="#genai_list_indexing_jobs"><CopyableCode code="genai_list_indexing_jobs" /></a></td>
+    <td><CopyableCode code="select" /></td>
+    <td></td>
+    <td><a href="#parameter-page"><code>page</code></a>, <a href="#parameter-per_page"><code>per_page</code></a></td>
+    <td>To list all indexing jobs for a knowledge base, send a GET request to `/v2/gen-ai/indexing_jobs`.</td>
 </tr>
 <tr>
     <td><a href="#genai_create_indexing_job"><CopyableCode code="genai_create_indexing_job" /></a></td>
@@ -172,12 +242,37 @@ Parameters can be passed in the `WHERE` clause of a query. Check the [Methods](#
 ## `SELECT` examples
 
 <Tabs
-    defaultValue="genai_list_indexing_jobs"
+    defaultValue="genai_get_indexing_job"
     values={[
-        { label: 'genai_list_indexing_jobs', value: 'genai_list_indexing_jobs' },
-        { label: 'genai_get_indexing_job', value: 'genai_get_indexing_job' }
+        { label: 'genai_get_indexing_job', value: 'genai_get_indexing_job' },
+        { label: 'genai_list_indexing_jobs', value: 'genai_list_indexing_jobs' }
     ]}
 >
+<TabItem value="genai_get_indexing_job">
+
+To get status of an indexing Job for a knowledge base, send a GET request to `/v2/gen-ai/indexing_jobs/&#123;uuid&#125;`.
+
+```sql
+SELECT
+completed_datasources,
+created_at,
+data_source_uuids,
+finished_at,
+knowledge_base_uuid,
+phase,
+started_at,
+status,
+tokens,
+total_datasources,
+total_items_failed,
+total_items_indexed,
+total_items_skipped,
+updated_at,
+uuid
+FROM digitalocean.genai.indexing_jobs
+WHERE uuid = '{{ uuid }}' -- required;
+```
+</TabItem>
 <TabItem value="genai_list_indexing_jobs">
 
 To list all indexing jobs for a knowledge base, send a GET request to `/v2/gen-ai/indexing_jobs`.
@@ -190,17 +285,6 @@ meta
 FROM digitalocean.genai.indexing_jobs
 WHERE page = '{{ page }}'
 AND per_page = '{{ per_page }}';
-```
-</TabItem>
-<TabItem value="genai_get_indexing_job">
-
-To get status of an indexing Job for a knowledge base, send a GET request to `/v2/gen-ai/indexing_jobs/&#123;uuid&#125;`.
-
-```sql
-SELECT
-job
-FROM digitalocean.genai.indexing_jobs
-WHERE uuid = '{{ uuid }}' -- required;
 ```
 </TabItem>
 </Tabs>

@@ -50,6 +50,31 @@ A JSON object containing `snapshots`, `volumes`, and `volume_snapshots` keys.
     </tr>
 </thead>
 <tbody>
+<tr>
+    <td><CopyableCode code="floating_ips" /></td>
+    <td><code>array</code></td>
+    <td>Floating IPs that are associated with this Droplet.<br />Requires `reserved_ip:read` scope.</td>
+</tr>
+<tr>
+    <td><CopyableCode code="reserved_ips" /></td>
+    <td><code>array</code></td>
+    <td>Reserved IPs that are associated with this Droplet.<br />Requires `reserved_ip:read` scope.</td>
+</tr>
+<tr>
+    <td><CopyableCode code="snapshots" /></td>
+    <td><code>array</code></td>
+    <td>Snapshots that are associated with this Droplet.<br />Requires `image:read` scope.</td>
+</tr>
+<tr>
+    <td><CopyableCode code="volume_snapshots" /></td>
+    <td><code>array</code></td>
+    <td>Volume Snapshots that are associated with this Droplet.<br />Requires `block_storage_snapshot:read` scope.</td>
+</tr>
+<tr>
+    <td><CopyableCode code="volumes" /></td>
+    <td><code>array</code></td>
+    <td>Volumes that are associated with this Droplet.<br />Requires `block_storage:read` scope.</td>
+</tr>
 </tbody>
 </table>
 </TabItem>
@@ -148,7 +173,11 @@ To list the associated billable resources that can be destroyed along with a<br 
 
 ```sql
 SELECT
-*
+floating_ips,
+reserved_ips,
+snapshots,
+volume_snapshots,
+volumes
 FROM digitalocean.compute.droplets_associated_resources
 WHERE droplet_id = '{{ droplet_id }}' -- required;
 ```

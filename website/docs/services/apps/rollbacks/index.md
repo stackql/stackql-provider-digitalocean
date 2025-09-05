@@ -124,6 +124,8 @@ SELECT
 '{{ deployment_id }}',
 {{ skip_pin }},
 '{{ app_id }}'
+RETURNING
+deployment
 ;
 ```
 </TabItem>

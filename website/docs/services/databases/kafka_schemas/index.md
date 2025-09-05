@@ -32,28 +32,12 @@ Creates, updates, deletes, gets or lists a <code>kafka_schemas</code> resource.
 The following fields are returned by `SELECT` queries:
 
 <Tabs
-    defaultValue="databases_list_kafka_schemas"
+    defaultValue="databases_get_kafka_schema"
     values={[
-        { label: 'databases_list_kafka_schemas', value: 'databases_list_kafka_schemas' },
-        { label: 'databases_get_kafka_schema', value: 'databases_get_kafka_schema' }
+        { label: 'databases_get_kafka_schema', value: 'databases_get_kafka_schema' },
+        { label: 'databases_list_kafka_schemas', value: 'databases_list_kafka_schemas' }
     ]}
 >
-<TabItem value="databases_list_kafka_schemas">
-
-A JSON object with a key of `subjects`.
-
-<table>
-<thead>
-    <tr>
-    <th>Name</th>
-    <th>Datatype</th>
-    <th>Description</th>
-    </tr>
-</thead>
-<tbody>
-</tbody>
-</table>
-</TabItem>
 <TabItem value="databases_get_kafka_schema">
 
 A JSON object.
@@ -67,6 +51,67 @@ A JSON object.
     </tr>
 </thead>
 <tbody>
+<tr>
+    <td><CopyableCode code="schema_id" /></td>
+    <td><code>integer</code></td>
+    <td>The id for schema.</td>
+</tr>
+<tr>
+    <td><CopyableCode code="subject_name" /></td>
+    <td><code>string</code></td>
+    <td>The name of the schema subject. (example: customer-schema)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="schema" /></td>
+    <td><code>string</code></td>
+    <td>The schema definition in the specified format. (example: &#123;<br />  "type": "record",<br />  "name": "Customer",<br />  "fields": [  <br />    &#123;"name": "id", "type": "int"&#125;,<br />    &#123;"name": "name", "type": "string"&#125;<br />  ]<br />&#125; )</td>
+</tr>
+<tr>
+    <td><CopyableCode code="schema_type" /></td>
+    <td><code>string</code></td>
+    <td>The type of the schema. (example: AVRO)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="version" /></td>
+    <td><code>string</code></td>
+    <td>The version of the schema. (example: 1)</td>
+</tr>
+</tbody>
+</table>
+</TabItem>
+<TabItem value="databases_list_kafka_schemas">
+
+A JSON object with a key of `subjects`.
+
+<table>
+<thead>
+    <tr>
+    <th>Name</th>
+    <th>Datatype</th>
+    <th>Description</th>
+    </tr>
+</thead>
+<tbody>
+<tr>
+    <td><CopyableCode code="schema_id" /></td>
+    <td><code>integer</code></td>
+    <td>The id for schema.</td>
+</tr>
+<tr>
+    <td><CopyableCode code="subject_name" /></td>
+    <td><code>string</code></td>
+    <td>The name of the schema subject. (example: customer-schema)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="schema" /></td>
+    <td><code>string</code></td>
+    <td>The schema definition in the specified format. (example: &#123;<br />  "type": "record",<br />  "name": "Customer",<br />  "fields": [  <br />    &#123;"name": "id", "type": "int"&#125;,<br />    &#123;"name": "name", "type": "string"&#125;<br />  ]<br />&#125; )</td>
+</tr>
+<tr>
+    <td><CopyableCode code="schema_type" /></td>
+    <td><code>string</code></td>
+    <td>The type of the schema. (example: AVRO)</td>
+</tr>
 </tbody>
 </table>
 </TabItem>
@@ -88,18 +133,18 @@ The following methods are available for this resource:
 </thead>
 <tbody>
 <tr>
-    <td><a href="#databases_list_kafka_schemas"><CopyableCode code="databases_list_kafka_schemas" /></a></td>
-    <td><CopyableCode code="select" /></td>
-    <td><a href="#parameter-database_cluster_uuid"><code>database_cluster_uuid</code></a></td>
-    <td></td>
-    <td>To list all schemas for a Kafka cluster, send a GET request to<br />`/v2/databases/$DATABASE_ID/schema-registry`.<br /></td>
-</tr>
-<tr>
     <td><a href="#databases_get_kafka_schema"><CopyableCode code="databases_get_kafka_schema" /></a></td>
     <td><CopyableCode code="select" /></td>
     <td><a href="#parameter-database_cluster_uuid"><code>database_cluster_uuid</code></a>, <a href="#parameter-subject_name"><code>subject_name</code></a></td>
     <td></td>
     <td>To get a specific schema by subject name for a Kafka cluster, send a GET request to<br />`/v2/databases/$DATABASE_ID/schema-registry/$SUBJECT_NAME`.<br /></td>
+</tr>
+<tr>
+    <td><a href="#databases_list_kafka_schemas"><CopyableCode code="databases_list_kafka_schemas" /></a></td>
+    <td><CopyableCode code="select" /></td>
+    <td><a href="#parameter-database_cluster_uuid"><code>database_cluster_uuid</code></a></td>
+    <td></td>
+    <td>To list all schemas for a Kafka cluster, send a GET request to<br />`/v2/databases/$DATABASE_ID/schema-registry`.<br /></td>
 </tr>
 <tr>
     <td><a href="#databases_create_kafka_schema"><CopyableCode code="databases_create_kafka_schema" /></a></td>
@@ -147,33 +192,40 @@ Parameters can be passed in the `WHERE` clause of a query. Check the [Methods](#
 ## `SELECT` examples
 
 <Tabs
-    defaultValue="databases_list_kafka_schemas"
+    defaultValue="databases_get_kafka_schema"
     values={[
-        { label: 'databases_list_kafka_schemas', value: 'databases_list_kafka_schemas' },
-        { label: 'databases_get_kafka_schema', value: 'databases_get_kafka_schema' }
+        { label: 'databases_get_kafka_schema', value: 'databases_get_kafka_schema' },
+        { label: 'databases_list_kafka_schemas', value: 'databases_list_kafka_schemas' }
     ]}
 >
-<TabItem value="databases_list_kafka_schemas">
-
-To list all schemas for a Kafka cluster, send a GET request to<br />`/v2/databases/$DATABASE_ID/schema-registry`.<br />
-
-```sql
-SELECT
-*
-FROM digitalocean.databases.kafka_schemas
-WHERE database_cluster_uuid = '{{ database_cluster_uuid }}' -- required;
-```
-</TabItem>
 <TabItem value="databases_get_kafka_schema">
 
 To get a specific schema by subject name for a Kafka cluster, send a GET request to<br />`/v2/databases/$DATABASE_ID/schema-registry/$SUBJECT_NAME`.<br />
 
 ```sql
 SELECT
-*
+schema_id,
+subject_name,
+schema,
+schema_type,
+version
 FROM digitalocean.databases.kafka_schemas
 WHERE database_cluster_uuid = '{{ database_cluster_uuid }}' -- required
 AND subject_name = '{{ subject_name }}' -- required;
+```
+</TabItem>
+<TabItem value="databases_list_kafka_schemas">
+
+To list all schemas for a Kafka cluster, send a GET request to<br />`/v2/databases/$DATABASE_ID/schema-registry`.<br />
+
+```sql
+SELECT
+schema_id,
+subject_name,
+schema,
+schema_type
+FROM digitalocean.databases.kafka_schemas
+WHERE database_cluster_uuid = '{{ database_cluster_uuid }}' -- required;
 ```
 </TabItem>
 </Tabs>
@@ -204,6 +256,11 @@ SELECT
 '{{ schema_type }}' --required,
 '{{ schema }}' --required,
 '{{ database_cluster_uuid }}'
+RETURNING
+schema_id,
+subject_name,
+schema,
+schema_type
 ;
 ```
 </TabItem>

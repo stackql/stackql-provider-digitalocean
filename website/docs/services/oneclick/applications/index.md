@@ -50,6 +50,16 @@ A JSON object with a key of `1_clicks`.
     </tr>
 </thead>
 <tbody>
+<tr>
+    <td><CopyableCode code="slug" /></td>
+    <td><code>string</code></td>
+    <td>The slug identifier for the 1-Click application. (title: slug, example: monitoring)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="type" /></td>
+    <td><code>string</code></td>
+    <td>The type of the 1-Click application. (title: type, example: kubernetes)</td>
+</tr>
 </tbody>
 </table>
 </TabItem>
@@ -122,7 +132,8 @@ To list all available 1-Click applications, send a GET request to `/v2/1-clicks`
 
 ```sql
 SELECT
-*
+slug,
+type
 FROM digitalocean.oneclick.applications
 WHERE type = '{{ type }}';
 ```
@@ -151,6 +162,8 @@ data__cluster_uuid
 SELECT 
 '{{ addon_slugs }}' --required,
 '{{ cluster_uuid }}' --required
+RETURNING
+message
 ;
 ```
 </TabItem>

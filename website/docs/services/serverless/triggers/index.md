@@ -32,28 +32,12 @@ Creates, updates, deletes, gets or lists a <code>triggers</code> resource.
 The following fields are returned by `SELECT` queries:
 
 <Tabs
-    defaultValue="functions_list_triggers"
+    defaultValue="functions_get_trigger"
     values={[
-        { label: 'functions_list_triggers', value: 'functions_list_triggers' },
-        { label: 'functions_get_trigger', value: 'functions_get_trigger' }
+        { label: 'functions_get_trigger', value: 'functions_get_trigger' },
+        { label: 'functions_list_triggers', value: 'functions_list_triggers' }
     ]}
 >
-<TabItem value="functions_list_triggers">
-
-An array of JSON objects with a key called `namespaces`.  Each object represents a namespace and contains<br />the properties associated with it. 
-
-<table>
-<thead>
-    <tr>
-    <th>Name</th>
-    <th>Datatype</th>
-    <th>Description</th>
-    </tr>
-</thead>
-<tbody>
-</tbody>
-</table>
-</TabItem>
 <TabItem value="functions_get_trigger">
 
 A JSON response object with a key called `trigger`. The object contains the properties associated<br />with the trigger.
@@ -67,6 +51,112 @@ A JSON response object with a key called `trigger`. The object contains the prop
     </tr>
 </thead>
 <tbody>
+<tr>
+    <td><CopyableCode code="name" /></td>
+    <td><code>string</code></td>
+    <td>The trigger's unique name within the namespace. (example: my trigger)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="created_at" /></td>
+    <td><code>string</code></td>
+    <td>UTC time string. (example: 2022-11-11T04:16:45Z)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="function" /></td>
+    <td><code>string</code></td>
+    <td>Name of function(action) that exists in the given namespace. (example: hello)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="is_enabled" /></td>
+    <td><code>boolean</code></td>
+    <td>Indicates weather the trigger is paused or unpaused.</td>
+</tr>
+<tr>
+    <td><CopyableCode code="namespace" /></td>
+    <td><code>string</code></td>
+    <td>A unique string format of UUID with a prefix fn-. (example: fn-xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="scheduled_details" /></td>
+    <td><code>object</code></td>
+    <td>Trigger details for SCHEDULED type, where body is optional. </td>
+</tr>
+<tr>
+    <td><CopyableCode code="scheduled_runs" /></td>
+    <td><code>object</code></td>
+    <td></td>
+</tr>
+<tr>
+    <td><CopyableCode code="type" /></td>
+    <td><code>string</code></td>
+    <td>String which indicates the type of trigger source like SCHEDULED. (example: SCHEDULED)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="updated_at" /></td>
+    <td><code>string</code></td>
+    <td>UTC time string. (example: 2022-11-11T04:16:45Z)</td>
+</tr>
+</tbody>
+</table>
+</TabItem>
+<TabItem value="functions_list_triggers">
+
+An array of JSON objects with a key called `namespaces`.  Each object represents a namespace and contains<br />the properties associated with it. 
+
+<table>
+<thead>
+    <tr>
+    <th>Name</th>
+    <th>Datatype</th>
+    <th>Description</th>
+    </tr>
+</thead>
+<tbody>
+<tr>
+    <td><CopyableCode code="name" /></td>
+    <td><code>string</code></td>
+    <td>The trigger's unique name within the namespace. (example: my trigger)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="created_at" /></td>
+    <td><code>string</code></td>
+    <td>UTC time string. (example: 2022-11-11T04:16:45Z)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="function" /></td>
+    <td><code>string</code></td>
+    <td>Name of function(action) that exists in the given namespace. (example: hello)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="is_enabled" /></td>
+    <td><code>boolean</code></td>
+    <td>Indicates weather the trigger is paused or unpaused.</td>
+</tr>
+<tr>
+    <td><CopyableCode code="namespace" /></td>
+    <td><code>string</code></td>
+    <td>A unique string format of UUID with a prefix fn-. (example: fn-xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="scheduled_details" /></td>
+    <td><code>object</code></td>
+    <td>Trigger details for SCHEDULED type, where body is optional. </td>
+</tr>
+<tr>
+    <td><CopyableCode code="scheduled_runs" /></td>
+    <td><code>object</code></td>
+    <td></td>
+</tr>
+<tr>
+    <td><CopyableCode code="type" /></td>
+    <td><code>string</code></td>
+    <td>String which indicates the type of trigger source like SCHEDULED. (example: SCHEDULED)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="updated_at" /></td>
+    <td><code>string</code></td>
+    <td>UTC time string. (example: 2022-11-11T04:16:45Z)</td>
+</tr>
 </tbody>
 </table>
 </TabItem>
@@ -88,18 +178,18 @@ The following methods are available for this resource:
 </thead>
 <tbody>
 <tr>
-    <td><a href="#functions_list_triggers"><CopyableCode code="functions_list_triggers" /></a></td>
-    <td><CopyableCode code="select" /></td>
-    <td><a href="#parameter-namespace_id"><code>namespace_id</code></a></td>
-    <td></td>
-    <td>Returns a list of triggers associated with the current user and namespace. To get all triggers, send a GET request to `/v2/functions/namespaces/$NAMESPACE_ID/triggers`.</td>
-</tr>
-<tr>
     <td><a href="#functions_get_trigger"><CopyableCode code="functions_get_trigger" /></a></td>
     <td><CopyableCode code="select" /></td>
     <td><a href="#parameter-namespace_id"><code>namespace_id</code></a>, <a href="#parameter-trigger_name"><code>trigger_name</code></a></td>
     <td></td>
     <td>Gets the trigger details. To get the trigger details, send a GET request to `/v2/functions/namespaces/$NAMESPACE_ID/triggers/$TRIGGER_NAME`.</td>
+</tr>
+<tr>
+    <td><a href="#functions_list_triggers"><CopyableCode code="functions_list_triggers" /></a></td>
+    <td><CopyableCode code="select" /></td>
+    <td><a href="#parameter-namespace_id"><code>namespace_id</code></a></td>
+    <td></td>
+    <td>Returns a list of triggers associated with the current user and namespace. To get all triggers, send a GET request to `/v2/functions/namespaces/$NAMESPACE_ID/triggers`.</td>
 </tr>
 <tr>
     <td><a href="#functions_create_trigger"><CopyableCode code="functions_create_trigger" /></a></td>
@@ -154,33 +244,49 @@ Parameters can be passed in the `WHERE` clause of a query. Check the [Methods](#
 ## `SELECT` examples
 
 <Tabs
-    defaultValue="functions_list_triggers"
+    defaultValue="functions_get_trigger"
     values={[
-        { label: 'functions_list_triggers', value: 'functions_list_triggers' },
-        { label: 'functions_get_trigger', value: 'functions_get_trigger' }
+        { label: 'functions_get_trigger', value: 'functions_get_trigger' },
+        { label: 'functions_list_triggers', value: 'functions_list_triggers' }
     ]}
 >
-<TabItem value="functions_list_triggers">
-
-Returns a list of triggers associated with the current user and namespace. To get all triggers, send a GET request to `/v2/functions/namespaces/$NAMESPACE_ID/triggers`.
-
-```sql
-SELECT
-*
-FROM digitalocean.serverless.triggers
-WHERE namespace_id = '{{ namespace_id }}' -- required;
-```
-</TabItem>
 <TabItem value="functions_get_trigger">
 
 Gets the trigger details. To get the trigger details, send a GET request to `/v2/functions/namespaces/$NAMESPACE_ID/triggers/$TRIGGER_NAME`.
 
 ```sql
 SELECT
-*
+name,
+created_at,
+function,
+is_enabled,
+namespace,
+scheduled_details,
+scheduled_runs,
+type,
+updated_at
 FROM digitalocean.serverless.triggers
 WHERE namespace_id = '{{ namespace_id }}' -- required
 AND trigger_name = '{{ trigger_name }}' -- required;
+```
+</TabItem>
+<TabItem value="functions_list_triggers">
+
+Returns a list of triggers associated with the current user and namespace. To get all triggers, send a GET request to `/v2/functions/namespaces/$NAMESPACE_ID/triggers`.
+
+```sql
+SELECT
+name,
+created_at,
+function,
+is_enabled,
+namespace,
+scheduled_details,
+scheduled_runs,
+type,
+updated_at
+FROM digitalocean.serverless.triggers
+WHERE namespace_id = '{{ namespace_id }}' -- required;
 ```
 </TabItem>
 </Tabs>
@@ -215,6 +321,8 @@ SELECT
 {{ is_enabled }} --required,
 '{{ scheduled_details }}' --required,
 '{{ namespace_id }}'
+RETURNING
+trigger
 ;
 ```
 </TabItem>
@@ -276,7 +384,9 @@ data__is_enabled = {{ is_enabled }},
 data__scheduled_details = '{{ scheduled_details }}'
 WHERE 
 namespace_id = '{{ namespace_id }}' --required
-AND trigger_name = '{{ trigger_name }}' --required;
+AND trigger_name = '{{ trigger_name }}' --required
+RETURNING
+trigger;
 ```
 </TabItem>
 </Tabs>

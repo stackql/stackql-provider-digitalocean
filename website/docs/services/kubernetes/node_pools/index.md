@@ -32,28 +32,12 @@ Creates, updates, deletes, gets or lists a <code>node_pools</code> resource.
 The following fields are returned by `SELECT` queries:
 
 <Tabs
-    defaultValue="kubernetes_list_node_pools"
+    defaultValue="kubernetes_get_node_pool"
     values={[
-        { label: 'kubernetes_list_node_pools', value: 'kubernetes_list_node_pools' },
-        { label: 'kubernetes_get_node_pool', value: 'kubernetes_get_node_pool' }
+        { label: 'kubernetes_get_node_pool', value: 'kubernetes_get_node_pool' },
+        { label: 'kubernetes_list_node_pools', value: 'kubernetes_list_node_pools' }
     ]}
 >
-<TabItem value="kubernetes_list_node_pools">
-
-The response will be a JSON object with a key called `node_pools`. This will<br />be set to an array of objects, each of which will contain the standard node<br />pool attributes.<br />
-
-<table>
-<thead>
-    <tr>
-    <th>Name</th>
-    <th>Datatype</th>
-    <th>Description</th>
-    </tr>
-</thead>
-<tbody>
-</tbody>
-</table>
-</TabItem>
 <TabItem value="kubernetes_get_node_pool">
 
 The response will be a JSON object with a key called `node_pool`. The value<br />of this will be an object containing the standard attributes of a node pool.<br />
@@ -67,6 +51,132 @@ The response will be a JSON object with a key called `node_pool`. The value<br /
     </tr>
 </thead>
 <tbody>
+<tr>
+    <td><CopyableCode code="id" /></td>
+    <td><code>string (uuid)</code></td>
+    <td>A unique ID that can be used to identify and reference a specific node pool. (example: cdda885e-7663-40c8-bc74-3a036c66545d)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="name" /></td>
+    <td><code>string</code></td>
+    <td>A human-readable name for the node pool. (example: frontend-pool)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="auto_scale" /></td>
+    <td><code>boolean</code></td>
+    <td>A boolean value indicating whether auto-scaling is enabled for this node pool.</td>
+</tr>
+<tr>
+    <td><CopyableCode code="count" /></td>
+    <td><code>integer</code></td>
+    <td>The number of Droplet instances in the node pool.</td>
+</tr>
+<tr>
+    <td><CopyableCode code="labels" /></td>
+    <td><code>object</code></td>
+    <td>An object of key/value mappings specifying labels to apply to all nodes in a pool. Labels will automatically be applied to all existing nodes and any subsequent nodes added to the pool. Note that when a label is removed, it is not deleted from the nodes in the pool.</td>
+</tr>
+<tr>
+    <td><CopyableCode code="max_nodes" /></td>
+    <td><code>integer</code></td>
+    <td>The maximum number of nodes that this node pool can be auto-scaled to. The value will be `0` if `auto_scale` is set to `false`.</td>
+</tr>
+<tr>
+    <td><CopyableCode code="min_nodes" /></td>
+    <td><code>integer</code></td>
+    <td>The minimum number of nodes that this node pool can be auto-scaled to. The value will be `0` if `auto_scale` is set to `false`.</td>
+</tr>
+<tr>
+    <td><CopyableCode code="nodes" /></td>
+    <td><code>array</code></td>
+    <td>An object specifying the details of a specific worker node in a node pool.</td>
+</tr>
+<tr>
+    <td><CopyableCode code="size" /></td>
+    <td><code>string</code></td>
+    <td>The slug identifier for the type of Droplet used as workers in the node pool. (example: s-1vcpu-2gb)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="tags" /></td>
+    <td><code>array</code></td>
+    <td>An array containing the tags applied to the node pool. All node pools are automatically tagged `k8s`, `k8s-worker`, and `k8s:$K8S_CLUSTER_ID`. <br /><br />Requires `tag:read` scope.</td>
+</tr>
+<tr>
+    <td><CopyableCode code="taints" /></td>
+    <td><code>array</code></td>
+    <td>An array of taints to apply to all nodes in a pool. Taints will automatically be applied to all existing nodes and any subsequent nodes added to the pool. When a taint is removed, it is deleted from all nodes in the pool.</td>
+</tr>
+</tbody>
+</table>
+</TabItem>
+<TabItem value="kubernetes_list_node_pools">
+
+The response will be a JSON object with a key called `node_pools`. This will<br />be set to an array of objects, each of which will contain the standard node<br />pool attributes.<br />
+
+<table>
+<thead>
+    <tr>
+    <th>Name</th>
+    <th>Datatype</th>
+    <th>Description</th>
+    </tr>
+</thead>
+<tbody>
+<tr>
+    <td><CopyableCode code="id" /></td>
+    <td><code>string (uuid)</code></td>
+    <td>A unique ID that can be used to identify and reference a specific node pool. (example: cdda885e-7663-40c8-bc74-3a036c66545d)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="name" /></td>
+    <td><code>string</code></td>
+    <td>A human-readable name for the node pool. (example: frontend-pool)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="auto_scale" /></td>
+    <td><code>boolean</code></td>
+    <td>A boolean value indicating whether auto-scaling is enabled for this node pool.</td>
+</tr>
+<tr>
+    <td><CopyableCode code="count" /></td>
+    <td><code>integer</code></td>
+    <td>The number of Droplet instances in the node pool.</td>
+</tr>
+<tr>
+    <td><CopyableCode code="labels" /></td>
+    <td><code>object</code></td>
+    <td>An object of key/value mappings specifying labels to apply to all nodes in a pool. Labels will automatically be applied to all existing nodes and any subsequent nodes added to the pool. Note that when a label is removed, it is not deleted from the nodes in the pool.</td>
+</tr>
+<tr>
+    <td><CopyableCode code="max_nodes" /></td>
+    <td><code>integer</code></td>
+    <td>The maximum number of nodes that this node pool can be auto-scaled to. The value will be `0` if `auto_scale` is set to `false`.</td>
+</tr>
+<tr>
+    <td><CopyableCode code="min_nodes" /></td>
+    <td><code>integer</code></td>
+    <td>The minimum number of nodes that this node pool can be auto-scaled to. The value will be `0` if `auto_scale` is set to `false`.</td>
+</tr>
+<tr>
+    <td><CopyableCode code="nodes" /></td>
+    <td><code>array</code></td>
+    <td>An object specifying the details of a specific worker node in a node pool.</td>
+</tr>
+<tr>
+    <td><CopyableCode code="size" /></td>
+    <td><code>string</code></td>
+    <td>The slug identifier for the type of Droplet used as workers in the node pool. (example: s-1vcpu-2gb)</td>
+</tr>
+<tr>
+    <td><CopyableCode code="tags" /></td>
+    <td><code>array</code></td>
+    <td>An array containing the tags applied to the node pool. All node pools are automatically tagged `k8s`, `k8s-worker`, and `k8s:$K8S_CLUSTER_ID`. <br /><br />Requires `tag:read` scope.</td>
+</tr>
+<tr>
+    <td><CopyableCode code="taints" /></td>
+    <td><code>array</code></td>
+    <td>An array of taints to apply to all nodes in a pool. Taints will automatically be applied to all existing nodes and any subsequent nodes added to the pool. When a taint is removed, it is deleted from all nodes in the pool.</td>
+</tr>
 </tbody>
 </table>
 </TabItem>
@@ -88,18 +198,18 @@ The following methods are available for this resource:
 </thead>
 <tbody>
 <tr>
-    <td><a href="#kubernetes_list_node_pools"><CopyableCode code="kubernetes_list_node_pools" /></a></td>
-    <td><CopyableCode code="select" /></td>
-    <td><a href="#parameter-cluster_id"><code>cluster_id</code></a></td>
-    <td></td>
-    <td>To list all of the node pools in a Kubernetes clusters, send a GET request to<br />`/v2/kubernetes/clusters/$K8S_CLUSTER_ID/node_pools`.<br /></td>
-</tr>
-<tr>
     <td><a href="#kubernetes_get_node_pool"><CopyableCode code="kubernetes_get_node_pool" /></a></td>
     <td><CopyableCode code="select" /></td>
     <td><a href="#parameter-cluster_id"><code>cluster_id</code></a>, <a href="#parameter-node_pool_id"><code>node_pool_id</code></a></td>
     <td></td>
     <td>To show information about a specific node pool in a Kubernetes cluster, send<br />a GET request to `/v2/kubernetes/clusters/$K8S_CLUSTER_ID/node_pools/$NODE_POOL_ID`.<br /></td>
+</tr>
+<tr>
+    <td><a href="#kubernetes_list_node_pools"><CopyableCode code="kubernetes_list_node_pools" /></a></td>
+    <td><CopyableCode code="select" /></td>
+    <td><a href="#parameter-cluster_id"><code>cluster_id</code></a></td>
+    <td></td>
+    <td>To list all of the node pools in a Kubernetes clusters, send a GET request to<br />`/v2/kubernetes/clusters/$K8S_CLUSTER_ID/node_pools`.<br /></td>
 </tr>
 <tr>
     <td><a href="#kubernetes_add_node_pool"><CopyableCode code="kubernetes_add_node_pool" /></a></td>
@@ -161,33 +271,53 @@ Parameters can be passed in the `WHERE` clause of a query. Check the [Methods](#
 ## `SELECT` examples
 
 <Tabs
-    defaultValue="kubernetes_list_node_pools"
+    defaultValue="kubernetes_get_node_pool"
     values={[
-        { label: 'kubernetes_list_node_pools', value: 'kubernetes_list_node_pools' },
-        { label: 'kubernetes_get_node_pool', value: 'kubernetes_get_node_pool' }
+        { label: 'kubernetes_get_node_pool', value: 'kubernetes_get_node_pool' },
+        { label: 'kubernetes_list_node_pools', value: 'kubernetes_list_node_pools' }
     ]}
 >
-<TabItem value="kubernetes_list_node_pools">
-
-To list all of the node pools in a Kubernetes clusters, send a GET request to<br />`/v2/kubernetes/clusters/$K8S_CLUSTER_ID/node_pools`.<br />
-
-```sql
-SELECT
-*
-FROM digitalocean.kubernetes.node_pools
-WHERE cluster_id = '{{ cluster_id }}' -- required;
-```
-</TabItem>
 <TabItem value="kubernetes_get_node_pool">
 
 To show information about a specific node pool in a Kubernetes cluster, send<br />a GET request to `/v2/kubernetes/clusters/$K8S_CLUSTER_ID/node_pools/$NODE_POOL_ID`.<br />
 
 ```sql
 SELECT
-*
+id,
+name,
+auto_scale,
+count,
+labels,
+max_nodes,
+min_nodes,
+nodes,
+size,
+tags,
+taints
 FROM digitalocean.kubernetes.node_pools
 WHERE cluster_id = '{{ cluster_id }}' -- required
 AND node_pool_id = '{{ node_pool_id }}' -- required;
+```
+</TabItem>
+<TabItem value="kubernetes_list_node_pools">
+
+To list all of the node pools in a Kubernetes clusters, send a GET request to<br />`/v2/kubernetes/clusters/$K8S_CLUSTER_ID/node_pools`.<br />
+
+```sql
+SELECT
+id,
+name,
+auto_scale,
+count,
+labels,
+max_nodes,
+min_nodes,
+nodes,
+size,
+tags,
+taints
+FROM digitalocean.kubernetes.node_pools
+WHERE cluster_id = '{{ cluster_id }}' -- required;
 ```
 </TabItem>
 </Tabs>
@@ -230,6 +360,8 @@ SELECT
 {{ min_nodes }},
 {{ max_nodes }},
 '{{ cluster_id }}'
+RETURNING
+node_pool
 ;
 ```
 </TabItem>
@@ -319,7 +451,9 @@ WHERE
 cluster_id = '{{ cluster_id }}' --required
 AND node_pool_id = '{{ node_pool_id }}' --required
 AND data__name = '{{ name }}' --required
-AND data__count = '{{ count }}' --required;
+AND data__count = '{{ count }}' --required
+RETURNING
+node_pool;
 ```
 </TabItem>
 </Tabs>

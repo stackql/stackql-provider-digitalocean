@@ -50,6 +50,16 @@ The response will be a JSON object with a key called `kubernetes_cluster_user`<b
     </tr>
 </thead>
 <tbody>
+<tr>
+    <td><CopyableCode code="groups" /></td>
+    <td><code>array</code></td>
+    <td>A list of in-cluster groups that the user belongs to.</td>
+</tr>
+<tr>
+    <td><CopyableCode code="username" /></td>
+    <td><code>string (email)</code></td>
+    <td>The username for the cluster admin user. (example: sammy@digitalocean.com)</td>
+</tr>
 </tbody>
 </table>
 </TabItem>
@@ -115,7 +125,8 @@ To show information the user associated with a Kubernetes cluster, send a GET<br
 
 ```sql
 SELECT
-*
+groups,
+username
 FROM digitalocean.kubernetes.cluster_user
 WHERE cluster_id = '{{ cluster_id }}' -- required;
 ```
