@@ -184,31 +184,25 @@ Example queries to try:
 
 ```sql
 -- List all droplets
-SELECT 
-  id, 
-  name, 
-  region.slug as region, 
-  size.slug as size, 
-  status 
-FROM 
-  digitalocean.droplet.droplets;
-
--- List all volumes
-SELECT 
-  id, 
-  name, 
-  size_gigabytes, 
-  region.slug as region 
-FROM 
-  digitalocean.volume.volumes;
+SELECT
+id,
+name,
+status,
+size_slug,
+JSON_EXTRACT(size, '$.vcpus') as vcpus,
+JSON_EXTRACT(size, '$.memory') as memory,
+JSON_EXTRACT(size, '$.disk') as disk_size_gb,
+JSON_EXTRACT(size, '$.price_hourly') as price_hourly,
+JSON_EXTRACT(size, '$.price_monthly') as price_monthly
+FROM digitalocean.compute.droplets;
 
 -- List all Kubernetes clusters
 SELECT 
-  id, 
-  name, 
-  region_slug, 
-  version, 
-  status.state 
+  id,
+  name,
+  cluster_subnet,
+  region,
+  JSON_EXTRACT(status, '$.state') as state
 FROM 
   digitalocean.kubernetes.clusters;
 ```
