@@ -63,7 +63,7 @@ The response will be a JSON object with a key called members. This will be set<b
 <tr>
     <td><CopyableCode code="urn" /></td>
     <td><code>string</code></td>
-    <td>The uniform resource name (URN) for the resource in the format do:resource_type:resource_id. (pattern: ^do:(dbaas|domain|droplet|floatingip|loadbalancer|space|volume|kubernetes|vpc):.*, example: do:droplet:13457723)</td>
+    <td>The uniform resource name (URN) for the resource in the format do:resource_type:resource_id. (pattern: <code>^do:(dbaas|domain|droplet|floatingip|loadbalancer|space|volume|kubernetes|vpc):.*</code>, example: do:droplet:13457723)</td>
 </tr>
 </tbody>
 </table>
@@ -152,7 +152,8 @@ FROM digitalocean.vpcs.members
 WHERE vpc_id = '{{ vpc_id }}' -- required
 AND resource_type = '{{ resource_type }}'
 AND per_page = '{{ per_page }}'
-AND page = '{{ page }}';
+AND page = '{{ page }}'
+;
 ```
 </TabItem>
 </Tabs>

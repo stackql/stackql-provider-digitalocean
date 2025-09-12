@@ -182,7 +182,8 @@ SELECT
 destination,
 resources
 FROM digitalocean.monitoring.sinks
-WHERE sink_uuid = '{{ sink_uuid }}' -- required;
+WHERE sink_uuid = '{{ sink_uuid }}' -- required
+;
 ```
 </TabItem>
 <TabItem value="monitoring_list_sinks">
@@ -194,7 +195,8 @@ SELECT
 destination,
 resources
 FROM digitalocean.monitoring.sinks
-WHERE resource_id = '{{ resource_id }}';
+WHERE resource_id = '{{ resource_id }}'
+;
 ```
 </TabItem>
 </Tabs>
@@ -259,7 +261,8 @@ To delete a sink, send a DELETE request to `/v2/monitoring/sinks/$&#123;sink_uui
 
 ```sql
 DELETE FROM digitalocean.monitoring.sinks
-WHERE sink_uuid = '{{ sink_uuid }}' --required;
+WHERE sink_uuid = '{{ sink_uuid }}' --required
+;
 ```
 </TabItem>
 </Tabs>

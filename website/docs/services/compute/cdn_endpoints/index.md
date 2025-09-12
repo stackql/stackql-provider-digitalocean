@@ -256,7 +256,8 @@ endpoint,
 origin,
 ttl
 FROM digitalocean.compute.cdn_endpoints
-WHERE cdn_id = '{{ cdn_id }}' -- required;
+WHERE cdn_id = '{{ cdn_id }}' -- required
+;
 ```
 </TabItem>
 <TabItem value="cdn_list_endpoints">
@@ -274,7 +275,8 @@ origin,
 ttl
 FROM digitalocean.compute.cdn_endpoints
 WHERE per_page = '{{ per_page }}'
-AND page = '{{ page }}';
+AND page = '{{ page }}'
+;
 ```
 </TabItem>
 </Tabs>
@@ -301,7 +303,7 @@ data__certificate_id,
 data__custom_domain
 )
 SELECT 
-'{{ origin }}' --required,
+'{{ origin }}' /* required */,
 {{ ttl }},
 '{{ certificate_id }}',
 '{{ custom_domain }}'
@@ -384,7 +386,8 @@ To delete a specific CDN endpoint, send a DELETE request to<br />`/v2/cdn/endpoi
 
 ```sql
 DELETE FROM digitalocean.compute.cdn_endpoints
-WHERE cdn_id = '{{ cdn_id }}' --required;
+WHERE cdn_id = '{{ cdn_id }}' --required
+;
 ```
 </TabItem>
 </Tabs>
@@ -408,7 +411,8 @@ EXEC digitalocean.compute.cdn_endpoints.cdn_purge_cache
 @@json=
 '{
 "files": "{{ files }}"
-}';
+}'
+;
 ```
 </TabItem>
 </Tabs>

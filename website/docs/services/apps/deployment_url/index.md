@@ -170,7 +170,8 @@ FROM digitalocean.apps.deployment_url
 WHERE app_id = '{{ app_id }}' -- required
 AND deployment_id = '{{ deployment_id }}' -- required
 AND component_name = '{{ component_name }}' -- required
-AND instance_name = '{{ instance_name }}';
+AND instance_name = '{{ instance_name }}'
+;
 ```
 </TabItem>
 <TabItem value="apps_get_exec_active_deployment">
@@ -183,7 +184,8 @@ url
 FROM digitalocean.apps.deployment_url
 WHERE app_id = '{{ app_id }}' -- required
 AND component_name = '{{ component_name }}' -- required
-AND instance_name = '{{ instance_name }}';
+AND instance_name = '{{ instance_name }}'
+;
 ```
 </TabItem>
 </Tabs>

@@ -154,7 +154,7 @@ The following methods are available for this resource:
 <tr>
     <td><a href="#reserved_ips_actions_post"><CopyableCode code="reserved_ips_actions_post" /></a></td>
     <td><CopyableCode code="exec" /></td>
-    <td><a href="#parameter-reserved_ip"><code>reserved_ip</code></a></td>
+    <td><a href="#parameter-reserved_ip"><code>reserved_ip</code></a>, <a href="#parameter-type"><code>type</code></a></td>
     <td></td>
     <td>To initiate an action on a reserved IP send a POST request to<br />`/v2/reserved_ips/$RESERVED_IP/actions`. In the JSON body to the request,<br />set the `type` attribute to on of the supported action types:<br /><br />| Action     | Details<br />|------------|--------<br />| `assign`   | Assigns a reserved IP to a Droplet<br />| `unassign` | Unassign a reserved IP from a Droplet<br /></td>
 </tr>
@@ -205,7 +205,8 @@ SELECT
 action
 FROM digitalocean.compute.reserved_ip_actions
 WHERE reserved_ip = '{{ reserved_ip }}' -- required
-AND action_id = '{{ action_id }}' -- required;
+AND action_id = '{{ action_id }}' -- required
+;
 ```
 </TabItem>
 <TabItem value="reserved_ips_actions_list">
@@ -224,7 +225,8 @@ started_at,
 status,
 type
 FROM digitalocean.compute.reserved_ip_actions
-WHERE reserved_ip = '{{ reserved_ip }}' -- required;
+WHERE reserved_ip = '{{ reserved_ip }}' -- required
+;
 ```
 </TabItem>
 </Tabs>
@@ -244,7 +246,12 @@ To initiate an action on a reserved IP send a POST request to<br />`/v2/reserved
 
 ```sql
 EXEC digitalocean.compute.reserved_ip_actions.reserved_ips_actions_post 
-@reserved_ip='{{ reserved_ip }}' --required;
+@reserved_ip='{{ reserved_ip }}' --required 
+@@json=
+'{
+"type": "{{ type }}"
+}'
+;
 ```
 </TabItem>
 </Tabs>

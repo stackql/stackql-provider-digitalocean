@@ -54,7 +54,7 @@ The response will be a JSON object with a key called `tag`. <br />The value of t
 <tr>
     <td><CopyableCode code="name" /></td>
     <td><code>string</code></td>
-    <td>The name of the tag. Tags may contain letters, numbers, colons, dashes, and underscores. There is a limit of 255 characters per tag.  **Note:** Tag names are case stable, which means the capitalization you use when you first create a tag is canonical.  When working with tags in the API, you must use the tag's canonical capitalization. For example, if you create a tag named "PROD", the URL to add that tag to a resource would be `https://api.digitalocean.com/v2/tags/PROD/resources` (not `/v2/tags/prod/resources`).  Tagged resources in the control panel will always display the canonical capitalization. For example, if you create a tag named "PROD", you can tag resources in the control panel by entering "prod". The tag will still display with its canonical capitalization, "PROD".  (pattern: ^[a-zA-Z0-9_\-\:]+$, example: extra-awesome)</td>
+    <td>The name of the tag. Tags may contain letters, numbers, colons, dashes, and underscores. There is a limit of 255 characters per tag.  **Note:** Tag names are case stable, which means the capitalization you use when you first create a tag is canonical.  When working with tags in the API, you must use the tag's canonical capitalization. For example, if you create a tag named "PROD", the URL to add that tag to a resource would be `https://api.digitalocean.com/v2/tags/PROD/resources` (not `/v2/tags/prod/resources`).  Tagged resources in the control panel will always display the canonical capitalization. For example, if you create a tag named "PROD", you can tag resources in the control panel by entering "prod". The tag will still display with its canonical capitalization, "PROD".  (pattern: <code>^[a-zA-Z0-9_\-\:]+$</code>, example: extra-awesome)</td>
 </tr>
 <tr>
     <td><CopyableCode code="resources" /></td>
@@ -80,7 +80,7 @@ To list all of your tags, you can send a `GET` request to `/v2/tags`.
 <tr>
     <td><CopyableCode code="name" /></td>
     <td><code>string</code></td>
-    <td>The name of the tag. Tags may contain letters, numbers, colons, dashes, and underscores. There is a limit of 255 characters per tag.  **Note:** Tag names are case stable, which means the capitalization you use when you first create a tag is canonical.  When working with tags in the API, you must use the tag's canonical capitalization. For example, if you create a tag named "PROD", the URL to add that tag to a resource would be `https://api.digitalocean.com/v2/tags/PROD/resources` (not `/v2/tags/prod/resources`).  Tagged resources in the control panel will always display the canonical capitalization. For example, if you create a tag named "PROD", you can tag resources in the control panel by entering "prod". The tag will still display with its canonical capitalization, "PROD".  (pattern: ^[a-zA-Z0-9_\-\:]+$, example: extra-awesome)</td>
+    <td>The name of the tag. Tags may contain letters, numbers, colons, dashes, and underscores. There is a limit of 255 characters per tag.  **Note:** Tag names are case stable, which means the capitalization you use when you first create a tag is canonical.  When working with tags in the API, you must use the tag's canonical capitalization. For example, if you create a tag named "PROD", the URL to add that tag to a resource would be `https://api.digitalocean.com/v2/tags/PROD/resources` (not `/v2/tags/prod/resources`).  Tagged resources in the control panel will always display the canonical capitalization. For example, if you create a tag named "PROD", you can tag resources in the control panel by entering "prod". The tag will still display with its canonical capitalization, "PROD".  (pattern: <code>^[a-zA-Z0-9_\-\:]+$</code>, example: extra-awesome)</td>
 </tr>
 <tr>
     <td><CopyableCode code="resources" /></td>
@@ -201,7 +201,8 @@ SELECT
 name,
 resources
 FROM digitalocean.compute.tags
-WHERE tag_id = '{{ tag_id }}' -- required;
+WHERE tag_id = '{{ tag_id }}' -- required
+;
 ```
 </TabItem>
 <TabItem value="tags_list">
@@ -214,7 +215,8 @@ name,
 resources
 FROM digitalocean.compute.tags
 WHERE per_page = '{{ per_page }}'
-AND page = '{{ page }}';
+AND page = '{{ page }}'
+;
 ```
 </TabItem>
 </Tabs>
@@ -281,7 +283,8 @@ A tag can be deleted by sending a `DELETE` request to `/v2/tags/$TAG_NAME`. Dele
 
 ```sql
 DELETE FROM digitalocean.compute.tags
-WHERE tag_id = '{{ tag_id }}' --required;
+WHERE tag_id = '{{ tag_id }}' --required
+;
 ```
 </TabItem>
 </Tabs>
@@ -306,7 +309,8 @@ EXEC digitalocean.compute.tags.tags_assign_resources
 @@json=
 '{
 "resources": "{{ resources }}"
-}';
+}'
+;
 ```
 </TabItem>
 <TabItem value="tags_unassign_resources">
@@ -319,7 +323,8 @@ EXEC digitalocean.compute.tags.tags_unassign_resources
 @@json=
 '{
 "resources": "{{ resources }}"
-}';
+}'
+;
 ```
 </TabItem>
 </Tabs>

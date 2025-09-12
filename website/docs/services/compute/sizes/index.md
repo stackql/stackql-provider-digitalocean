@@ -194,7 +194,8 @@ transfer,
 vcpus
 FROM digitalocean.compute.sizes
 WHERE per_page = '{{ per_page }}'
-AND page = '{{ page }}';
+AND page = '{{ page }}'
+;
 ```
 </TabItem>
 </Tabs>

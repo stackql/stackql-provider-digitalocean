@@ -289,7 +289,8 @@ storage_size_mib,
 tags
 FROM digitalocean.databases.replicas
 WHERE database_cluster_uuid = '{{ database_cluster_uuid }}' -- required
-AND replica_name = '{{ replica_name }}' -- required;
+AND replica_name = '{{ replica_name }}' -- required
+;
 ```
 </TabItem>
 <TabItem value="databases_list_replicas">
@@ -310,7 +311,8 @@ status,
 storage_size_mib,
 tags
 FROM digitalocean.databases.replicas
-WHERE database_cluster_uuid = '{{ database_cluster_uuid }}' -- required;
+WHERE database_cluster_uuid = '{{ database_cluster_uuid }}' -- required
+;
 ```
 </TabItem>
 </Tabs>
@@ -340,7 +342,7 @@ data__storage_size_mib,
 database_cluster_uuid
 )
 SELECT 
-'{{ name }}' --required,
+'{{ name }}' /* required */,
 '{{ region }}',
 '{{ size }}',
 '{{ tags }}',
@@ -411,7 +413,8 @@ To destroy a specific read-only replica, send a DELETE request to `/v2/databases
 ```sql
 DELETE FROM digitalocean.databases.replicas
 WHERE database_cluster_uuid = '{{ database_cluster_uuid }}' --required
-AND replica_name = '{{ replica_name }}' --required;
+AND replica_name = '{{ replica_name }}' --required
+;
 ```
 </TabItem>
 </Tabs>
@@ -432,7 +435,8 @@ To promote a specific read-only replica, send a PUT request to `/v2/databases/$D
 ```sql
 EXEC digitalocean.databases.replicas.databases_promote_replica 
 @database_cluster_uuid='{{ database_cluster_uuid }}' --required, 
-@replica_name='{{ replica_name }}' --required;
+@replica_name='{{ replica_name }}' --required
+;
 ```
 </TabItem>
 </Tabs>

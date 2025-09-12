@@ -263,7 +263,8 @@ AND deployment_id = '{{ deployment_id }}' -- required
 AND component_name = '{{ component_name }}' -- required
 AND type = '{{ type }}' -- required
 AND follow = '{{ follow }}'
-AND pod_connection_timeout = '{{ pod_connection_timeout }}';
+AND pod_connection_timeout = '{{ pod_connection_timeout }}'
+;
 ```
 </TabItem>
 <TabItem value="apps_get_logs_active_deployment">
@@ -279,7 +280,8 @@ WHERE app_id = '{{ app_id }}' -- required
 AND component_name = '{{ component_name }}' -- required
 AND type = '{{ type }}' -- required
 AND follow = '{{ follow }}'
-AND pod_connection_timeout = '{{ pod_connection_timeout }}';
+AND pod_connection_timeout = '{{ pod_connection_timeout }}'
+;
 ```
 </TabItem>
 <TabItem value="apps_get_logs_aggregate">
@@ -295,7 +297,8 @@ WHERE app_id = '{{ app_id }}' -- required
 AND deployment_id = '{{ deployment_id }}' -- required
 AND type = '{{ type }}' -- required
 AND follow = '{{ follow }}'
-AND pod_connection_timeout = '{{ pod_connection_timeout }}';
+AND pod_connection_timeout = '{{ pod_connection_timeout }}'
+;
 ```
 </TabItem>
 <TabItem value="apps_get_logs_active_deployment_aggregate">
@@ -310,7 +313,8 @@ FROM digitalocean.apps.deployment_logs
 WHERE app_id = '{{ app_id }}' -- required
 AND type = '{{ type }}' -- required
 AND follow = '{{ follow }}'
-AND pod_connection_timeout = '{{ pod_connection_timeout }}';
+AND pod_connection_timeout = '{{ pod_connection_timeout }}'
+;
 ```
 </TabItem>
 </Tabs>

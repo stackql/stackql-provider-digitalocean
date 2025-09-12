@@ -59,7 +59,7 @@ The response will be a JSON object with details about the partner attachment<br 
 <tr>
     <td><CopyableCode code="name" /></td>
     <td><code>string</code></td>
-    <td>The name of the partner attachment. Must be unique and may only contain alphanumeric characters, dashes, and periods. (pattern: ^[a-zA-Z0-9\-\.]+$, example: env.prod-partner-network-connect)</td>
+    <td>The name of the partner attachment. Must be unique and may only contain alphanumeric characters, dashes, and periods. (pattern: <code>^[a-zA-Z0-9\-\.]+$</code>, example: env.prod-partner-network-connect)</td>
 </tr>
 <tr>
     <td><CopyableCode code="bgp" /></td>
@@ -130,7 +130,7 @@ The response will be a JSON object with a `partner_attachments` key<br />that co
 <tr>
     <td><CopyableCode code="name" /></td>
     <td><code>string</code></td>
-    <td>The name of the partner attachment. Must be unique and may only contain alphanumeric characters, dashes, and periods. (pattern: ^[a-zA-Z0-9\-\.]+$, example: env.prod-partner-network-connect)</td>
+    <td>The name of the partner attachment. Must be unique and may only contain alphanumeric characters, dashes, and periods. (pattern: <code>^[a-zA-Z0-9\-\.]+$</code>, example: env.prod-partner-network-connect)</td>
 </tr>
 <tr>
     <td><CopyableCode code="bgp" /></td>
@@ -221,7 +221,7 @@ The following methods are available for this resource:
 <tr>
     <td><a href="#partner_attachments_patch"><CopyableCode code="partner_attachments_patch" /></a></td>
     <td><CopyableCode code="update" /></td>
-    <td><a href="#parameter-pa_id"><code>pa_id</code></a></td>
+    <td><a href="#parameter-pa_id"><code>pa_id</code></a>, <a href="#parameter-data__name"><code>data__name</code></a></td>
     <td></td>
     <td>To update an existing partner attachment, send a `PATCH` request to<br />`/v2/partner_network_connect/attachments/&#123;pa_id&#125;` with a JSON object containing the<br />fields to be updated.<br /></td>
 </tr>
@@ -293,7 +293,8 @@ region,
 state,
 vpc_ids
 FROM digitalocean.network.partner_attachments
-WHERE pa_id = '{{ pa_id }}' -- required;
+WHERE pa_id = '{{ pa_id }}' -- required
+;
 ```
 </TabItem>
 <TabItem value="partner_attachments_list">
@@ -315,7 +316,8 @@ state,
 vpc_ids
 FROM digitalocean.network.partner_attachments
 WHERE per_page = '{{ per_page }}'
-AND page = '{{ page }}';
+AND page = '{{ page }}'
+;
 ```
 </TabItem>
 </Tabs>
@@ -346,11 +348,11 @@ data__bgp,
 data__redundancy_zone
 )
 SELECT 
-'{{ name }}' --required,
-{{ connection_bandwidth_in_mbps }} --required,
-'{{ region }}' --required,
-'{{ naas_provider }}' --required,
-'{{ vpc_ids }}' --required,
+'{{ name }}' /* required */,
+{{ connection_bandwidth_in_mbps }} /* required */,
+'{{ region }}' /* required */,
+'{{ naas_provider }}' /* required */,
+'{{ vpc_ids }}' /* required */,
 '{{ parent_uuid }}',
 '{{ bgp }}',
 '{{ redundancy_zone }}'
@@ -425,9 +427,10 @@ To update an existing partner attachment, send a `PATCH` request to<br />`/v2/pa
 ```sql
 UPDATE digitalocean.network.partner_attachments
 SET 
--- No updatable properties
+data__name = '{{ name }}'
 WHERE 
 pa_id = '{{ pa_id }}' --required
+AND data__name = '{{ name }}' --required
 RETURNING
 partner_attachment;
 ```
@@ -449,7 +452,8 @@ To delete an existing partner attachment, send a `DELETE` request to<br />`/v2/p
 
 ```sql
 DELETE FROM digitalocean.network.partner_attachments
-WHERE pa_id = '{{ pa_id }}' --required;
+WHERE pa_id = '{{ pa_id }}' --required
+;
 ```
 </TabItem>
 </Tabs>

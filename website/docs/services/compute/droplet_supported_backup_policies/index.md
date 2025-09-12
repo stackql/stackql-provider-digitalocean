@@ -140,7 +140,8 @@ possible_days,
 possible_window_starts,
 retention_period_days,
 window_length_hours
-FROM digitalocean.compute.droplet_supported_backup_policies;
+FROM digitalocean.compute.droplet_supported_backup_policies
+;
 ```
 </TabItem>
 </Tabs>

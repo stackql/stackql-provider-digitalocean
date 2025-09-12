@@ -170,7 +170,8 @@ number_of_shards,
 size,
 status
 FROM digitalocean.databases.opensearch_indexes
-WHERE database_cluster_uuid = '{{ database_cluster_uuid }}' -- required;
+WHERE database_cluster_uuid = '{{ database_cluster_uuid }}' -- required
+;
 ```
 </TabItem>
 </Tabs>
@@ -191,7 +192,8 @@ To delete a single index within OpenSearch cluster, send a DELETE request<br />t
 ```sql
 DELETE FROM digitalocean.databases.opensearch_indexes
 WHERE database_cluster_uuid = '{{ database_cluster_uuid }}' --required
-AND index_name = '{{ index_name }}' --required;
+AND index_name = '{{ index_name }}' --required
+;
 ```
 </TabItem>
 </Tabs>

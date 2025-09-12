@@ -253,7 +253,8 @@ start_time
 FROM digitalocean.billing.invoices
 WHERE invoice_uuid = '{{ invoice_uuid }}' -- required
 AND per_page = '{{ per_page }}'
-AND page = '{{ page }}';
+AND page = '{{ page }}'
+;
 ```
 </TabItem>
 <TabItem value="invoices_list">
@@ -268,7 +269,8 @@ links,
 meta
 FROM digitalocean.billing.invoices
 WHERE per_page = '{{ per_page }}'
-AND page = '{{ page }}';
+AND page = '{{ page }}'
+;
 ```
 </TabItem>
 </Tabs>
@@ -289,7 +291,8 @@ To retrieve a CSV for an invoice, send a GET request to `/v2/customers/my/invoic
 
 ```sql
 EXEC digitalocean.billing.invoices.invoices_get_csv_by_uuid 
-@invoice_uuid='{{ invoice_uuid }}' --required;
+@invoice_uuid='{{ invoice_uuid }}' --required
+;
 ```
 </TabItem>
 <TabItem value="invoices_get_pdf_by_uuid">
@@ -298,7 +301,8 @@ To retrieve a PDF for an invoice, send a GET request to `/v2/customers/my/invoic
 
 ```sql
 EXEC digitalocean.billing.invoices.invoices_get_pdf_by_uuid 
-@invoice_uuid='{{ invoice_uuid }}' --required;
+@invoice_uuid='{{ invoice_uuid }}' --required
+;
 ```
 </TabItem>
 </Tabs>

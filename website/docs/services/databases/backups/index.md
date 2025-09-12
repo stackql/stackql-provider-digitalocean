@@ -128,7 +128,8 @@ SELECT
 created_at,
 size_gigabytes
 FROM digitalocean.databases.backups
-WHERE database_cluster_uuid = '{{ database_cluster_uuid }}' -- required;
+WHERE database_cluster_uuid = '{{ database_cluster_uuid }}' -- required
+;
 ```
 </TabItem>
 </Tabs>

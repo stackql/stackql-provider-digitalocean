@@ -134,7 +134,8 @@ created_at,
 state,
 value
 FROM digitalocean.network.partner_attachments_bgp_auth_key
-WHERE pa_id = '{{ pa_id }}' -- required;
+WHERE pa_id = '{{ pa_id }}' -- required
+;
 ```
 </TabItem>
 </Tabs>

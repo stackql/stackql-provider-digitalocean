@@ -134,7 +134,8 @@ account_balance,
 generated_at,
 month_to_date_balance,
 month_to_date_usage
-FROM digitalocean.billing.balances;
+FROM digitalocean.billing.balances
+;
 ```
 </TabItem>
 </Tabs>

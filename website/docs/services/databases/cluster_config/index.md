@@ -129,7 +129,8 @@ Shows configuration parameters for an existing database cluster by sending a GET
 SELECT
 config
 FROM digitalocean.databases.cluster_config
-WHERE database_cluster_uuid = '{{ database_cluster_uuid }}' -- required;
+WHERE database_cluster_uuid = '{{ database_cluster_uuid }}' -- required
+;
 ```
 </TabItem>
 </Tabs>

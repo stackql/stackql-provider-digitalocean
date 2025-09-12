@@ -175,7 +175,8 @@ backup_enabled,
 backup_policy,
 next_backup_window
 FROM digitalocean.compute.droplet_backup_policies
-WHERE droplet_id = '{{ droplet_id }}' -- required;
+WHERE droplet_id = '{{ droplet_id }}' -- required
+;
 ```
 </TabItem>
 <TabItem value="droplets_list_backup_policies">
@@ -187,7 +188,8 @@ SELECT
 *
 FROM digitalocean.compute.droplet_backup_policies
 WHERE per_page = '{{ per_page }}'
-AND page = '{{ page }}';
+AND page = '{{ page }}'
+;
 ```
 </TabItem>
 </Tabs>

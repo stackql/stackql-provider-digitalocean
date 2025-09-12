@@ -158,7 +158,8 @@ version
 FROM digitalocean.databases.kafka_schema_version
 WHERE database_cluster_uuid = '{{ database_cluster_uuid }}' -- required
 AND subject_name = '{{ subject_name }}' -- required
-AND version = '{{ version }}' -- required;
+AND version = '{{ version }}' -- required
+;
 ```
 </TabItem>
 </Tabs>

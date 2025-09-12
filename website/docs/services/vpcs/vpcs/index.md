@@ -59,7 +59,7 @@ The response will be a JSON object with a key called `vpc`. The value of this wi
 <tr>
     <td><CopyableCode code="name" /></td>
     <td><code>string</code></td>
-    <td>The name of the VPC. Must be unique and may only contain alphanumeric characters, dashes, and periods. (pattern: ^[a-zA-Z0-9\-\.]+$, example: env.prod-vpc)</td>
+    <td>The name of the VPC. Must be unique and may only contain alphanumeric characters, dashes, and periods. (pattern: <code>^[a-zA-Z0-9\-\.]+$</code>, example: env.prod-vpc)</td>
 </tr>
 <tr>
     <td><CopyableCode code="created_at" /></td>
@@ -89,7 +89,7 @@ The response will be a JSON object with a key called `vpc`. The value of this wi
 <tr>
     <td><CopyableCode code="urn" /></td>
     <td><code>string</code></td>
-    <td>The uniform resource name (URN) for the resource in the format do:resource_type:resource_id. (pattern: ^do:(dbaas|domain|droplet|floatingip|loadbalancer|space|volume|kubernetes|vpc):.*, example: do:droplet:13457723)</td>
+    <td>The uniform resource name (URN) for the resource in the format do:resource_type:resource_id. (pattern: <code>^do:(dbaas|domain|droplet|floatingip|loadbalancer|space|volume|kubernetes|vpc):.*</code>, example: do:droplet:13457723)</td>
 </tr>
 </tbody>
 </table>
@@ -115,7 +115,7 @@ The response will be a JSON object with a key called `vpcs`. This will be set to
 <tr>
     <td><CopyableCode code="name" /></td>
     <td><code>string</code></td>
-    <td>The name of the VPC. Must be unique and may only contain alphanumeric characters, dashes, and periods. (pattern: ^[a-zA-Z0-9\-\.]+$, example: env.prod-vpc)</td>
+    <td>The name of the VPC. Must be unique and may only contain alphanumeric characters, dashes, and periods. (pattern: <code>^[a-zA-Z0-9\-\.]+$</code>, example: env.prod-vpc)</td>
 </tr>
 <tr>
     <td><CopyableCode code="created_at" /></td>
@@ -145,7 +145,7 @@ The response will be a JSON object with a key called `vpcs`. This will be set to
 <tr>
     <td><CopyableCode code="urn" /></td>
     <td><code>string</code></td>
-    <td>The uniform resource name (URN) for the resource in the format do:resource_type:resource_id. (pattern: ^do:(dbaas|domain|droplet|floatingip|loadbalancer|space|volume|kubernetes|vpc):.*, example: do:droplet:13457723)</td>
+    <td>The uniform resource name (URN) for the resource in the format do:resource_type:resource_id. (pattern: <code>^do:(dbaas|domain|droplet|floatingip|loadbalancer|space|volume|kubernetes|vpc):.*</code>, example: do:droplet:13457723)</td>
 </tr>
 </tbody>
 </table>
@@ -267,7 +267,8 @@ ip_range,
 region,
 urn
 FROM digitalocean.vpcs.vpcs
-WHERE vpc_id = '{{ vpc_id }}' -- required;
+WHERE vpc_id = '{{ vpc_id }}' -- required
+;
 ```
 </TabItem>
 <TabItem value="vpcs_list">
@@ -286,7 +287,8 @@ region,
 urn
 FROM digitalocean.vpcs.vpcs
 WHERE per_page = '{{ per_page }}'
-AND page = '{{ page }}';
+AND page = '{{ page }}'
+;
 ```
 </TabItem>
 </Tabs>
@@ -313,9 +315,9 @@ data__region,
 data__ip_range
 )
 SELECT 
-'{{ name }}' --required,
+'{{ name }}' /* required */,
 '{{ description }}',
-'{{ region }}' --required,
+'{{ region }}' /* required */,
 '{{ ip_range }}'
 RETURNING
 vpc
@@ -422,7 +424,8 @@ To delete a VPC, send a DELETE request to `/v2/vpcs/$VPC_ID`. A 204 status<br />
 
 ```sql
 DELETE FROM digitalocean.vpcs.vpcs
-WHERE vpc_id = '{{ vpc_id }}' --required;
+WHERE vpc_id = '{{ vpc_id }}' --required
+;
 ```
 </TabItem>
 </Tabs>

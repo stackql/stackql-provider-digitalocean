@@ -235,7 +235,8 @@ tier_upgrade_to,
 usd_per_month,
 usd_per_second
 FROM digitalocean.apps.instance_sizes
-WHERE slug = '{{ slug }}' -- required;
+WHERE slug = '{{ slug }}' -- required
+;
 ```
 </TabItem>
 <TabItem value="apps_list_instance_sizes">
@@ -246,7 +247,8 @@ List all instance sizes for `service`, `worker`, and `job` components.
 SELECT
 discount_percent,
 instance_sizes
-FROM digitalocean.apps.instance_sizes;
+FROM digitalocean.apps.instance_sizes
+;
 ```
 </TabItem>
 </Tabs>

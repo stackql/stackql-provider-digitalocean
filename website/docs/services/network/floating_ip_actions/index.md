@@ -154,7 +154,7 @@ The following methods are available for this resource:
 <tr>
     <td><a href="#floating_ips_action_post"><CopyableCode code="floating_ips_action_post" /></a></td>
     <td><CopyableCode code="exec" /></td>
-    <td><a href="#parameter-floating_ip"><code>floating_ip</code></a></td>
+    <td><a href="#parameter-floating_ip"><code>floating_ip</code></a>, <a href="#parameter-type"><code>type</code></a></td>
     <td></td>
     <td>To initiate an action on a floating IP send a POST request to<br />`/v2/floating_ips/$FLOATING_IP/actions`. In the JSON body to the request,<br />set the `type` attribute to on of the supported action types:<br /><br />| Action     | Details<br />|------------|--------<br />| `assign`   | Assigns a floating IP to a Droplet<br />| `unassign` | Unassign a floating IP from a Droplet<br /></td>
 </tr>
@@ -205,7 +205,8 @@ SELECT
 action
 FROM digitalocean.network.floating_ip_actions
 WHERE floating_ip = '{{ floating_ip }}' -- required
-AND action_id = '{{ action_id }}' -- required;
+AND action_id = '{{ action_id }}' -- required
+;
 ```
 </TabItem>
 <TabItem value="floating_ips_action_list">
@@ -224,7 +225,8 @@ started_at,
 status,
 type
 FROM digitalocean.network.floating_ip_actions
-WHERE floating_ip = '{{ floating_ip }}' -- required;
+WHERE floating_ip = '{{ floating_ip }}' -- required
+;
 ```
 </TabItem>
 </Tabs>
@@ -244,7 +246,12 @@ To initiate an action on a floating IP send a POST request to<br />`/v2/floating
 
 ```sql
 EXEC digitalocean.network.floating_ip_actions.floating_ips_action_post 
-@floating_ip='{{ floating_ip }}' --required;
+@floating_ip='{{ floating_ip }}' --required 
+@@json=
+'{
+"type": "{{ type }}"
+}'
+;
 ```
 </TabItem>
 </Tabs>

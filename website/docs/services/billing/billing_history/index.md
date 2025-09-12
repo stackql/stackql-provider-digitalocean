@@ -146,7 +146,8 @@ date,
 description,
 invoice_uuid,
 type
-FROM digitalocean.billing.billing_history;
+FROM digitalocean.billing.billing_history
+;
 ```
 </TabItem>
 </Tabs>

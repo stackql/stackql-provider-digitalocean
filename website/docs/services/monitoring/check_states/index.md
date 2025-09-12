@@ -128,7 +128,8 @@ SELECT
 previous_outage,
 regions
 FROM digitalocean.monitoring.check_states
-WHERE check_id = '{{ check_id }}' -- required;
+WHERE check_id = '{{ check_id }}' -- required
+;
 ```
 </TabItem>
 </Tabs>

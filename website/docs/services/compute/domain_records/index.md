@@ -204,7 +204,7 @@ The following methods are available for this resource:
 <tr>
     <td><a href="#domains_create_record"><CopyableCode code="domains_create_record" /></a></td>
     <td><CopyableCode code="insert" /></td>
-    <td><a href="#parameter-domain_name"><code>domain_name</code></a></td>
+    <td><a href="#parameter-domain_name"><code>domain_name</code></a>, <a href="#parameter-data__type"><code>data__type</code></a></td>
     <td></td>
     <td>To create a new record to a domain, send a POST request to<br />`/v2/domains/$DOMAIN_NAME/records`.<br /><br />The request must include all of the required fields for the domain record type<br />being added.<br /><br />See the [attribute table]https://docs.digitalocean.com/products/networking/dns/how-to/manage-records/ for details regarding record<br />types and their respective required attributes.<br /></td>
 </tr>
@@ -305,7 +305,8 @@ type,
 weight
 FROM digitalocean.compute.domain_records
 WHERE domain_name = '{{ domain_name }}' -- required
-AND domain_record_id = '{{ domain_record_id }}' -- required;
+AND domain_record_id = '{{ domain_record_id }}' -- required
+;
 ```
 </TabItem>
 <TabItem value="domains_list_records">
@@ -329,7 +330,8 @@ WHERE domain_name = '{{ domain_name }}' -- required
 AND name = '{{ name }}'
 AND type = '{{ type }}'
 AND per_page = '{{ per_page }}'
-AND page = '{{ page }}';
+AND page = '{{ page }}'
+;
 ```
 </TabItem>
 </Tabs>
@@ -350,9 +352,27 @@ To create a new record to a domain, send a POST request to<br />`/v2/domains/$DO
 
 ```sql
 INSERT INTO digitalocean.compute.domain_records (
+data__type,
+data__name,
+data__data,
+data__priority,
+data__port,
+data__ttl,
+data__weight,
+data__flags,
+data__tag,
 domain_name
 )
 SELECT 
+'{{ type }}' /* required */,
+'{{ name }}',
+'{{ data }}',
+{{ priority }},
+{{ port }},
+{{ ttl }},
+{{ weight }},
+{{ flags }},
+'{{ tag }}',
 '{{ domain_name }}'
 RETURNING
 domain_record
@@ -368,6 +388,51 @@ domain_record
     - name: domain_name
       value: string
       description: Required parameter for the domain_records resource.
+    - name: type
+      value: string
+      description: >
+        The type of the DNS record. For example: A, CNAME, TXT, ...
+        
+    - name: name
+      value: string
+      description: >
+        The host name, alias, or service being defined by the record.
+        
+    - name: data
+      value: string
+      description: >
+        Variable data depending on record type. For example, the "data" value for an A record would be the IPv4 address to which the domain will be mapped. For a CAA record, it would contain the domain name of the CA being granted permission to issue certificates.
+        
+    - name: priority
+      value: integer
+      description: >
+        The priority for SRV and MX records.
+        
+    - name: port
+      value: integer
+      description: >
+        The port for SRV records.
+        
+    - name: ttl
+      value: integer
+      description: >
+        This value is the time to live for the record, in seconds. This defines the time frame that clients can cache queried information before a refresh should be requested.
+        
+    - name: weight
+      value: integer
+      description: >
+        The weight for SRV records.
+        
+    - name: flags
+      value: integer
+      description: >
+        An unsigned integer between 0-255 used for CAA records.
+        
+    - name: tag
+      value: string
+      description: >
+        The parameter tag for CAA records. Valid values are "issue", "issuewild", or "iodef"
+        
 ```
 </TabItem>
 </Tabs>
@@ -458,7 +523,8 @@ To delete a record for a domain, send a DELETE request to<br />`/v2/domains/$DOM
 ```sql
 DELETE FROM digitalocean.compute.domain_records
 WHERE domain_name = '{{ domain_name }}' --required
-AND domain_record_id = '{{ domain_record_id }}' --required;
+AND domain_record_id = '{{ domain_record_id }}' --required
+;
 ```
 </TabItem>
 </Tabs>

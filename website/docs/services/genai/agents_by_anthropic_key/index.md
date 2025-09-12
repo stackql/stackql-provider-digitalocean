@@ -146,7 +146,8 @@ meta
 FROM digitalocean.genai.agents_by_anthropic_key
 WHERE uuid = '{{ uuid }}' -- required
 AND page = '{{ page }}'
-AND per_page = '{{ per_page }}';
+AND per_page = '{{ per_page }}'
+;
 ```
 </TabItem>
 </Tabs>

@@ -140,7 +140,8 @@ cluster_name,
 create_time,
 event_type
 FROM digitalocean.databases.events_logs
-WHERE database_cluster_uuid = '{{ database_cluster_uuid }}' -- required;
+WHERE database_cluster_uuid = '{{ database_cluster_uuid }}' -- required
+;
 ```
 </TabItem>
 </Tabs>

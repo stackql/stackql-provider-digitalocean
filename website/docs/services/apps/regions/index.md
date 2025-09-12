@@ -158,7 +158,8 @@ flag,
 label,
 reason,
 slug
-FROM digitalocean.apps.regions;
+FROM digitalocean.apps.regions
+;
 ```
 </TabItem>
 </Tabs>

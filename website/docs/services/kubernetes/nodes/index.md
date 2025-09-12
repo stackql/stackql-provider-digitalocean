@@ -118,7 +118,8 @@ WHERE cluster_id = '{{ cluster_id }}' --required
 AND node_pool_id = '{{ node_pool_id }}' --required
 AND node_id = '{{ node_id }}' --required
 AND skip_drain = '{{ skip_drain }}'
-AND replace = '{{ replace }}';
+AND replace = '{{ replace }}'
+;
 ```
 </TabItem>
 </Tabs>

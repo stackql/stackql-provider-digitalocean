@@ -172,7 +172,8 @@ SELECT
 name
 FROM digitalocean.databases.dbs
 WHERE database_cluster_uuid = '{{ database_cluster_uuid }}' -- required
-AND database_name = '{{ database_name }}' -- required;
+AND database_name = '{{ database_name }}' -- required
+;
 ```
 </TabItem>
 <TabItem value="databases_list">
@@ -183,7 +184,8 @@ To list all of the databases in a clusters, send a GET request to<br />`/v2/data
 SELECT
 name
 FROM digitalocean.databases.dbs
-WHERE database_cluster_uuid = '{{ database_cluster_uuid }}' -- required;
+WHERE database_cluster_uuid = '{{ database_cluster_uuid }}' -- required
+;
 ```
 </TabItem>
 </Tabs>
@@ -208,7 +210,7 @@ data__name,
 database_cluster_uuid
 )
 SELECT 
-'{{ name }}' --required,
+'{{ name }}' /* required */,
 '{{ database_cluster_uuid }}'
 RETURNING
 db
@@ -249,7 +251,8 @@ To delete a specific database, send a DELETE request to<br />`/v2/databases/$DAT
 ```sql
 DELETE FROM digitalocean.databases.dbs
 WHERE database_cluster_uuid = '{{ database_cluster_uuid }}' --required
-AND database_name = '{{ database_name }}' --required;
+AND database_name = '{{ database_name }}' --required
+;
 ```
 </TabItem>
 </Tabs>

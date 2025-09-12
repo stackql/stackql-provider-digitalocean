@@ -52,7 +52,7 @@ The following methods are available for this resource:
 <tr>
     <td><a href="#firewalls_add_rules"><CopyableCode code="firewalls_add_rules" /></a></td>
     <td><CopyableCode code="insert" /></td>
-    <td><a href="#parameter-firewall_id"><code>firewall_id</code></a></td>
+    <td><a href="#parameter-firewall_id"><code>firewall_id</code></a>, <a href="#parameter-data__inbound_rules"><code>data__inbound_rules</code></a></td>
     <td></td>
     <td>To add additional access rules to a firewall, send a POST request to<br />`/v2/firewalls/$FIREWALL_ID/rules`. The body of the request may include an<br />inbound_rules and/or outbound_rules attribute containing an array of rules to<br />be added.<br /><br />No response body will be sent back, but the response code will indicate<br />success. Specifically, the response code will be a 204, which means that the<br />action was successful with no returned body data.<br /></td>
 </tr>
@@ -107,7 +107,7 @@ data__outbound_rules,
 firewall_id
 )
 SELECT 
-'{{ inbound_rules }}',
+'{{ inbound_rules }}' /* required */,
 '{{ outbound_rules }}',
 '{{ firewall_id }}'
 ;
@@ -145,7 +145,8 @@ To remove access rules from a firewall, send a DELETE request to<br />`/v2/firew
 
 ```sql
 DELETE FROM digitalocean.compute.firewall_rules
-WHERE firewall_id = '{{ firewall_id }}' --required;
+WHERE firewall_id = '{{ firewall_id }}' --required
+;
 ```
 </TabItem>
 </Tabs>

@@ -174,7 +174,8 @@ EXEC digitalocean.apps.rollbacks.apps_validate_rollback
 '{
 "deployment_id": "{{ deployment_id }}", 
 "skip_pin": {{ skip_pin }}
-}';
+}'
+;
 ```
 </TabItem>
 <TabItem value="apps_commit_rollback">
@@ -183,7 +184,8 @@ Commit an app rollback. This action permanently applies the rollback and unpins 
 
 ```sql
 EXEC digitalocean.apps.rollbacks.apps_commit_rollback 
-@app_id='{{ app_id }}' --required;
+@app_id='{{ app_id }}' --required
+;
 ```
 </TabItem>
 <TabItem value="apps_revert_rollback">
@@ -192,7 +194,8 @@ Revert an app rollback. This action reverts the active rollback by creating a ne
 
 ```sql
 EXEC digitalocean.apps.rollbacks.apps_revert_rollback 
-@app_id='{{ app_id }}' --required;
+@app_id='{{ app_id }}' --required
+;
 ```
 </TabItem>
 </Tabs>

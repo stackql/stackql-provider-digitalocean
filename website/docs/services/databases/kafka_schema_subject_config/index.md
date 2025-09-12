@@ -141,7 +141,8 @@ subject_name,
 compatibility_level
 FROM digitalocean.databases.kafka_schema_subject_config
 WHERE database_cluster_uuid = '{{ database_cluster_uuid }}' -- required
-AND subject_name = '{{ subject_name }}' -- required;
+AND subject_name = '{{ subject_name }}' -- required
+;
 ```
 </TabItem>
 </Tabs>

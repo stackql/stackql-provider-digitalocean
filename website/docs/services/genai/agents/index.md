@@ -553,7 +553,8 @@ uuid,
 version_hash,
 workspace
 FROM digitalocean.genai.agents
-WHERE uuid = '{{ uuid }}' -- required;
+WHERE uuid = '{{ uuid }}' -- required
+;
 ```
 </TabItem>
 <TabItem value="genai_list_agents_by_workspace">
@@ -569,7 +570,8 @@ FROM digitalocean.genai.agents
 WHERE workspace_uuid = '{{ workspace_uuid }}' -- required
 AND only_deployed = '{{ only_deployed }}'
 AND page = '{{ page }}'
-AND per_page = '{{ per_page }}';
+AND per_page = '{{ per_page }}'
+;
 ```
 </TabItem>
 <TabItem value="genai_list_agents">
@@ -584,7 +586,8 @@ meta
 FROM digitalocean.genai.agents
 WHERE only_deployed = '{{ only_deployed }}'
 AND page = '{{ page }}'
-AND per_page = '{{ per_page }}';
+AND per_page = '{{ per_page }}'
+;
 ```
 </TabItem>
 </Tabs>
@@ -764,7 +767,8 @@ To delete an agent, send a DELETE request to `/v2/gen-ai/agents/&#123;uuid&#125;
 
 ```sql
 DELETE FROM digitalocean.genai.agents
-WHERE uuid = '{{ uuid }}' --required;
+WHERE uuid = '{{ uuid }}' --required
+;
 ```
 </TabItem>
 </Tabs>
@@ -800,7 +804,8 @@ EXEC digitalocean.genai.agents.genai_attach_agent_function
 "function_name": "{{ function_name }}", 
 "input_schema": "{{ input_schema }}", 
 "output_schema": "{{ output_schema }}"
-}';
+}'
+;
 ```
 </TabItem>
 <TabItem value="genai_update_agent_function">
@@ -821,7 +826,8 @@ EXEC digitalocean.genai.agents.genai_update_agent_function
 "function_uuid": "{{ function_uuid }}", 
 "input_schema": "{{ input_schema }}", 
 "output_schema": "{{ output_schema }}"
-}';
+}'
+;
 ```
 </TabItem>
 <TabItem value="genai_detach_agent_function">
@@ -831,7 +837,8 @@ To delete a function route from an agent, send a DELETE request to `/v2/gen-ai/a
 ```sql
 EXEC digitalocean.genai.agents.genai_detach_agent_function 
 @agent_uuid='{{ agent_uuid }}' --required, 
-@function_uuid='{{ function_uuid }}' --required;
+@function_uuid='{{ function_uuid }}' --required
+;
 ```
 </TabItem>
 <TabItem value="genai_attach_agent">
@@ -848,7 +855,8 @@ EXEC digitalocean.genai.agents.genai_attach_agent
 "if_case": "{{ if_case }}", 
 "parent_agent_uuid": "{{ parent_agent_uuid }}", 
 "route_name": "{{ route_name }}"
-}';
+}'
+;
 ```
 </TabItem>
 <TabItem value="genai_update_attached_agent">
@@ -866,7 +874,8 @@ EXEC digitalocean.genai.agents.genai_update_attached_agent
 "parent_agent_uuid": "{{ parent_agent_uuid }}", 
 "route_name": "{{ route_name }}", 
 "uuid": "{{ uuid }}"
-}';
+}'
+;
 ```
 </TabItem>
 <TabItem value="genai_detach_agent">
@@ -876,7 +885,8 @@ To delete an agent route from a parent agent, send a DELETE request to `/v2/gen-
 ```sql
 EXEC digitalocean.genai.agents.genai_detach_agent 
 @parent_agent_uuid='{{ parent_agent_uuid }}' --required, 
-@child_agent_uuid='{{ child_agent_uuid }}' --required;
+@child_agent_uuid='{{ child_agent_uuid }}' --required
+;
 ```
 </TabItem>
 <TabItem value="genai_update_agent_deployment_visibility">
@@ -890,7 +900,8 @@ EXEC digitalocean.genai.agents.genai_update_agent_deployment_visibility
 '{
 "uuid": "{{ uuid }}", 
 "visibility": "{{ visibility }}"
-}';
+}'
+;
 ```
 </TabItem>
 </Tabs>

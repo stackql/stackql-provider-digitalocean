@@ -194,7 +194,8 @@ SELECT
 sink
 FROM digitalocean.databases.log_sinks
 WHERE database_cluster_uuid = '{{ database_cluster_uuid }}' -- required
-AND logsink_id = '{{ logsink_id }}' -- required;
+AND logsink_id = '{{ logsink_id }}' -- required
+;
 ```
 </TabItem>
 <TabItem value="databases_list_logsink">
@@ -208,7 +209,8 @@ sink_name,
 config,
 sink_type
 FROM digitalocean.databases.log_sinks
-WHERE database_cluster_uuid = '{{ database_cluster_uuid }}' -- required;
+WHERE database_cluster_uuid = '{{ database_cluster_uuid }}' -- required
+;
 ```
 </TabItem>
 </Tabs>
@@ -235,9 +237,9 @@ data__config,
 database_cluster_uuid
 )
 SELECT 
-'{{ sink_name }}' --required,
-'{{ sink_type }}' --required,
-'{{ config }}' --required,
+'{{ sink_name }}' /* required */,
+'{{ sink_type }}' /* required */,
+'{{ config }}' /* required */,
 '{{ database_cluster_uuid }}'
 RETURNING
 sink
@@ -317,7 +319,8 @@ To delete a logsink for a database cluster, send a DELETE request to<br />`/v2/d
 ```sql
 DELETE FROM digitalocean.databases.log_sinks
 WHERE database_cluster_uuid = '{{ database_cluster_uuid }}' --required
-AND logsink_id = '{{ logsink_id }}' --required;
+AND logsink_id = '{{ logsink_id }}' --required
+;
 ```
 </TabItem>
 </Tabs>

@@ -184,7 +184,8 @@ is_default,
 owner_uuid,
 purpose,
 updated_at
-FROM digitalocean.projects.defaults;
+FROM digitalocean.projects.defaults
+;
 ```
 </TabItem>
 </Tabs>
@@ -210,8 +211,6 @@ data__description = '{{ description }}',
 data__purpose = '{{ purpose }}',
 data__environment = '{{ environment }}',
 data__is_default = {{ is_default }}
-WHERE 
-
 RETURNING
 project;
 ```

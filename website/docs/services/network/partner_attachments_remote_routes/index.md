@@ -134,7 +134,8 @@ cidr
 FROM digitalocean.network.partner_attachments_remote_routes
 WHERE pa_id = '{{ pa_id }}' -- required
 AND per_page = '{{ per_page }}'
-AND page = '{{ page }}';
+AND page = '{{ page }}'
+;
 ```
 </TabItem>
 </Tabs>

@@ -59,7 +59,7 @@ The response will be a JSON object with a key called `vpc_peering`. The value of
 <tr>
     <td><CopyableCode code="name" /></td>
     <td><code>string</code></td>
-    <td>The name of the VPC peering. Must be unique within the team and may only contain alphanumeric characters and dashes. (pattern: ^[a-zA-Z0-9\-]+$, example: nyc1-blr1-peering)</td>
+    <td>The name of the VPC peering. Must be unique within the team and may only contain alphanumeric characters and dashes. (pattern: <code>^[a-zA-Z0-9\-]+$</code>, example: nyc1-blr1-peering)</td>
 </tr>
 <tr>
     <td><CopyableCode code="created_at" /></td>
@@ -100,7 +100,7 @@ The response will be a JSON object with a key called `vpc_peerings`. This  will 
 <tr>
     <td><CopyableCode code="name" /></td>
     <td><code>string</code></td>
-    <td>The name of the VPC peering. Must be unique within the team and may only contain alphanumeric characters and dashes. (pattern: ^[a-zA-Z0-9\-]+$, example: nyc1-blr1-peering)</td>
+    <td>The name of the VPC peering. Must be unique within the team and may only contain alphanumeric characters and dashes. (pattern: <code>^[a-zA-Z0-9\-]+$</code>, example: nyc1-blr1-peering)</td>
 </tr>
 <tr>
     <td><CopyableCode code="created_at" /></td>
@@ -232,7 +232,8 @@ created_at,
 status,
 vpc_ids
 FROM digitalocean.vpcs.vpc_peerings
-WHERE vpc_peering_id = '{{ vpc_peering_id }}' -- required;
+WHERE vpc_peering_id = '{{ vpc_peering_id }}' -- required
+;
 ```
 </TabItem>
 <TabItem value="vpc_peerings_list">
@@ -249,7 +250,8 @@ vpc_ids
 FROM digitalocean.vpcs.vpc_peerings
 WHERE per_page = '{{ per_page }}'
 AND page = '{{ page }}'
-AND region = '{{ region }}';
+AND region = '{{ region }}'
+;
 ```
 </TabItem>
 </Tabs>
@@ -274,8 +276,8 @@ data__name,
 data__vpc_ids
 )
 SELECT 
-'{{ name }}' --required,
-'{{ vpc_ids }}' --required
+'{{ name }}' /* required */,
+'{{ vpc_ids }}' /* required */
 RETURNING
 vpc_peering
 ;
@@ -342,7 +344,8 @@ To delete a VPC peering, send a DELETE request to `/v2/vpc_peerings/$VPC_PEERING
 
 ```sql
 DELETE FROM digitalocean.vpcs.vpc_peerings
-WHERE vpc_peering_id = '{{ vpc_peering_id }}' --required;
+WHERE vpc_peering_id = '{{ vpc_peering_id }}' --required
+;
 ```
 </TabItem>
 </Tabs>

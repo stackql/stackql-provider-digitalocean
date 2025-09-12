@@ -140,7 +140,8 @@ status
 FROM digitalocean.monitoring.droplet_load1_metrics
 WHERE host_id = '{{ host_id }}' -- required
 AND start = '{{ start }}' -- required
-AND end = '{{ end }}' -- required;
+AND end = '{{ end }}' -- required
+;
 ```
 </TabItem>
 </Tabs>

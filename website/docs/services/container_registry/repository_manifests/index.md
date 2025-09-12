@@ -208,7 +208,8 @@ FROM digitalocean.container_registry.repository_manifests
 WHERE registry_name = '{{ registry_name }}' -- required
 AND repository_name = '{{ repository_name }}' -- required
 AND per_page = '{{ per_page }}'
-AND page = '{{ page }}';
+AND page = '{{ page }}'
+;
 ```
 </TabItem>
 </Tabs>
@@ -230,7 +231,8 @@ To delete a container repository manifest by digest in one of your registries, s
 DELETE FROM digitalocean.container_registry.repository_manifests
 WHERE registry_name = '{{ registry_name }}' --required
 AND repository_name = '{{ repository_name }}' --required
-AND manifest_digest = '{{ manifest_digest }}' --required;
+AND manifest_digest = '{{ manifest_digest }}' --required
+;
 ```
 </TabItem>
 </Tabs>
@@ -254,7 +256,8 @@ EXEC digitalocean.container_registry.repository_manifests.registry_list_reposito
 @registry_name='{{ registry_name }}' --required, 
 @repository_name='{{ repository_name }}' --required, 
 @per_page='{{ per_page }}', 
-@page='{{ page }}';
+@page='{{ page }}'
+;
 ```
 </TabItem>
 <TabItem value="registry_delete_repository_manifest_legacy">
@@ -265,7 +268,8 @@ To delete a container repository manifest by digest, send a DELETE request to<br
 EXEC digitalocean.container_registry.repository_manifests.registry_delete_repository_manifest_legacy 
 @registry_name='{{ registry_name }}' --required, 
 @repository_name='{{ repository_name }}' --required, 
-@manifest_digest='{{ manifest_digest }}' --required;
+@manifest_digest='{{ manifest_digest }}' --required
+;
 ```
 </TabItem>
 </Tabs>

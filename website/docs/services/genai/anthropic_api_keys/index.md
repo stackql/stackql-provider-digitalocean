@@ -223,7 +223,8 @@ deleted_at,
 updated_at,
 uuid
 FROM digitalocean.genai.anthropic_api_keys
-WHERE api_key_uuid = '{{ api_key_uuid }}' -- required;
+WHERE api_key_uuid = '{{ api_key_uuid }}' -- required
+;
 ```
 </TabItem>
 <TabItem value="genai_list_anthropic_api_keys">
@@ -237,7 +238,8 @@ links,
 meta
 FROM digitalocean.genai.anthropic_api_keys
 WHERE page = '{{ page }}'
-AND per_page = '{{ per_page }}';
+AND per_page = '{{ per_page }}'
+;
 ```
 </TabItem>
 </Tabs>
@@ -331,7 +333,8 @@ To delete an Anthropic API key, send a DELETE request to `/v2/gen-ai/anthropic/k
 
 ```sql
 DELETE FROM digitalocean.genai.anthropic_api_keys
-WHERE api_key_uuid = '{{ api_key_uuid }}' --required;
+WHERE api_key_uuid = '{{ api_key_uuid }}' --required
+;
 ```
 </TabItem>
 </Tabs>

@@ -135,7 +135,8 @@ SELECT
 url
 FROM digitalocean.genai.oauth2
 WHERE type = '{{ type }}'
-AND redirect_url = '{{ redirect_url }}';
+AND redirect_url = '{{ redirect_url }}'
+;
 ```
 </TabItem>
 </Tabs>
@@ -159,7 +160,8 @@ EXEC digitalocean.genai.oauth2.genai_create_oauth2_dropbox_tokens
 '{
 "code": "{{ code }}", 
 "redirect_url": "{{ redirect_url }}"
-}';
+}'
+;
 ```
 </TabItem>
 </Tabs>

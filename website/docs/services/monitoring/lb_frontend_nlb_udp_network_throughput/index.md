@@ -140,7 +140,8 @@ status
 FROM digitalocean.monitoring.lb_frontend_nlb_udp_network_throughput
 WHERE lb_id = '{{ lb_id }}' -- required
 AND start = '{{ start }}' -- required
-AND end = '{{ end }}' -- required;
+AND end = '{{ end }}' -- required
+;
 ```
 </TabItem>
 </Tabs>

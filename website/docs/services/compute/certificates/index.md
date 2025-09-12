@@ -184,7 +184,7 @@ The following methods are available for this resource:
 <tr>
     <td><a href="#certificates_create"><CopyableCode code="certificates_create" /></a></td>
     <td><CopyableCode code="insert" /></td>
-    <td></td>
+    <td><a href="#parameter-data__name"><code>data__name</code></a></td>
     <td></td>
     <td>To upload new SSL certificate which you have previously generated, send a POST<br />request to `/v2/certificates`.<br /><br />When uploading a user-generated certificate, the `private_key`,<br />`leaf_certificate`, and optionally the `certificate_chain` attributes should<br />be provided. The type must be set to `custom`.<br /><br />When using Let's Encrypt to create a certificate, the `dns_names` attribute<br />must be provided, and the type must be set to `lets_encrypt`.<br /></td>
 </tr>
@@ -258,7 +258,8 @@ sha1_fingerprint,
 state,
 type
 FROM digitalocean.compute.certificates
-WHERE certificate_id = '{{ certificate_id }}' -- required;
+WHERE certificate_id = '{{ certificate_id }}' -- required
+;
 ```
 </TabItem>
 <TabItem value="certificates_list">
@@ -278,7 +279,8 @@ type
 FROM digitalocean.compute.certificates
 WHERE per_page = '{{ per_page }}'
 AND page = '{{ page }}'
-AND name = '{{ name }}';
+AND name = '{{ name }}'
+;
 ```
 </TabItem>
 </Tabs>
@@ -299,10 +301,14 @@ To upload new SSL certificate which you have previously generated, send a POST<b
 
 ```sql
 INSERT INTO digitalocean.compute.certificates (
-
+data__name,
+data__type,
+data__dns_names
 )
 SELECT 
-
+'{{ name }}' /* required */,
+'{{ type }}',
+'{{ dns_names }}'
 RETURNING
 certificate
 ;
@@ -314,6 +320,22 @@ certificate
 # Description fields are for documentation purposes
 - name: certificates
   props:
+    - name: name
+      value: string
+      description: >
+        A unique human-readable name referring to a certificate.
+        
+    - name: type
+      value: string
+      description: >
+        A string representing the type of the certificate. The value will be `custom` for a user-uploaded certificate or `lets_encrypt` for one automatically generated with Let's Encrypt.
+        
+      valid_values: ['custom', 'lets_encrypt']
+    - name: dns_names
+      value: array
+      description: >
+        An array of fully qualified domain names (FQDNs) for which the certificate was issued. A certificate covering all subdomains can be issued using a wildcard (e.g. `*.example.com`).
+        
 ```
 </TabItem>
 </Tabs>
@@ -333,7 +355,8 @@ To delete a specific certificate, send a DELETE request to<br />`/v2/certificate
 
 ```sql
 DELETE FROM digitalocean.compute.certificates
-WHERE certificate_id = '{{ certificate_id }}' --required;
+WHERE certificate_id = '{{ certificate_id }}' --required
+;
 ```
 </TabItem>
 </Tabs>

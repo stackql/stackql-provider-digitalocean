@@ -282,7 +282,8 @@ status,
 uuid,
 validations
 FROM digitalocean.network.byoip_prefixes
-WHERE byoip_prefix_uuid = '{{ byoip_prefix_uuid }}' -- required;
+WHERE byoip_prefix_uuid = '{{ byoip_prefix_uuid }}' -- required
+;
 ```
 </TabItem>
 <TabItem value="byoip_prefixes_list">
@@ -303,7 +304,8 @@ uuid,
 validations
 FROM digitalocean.network.byoip_prefixes
 WHERE per_page = '{{ per_page }}'
-AND page = '{{ page }}';
+AND page = '{{ page }}'
+;
 ```
 </TabItem>
 </Tabs>
@@ -329,9 +331,9 @@ data__region,
 data__signature
 )
 SELECT 
-'{{ prefix }}' --required,
-'{{ region }}' --required,
-'{{ signature }}' --required
+'{{ prefix }}' /* required */,
+'{{ region }}' /* required */,
+'{{ signature }}' /* required */
 RETURNING
 region,
 status,
@@ -404,7 +406,8 @@ To delete a BYOIP prefix and remove it from your account, send a DELETE request<
 
 ```sql
 DELETE FROM digitalocean.network.byoip_prefixes
-WHERE byoip_prefix_uuid = '{{ byoip_prefix_uuid }}' --required;
+WHERE byoip_prefix_uuid = '{{ byoip_prefix_uuid }}' --required
+;
 ```
 </TabItem>
 </Tabs>

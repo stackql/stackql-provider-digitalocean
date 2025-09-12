@@ -204,7 +204,7 @@ The following methods are available for this resource:
 <tr>
     <td><a href="#volumes_create"><CopyableCode code="volumes_create" /></a></td>
     <td><CopyableCode code="insert" /></td>
-    <td></td>
+    <td><a href="#parameter-data__name"><code>data__name</code></a>, <a href="#parameter-data__size_gigabytes"><code>data__size_gigabytes</code></a>, <a href="#parameter-data__region"><code>data__region</code></a></td>
     <td></td>
     <td>To create a new volume, send a POST request to `/v2/volumes`. Optionally, a `filesystem_type` attribute may be provided in order to automatically format the volume's filesystem. Pre-formatted volumes are automatically mounted when attached to Ubuntu, Debian, Fedora, Fedora Atomic, and CentOS Droplets created on or after April 26, 2018. Attaching pre-formatted volumes to Droplets without support for auto-mounting is not recommended.</td>
 </tr>
@@ -225,7 +225,7 @@ The following methods are available for this resource:
 <tr>
     <td><a href="#volume_actions_post"><CopyableCode code="volume_actions_post" /></a></td>
     <td><CopyableCode code="exec" /></td>
-    <td></td>
+    <td><a href="#parameter-type"><code>type</code></a></td>
     <td><a href="#parameter-per_page"><code>per_page</code></a>, <a href="#parameter-page"><code>page</code></a></td>
     <td>To initiate an action on a block storage volume by Name, send a POST request to<br />`~/v2/volumes/actions`. The body should contain the appropriate<br />attributes for the respective action.<br /><br />## Attach a Block Storage Volume to a Droplet<br /><br />| Attribute   | Details                                                             |<br />| ----------- | ------------------------------------------------------------------- |<br />| type        | This must be `attach`                                               |<br />| volume_name | The name of the block storage volume                                |<br />| droplet_id  | Set to the Droplet's ID                                             |<br />| region      | Set to the slug representing the region where the volume is located |<br /><br />Each volume may only be attached to a single Droplet. However, up to fifteen<br />volumes may be attached to a Droplet at a time. Pre-formatted volumes will be<br />automatically mounted to Ubuntu, Debian, Fedora, Fedora Atomic, and CentOS<br />Droplets created on or after April 26, 2018 when attached. On older Droplets,<br />[additional configuration](https://docs.digitalocean.com/products/volumes/how-to/mount/)<br />is required.<br /><br />## Remove a Block Storage Volume from a Droplet<br /><br />| Attribute   | Details                                                             |<br />| ----------- | ------------------------------------------------------------------- |<br />| type        | This must be `detach`                                               |<br />| volume_name | The name of the block storage volume                                |<br />| droplet_id  | Set to the Droplet's ID                                             |<br />| region      | Set to the slug representing the region where the volume is located |<br /></td>
 </tr>
@@ -299,7 +299,8 @@ region,
 size_gigabytes,
 tags
 FROM digitalocean.compute.volumes
-WHERE volume_id = '{{ volume_id }}' -- required;
+WHERE volume_id = '{{ volume_id }}' -- required
+;
 ```
 </TabItem>
 <TabItem value="volumes_list">
@@ -322,7 +323,8 @@ FROM digitalocean.compute.volumes
 WHERE name = '{{ name }}'
 AND region = '{{ region }}'
 AND per_page = '{{ per_page }}'
-AND page = '{{ page }}';
+AND page = '{{ page }}'
+;
 ```
 </TabItem>
 </Tabs>
@@ -343,10 +345,24 @@ To create a new volume, send a POST request to `/v2/volumes`. Optionally, a `fil
 
 ```sql
 INSERT INTO digitalocean.compute.volumes (
-
+data__name,
+data__description,
+data__size_gigabytes,
+data__tags,
+data__snapshot_id,
+data__filesystem_type,
+data__region,
+data__filesystem_label
 )
 SELECT 
-
+'{{ name }}' /* required */,
+'{{ description }}',
+{{ size_gigabytes }} /* required */,
+'{{ tags }}',
+'{{ snapshot_id }}',
+'{{ filesystem_type }}',
+'{{ region }}' /* required */,
+'{{ filesystem_label }}'
 RETURNING
 volume
 ;
@@ -358,6 +374,47 @@ volume
 # Description fields are for documentation purposes
 - name: volumes
   props:
+    - name: name
+      value: string
+      description: >
+        A human-readable name for the block storage volume. Must be lowercase and be composed only of numbers, letters and "-", up to a limit of 64 characters. The name must begin with a letter.
+        
+    - name: description
+      value: string
+      description: >
+        An optional free-form text field to describe a block storage volume.
+        
+    - name: size_gigabytes
+      value: integer
+      description: >
+        The size of the block storage volume in GiB (1024^3). This field does not apply  when creating a volume from a snapshot.
+        
+    - name: tags
+      value: array
+      description: >
+        A flat array of tag names as strings to be applied to the resource. Tag names may be for either existing or new tags. <br><br>Requires `tag:create` scope.
+        
+    - name: snapshot_id
+      value: string
+      description: >
+        The unique identifier for the volume snapshot from which to create the volume.
+        
+    - name: filesystem_type
+      value: string
+      description: >
+        The name of the filesystem type to be used on the volume. When provided, the volume will automatically be formatted to the specified filesystem type. Currently, the available options are `ext4` and `xfs`. Pre-formatted volumes are automatically mounted when attached to Ubuntu, Debian, Fedora, Fedora Atomic, and CentOS Droplets created on or after April 26, 2018. Attaching pre-formatted volumes to other Droplets is not recommended.
+        
+    - name: region
+      value: string
+      description: >
+        The slug identifier for the region where the resource will initially be  available.
+        
+      valid_values: ['ams1', 'ams2', 'ams3', 'blr1', 'fra1', 'lon1', 'nyc1', 'nyc2', 'nyc3', 'sfo1', 'sfo2', 'sfo3', 'sgp1', 'tor1', 'syd1']
+    - name: filesystem_label
+      value: string
+      description: >
+        The label applied to the filesystem. Labels for ext4 type filesystems may contain 16 characters while labels for xfs type filesystems are limited to 12 characters. May only be used in conjunction with filesystem_type.
+        
 ```
 </TabItem>
 </Tabs>
@@ -378,7 +435,8 @@ To delete a block storage volume, destroying all data and removing it from your 
 
 ```sql
 DELETE FROM digitalocean.compute.volumes
-WHERE volume_id = '{{ volume_id }}' --required;
+WHERE volume_id = '{{ volume_id }}' --required
+;
 ```
 </TabItem>
 <TabItem value="volumes_delete_by_name">
@@ -388,7 +446,8 @@ Block storage volumes may also be deleted by name by sending a DELETE request wi
 ```sql
 DELETE FROM digitalocean.compute.volumes
 WHERE name = '{{ name }}'
-AND region = '{{ region }}';
+AND region = '{{ region }}'
+;
 ```
 </TabItem>
 </Tabs>
@@ -409,7 +468,15 @@ To initiate an action on a block storage volume by Name, send a POST request to<
 ```sql
 EXEC digitalocean.compute.volumes.volume_actions_post 
 @per_page='{{ per_page }}', 
-@page='{{ page }}';
+@page='{{ page }}' 
+@@json=
+'{
+"type": "{{ type }}", 
+"region": "{{ region }}", 
+"droplet_id": {{ droplet_id }}, 
+"tags": "{{ tags }}"
+}'
+;
 ```
 </TabItem>
 </Tabs>

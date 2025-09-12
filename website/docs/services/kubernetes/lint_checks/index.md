@@ -153,7 +153,8 @@ diagnostics,
 requested_at
 FROM digitalocean.kubernetes.lint_checks
 WHERE cluster_id = '{{ cluster_id }}' -- required
-AND run_id = '{{ run_id }}';
+AND run_id = '{{ run_id }}'
+;
 ```
 </TabItem>
 </Tabs>
@@ -180,7 +181,8 @@ EXEC digitalocean.kubernetes.lint_checks.kubernetes_run_cluster_lint
 "include_checks": "{{ include_checks }}", 
 "exclude_groups": "{{ exclude_groups }}", 
 "exclude_checks": "{{ exclude_checks }}"
-}';
+}'
+;
 ```
 </TabItem>
 </Tabs>

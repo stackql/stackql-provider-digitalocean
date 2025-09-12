@@ -158,7 +158,8 @@ status,
 updated_at,
 uuid
 FROM digitalocean.container_registry.active_garbage_collection
-WHERE registry_name = '{{ registry_name }}' -- required;
+WHERE registry_name = '{{ registry_name }}' -- required
+;
 ```
 </TabItem>
 </Tabs>

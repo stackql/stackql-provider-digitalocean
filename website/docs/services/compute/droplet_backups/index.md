@@ -170,7 +170,8 @@ type
 FROM digitalocean.compute.droplet_backups
 WHERE droplet_id = '{{ droplet_id }}' -- required
 AND per_page = '{{ per_page }}'
-AND page = '{{ page }}';
+AND page = '{{ page }}'
+;
 ```
 </TabItem>
 </Tabs>

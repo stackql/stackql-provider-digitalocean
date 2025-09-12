@@ -111,7 +111,8 @@ To retrieve a list of all Droplets that are co-located on the same physical<br /
 ```sql
 SELECT
 *
-FROM digitalocean.compute.droplet_neighbor_ids;
+FROM digitalocean.compute.droplet_neighbor_ids
+;
 ```
 </TabItem>
 </Tabs>

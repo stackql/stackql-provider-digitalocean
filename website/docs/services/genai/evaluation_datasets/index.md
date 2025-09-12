@@ -146,7 +146,8 @@ EXEC digitalocean.genai.evaluation_datasets.genai_create_evaluation_dataset_file
 @@json=
 '{
 "files": "{{ files }}"
-}';
+}'
+;
 ```
 </TabItem>
 </Tabs>

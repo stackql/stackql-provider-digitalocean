@@ -128,7 +128,8 @@ SELECT
 components,
 functions_components
 FROM digitalocean.apps.health
-WHERE app_id = '{{ app_id }}' -- required;
+WHERE app_id = '{{ app_id }}' -- required
+;
 ```
 </TabItem>
 </Tabs>

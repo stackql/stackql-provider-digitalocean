@@ -243,7 +243,8 @@ region,
 updated_at,
 uuid
 FROM digitalocean.serverless.namespaces
-WHERE namespace_id = '{{ namespace_id }}' -- required;
+WHERE namespace_id = '{{ namespace_id }}' -- required
+;
 ```
 </TabItem>
 <TabItem value="functions_list_namespaces">
@@ -260,7 +261,8 @@ namespace,
 region,
 updated_at,
 uuid
-FROM digitalocean.serverless.namespaces;
+FROM digitalocean.serverless.namespaces
+;
 ```
 </TabItem>
 </Tabs>
@@ -285,8 +287,8 @@ data__region,
 data__label
 )
 SELECT 
-'{{ region }}' --required,
-'{{ label }}' --required
+'{{ region }}' /* required */,
+'{{ label }}' /* required */
 RETURNING
 namespace
 ;
@@ -327,7 +329,8 @@ Deletes the given namespace.  When a namespace is deleted all assets, in the nam
 
 ```sql
 DELETE FROM digitalocean.serverless.namespaces
-WHERE namespace_id = '{{ namespace_id }}' --required;
+WHERE namespace_id = '{{ namespace_id }}' --required
+;
 ```
 </TabItem>
 </Tabs>

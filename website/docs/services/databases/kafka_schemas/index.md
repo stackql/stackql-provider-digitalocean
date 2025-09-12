@@ -211,7 +211,8 @@ schema_type,
 version
 FROM digitalocean.databases.kafka_schemas
 WHERE database_cluster_uuid = '{{ database_cluster_uuid }}' -- required
-AND subject_name = '{{ subject_name }}' -- required;
+AND subject_name = '{{ subject_name }}' -- required
+;
 ```
 </TabItem>
 <TabItem value="databases_list_kafka_schemas">
@@ -225,7 +226,8 @@ subject_name,
 schema,
 schema_type
 FROM digitalocean.databases.kafka_schemas
-WHERE database_cluster_uuid = '{{ database_cluster_uuid }}' -- required;
+WHERE database_cluster_uuid = '{{ database_cluster_uuid }}' -- required
+;
 ```
 </TabItem>
 </Tabs>
@@ -252,9 +254,9 @@ data__schema,
 database_cluster_uuid
 )
 SELECT 
-'{{ subject_name }}' --required,
-'{{ schema_type }}' --required,
-'{{ schema }}' --required,
+'{{ subject_name }}' /* required */,
+'{{ schema_type }}' /* required */,
+'{{ schema }}' /* required */,
 '{{ database_cluster_uuid }}'
 RETURNING
 schema_id,
@@ -309,7 +311,8 @@ To delete a specific schema by subject name for a Kafka cluster, send a DELETE r
 ```sql
 DELETE FROM digitalocean.databases.kafka_schemas
 WHERE database_cluster_uuid = '{{ database_cluster_uuid }}' --required
-AND subject_name = '{{ subject_name }}' --required;
+AND subject_name = '{{ subject_name }}' --required
+;
 ```
 </TabItem>
 </Tabs>

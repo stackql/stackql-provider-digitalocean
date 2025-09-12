@@ -262,7 +262,8 @@ resource_type,
 size_gigabytes,
 tags
 FROM digitalocean.compute.snapshots
-WHERE snapshot_id = '{{ snapshot_id }}' -- required;
+WHERE snapshot_id = '{{ snapshot_id }}' -- required
+;
 ```
 </TabItem>
 <TabItem value="snapshots_list">
@@ -283,7 +284,8 @@ tags
 FROM digitalocean.compute.snapshots
 WHERE per_page = '{{ per_page }}'
 AND page = '{{ page }}'
-AND resource_type = '{{ resource_type }}';
+AND resource_type = '{{ resource_type }}'
+;
 ```
 </TabItem>
 </Tabs>
@@ -303,7 +305,8 @@ Both Droplet and volume snapshots are managed through the `/v2/snapshots/`<br />
 
 ```sql
 DELETE FROM digitalocean.compute.snapshots
-WHERE snapshot_id = '{{ snapshot_id }}' --required;
+WHERE snapshot_id = '{{ snapshot_id }}' --required
+;
 ```
 </TabItem>
 </Tabs>

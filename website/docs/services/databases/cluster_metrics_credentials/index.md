@@ -123,7 +123,8 @@ To show the credentials for all database clusters' metrics endpoints, send a GET
 ```sql
 SELECT
 credentials
-FROM digitalocean.databases.cluster_metrics_credentials;
+FROM digitalocean.databases.cluster_metrics_credentials
+;
 ```
 </TabItem>
 </Tabs>
@@ -144,9 +145,7 @@ To update the credentials for all database clusters' metrics endpoints, send a P
 ```sql
 REPLACE digitalocean.databases.cluster_metrics_credentials
 SET 
-data__credentials = '{{ credentials }}'
-WHERE 
-;
+data__credentials = '{{ credentials }}';
 ```
 </TabItem>
 </Tabs>

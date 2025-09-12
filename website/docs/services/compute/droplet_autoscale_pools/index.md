@@ -288,7 +288,8 @@ droplet_template,
 status,
 updated_at
 FROM digitalocean.compute.droplet_autoscale_pools
-WHERE autoscale_pool_id = '{{ autoscale_pool_id }}' -- required;
+WHERE autoscale_pool_id = '{{ autoscale_pool_id }}' -- required
+;
 ```
 </TabItem>
 <TabItem value="autoscalepools_list">
@@ -309,7 +310,8 @@ updated_at
 FROM digitalocean.compute.droplet_autoscale_pools
 WHERE per_page = '{{ per_page }}'
 AND page = '{{ page }}'
-AND name = '{{ name }}';
+AND name = '{{ name }}'
+;
 ```
 </TabItem>
 </Tabs>
@@ -335,9 +337,9 @@ data__config,
 data__droplet_template
 )
 SELECT 
-'{{ name }}' --required,
-'{{ config }}' --required,
-'{{ droplet_template }}' --required
+'{{ name }}' /* required */,
+'{{ config }}' /* required */,
+'{{ droplet_template }}' /* required */
 RETURNING
 autoscale_pool
 ;
@@ -410,7 +412,8 @@ To destroy an autoscale pool, send a DELETE request to the `/v2/droplets/autosca
 
 ```sql
 DELETE FROM digitalocean.compute.droplet_autoscale_pools
-WHERE autoscale_pool_id = '{{ autoscale_pool_id }}' --required;
+WHERE autoscale_pool_id = '{{ autoscale_pool_id }}' --required
+;
 ```
 </TabItem>
 </Tabs>
@@ -431,7 +434,8 @@ To destroy an autoscale pool and its associated resources (Droplets),<br />send 
 ```sql
 EXEC digitalocean.compute.droplet_autoscale_pools.autoscalepools_delete_dangerous 
 @autoscale_pool_id='{{ autoscale_pool_id }}' --required, 
-@X-Dangerous='{{ X-Dangerous }}' --required;
+@X-Dangerous='{{ X-Dangerous }}' --required
+;
 ```
 </TabItem>
 </Tabs>

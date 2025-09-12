@@ -134,7 +134,8 @@ kubernetes_version,
 slug,
 supported_features
 FROM digitalocean.kubernetes.available_upgrades
-WHERE cluster_id = '{{ cluster_id }}' -- required;
+WHERE cluster_id = '{{ cluster_id }}' -- required
+;
 ```
 </TabItem>
 </Tabs>

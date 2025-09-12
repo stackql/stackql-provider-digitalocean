@@ -158,7 +158,8 @@ metric_uuid,
 metric_value_type,
 range_max,
 range_min
-FROM digitalocean.genai.evaluation_metrics;
+FROM digitalocean.genai.evaluation_metrics
+;
 ```
 </TabItem>
 </Tabs>

@@ -140,7 +140,8 @@ usage
 FROM digitalocean.genai.agent_usage
 WHERE uuid = '{{ uuid }}' -- required
 AND start = '{{ start }}'
-AND stop = '{{ stop }}';
+AND stop = '{{ stop }}'
+;
 ```
 </TabItem>
 </Tabs>

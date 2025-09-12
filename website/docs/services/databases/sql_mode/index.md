@@ -129,7 +129,8 @@ To retrieve the configured SQL modes for an existing MySQL cluster, send a GET r
 SELECT
 sql_mode
 FROM digitalocean.databases.sql_mode
-WHERE database_cluster_uuid = '{{ database_cluster_uuid }}' -- required;
+WHERE database_cluster_uuid = '{{ database_cluster_uuid }}' -- required
+;
 ```
 </TabItem>
 </Tabs>

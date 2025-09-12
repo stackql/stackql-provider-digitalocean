@@ -341,7 +341,8 @@ status,
 tags,
 type
 FROM digitalocean.compute.images
-WHERE image_id = '{{ image_id }}' -- required;
+WHERE image_id = '{{ image_id }}' -- required
+;
 ```
 </TabItem>
 <TabItem value="images_list">
@@ -369,7 +370,8 @@ WHERE type = '{{ type }}'
 AND private = '{{ private }}'
 AND tag_name = '{{ tag_name }}'
 AND per_page = '{{ per_page }}'
-AND page = '{{ page }}';
+AND page = '{{ page }}'
+;
 ```
 </TabItem>
 </Tabs>
@@ -398,11 +400,11 @@ data__region,
 data__tags
 )
 SELECT 
-'{{ name }}' --required,
+'{{ name }}' /* required */,
 '{{ distribution }}',
 '{{ description }}',
-'{{ url }}' --required,
-'{{ region }}' --required,
+'{{ url }}' /* required */,
+'{{ region }}' /* required */,
 '{{ tags }}'
 RETURNING
 image
@@ -493,7 +495,8 @@ To delete a snapshot or custom image, send a `DELETE` request to `/v2/images/$IM
 
 ```sql
 DELETE FROM digitalocean.compute.images
-WHERE image_id = '{{ image_id }}' --required;
+WHERE image_id = '{{ image_id }}' --required
+;
 ```
 </TabItem>
 </Tabs>

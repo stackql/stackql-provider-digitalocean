@@ -218,7 +218,8 @@ replication_factor,
 state
 FROM digitalocean.databases.kafka_topics
 WHERE database_cluster_uuid = '{{ database_cluster_uuid }}' -- required
-AND topic_name = '{{ topic_name }}' -- required;
+AND topic_name = '{{ topic_name }}' -- required
+;
 ```
 </TabItem>
 <TabItem value="databases_list_kafka_topics">
@@ -232,7 +233,8 @@ partition_count,
 replication_factor,
 state
 FROM digitalocean.databases.kafka_topics
-WHERE database_cluster_uuid = '{{ database_cluster_uuid }}' -- required;
+WHERE database_cluster_uuid = '{{ database_cluster_uuid }}' -- required
+;
 ```
 </TabItem>
 </Tabs>
@@ -260,7 +262,7 @@ data__config,
 database_cluster_uuid
 )
 SELECT 
-'{{ name }}' --required,
+'{{ name }}' /* required */,
 {{ replication_factor }},
 {{ partition_count }},
 '{{ config }}',
@@ -344,7 +346,8 @@ To delete a single topic within a Kafka cluster, send a DELETE request<br />to `
 ```sql
 DELETE FROM digitalocean.databases.kafka_topics
 WHERE database_cluster_uuid = '{{ database_cluster_uuid }}' --required
-AND topic_name = '{{ topic_name }}' --required;
+AND topic_name = '{{ topic_name }}' --required
+;
 ```
 </TabItem>
 </Tabs>

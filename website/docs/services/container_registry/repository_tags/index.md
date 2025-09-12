@@ -202,7 +202,8 @@ FROM digitalocean.container_registry.repository_tags
 WHERE registry_name = '{{ registry_name }}' -- required
 AND repository_name = '{{ repository_name }}' -- required
 AND per_page = '{{ per_page }}'
-AND page = '{{ page }}';
+AND page = '{{ page }}'
+;
 ```
 </TabItem>
 </Tabs>
@@ -224,7 +225,8 @@ To delete a container repository tag in on of our container registries, send a D
 DELETE FROM digitalocean.container_registry.repository_tags
 WHERE registry_name = '{{ registry_name }}' --required
 AND repository_name = '{{ repository_name }}' --required
-AND repository_tag = '{{ repository_tag }}' --required;
+AND repository_tag = '{{ repository_tag }}' --required
+;
 ```
 </TabItem>
 </Tabs>
@@ -248,7 +250,8 @@ EXEC digitalocean.container_registry.repository_tags.registry_list_repository_ta
 @registry_name='{{ registry_name }}' --required, 
 @repository_name='{{ repository_name }}' --required, 
 @per_page='{{ per_page }}', 
-@page='{{ page }}';
+@page='{{ page }}'
+;
 ```
 </TabItem>
 <TabItem value="registry_delete_repository_tag_legacy">
@@ -259,7 +262,8 @@ To delete a container repository tag, send a DELETE request to<br />`/v2/registr
 EXEC digitalocean.container_registry.repository_tags.registry_delete_repository_tag_legacy 
 @registry_name='{{ registry_name }}' --required, 
 @repository_name='{{ repository_name }}' --required, 
-@repository_tag='{{ repository_tag }}' --required;
+@repository_tag='{{ repository_tag }}' --required
+;
 ```
 </TabItem>
 </Tabs>
