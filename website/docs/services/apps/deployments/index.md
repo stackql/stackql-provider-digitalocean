@@ -341,7 +341,8 @@ updated_at,
 workers
 FROM digitalocean.apps.deployments
 WHERE app_id = '{{ app_id }}' -- required
-AND deployment_id = '{{ deployment_id }}' -- required;
+AND deployment_id = '{{ deployment_id }}' -- required
+;
 ```
 </TabItem>
 <TabItem value="apps_list_deployments">
@@ -369,7 +370,8 @@ FROM digitalocean.apps.deployments
 WHERE app_id = '{{ app_id }}' -- required
 AND page = '{{ page }}'
 AND per_page = '{{ per_page }}'
-AND deployment_types = '{{ deployment_types }}';
+AND deployment_types = '{{ deployment_types }}'
+;
 ```
 </TabItem>
 </Tabs>
@@ -432,7 +434,8 @@ Immediately cancel an in-progress deployment.
 ```sql
 EXEC digitalocean.apps.deployments.apps_cancel_deployment 
 @app_id='{{ app_id }}' --required, 
-@deployment_id='{{ deployment_id }}' --required;
+@deployment_id='{{ deployment_id }}' --required
+;
 ```
 </TabItem>
 </Tabs>

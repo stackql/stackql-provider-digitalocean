@@ -356,7 +356,8 @@ uuid,
 version_hash,
 workspace
 FROM digitalocean.genai.agent_routes
-WHERE uuid = '{{ uuid }}' -- required;
+WHERE uuid = '{{ uuid }}' -- required
+;
 ```
 </TabItem>
 </Tabs>

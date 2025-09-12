@@ -154,7 +154,7 @@ The following methods are available for this resource:
 <tr>
     <td><a href="#reserved_ips_create"><CopyableCode code="reserved_ips_create" /></a></td>
     <td><CopyableCode code="insert" /></td>
-    <td></td>
+    <td><a href="#parameter-data__droplet_id"><code>data__droplet_id</code></a></td>
     <td></td>
     <td>On creation, a reserved IP must be either assigned to a Droplet or reserved to a region.<br />* To create a new reserved IP assigned to a Droplet, send a POST<br />  request to `/v2/reserved_ips` with the `droplet_id` attribute.<br /><br />* To create a new reserved IP reserved to a region, send a POST request to<br />  `/v2/reserved_ips` with the `region` attribute.<br /><br />**Note**:  In addition to the standard rate limiting, only 12 reserved IPs may be created per 60 seconds.</td>
 </tr>
@@ -220,7 +220,8 @@ ip,
 locked,
 region
 FROM digitalocean.compute.reserved_ips
-WHERE reserved_ip = '{{ reserved_ip }}' -- required;
+WHERE reserved_ip = '{{ reserved_ip }}' -- required
+;
 ```
 </TabItem>
 <TabItem value="reserved_ips_list">
@@ -236,7 +237,8 @@ locked,
 region
 FROM digitalocean.compute.reserved_ips
 WHERE per_page = '{{ per_page }}'
-AND page = '{{ page }}';
+AND page = '{{ page }}'
+;
 ```
 </TabItem>
 </Tabs>
@@ -257,10 +259,10 @@ On creation, a reserved IP must be either assigned to a Droplet or reserved to a
 
 ```sql
 INSERT INTO digitalocean.compute.reserved_ips (
-
+data__droplet_id
 )
 SELECT 
-
+{{ droplet_id }} /* required */
 RETURNING
 links,
 reserved_ip
@@ -273,6 +275,11 @@ reserved_ip
 # Description fields are for documentation purposes
 - name: reserved_ips
   props:
+    - name: droplet_id
+      value: integer
+      description: >
+        The ID of the Droplet that the reserved IP will be assigned to.
+        
 ```
 </TabItem>
 </Tabs>
@@ -292,7 +299,8 @@ To delete a reserved IP and remove it from your account, send a DELETE request<b
 
 ```sql
 DELETE FROM digitalocean.compute.reserved_ips
-WHERE reserved_ip = '{{ reserved_ip }}' --required;
+WHERE reserved_ip = '{{ reserved_ip }}' --required
+;
 ```
 </TabItem>
 </Tabs>

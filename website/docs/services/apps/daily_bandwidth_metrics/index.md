@@ -141,7 +141,8 @@ app_bandwidth_usage,
 date
 FROM digitalocean.apps.daily_bandwidth_metrics
 WHERE app_id = '{{ app_id }}' -- required
-AND date = '{{ date }}';
+AND date = '{{ date }}'
+;
 ```
 </TabItem>
 </Tabs>
@@ -166,7 +167,7 @@ data__app_ids,
 data__date
 )
 SELECT 
-'{{ app_ids }}' --required,
+'{{ app_ids }}' /* required */,
 '{{ date }}'
 RETURNING
 app_bandwidth_usage,

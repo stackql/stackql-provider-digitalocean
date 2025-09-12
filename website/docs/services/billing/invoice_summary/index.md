@@ -188,7 +188,8 @@ user_billing_address,
 user_company,
 user_email
 FROM digitalocean.billing.invoice_summary
-WHERE invoice_uuid = '{{ invoice_uuid }}' -- required;
+WHERE invoice_uuid = '{{ invoice_uuid }}' -- required
+;
 ```
 </TabItem>
 </Tabs>

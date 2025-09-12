@@ -148,7 +148,8 @@ load_balancers,
 volume_snapshots,
 volumes
 FROM digitalocean.kubernetes.associated_resources
-WHERE cluster_id = '{{ cluster_id }}' -- required;
+WHERE cluster_id = '{{ cluster_id }}' -- required
+;
 ```
 </TabItem>
 </Tabs>
@@ -168,7 +169,8 @@ To delete a Kubernetes cluster along with a subset of its associated resources,<
 
 ```sql
 DELETE FROM digitalocean.kubernetes.associated_resources
-WHERE cluster_id = '{{ cluster_id }}' --required;
+WHERE cluster_id = '{{ cluster_id }}' --required
+;
 ```
 </TabItem>
 </Tabs>
@@ -188,7 +190,8 @@ To delete a Kubernetes cluster with all of its associated resources, send a<br /
 
 ```sql
 EXEC digitalocean.kubernetes.associated_resources.kubernetes_destroy_associated_resources_dangerous 
-@cluster_id='{{ cluster_id }}' --required;
+@cluster_id='{{ cluster_id }}' --required
+;
 ```
 </TabItem>
 </Tabs>

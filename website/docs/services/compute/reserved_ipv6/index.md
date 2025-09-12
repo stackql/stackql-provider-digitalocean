@@ -153,7 +153,7 @@ The following methods are available for this resource:
 <tr>
     <td><a href="#reserved_ipv6_actions_post"><CopyableCode code="reserved_ipv6_actions_post" /></a></td>
     <td><CopyableCode code="exec" /></td>
-    <td><a href="#parameter-reserved_ipv6"><code>reserved_ipv6</code></a></td>
+    <td><a href="#parameter-reserved_ipv6"><code>reserved_ipv6</code></a>, <a href="#parameter-type"><code>type</code></a></td>
     <td></td>
     <td>To initiate an action on a reserved IPv6 send a POST request to<br />`/v2/reserved_ipv6/$RESERVED_IPV6/actions`. In the JSON body to the request,<br />set the `type` attribute to on of the supported action types:<br /><br />| Action     | Details<br />|------------|--------<br />| `assign`   | Assigns a reserved IPv6 to a Droplet<br />| `unassign` | Unassign a reserved IPv6 from a Droplet<br /></td>
 </tr>
@@ -211,7 +211,8 @@ ip,
 region_slug,
 reserved_at
 FROM digitalocean.compute.reserved_ipv6
-WHERE reserved_ipv6 = '{{ reserved_ipv6 }}' -- required;
+WHERE reserved_ipv6 = '{{ reserved_ipv6 }}' -- required
+;
 ```
 </TabItem>
 <TabItem value="reserved_ipv6_list">
@@ -225,7 +226,8 @@ meta,
 reserved_ipv6s
 FROM digitalocean.compute.reserved_ipv6
 WHERE per_page = '{{ per_page }}'
-AND page = '{{ page }}';
+AND page = '{{ page }}'
+;
 ```
 </TabItem>
 </Tabs>
@@ -249,7 +251,7 @@ INSERT INTO digitalocean.compute.reserved_ipv6 (
 data__region_slug
 )
 SELECT 
-'{{ region_slug }}' --required
+'{{ region_slug }}' /* required */
 RETURNING
 reserved_ipv6
 ;
@@ -285,7 +287,8 @@ To delete a reserved IP and remove it from your account, send a DELETE request<b
 
 ```sql
 DELETE FROM digitalocean.compute.reserved_ipv6
-WHERE reserved_ipv6 = '{{ reserved_ipv6 }}' --required;
+WHERE reserved_ipv6 = '{{ reserved_ipv6 }}' --required
+;
 ```
 </TabItem>
 </Tabs>
@@ -305,7 +308,12 @@ To initiate an action on a reserved IPv6 send a POST request to<br />`/v2/reserv
 
 ```sql
 EXEC digitalocean.compute.reserved_ipv6.reserved_ipv6_actions_post 
-@reserved_ipv6='{{ reserved_ipv6 }}' --required;
+@reserved_ipv6='{{ reserved_ipv6 }}' --required 
+@@json=
+'{
+"type": "{{ type }}"
+}'
+;
 ```
 </TabItem>
 </Tabs>

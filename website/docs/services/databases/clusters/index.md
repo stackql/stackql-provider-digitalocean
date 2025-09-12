@@ -109,7 +109,7 @@ A JSON object with a key of `database`.
 <tr>
     <td><CopyableCode code="private_network_uuid" /></td>
     <td><code>string</code></td>
-    <td>A string specifying the UUID of the VPC to which the database cluster will be assigned. If excluded, the cluster when creating a new database cluster, it will be assigned to your account's default VPC for the region. <br /><br />Requires `vpc:read` scope. (pattern: ^$|[0-9a-f]&#123;8&#125;\b-[0-9a-f]&#123;4&#125;-[0-9a-f]&#123;4&#125;-[0-9a-f]&#123;4&#125;-\b[0-9a-f]&#123;12&#125;, example: d455e75d-4858-4eec-8c95-da2f0a5f93a7)</td>
+    <td>A string specifying the UUID of the VPC to which the database cluster will be assigned. If excluded, the cluster when creating a new database cluster, it will be assigned to your account's default VPC for the region. <br /><br />Requires `vpc:read` scope. (pattern: <code>^$|[0-9a-f]&#123;8&#125;\b-[0-9a-f]&#123;4&#125;-[0-9a-f]&#123;4&#125;-[0-9a-f]&#123;4&#125;-\b[0-9a-f]&#123;12&#125;</code>, example: d455e75d-4858-4eec-8c95-da2f0a5f93a7)</td>
 </tr>
 <tr>
     <td><CopyableCode code="region" /></td>
@@ -260,7 +260,7 @@ A JSON object with a key of `databases`.
 <tr>
     <td><CopyableCode code="private_network_uuid" /></td>
     <td><code>string</code></td>
-    <td>A string specifying the UUID of the VPC to which the database cluster will be assigned. If excluded, the cluster when creating a new database cluster, it will be assigned to your account's default VPC for the region. <br /><br />Requires `vpc:read` scope. (pattern: ^$|[0-9a-f]&#123;8&#125;\b-[0-9a-f]&#123;4&#125;-[0-9a-f]&#123;4&#125;-[0-9a-f]&#123;4&#125;-\b[0-9a-f]&#123;12&#125;, example: d455e75d-4858-4eec-8c95-da2f0a5f93a7)</td>
+    <td>A string specifying the UUID of the VPC to which the database cluster will be assigned. If excluded, the cluster when creating a new database cluster, it will be assigned to your account's default VPC for the region. <br /><br />Requires `vpc:read` scope. (pattern: <code>^$|[0-9a-f]&#123;8&#125;\b-[0-9a-f]&#123;4&#125;-[0-9a-f]&#123;4&#125;-[0-9a-f]&#123;4&#125;-\b[0-9a-f]&#123;12&#125;</code>, example: d455e75d-4858-4eec-8c95-da2f0a5f93a7)</td>
 </tr>
 <tr>
     <td><CopyableCode code="region" /></td>
@@ -492,7 +492,8 @@ version,
 version_end_of_availability,
 version_end_of_life
 FROM digitalocean.databases.clusters
-WHERE database_cluster_uuid = '{{ database_cluster_uuid }}' -- required;
+WHERE database_cluster_uuid = '{{ database_cluster_uuid }}' -- required
+;
 ```
 </TabItem>
 <TabItem value="databases_list_clusters">
@@ -529,7 +530,8 @@ version,
 version_end_of_availability,
 version_end_of_life
 FROM digitalocean.databases.clusters
-WHERE tag_name = '{{ tag_name }}';
+WHERE tag_name = '{{ tag_name }}'
+;
 ```
 </TabItem>
 </Tabs>
@@ -565,12 +567,12 @@ data__autoscale,
 data__backup_restore
 )
 SELECT 
-'{{ name }}' --required,
-'{{ engine }}' --required,
+'{{ name }}' /* required */,
+'{{ engine }}' /* required */,
 '{{ version }}',
-{{ num_nodes }} --required,
-'{{ size }}' --required,
-'{{ region }}' --required,
+{{ num_nodes }} /* required */,
+'{{ size }}' /* required */,
+'{{ region }}' /* required */,
 '{{ private_network_uuid }}',
 '{{ tags }}',
 '{{ project_id }}',
@@ -668,7 +670,8 @@ To destroy a specific database, send a DELETE request to `/v2/databases/$DATABAS
 
 ```sql
 DELETE FROM digitalocean.databases.clusters
-WHERE database_cluster_uuid = '{{ database_cluster_uuid }}' --required;
+WHERE database_cluster_uuid = '{{ database_cluster_uuid }}' --required
+;
 ```
 </TabItem>
 </Tabs>
@@ -696,7 +699,8 @@ EXEC digitalocean.databases.clusters.databases_update_region
 @@json=
 '{
 "region": "{{ region }}"
-}';
+}'
+;
 ```
 </TabItem>
 <TabItem value="databases_update_cluster_size">
@@ -711,7 +715,8 @@ EXEC digitalocean.databases.clusters.databases_update_cluster_size
 "size": "{{ size }}", 
 "num_nodes": {{ num_nodes }}, 
 "storage_size_mib": {{ storage_size_mib }}
-}';
+}'
+;
 ```
 </TabItem>
 <TabItem value="databases_update_maintenance_window">
@@ -725,7 +730,8 @@ EXEC digitalocean.databases.clusters.databases_update_maintenance_window
 '{
 "day": "{{ day }}", 
 "hour": "{{ hour }}"
-}';
+}'
+;
 ```
 </TabItem>
 <TabItem value="databases_install_update">
@@ -734,7 +740,8 @@ To start the installation of updates for a database cluster, send a PUT request 
 
 ```sql
 EXEC digitalocean.databases.clusters.databases_install_update 
-@database_cluster_uuid='{{ database_cluster_uuid }}' --required;
+@database_cluster_uuid='{{ database_cluster_uuid }}' --required
+;
 ```
 </TabItem>
 <TabItem value="databases_update_major_version">
@@ -747,7 +754,8 @@ EXEC digitalocean.databases.clusters.databases_update_major_version
 @@json=
 '{
 "version": "{{ version }}"
-}';
+}'
+;
 ```
 </TabItem>
 </Tabs>

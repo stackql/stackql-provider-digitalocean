@@ -206,7 +206,8 @@ name,
 config,
 type
 FROM digitalocean.monitoring.destinations
-WHERE destination_uuid = '{{ destination_uuid }}' -- required;
+WHERE destination_uuid = '{{ destination_uuid }}' -- required
+;
 ```
 </TabItem>
 <TabItem value="monitoring_list_destinations">
@@ -219,7 +220,8 @@ id,
 name,
 config,
 type
-FROM digitalocean.monitoring.destinations;
+FROM digitalocean.monitoring.destinations
+;
 ```
 </TabItem>
 </Tabs>
@@ -248,8 +250,8 @@ destination_uuid
 )
 SELECT 
 '{{ name }}',
-'{{ type }}' --required,
-'{{ config }}' --required,
+'{{ type }}' /* required */,
+'{{ config }}' /* required */,
 '{{ destination_uuid }}'
 ;
 ```
@@ -266,8 +268,8 @@ data__config
 )
 SELECT 
 '{{ name }}',
-'{{ type }}' --required,
-'{{ config }}' --required
+'{{ type }}' /* required */,
+'{{ config }}' /* required */
 RETURNING
 destination
 ;
@@ -315,7 +317,8 @@ To delete a destination and all associated sinks, send a DELETE request to `/v2/
 
 ```sql
 DELETE FROM digitalocean.monitoring.destinations
-WHERE destination_uuid = '{{ destination_uuid }}' --required;
+WHERE destination_uuid = '{{ destination_uuid }}' --required
+;
 ```
 </TabItem>
 </Tabs>

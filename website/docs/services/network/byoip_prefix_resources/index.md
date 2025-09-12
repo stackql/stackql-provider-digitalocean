@@ -158,7 +158,8 @@ resource
 FROM digitalocean.network.byoip_prefix_resources
 WHERE byoip_prefix_uuid = '{{ byoip_prefix_uuid }}' -- required
 AND per_page = '{{ per_page }}'
-AND page = '{{ page }}';
+AND page = '{{ page }}'
+;
 ```
 </TabItem>
 </Tabs>

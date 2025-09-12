@@ -152,7 +152,8 @@ prompts
 FROM digitalocean.genai.evaluation_run_results
 WHERE evaluation_run_uuid = '{{ evaluation_run_uuid }}' -- required
 AND page = '{{ page }}'
-AND per_page = '{{ per_page }}';
+AND per_page = '{{ per_page }}'
+;
 ```
 </TabItem>
 </Tabs>

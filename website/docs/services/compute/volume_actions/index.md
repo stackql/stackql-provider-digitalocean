@@ -194,7 +194,7 @@ The following methods are available for this resource:
 <tr>
     <td><a href="#volume_actions_post_by_id"><CopyableCode code="volume_actions_post_by_id" /></a></td>
     <td><CopyableCode code="exec" /></td>
-    <td><a href="#parameter-volume_id"><code>volume_id</code></a></td>
+    <td><a href="#parameter-volume_id"><code>volume_id</code></a>, <a href="#parameter-type"><code>type</code></a></td>
     <td><a href="#parameter-per_page"><code>per_page</code></a>, <a href="#parameter-page"><code>page</code></a></td>
     <td>To initiate an action on a block storage volume by Id, send a POST request to<br />`~/v2/volumes/$VOLUME_ID/actions`. The body should contain the appropriate<br />attributes for the respective action.<br /><br />## Attach a Block Storage Volume to a Droplet<br /><br />| Attribute  | Details                                                             |<br />| ---------- | ------------------------------------------------------------------- |<br />| type       | This must be `attach`                                               |<br />| droplet_id | Set to the Droplet's ID                                             |<br />| region     | Set to the slug representing the region where the volume is located |<br /><br />Each volume may only be attached to a single Droplet. However, up to fifteen<br />volumes may be attached to a Droplet at a time. Pre-formatted volumes will be<br />automatically mounted to Ubuntu, Debian, Fedora, Fedora Atomic, and CentOS<br />Droplets created on or after April 26, 2018 when attached. On older Droplets,<br />[additional configuration](https://docs.digitalocean.com/products/volumes/how-to/mount/)<br />is required.<br /><br />## Remove a Block Storage Volume from a Droplet<br /><br />| Attribute  | Details                                                             |<br />| ---------- | ------------------------------------------------------------------- |<br />| type       | This must be `detach`                                               |<br />| droplet_id | Set to the Droplet's ID                                             |<br />| region     | Set to the slug representing the region where the volume is located |<br /><br />## Resize a Volume<br /><br />| Attribute      | Details                                                             |<br />| -------------- | ------------------------------------------------------------------- |<br />| type           | This must be `resize`                                               |<br />| size_gigabytes | The new size of the block storage volume in GiB (1024^3)            |<br />| region         | Set to the slug representing the region where the volume is located |<br /><br />Volumes may only be resized upwards. The maximum size for a volume is 16TiB.<br /></td>
 </tr>
@@ -265,7 +265,8 @@ FROM digitalocean.compute.volume_actions
 WHERE volume_id = '{{ volume_id }}' -- required
 AND action_id = '{{ action_id }}' -- required
 AND per_page = '{{ per_page }}'
-AND page = '{{ page }}';
+AND page = '{{ page }}'
+;
 ```
 </TabItem>
 <TabItem value="volume_actions_list">
@@ -286,7 +287,8 @@ type
 FROM digitalocean.compute.volume_actions
 WHERE volume_id = '{{ volume_id }}' -- required
 AND per_page = '{{ per_page }}'
-AND page = '{{ page }}';
+AND page = '{{ page }}'
+;
 ```
 </TabItem>
 </Tabs>
@@ -308,7 +310,15 @@ To initiate an action on a block storage volume by Id, send a POST request to<br
 EXEC digitalocean.compute.volume_actions.volume_actions_post_by_id 
 @volume_id='{{ volume_id }}' --required, 
 @per_page='{{ per_page }}', 
-@page='{{ page }}';
+@page='{{ page }}' 
+@@json=
+'{
+"type": "{{ type }}", 
+"region": "{{ region }}", 
+"droplet_id": {{ droplet_id }}, 
+"tags": "{{ tags }}"
+}'
+;
 ```
 </TabItem>
 </Tabs>

@@ -135,7 +135,8 @@ SELECT
 slug,
 type
 FROM digitalocean.oneclick.applications
-WHERE type = '{{ type }}';
+WHERE type = '{{ type }}'
+;
 ```
 </TabItem>
 </Tabs>
@@ -160,8 +161,8 @@ data__addon_slugs,
 data__cluster_uuid
 )
 SELECT 
-'{{ addon_slugs }}' --required,
-'{{ cluster_uuid }}' --required
+'{{ addon_slugs }}' /* required */,
+'{{ cluster_uuid }}' /* required */
 RETURNING
 message
 ;

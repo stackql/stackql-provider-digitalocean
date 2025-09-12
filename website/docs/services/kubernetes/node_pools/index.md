@@ -296,7 +296,8 @@ tags,
 taints
 FROM digitalocean.kubernetes.node_pools
 WHERE cluster_id = '{{ cluster_id }}' -- required
-AND node_pool_id = '{{ node_pool_id }}' -- required;
+AND node_pool_id = '{{ node_pool_id }}' -- required
+;
 ```
 </TabItem>
 <TabItem value="kubernetes_list_node_pools">
@@ -317,7 +318,8 @@ size,
 tags,
 taints
 FROM digitalocean.kubernetes.node_pools
-WHERE cluster_id = '{{ cluster_id }}' -- required;
+WHERE cluster_id = '{{ cluster_id }}' -- required
+;
 ```
 </TabItem>
 </Tabs>
@@ -350,9 +352,9 @@ data__max_nodes,
 cluster_id
 )
 SELECT 
-'{{ size }}' --required,
-'{{ name }}' --required,
-{{ count }} --required,
+'{{ size }}' /* required */,
+'{{ name }}' /* required */,
+{{ count }} /* required */,
 '{{ tags }}',
 '{{ labels }}',
 '{{ taints }}',
@@ -474,7 +476,8 @@ To delete a node pool, send a DELETE request to<br />`/v2/kubernetes/clusters/$K
 ```sql
 DELETE FROM digitalocean.kubernetes.node_pools
 WHERE cluster_id = '{{ cluster_id }}' --required
-AND node_pool_id = '{{ node_pool_id }}' --required;
+AND node_pool_id = '{{ node_pool_id }}' --required
+;
 ```
 </TabItem>
 </Tabs>
@@ -499,7 +502,8 @@ EXEC digitalocean.kubernetes.node_pools.kubernetes_recycle_node_pool
 @@json=
 '{
 "nodes": "{{ nodes }}"
-}';
+}'
+;
 ```
 </TabItem>
 </Tabs>

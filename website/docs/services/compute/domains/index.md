@@ -209,7 +209,8 @@ ip_address,
 ttl,
 zone_file
 FROM digitalocean.compute.domains
-WHERE domain_name = '{{ domain_name }}' -- required;
+WHERE domain_name = '{{ domain_name }}' -- required
+;
 ```
 </TabItem>
 <TabItem value="domains_list">
@@ -224,7 +225,8 @@ ttl,
 zone_file
 FROM digitalocean.compute.domains
 WHERE per_page = '{{ per_page }}'
-AND page = '{{ page }}';
+AND page = '{{ page }}'
+;
 ```
 </TabItem>
 </Tabs>
@@ -291,7 +293,8 @@ To delete a domain, send a DELETE request to `/v2/domains/$DOMAIN_NAME`.<br />
 
 ```sql
 DELETE FROM digitalocean.compute.domains
-WHERE domain_name = '{{ domain_name }}' --required;
+WHERE domain_name = '{{ domain_name }}' --required
+;
 ```
 </TabItem>
 </Tabs>

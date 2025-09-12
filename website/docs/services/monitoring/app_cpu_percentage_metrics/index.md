@@ -146,7 +146,8 @@ FROM digitalocean.monitoring.app_cpu_percentage_metrics
 WHERE app_id = '{{ app_id }}' -- required
 AND start = '{{ start }}' -- required
 AND end = '{{ end }}' -- required
-AND app_component = '{{ app_component }}';
+AND app_component = '{{ app_component }}'
+;
 ```
 </TabItem>
 </Tabs>

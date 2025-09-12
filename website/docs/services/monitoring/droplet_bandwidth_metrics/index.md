@@ -152,7 +152,8 @@ WHERE host_id = '{{ host_id }}' -- required
 AND interface = '{{ interface }}' -- required
 AND direction = '{{ direction }}' -- required
 AND start = '{{ start }}' -- required
-AND end = '{{ end }}' -- required;
+AND end = '{{ end }}' -- required
+;
 ```
 </TabItem>
 </Tabs>

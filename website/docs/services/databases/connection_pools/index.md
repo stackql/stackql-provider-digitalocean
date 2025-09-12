@@ -267,7 +267,8 @@ standby_private_connection,
 user
 FROM digitalocean.databases.connection_pools
 WHERE database_cluster_uuid = '{{ database_cluster_uuid }}' -- required
-AND pool_name = '{{ pool_name }}' -- required;
+AND pool_name = '{{ pool_name }}' -- required
+;
 ```
 </TabItem>
 <TabItem value="databases_list_connection_pools">
@@ -286,7 +287,8 @@ standby_connection,
 standby_private_connection,
 user
 FROM digitalocean.databases.connection_pools
-WHERE database_cluster_uuid = '{{ database_cluster_uuid }}' -- required;
+WHERE database_cluster_uuid = '{{ database_cluster_uuid }}' -- required
+;
 ```
 </TabItem>
 </Tabs>
@@ -315,10 +317,10 @@ data__user,
 database_cluster_uuid
 )
 SELECT 
-'{{ name }}' --required,
-'{{ mode }}' --required,
-{{ size }} --required,
-'{{ db }}' --required,
+'{{ name }}' /* required */,
+'{{ mode }}' /* required */,
+{{ size }} /* required */,
+'{{ db }}' /* required */,
 '{{ user }}',
 '{{ database_cluster_uuid }}'
 RETURNING
@@ -410,7 +412,8 @@ To delete a specific connection pool for a PostgreSQL database cluster, send<br 
 ```sql
 DELETE FROM digitalocean.databases.connection_pools
 WHERE database_cluster_uuid = '{{ database_cluster_uuid }}' --required
-AND pool_name = '{{ pool_name }}' --required;
+AND pool_name = '{{ pool_name }}' --required
+;
 ```
 </TabItem>
 </Tabs>

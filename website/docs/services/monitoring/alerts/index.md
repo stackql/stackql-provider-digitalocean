@@ -255,7 +255,8 @@ threshold,
 type
 FROM digitalocean.monitoring.alerts
 WHERE check_id = '{{ check_id }}' -- required
-AND alert_id = '{{ alert_id }}' -- required;
+AND alert_id = '{{ alert_id }}' -- required
+;
 ```
 </TabItem>
 <TabItem value="uptime_list_alerts">
@@ -274,7 +275,8 @@ type
 FROM digitalocean.monitoring.alerts
 WHERE check_id = '{{ check_id }}' -- required
 AND per_page = '{{ per_page }}'
-AND page = '{{ page }}';
+AND page = '{{ page }}'
+;
 ```
 </TabItem>
 </Tabs>
@@ -304,12 +306,12 @@ data__period,
 check_id
 )
 SELECT 
-'{{ name }}' --required,
-'{{ type }}' --required,
+'{{ name }}' /* required */,
+'{{ type }}' /* required */,
 {{ threshold }},
 '{{ comparison }}',
-'{{ notifications }}' --required,
-'{{ period }}' --required,
+'{{ notifications }}' /* required */,
+'{{ period }}' /* required */,
 '{{ check_id }}'
 RETURNING
 alert
@@ -413,7 +415,8 @@ To delete an Uptime alert, send a DELETE request to `/v2/uptime/checks/$CHECK_ID
 ```sql
 DELETE FROM digitalocean.monitoring.alerts
 WHERE check_id = '{{ check_id }}' --required
-AND alert_id = '{{ alert_id }}' --required;
+AND alert_id = '{{ alert_id }}' --required
+;
 ```
 </TabItem>
 </Tabs>

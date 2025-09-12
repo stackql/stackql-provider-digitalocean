@@ -149,7 +149,8 @@ SELECT
 created_at,
 tier,
 updated_at
-FROM digitalocean.container_registry.subscriptions;
+FROM digitalocean.container_registry.subscriptions
+;
 ```
 </TabItem>
 </Tabs>
@@ -211,6 +212,7 @@ A subscription is automatically created when you configure your container regist
 
 ```sql
 EXEC digitalocean.container_registry.subscriptions.registry_get_subscription_legacy 
+
 ;
 ```
 </TabItem>
@@ -223,7 +225,8 @@ EXEC digitalocean.container_registry.subscriptions.registry_update_subscription_
 @@json=
 '{
 "tier_slug": "{{ tier_slug }}"
-}';
+}'
+;
 ```
 </TabItem>
 </Tabs>

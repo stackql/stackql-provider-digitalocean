@@ -53,7 +53,7 @@ A JSON object with a key of `rules`.
 <tr>
     <td><CopyableCode code="cluster_uuid" /></td>
     <td><code>string</code></td>
-    <td>A unique ID for the database cluster to which the rule is applied. (pattern: ^$|[0-9a-f]&#123;8&#125;\b-[0-9a-f]&#123;4&#125;-[0-9a-f]&#123;4&#125;-[0-9a-f]&#123;4&#125;-\b[0-9a-f]&#123;12&#125;, example: 9cc10173-e9ea-4176-9dbc-a4cee4c4ff30)</td>
+    <td>A unique ID for the database cluster to which the rule is applied. (pattern: <code>^$|[0-9a-f]&#123;8&#125;\b-[0-9a-f]&#123;4&#125;-[0-9a-f]&#123;4&#125;-[0-9a-f]&#123;4&#125;-\b[0-9a-f]&#123;12&#125;</code>, example: 9cc10173-e9ea-4176-9dbc-a4cee4c4ff30)</td>
 </tr>
 <tr>
     <td><CopyableCode code="created_at" /></td>
@@ -68,7 +68,7 @@ A JSON object with a key of `rules`.
 <tr>
     <td><CopyableCode code="uuid" /></td>
     <td><code>string</code></td>
-    <td>A unique ID for the firewall rule itself. (pattern: ^$|[0-9a-f]&#123;8&#125;\b-[0-9a-f]&#123;4&#125;-[0-9a-f]&#123;4&#125;-[0-9a-f]&#123;4&#125;-\b[0-9a-f]&#123;12&#125;, example: 79f26d28-ea8a-41f2-8ad8-8cfcdd020095)</td>
+    <td>A unique ID for the firewall rule itself. (pattern: <code>^$|[0-9a-f]&#123;8&#125;\b-[0-9a-f]&#123;4&#125;-[0-9a-f]&#123;4&#125;-[0-9a-f]&#123;4&#125;-\b[0-9a-f]&#123;12&#125;</code>, example: 79f26d28-ea8a-41f2-8ad8-8cfcdd020095)</td>
 </tr>
 <tr>
     <td><CopyableCode code="value" /></td>
@@ -153,7 +153,8 @@ type,
 uuid,
 value
 FROM digitalocean.databases.firewall_rules
-WHERE database_cluster_uuid = '{{ database_cluster_uuid }}' -- required;
+WHERE database_cluster_uuid = '{{ database_cluster_uuid }}' -- required
+;
 ```
 </TabItem>
 </Tabs>

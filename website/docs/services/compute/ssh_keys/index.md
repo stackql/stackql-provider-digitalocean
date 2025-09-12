@@ -216,7 +216,8 @@ name,
 fingerprint,
 public_key
 FROM digitalocean.compute.ssh_keys
-WHERE ssh_key_identifier = '{{ ssh_key_identifier }}' -- required;
+WHERE ssh_key_identifier = '{{ ssh_key_identifier }}' -- required
+;
 ```
 </TabItem>
 <TabItem value="ssh_keys_list">
@@ -231,7 +232,8 @@ fingerprint,
 public_key
 FROM digitalocean.compute.ssh_keys
 WHERE per_page = '{{ per_page }}'
-AND page = '{{ page }}';
+AND page = '{{ page }}'
+;
 ```
 </TabItem>
 </Tabs>
@@ -256,8 +258,8 @@ data__public_key,
 data__name
 )
 SELECT 
-'{{ public_key }}' --required,
-'{{ name }}' --required
+'{{ public_key }}' /* required */,
+'{{ name }}' /* required */
 RETURNING
 ssh_key
 ;
@@ -323,7 +325,8 @@ To destroy a public SSH key that you have in your account, send a DELETE request
 
 ```sql
 DELETE FROM digitalocean.compute.ssh_keys
-WHERE ssh_key_identifier = '{{ ssh_key_identifier }}' --required;
+WHERE ssh_key_identifier = '{{ ssh_key_identifier }}' --required
+;
 ```
 </TabItem>
 </Tabs>

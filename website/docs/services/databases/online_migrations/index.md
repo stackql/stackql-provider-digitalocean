@@ -153,7 +153,8 @@ id,
 created_at,
 status
 FROM digitalocean.databases.online_migrations
-WHERE database_cluster_uuid = '{{ database_cluster_uuid }}' -- required;
+WHERE database_cluster_uuid = '{{ database_cluster_uuid }}' -- required
+;
 ```
 </TabItem>
 </Tabs>
@@ -180,7 +181,8 @@ EXEC digitalocean.databases.online_migrations.databases_update_online_migration
 "source": "{{ source }}", 
 "disable_ssl": {{ disable_ssl }}, 
 "ignore_dbs": "{{ ignore_dbs }}"
-}';
+}'
+;
 ```
 </TabItem>
 <TabItem value="databases_delete_online_migration">
@@ -190,7 +192,8 @@ To stop an online migration, send a DELETE request to `/v2/databases/$DATABASE_I
 ```sql
 EXEC digitalocean.databases.online_migrations.databases_delete_online_migration 
 @database_cluster_uuid='{{ database_cluster_uuid }}' --required, 
-@migration_id='{{ migration_id }}' --required;
+@migration_id='{{ migration_id }}' --required
+;
 ```
 </TabItem>
 </Tabs>

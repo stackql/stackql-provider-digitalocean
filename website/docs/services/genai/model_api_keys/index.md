@@ -173,7 +173,8 @@ links,
 meta
 FROM digitalocean.genai.model_api_keys
 WHERE page = '{{ page }}'
-AND per_page = '{{ per_page }}';
+AND per_page = '{{ per_page }}'
+;
 ```
 </TabItem>
 </Tabs>
@@ -259,7 +260,8 @@ To delete an API key for a model, send a DELETE request to `/v2/gen-ai/models/ap
 
 ```sql
 DELETE FROM digitalocean.genai.model_api_keys
-WHERE api_key_uuid = '{{ api_key_uuid }}' --required;
+WHERE api_key_uuid = '{{ api_key_uuid }}' --required
+;
 ```
 </TabItem>
 </Tabs>
@@ -279,7 +281,8 @@ To regenerate a model API key, send a PUT request to `/v2/gen-ai/models/api_keys
 
 ```sql
 EXEC digitalocean.genai.model_api_keys.genai_regenerate_model_api_key 
-@api_key_uuid='{{ api_key_uuid }}' --required;
+@api_key_uuid='{{ api_key_uuid }}' --required
+;
 ```
 </TabItem>
 </Tabs>

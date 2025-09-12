@@ -128,7 +128,8 @@ SELECT
 regions,
 sizes,
 versions
-FROM digitalocean.kubernetes.options;
+FROM digitalocean.kubernetes.options
+;
 ```
 </TabItem>
 </Tabs>

@@ -158,7 +158,8 @@ server,
 token
 FROM digitalocean.kubernetes.credentials
 WHERE cluster_id = '{{ cluster_id }}' -- required
-AND expiry_seconds = '{{ expiry_seconds }}';
+AND expiry_seconds = '{{ expiry_seconds }}'
+;
 ```
 </TabItem>
 </Tabs>

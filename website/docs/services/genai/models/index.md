@@ -152,7 +152,8 @@ FROM digitalocean.genai.models
 WHERE usecases = '{{ usecases }}'
 AND public_only = '{{ public_only }}'
 AND page = '{{ page }}'
-AND per_page = '{{ per_page }}';
+AND per_page = '{{ per_page }}'
+;
 ```
 </TabItem>
 </Tabs>

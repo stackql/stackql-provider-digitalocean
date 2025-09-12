@@ -170,7 +170,8 @@ prompt_chunks,
 prompt_level_metric_results
 FROM digitalocean.genai.evaluation_run_prompt_results
 WHERE evaluation_run_uuid = '{{ evaluation_run_uuid }}' -- required
-AND prompt_id = '{{ prompt_id }}' -- required;
+AND prompt_id = '{{ prompt_id }}' -- required
+;
 ```
 </TabItem>
 </Tabs>

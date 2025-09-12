@@ -230,7 +230,8 @@ SELECT
 database_status,
 knowledge_base
 FROM digitalocean.genai.knowledge_bases
-WHERE uuid = '{{ uuid }}' -- required;
+WHERE uuid = '{{ uuid }}' -- required
+;
 ```
 </TabItem>
 <TabItem value="genai_list_knowledge_bases">
@@ -244,7 +245,8 @@ links,
 meta
 FROM digitalocean.genai.knowledge_bases
 WHERE page = '{{ page }}'
-AND per_page = '{{ per_page }}';
+AND per_page = '{{ per_page }}'
+;
 ```
 </TabItem>
 </Tabs>
@@ -385,7 +387,8 @@ To delete a knowledge base, send a DELETE request to `/v2/gen-ai/knowledge_bases
 
 ```sql
 DELETE FROM digitalocean.genai.knowledge_bases
-WHERE uuid = '{{ uuid }}' --required;
+WHERE uuid = '{{ uuid }}' --required
+;
 ```
 </TabItem>
 </Tabs>
@@ -407,7 +410,8 @@ To attach knowledge bases to an agent, send a POST request to `/v2/gen-ai/agents
 
 ```sql
 EXEC digitalocean.genai.knowledge_bases.genai_attach_knowledge_bases 
-@agent_uuid='{{ agent_uuid }}' --required;
+@agent_uuid='{{ agent_uuid }}' --required
+;
 ```
 </TabItem>
 <TabItem value="genai_attach_knowledge_base">
@@ -417,7 +421,8 @@ To attach a knowledge base to an agent, send a POST request to `/v2/gen-ai/agent
 ```sql
 EXEC digitalocean.genai.knowledge_bases.genai_attach_knowledge_base 
 @agent_uuid='{{ agent_uuid }}' --required, 
-@knowledge_base_uuid='{{ knowledge_base_uuid }}' --required;
+@knowledge_base_uuid='{{ knowledge_base_uuid }}' --required
+;
 ```
 </TabItem>
 <TabItem value="genai_detach_knowledge_base">
@@ -427,7 +432,8 @@ To detach a knowledge base from an agent, send a DELETE request to `/v2/gen-ai/a
 ```sql
 EXEC digitalocean.genai.knowledge_bases.genai_detach_knowledge_base 
 @agent_uuid='{{ agent_uuid }}' --required, 
-@knowledge_base_uuid='{{ knowledge_base_uuid }}' --required;
+@knowledge_base_uuid='{{ knowledge_base_uuid }}' --required
+;
 ```
 </TabItem>
 </Tabs>

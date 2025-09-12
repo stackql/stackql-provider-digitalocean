@@ -153,7 +153,8 @@ meta
 FROM digitalocean.genai.agent_versions
 WHERE uuid = '{{ uuid }}' -- required
 AND page = '{{ page }}'
-AND per_page = '{{ per_page }}';
+AND per_page = '{{ per_page }}'
+;
 ```
 </TabItem>
 </Tabs>
@@ -178,7 +179,8 @@ EXEC digitalocean.genai.agent_versions.genai_rollback_to_agent_version
 '{
 "uuid": "{{ uuid }}", 
 "version_hash": "{{ version_hash }}"
-}';
+}'
+;
 ```
 </TabItem>
 </Tabs>

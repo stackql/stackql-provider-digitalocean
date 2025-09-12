@@ -140,7 +140,8 @@ status
 FROM digitalocean.monitoring.lb_droplets_downtime
 WHERE lb_id = '{{ lb_id }}' -- required
 AND start = '{{ start }}' -- required
-AND end = '{{ end }}' -- required;
+AND end = '{{ end }}' -- required
+;
 ```
 </TabItem>
 </Tabs>

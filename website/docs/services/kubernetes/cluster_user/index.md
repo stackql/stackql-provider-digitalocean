@@ -128,7 +128,8 @@ SELECT
 groups,
 username
 FROM digitalocean.kubernetes.cluster_user
-WHERE cluster_id = '{{ cluster_id }}' -- required;
+WHERE cluster_id = '{{ cluster_id }}' -- required
+;
 ```
 </TabItem>
 </Tabs>

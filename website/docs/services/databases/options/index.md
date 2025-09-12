@@ -122,7 +122,8 @@ To list all of the options available for the offered database engines, send a GE
 SELECT
 options,
 version_availability
-FROM digitalocean.databases.options;
+FROM digitalocean.databases.options
+;
 ```
 </TabItem>
 </Tabs>

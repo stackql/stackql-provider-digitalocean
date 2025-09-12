@@ -140,7 +140,8 @@ instance_name,
 component_type,
 instance_alias
 FROM digitalocean.apps.instances
-WHERE app_id = '{{ app_id }}' -- required;
+WHERE app_id = '{{ app_id }}' -- required
+;
 ```
 </TabItem>
 </Tabs>

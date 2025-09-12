@@ -179,7 +179,8 @@ meta
 FROM digitalocean.genai.agent_api_keys
 WHERE agent_uuid = '{{ agent_uuid }}' -- required
 AND page = '{{ page }}'
-AND per_page = '{{ per_page }}';
+AND per_page = '{{ per_page }}'
+;
 ```
 </TabItem>
 </Tabs>
@@ -280,7 +281,8 @@ To delete an API key for an agent, send a DELETE request to `/v2/gen-ai/agents/&
 ```sql
 DELETE FROM digitalocean.genai.agent_api_keys
 WHERE agent_uuid = '{{ agent_uuid }}' --required
-AND api_key_uuid = '{{ api_key_uuid }}' --required;
+AND api_key_uuid = '{{ api_key_uuid }}' --required
+;
 ```
 </TabItem>
 </Tabs>
@@ -301,7 +303,8 @@ To regenerate an agent API key, send a PUT request to `/v2/gen-ai/agents/&#123;a
 ```sql
 EXEC digitalocean.genai.agent_api_keys.genai_regenerate_agent_api_key 
 @agent_uuid='{{ agent_uuid }}' --required, 
-@api_key_uuid='{{ api_key_uuid }}' --required;
+@api_key_uuid='{{ api_key_uuid }}' --required
+;
 ```
 </TabItem>
 </Tabs>

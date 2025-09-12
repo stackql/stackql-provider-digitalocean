@@ -54,7 +54,7 @@ The response will be a JSON object with the key `registry` containing informatio
 <tr>
     <td><CopyableCode code="name" /></td>
     <td><code>string</code></td>
-    <td>A globally unique name for the container registry. Must be lowercase and be composed only of numbers, letters and `-`, up to a limit of 63 characters. (pattern: ^[a-z0-9-]&#123;1,63&#125;$, example: example)</td>
+    <td>A globally unique name for the container registry. Must be lowercase and be composed only of numbers, letters and `-`, up to a limit of 63 characters. (pattern: <code>^[a-z0-9-]&#123;1,63&#125;$</code>, example: example)</td>
 </tr>
 <tr>
     <td><CopyableCode code="created_at" /></td>
@@ -220,7 +220,8 @@ region,
 storage_usage_bytes,
 storage_usage_bytes_updated_at
 FROM digitalocean.container_registry.registries
-WHERE registry_name = '{{ registry_name }}' -- required;
+WHERE registry_name = '{{ registry_name }}' -- required
+;
 ```
 </TabItem>
 <TabItem value="registries_list">
@@ -230,7 +231,8 @@ To get information about any container registry in your account, send a GET requ
 ```sql
 SELECT
 *
-FROM digitalocean.container_registry.registries;
+FROM digitalocean.container_registry.registries
+;
 ```
 </TabItem>
 </Tabs>
@@ -256,7 +258,7 @@ data__subscription_tier_slug,
 data__region
 )
 SELECT 
-'{{ name }}' --required,
+'{{ name }}' /* required */,
 '{{ subscription_tier_slug }}',
 '{{ region }}'
 RETURNING
@@ -306,7 +308,8 @@ To delete your container registry, destroying all container image data stored in
 
 ```sql
 DELETE FROM digitalocean.container_registry.registries
-WHERE registry_name = '{{ registry_name }}' --required;
+WHERE registry_name = '{{ registry_name }}' --required
+;
 ```
 </TabItem>
 </Tabs>
@@ -333,7 +336,8 @@ EXEC digitalocean.container_registry.registries.registries_validate_name
 @@json=
 '{
 "name": "{{ name }}"
-}';
+}'
+;
 ```
 </TabItem>
 <TabItem value="registry_get_legacy">
@@ -342,6 +346,7 @@ To get information about your container registry, send a GET request to `/v2/reg
 
 ```sql
 EXEC digitalocean.container_registry.registries.registry_get_legacy 
+
 ;
 ```
 </TabItem>
@@ -356,7 +361,8 @@ EXEC digitalocean.container_registry.registries.registry_create_legacy
 "name": "{{ name }}", 
 "subscription_tier_slug": "{{ subscription_tier_slug }}", 
 "region": "{{ region }}"
-}';
+}'
+;
 ```
 </TabItem>
 <TabItem value="registry_delete_legacy">
@@ -365,6 +371,7 @@ To delete your container registry, destroying all container image data stored in
 
 ```sql
 EXEC digitalocean.container_registry.registries.registry_delete_legacy 
+
 ;
 ```
 </TabItem>
@@ -377,7 +384,8 @@ EXEC digitalocean.container_registry.registries.registry_validate_name_legacy
 @@json=
 '{
 "name": "{{ name }}"
-}';
+}'
+;
 ```
 </TabItem>
 </Tabs>

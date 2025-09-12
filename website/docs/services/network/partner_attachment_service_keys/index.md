@@ -141,7 +141,8 @@ created_at,
 state,
 value
 FROM digitalocean.network.partner_attachment_service_keys
-WHERE pa_id = '{{ pa_id }}' -- required;
+WHERE pa_id = '{{ pa_id }}' -- required
+;
 ```
 </TabItem>
 </Tabs>

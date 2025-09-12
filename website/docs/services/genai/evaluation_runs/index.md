@@ -255,7 +255,8 @@ test_case_description,
 test_case_uuid,
 test_case_version
 FROM digitalocean.genai.evaluation_runs
-WHERE evaluation_run_uuid = '{{ evaluation_run_uuid }}' -- required;
+WHERE evaluation_run_uuid = '{{ evaluation_run_uuid }}' -- required
+;
 ```
 </TabItem>
 </Tabs>

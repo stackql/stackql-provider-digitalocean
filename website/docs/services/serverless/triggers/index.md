@@ -267,7 +267,8 @@ type,
 updated_at
 FROM digitalocean.serverless.triggers
 WHERE namespace_id = '{{ namespace_id }}' -- required
-AND trigger_name = '{{ trigger_name }}' -- required;
+AND trigger_name = '{{ trigger_name }}' -- required
+;
 ```
 </TabItem>
 <TabItem value="functions_list_triggers">
@@ -286,7 +287,8 @@ scheduled_runs,
 type,
 updated_at
 FROM digitalocean.serverless.triggers
-WHERE namespace_id = '{{ namespace_id }}' -- required;
+WHERE namespace_id = '{{ namespace_id }}' -- required
+;
 ```
 </TabItem>
 </Tabs>
@@ -315,11 +317,11 @@ data__scheduled_details,
 namespace_id
 )
 SELECT 
-'{{ name }}' --required,
-'{{ function }}' --required,
-'{{ type }}' --required,
-{{ is_enabled }} --required,
-'{{ scheduled_details }}' --required,
+'{{ name }}' /* required */,
+'{{ function }}' /* required */,
+'{{ type }}' /* required */,
+{{ is_enabled }} /* required */,
+'{{ scheduled_details }}' /* required */,
 '{{ namespace_id }}'
 RETURNING
 trigger
@@ -407,7 +409,8 @@ Deletes the given trigger.<br />To delete trigger, send a DELETE request to `/v2
 ```sql
 DELETE FROM digitalocean.serverless.triggers
 WHERE namespace_id = '{{ namespace_id }}' --required
-AND trigger_name = '{{ trigger_name }}' --required;
+AND trigger_name = '{{ trigger_name }}' --required
+;
 ```
 </TabItem>
 </Tabs>

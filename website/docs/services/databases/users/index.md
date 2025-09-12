@@ -252,7 +252,8 @@ role,
 settings
 FROM digitalocean.databases.users
 WHERE database_cluster_uuid = '{{ database_cluster_uuid }}' -- required
-AND username = '{{ username }}' -- required;
+AND username = '{{ username }}' -- required
+;
 ```
 </TabItem>
 <TabItem value="databases_list_users">
@@ -269,7 +270,8 @@ password,
 role,
 settings
 FROM digitalocean.databases.users
-WHERE database_cluster_uuid = '{{ database_cluster_uuid }}' -- required;
+WHERE database_cluster_uuid = '{{ database_cluster_uuid }}' -- required
+;
 ```
 </TabItem>
 </Tabs>
@@ -297,7 +299,7 @@ data__readonly,
 database_cluster_uuid
 )
 SELECT 
-'{{ name }}' --required,
+'{{ name }}' /* required */,
 '{{ mysql_settings }}',
 '{{ settings }}',
 {{ readonly }},
@@ -380,7 +382,8 @@ To remove a specific database user, send a DELETE request to<br />`/v2/databases
 ```sql
 DELETE FROM digitalocean.databases.users
 WHERE database_cluster_uuid = '{{ database_cluster_uuid }}' --required
-AND username = '{{ username }}' --required;
+AND username = '{{ username }}' --required
+;
 ```
 </TabItem>
 </Tabs>
@@ -405,7 +408,8 @@ EXEC digitalocean.databases.users.databases_reset_auth
 @@json=
 '{
 "mysql_settings": "{{ mysql_settings }}"
-}';
+}'
+;
 ```
 </TabItem>
 </Tabs>

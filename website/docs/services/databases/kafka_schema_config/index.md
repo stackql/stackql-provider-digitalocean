@@ -129,7 +129,8 @@ To retrieve the Schema Registry configuration for a Kafka cluster, send a GET re
 SELECT
 compatibility_level
 FROM digitalocean.databases.kafka_schema_config
-WHERE database_cluster_uuid = '{{ database_cluster_uuid }}' -- required;
+WHERE database_cluster_uuid = '{{ database_cluster_uuid }}' -- required
+;
 ```
 </TabItem>
 </Tabs>

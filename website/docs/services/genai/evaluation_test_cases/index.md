@@ -623,7 +623,8 @@ test_case_uuid,
 test_case_version
 FROM digitalocean.genai.evaluation_test_cases
 WHERE evaluation_test_case_uuid = '{{ evaluation_test_case_uuid }}' -- required
-AND evaluation_test_case_version = '{{ evaluation_test_case_version }}';
+AND evaluation_test_case_version = '{{ evaluation_test_case_version }}'
+;
 ```
 </TabItem>
 <TabItem value="genai_get_evaluation_test_case">
@@ -652,7 +653,8 @@ updated_by_user_email,
 version
 FROM digitalocean.genai.evaluation_test_cases
 WHERE test_case_uuid = '{{ test_case_uuid }}' -- required
-AND evaluation_test_case_version = '{{ evaluation_test_case_version }}';
+AND evaluation_test_case_version = '{{ evaluation_test_case_version }}'
+;
 ```
 </TabItem>
 <TabItem value="genai_list_evaluation_test_cases_by_workspace">
@@ -680,7 +682,8 @@ updated_at,
 updated_by_user_email,
 version
 FROM digitalocean.genai.evaluation_test_cases
-WHERE workspace_uuid = '{{ workspace_uuid }}' -- required;
+WHERE workspace_uuid = '{{ workspace_uuid }}' -- required
+;
 ```
 </TabItem>
 <TabItem value="genai_list_evaluation_test_cases">
@@ -707,7 +710,8 @@ total_runs,
 updated_at,
 updated_by_user_email,
 version
-FROM digitalocean.genai.evaluation_test_cases;
+FROM digitalocean.genai.evaluation_test_cases
+;
 ```
 </TabItem>
 </Tabs>

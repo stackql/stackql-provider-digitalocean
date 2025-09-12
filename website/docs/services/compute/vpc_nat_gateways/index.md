@@ -335,7 +335,8 @@ udp_timeout_seconds,
 updated_at,
 vpcs
 FROM digitalocean.compute.vpc_nat_gateways
-WHERE id = '{{ id }}' -- required;
+WHERE id = '{{ id }}' -- required
+;
 ```
 </TabItem>
 <TabItem value="vpcnatgateways_list">
@@ -363,7 +364,8 @@ AND page = '{{ page }}'
 AND state = '{{ state }}'
 AND region = '{{ region }}'
 AND type = '{{ type }}'
-AND name = '{{ name }}';
+AND name = '{{ name }}'
+;
 ```
 </TabItem>
 </Tabs>
@@ -394,11 +396,11 @@ data__icmp_timeout_seconds,
 data__tcp_timeout_seconds
 )
 SELECT 
-'{{ name }}' --required,
-'{{ type }}' --required,
-'{{ region }}' --required,
-{{ size }} --required,
-'{{ vpcs }}' --required,
+'{{ name }}' /* required */,
+'{{ type }}' /* required */,
+'{{ region }}' /* required */,
+{{ size }} /* required */,
+'{{ vpcs }}' /* required */,
 {{ udp_timeout_seconds }},
 {{ icmp_timeout_seconds }},
 {{ tcp_timeout_seconds }}
@@ -505,7 +507,8 @@ To destroy a VPC NAT Gateway, send a DELETE request to the `/v2/vpc_nat_gateways
 
 ```sql
 DELETE FROM digitalocean.compute.vpc_nat_gateways
-WHERE id = '{{ id }}' --required;
+WHERE id = '{{ id }}' --required
+;
 ```
 </TabItem>
 </Tabs>

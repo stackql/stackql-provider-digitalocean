@@ -250,7 +250,8 @@ started_at,
 status,
 type
 FROM digitalocean.account.actions
-WHERE action_id = '{{ action_id }}' -- required;
+WHERE action_id = '{{ action_id }}' -- required
+;
 ```
 </TabItem>
 <TabItem value="actions_list">
@@ -270,7 +271,8 @@ status,
 type
 FROM digitalocean.account.actions
 WHERE per_page = '{{ per_page }}'
-AND page = '{{ page }}';
+AND page = '{{ page }}'
+;
 ```
 </TabItem>
 </Tabs>

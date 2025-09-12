@@ -238,7 +238,8 @@ regions,
 target,
 type
 FROM digitalocean.monitoring.checks
-WHERE check_id = '{{ check_id }}' -- required;
+WHERE check_id = '{{ check_id }}' -- required
+;
 ```
 </TabItem>
 <TabItem value="uptime_list_checks">
@@ -255,7 +256,8 @@ target,
 type
 FROM digitalocean.monitoring.checks
 WHERE per_page = '{{ per_page }}'
-AND page = '{{ page }}';
+AND page = '{{ page }}'
+;
 ```
 </TabItem>
 </Tabs>
@@ -283,11 +285,11 @@ data__regions,
 data__enabled
 )
 SELECT 
-'{{ name }}' --required,
-'{{ type }}' --required,
-'{{ target }}' --required,
-'{{ regions }}' --required,
-{{ enabled }} --required
+'{{ name }}' /* required */,
+'{{ type }}' /* required */,
+'{{ target }}' /* required */,
+'{{ regions }}' /* required */,
+{{ enabled }} /* required */
 RETURNING
 check
 ;
@@ -374,7 +376,8 @@ To delete an Uptime check, send a DELETE request to `/v2/uptime/checks/$CHECK_ID
 
 ```sql
 DELETE FROM digitalocean.monitoring.checks
-WHERE check_id = '{{ check_id }}' --required;
+WHERE check_id = '{{ check_id }}' --required
+;
 ```
 </TabItem>
 </Tabs>

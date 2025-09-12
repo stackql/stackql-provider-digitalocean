@@ -248,7 +248,8 @@ access_key,
 created_at,
 grants
 FROM digitalocean.spaces.keys
-WHERE access_key = '{{ access_key }}' -- required;
+WHERE access_key = '{{ access_key }}' -- required
+;
 ```
 </TabItem>
 <TabItem value="spaces_key_list">
@@ -268,7 +269,8 @@ AND sort = '{{ sort }}'
 AND sort_direction = '{{ sort_direction }}'
 AND name = '{{ name }}'
 AND bucket = '{{ bucket }}'
-AND permission = '{{ permission }}';
+AND permission = '{{ permission }}'
+;
 ```
 </TabItem>
 </Tabs>
@@ -388,7 +390,8 @@ To delete a Spaces Access Key, send a DELETE request to `/v2/spaces/keys/$ACCESS
 
 ```sql
 DELETE FROM digitalocean.spaces.keys
-WHERE access_key = '{{ access_key }}' --required;
+WHERE access_key = '{{ access_key }}' --required
+;
 ```
 </TabItem>
 </Tabs>

@@ -272,7 +272,8 @@ evaluation_test_cases,
 updated_at,
 uuid
 FROM digitalocean.genai.workspaces
-WHERE workspace_uuid = '{{ workspace_uuid }}' -- required;
+WHERE workspace_uuid = '{{ workspace_uuid }}' -- required
+;
 ```
 </TabItem>
 <TabItem value="genai_list_workspaces">
@@ -291,7 +292,8 @@ description,
 evaluation_test_cases,
 updated_at,
 uuid
-FROM digitalocean.genai.workspaces;
+FROM digitalocean.genai.workspaces
+;
 ```
 </TabItem>
 </Tabs>
@@ -392,7 +394,8 @@ To delete a workspace, send a DELETE request to `/v2/gen-ai/workspace/&#123;work
 
 ```sql
 DELETE FROM digitalocean.genai.workspaces
-WHERE workspace_uuid = '{{ workspace_uuid }}' --required;
+WHERE workspace_uuid = '{{ workspace_uuid }}' --required
+;
 ```
 </TabItem>
 </Tabs>

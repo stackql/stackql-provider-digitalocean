@@ -58,7 +58,7 @@ A JSON object that has a key called `firewalls`.
 <tr>
     <td><CopyableCode code="name" /></td>
     <td><code>string</code></td>
-    <td>A human-readable name for a firewall. The name must begin with an alphanumeric character. Subsequent characters must either be alphanumeric characters, a period (.), or a dash (-). (pattern: ^[a-zA-Z0-9][a-zA-Z0-9\.-]+$, example: firewall)</td>
+    <td>A human-readable name for a firewall. The name must begin with an alphanumeric character. Subsequent characters must either be alphanumeric characters, a period (.), or a dash (-). (pattern: <code>^[a-zA-Z0-9][a-zA-Z0-9\.-]+$</code>, example: firewall)</td>
 </tr>
 <tr>
     <td><CopyableCode code="created_at" /></td>
@@ -182,7 +182,8 @@ tags
 FROM digitalocean.compute.droplets_firewalls
 WHERE droplet_id = '{{ droplet_id }}' -- required
 AND per_page = '{{ per_page }}'
-AND page = '{{ page }}';
+AND page = '{{ page }}'
+;
 ```
 </TabItem>
 </Tabs>

@@ -140,7 +140,8 @@ status
 FROM digitalocean.monitoring.lb_frontend_http_requests_per_second
 WHERE lb_id = '{{ lb_id }}' -- required
 AND start = '{{ start }}' -- required
-AND end = '{{ end }}' -- required;
+AND end = '{{ end }}' -- required
+;
 ```
 </TabItem>
 </Tabs>

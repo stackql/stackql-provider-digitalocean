@@ -194,7 +194,7 @@ The following methods are available for this resource:
 <tr>
     <td><a href="#image_actions_post"><CopyableCode code="image_actions_post" /></a></td>
     <td><CopyableCode code="exec" /></td>
-    <td><a href="#parameter-image_id"><code>image_id</code></a></td>
+    <td><a href="#parameter-image_id"><code>image_id</code></a>, <a href="#parameter-type"><code>type</code></a></td>
     <td></td>
     <td>The following actions are available on an Image.<br /><br />## Convert an Image to a Snapshot<br /><br />To convert an image, for example, a backup to a snapshot, send a POST request<br />to `/v2/images/$IMAGE_ID/actions`. Set the `type` attribute to `convert`.<br /><br />## Transfer an Image<br /><br />To transfer an image to another region, send a POST request to<br />`/v2/images/$IMAGE_ID/actions`. Set the `type` attribute to `transfer` and set<br />`region` attribute to the slug identifier of the region you wish to transfer<br />to.<br /></td>
 </tr>
@@ -253,7 +253,8 @@ status,
 type
 FROM digitalocean.compute.image_actions
 WHERE image_id = '{{ image_id }}' -- required
-AND action_id = '{{ action_id }}' -- required;
+AND action_id = '{{ action_id }}' -- required
+;
 ```
 </TabItem>
 <TabItem value="image_actions_list">
@@ -272,7 +273,8 @@ started_at,
 status,
 type
 FROM digitalocean.compute.image_actions
-WHERE image_id = '{{ image_id }}' -- required;
+WHERE image_id = '{{ image_id }}' -- required
+;
 ```
 </TabItem>
 </Tabs>
@@ -292,7 +294,12 @@ The following actions are available on an Image.<br /><br />## Convert an Image 
 
 ```sql
 EXEC digitalocean.compute.image_actions.image_actions_post 
-@image_id='{{ image_id }}' --required;
+@image_id='{{ image_id }}' --required 
+@@json=
+'{
+"type": "{{ type }}"
+}'
+;
 ```
 </TabItem>
 </Tabs>

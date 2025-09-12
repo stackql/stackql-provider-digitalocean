@@ -247,7 +247,8 @@ uuid,
 value,
 window
 FROM digitalocean.monitoring.alert_policies
-WHERE alert_uuid = '{{ alert_uuid }}' -- required;
+WHERE alert_uuid = '{{ alert_uuid }}' -- required
+;
 ```
 </TabItem>
 <TabItem value="monitoring_list_alert_policy">
@@ -261,7 +262,8 @@ meta,
 policies
 FROM digitalocean.monitoring.alert_policies
 WHERE per_page = '{{ per_page }}'
-AND page = '{{ page }}';
+AND page = '{{ page }}'
+;
 ```
 </TabItem>
 </Tabs>
@@ -293,15 +295,15 @@ data__value,
 data__window
 )
 SELECT 
-'{{ alerts }}' --required,
-'{{ compare }}' --required,
-'{{ description }}' --required,
-{{ enabled }} --required,
-'{{ entities }}' --required,
-'{{ tags }}' --required,
-'{{ type }}' --required,
-{{ value }} --required,
-'{{ window }}' --required
+'{{ alerts }}' /* required */,
+'{{ compare }}' /* required */,
+'{{ description }}' /* required */,
+{{ enabled }} /* required */,
+'{{ entities }}' /* required */,
+'{{ tags }}' /* required */,
+'{{ type }}' /* required */,
+{{ value }} /* required */,
+'{{ window }}' /* required */
 RETURNING
 policy
 ;
@@ -395,7 +397,8 @@ To delete an alert policy, send a DELETE request to `/v2/monitoring/alerts/&#123
 
 ```sql
 DELETE FROM digitalocean.monitoring.alert_policies
-WHERE alert_uuid = '{{ alert_uuid }}' --required;
+WHERE alert_uuid = '{{ alert_uuid }}' --required
+;
 ```
 </TabItem>
 </Tabs>

@@ -179,7 +179,8 @@ snapshots,
 volume_snapshots,
 volumes
 FROM digitalocean.compute.droplets_associated_resources
-WHERE droplet_id = '{{ droplet_id }}' -- required;
+WHERE droplet_id = '{{ droplet_id }}' -- required
+;
 ```
 </TabItem>
 </Tabs>
@@ -210,7 +211,8 @@ EXEC digitalocean.compute.droplets_associated_resources.droplets_destroy_with_as
 "snapshots": "{{ snapshots }}", 
 "volumes": "{{ volumes }}", 
 "volume_snapshots": "{{ volume_snapshots }}"
-}';
+}'
+;
 ```
 </TabItem>
 <TabItem value="droplets_destroy_with_associated_resources_dangerous">
@@ -220,7 +222,8 @@ To destroy a Droplet along with all of its associated resources, send a DELETE<b
 ```sql
 EXEC digitalocean.compute.droplets_associated_resources.droplets_destroy_with_associated_resources_dangerous 
 @droplet_id='{{ droplet_id }}' --required, 
-@X-Dangerous='{{ X-Dangerous }}' --required;
+@X-Dangerous='{{ X-Dangerous }}' --required
+;
 ```
 </TabItem>
 <TabItem value="droplets_get_destroy_associated_resources_status">
@@ -229,7 +232,8 @@ To check on the status of a request to destroy a Droplet with its associated<br 
 
 ```sql
 EXEC digitalocean.compute.droplets_associated_resources.droplets_get_destroy_associated_resources_status 
-@droplet_id='{{ droplet_id }}' --required;
+@droplet_id='{{ droplet_id }}' --required
+;
 ```
 </TabItem>
 <TabItem value="droplets_destroy_retry_with_associated_resources">
@@ -238,7 +242,8 @@ If the status of a request to destroy a Droplet with its associated resources<br
 
 ```sql
 EXEC digitalocean.compute.droplets_associated_resources.droplets_destroy_retry_with_associated_resources 
-@droplet_id='{{ droplet_id }}' --required;
+@droplet_id='{{ droplet_id }}' --required
+;
 ```
 </TabItem>
 </Tabs>

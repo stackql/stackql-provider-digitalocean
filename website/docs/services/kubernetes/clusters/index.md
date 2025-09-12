@@ -469,7 +469,8 @@ updated_at,
 version,
 vpc_uuid
 FROM digitalocean.kubernetes.clusters
-WHERE cluster_id = '{{ cluster_id }}' -- required;
+WHERE cluster_id = '{{ cluster_id }}' -- required
+;
 ```
 </TabItem>
 <TabItem value="kubernetes_list_clusters">
@@ -504,7 +505,8 @@ version,
 vpc_uuid
 FROM digitalocean.kubernetes.clusters
 WHERE per_page = '{{ per_page }}'
-AND page = '{{ page }}';
+AND page = '{{ page }}'
+;
 ```
 </TabItem>
 </Tabs>
@@ -544,14 +546,14 @@ data__amd_gpu_device_plugin,
 data__amd_gpu_device_metrics_exporter_plugin
 )
 SELECT 
-'{{ name }}' --required,
-'{{ region }}' --required,
-'{{ version }}' --required,
+'{{ name }}' /* required */,
+'{{ region }}' /* required */,
+'{{ version }}' /* required */,
 '{{ cluster_subnet }}',
 '{{ service_subnet }}',
 '{{ vpc_uuid }}',
 '{{ tags }}',
-'{{ node_pools }}' --required,
+'{{ node_pools }}' /* required */,
 '{{ maintenance_policy }}',
 {{ auto_upgrade }},
 {{ surge_upgrade }},
@@ -715,7 +717,8 @@ To delete a Kubernetes cluster and all services deployed to it, send a DELETE<br
 
 ```sql
 DELETE FROM digitalocean.kubernetes.clusters
-WHERE cluster_id = '{{ cluster_id }}' --required;
+WHERE cluster_id = '{{ cluster_id }}' --required
+;
 ```
 </TabItem>
 </Tabs>
@@ -739,7 +742,8 @@ This endpoint returns a kubeconfig file in YAML format. It can be used to<br />c
 ```sql
 EXEC digitalocean.kubernetes.clusters.kubernetes_get_kubeconfig 
 @cluster_id='{{ cluster_id }}' --required, 
-@expiry_seconds='{{ expiry_seconds }}';
+@expiry_seconds='{{ expiry_seconds }}'
+;
 ```
 </TabItem>
 <TabItem value="kubernetes_upgrade_cluster">
@@ -752,7 +756,8 @@ EXEC digitalocean.kubernetes.clusters.kubernetes_upgrade_cluster
 @@json=
 '{
 "version": "{{ version }}"
-}';
+}'
+;
 ```
 </TabItem>
 <TabItem value="kubernetes_add_registry">
@@ -764,7 +769,8 @@ EXEC digitalocean.kubernetes.clusters.kubernetes_add_registry
 @@json=
 '{
 "cluster_uuids": "{{ cluster_uuids }}"
-}';
+}'
+;
 ```
 </TabItem>
 <TabItem value="kubernetes_remove_registry">
@@ -776,7 +782,8 @@ EXEC digitalocean.kubernetes.clusters.kubernetes_remove_registry
 @@json=
 '{
 "cluster_uuids": "{{ cluster_uuids }}"
-}';
+}'
+;
 ```
 </TabItem>
 </Tabs>

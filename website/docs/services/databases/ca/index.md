@@ -122,7 +122,8 @@ To retrieve the public certificate used to secure the connection to the database
 SELECT
 certificate
 FROM digitalocean.databases.ca
-WHERE database_cluster_uuid = '{{ database_cluster_uuid }}' -- required;
+WHERE database_cluster_uuid = '{{ database_cluster_uuid }}' -- required
+;
 ```
 </TabItem>
 </Tabs>

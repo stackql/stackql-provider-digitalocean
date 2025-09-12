@@ -190,7 +190,8 @@ FROM digitalocean.container_registry.repositories
 WHERE registry_name = '{{ registry_name }}' -- required
 AND per_page = '{{ per_page }}'
 AND page = '{{ page }}'
-AND page_token = '{{ page_token }}';
+AND page_token = '{{ page_token }}'
+;
 ```
 </TabItem>
 </Tabs>
@@ -211,7 +212,8 @@ To delete a container repository including all of its tags, send a DELETE reques
 ```sql
 DELETE FROM digitalocean.container_registry.repositories
 WHERE registry_name = '{{ registry_name }}' --required
-AND repository_name = '{{ repository_name }}' --required;
+AND repository_name = '{{ repository_name }}' --required
+;
 ```
 </TabItem>
 </Tabs>
@@ -234,7 +236,8 @@ This endpoint has been deprecated in favor of the _List All Container Registry R
 EXEC digitalocean.container_registry.repositories.registry_list_repositories_legacy 
 @registry_name='{{ registry_name }}' --required, 
 @per_page='{{ per_page }}', 
-@page='{{ page }}';
+@page='{{ page }}'
+;
 ```
 </TabItem>
 <TabItem value="registry_list_repositories_v2_legacy">
@@ -246,7 +249,8 @@ EXEC digitalocean.container_registry.repositories.registry_list_repositories_v2_
 @registry_name='{{ registry_name }}' --required, 
 @per_page='{{ per_page }}', 
 @page='{{ page }}', 
-@page_token='{{ page_token }}';
+@page_token='{{ page_token }}'
+;
 ```
 </TabItem>
 </Tabs>

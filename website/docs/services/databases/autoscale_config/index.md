@@ -129,7 +129,8 @@ To retrieve the autoscale configuration for an existing database cluster, send a
 SELECT
 storage
 FROM digitalocean.databases.autoscale_config
-WHERE database_cluster_uuid = '{{ database_cluster_uuid }}' -- required;
+WHERE database_cluster_uuid = '{{ database_cluster_uuid }}' -- required
+;
 ```
 </TabItem>
 </Tabs>

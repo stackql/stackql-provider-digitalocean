@@ -68,7 +68,7 @@ The response will be a JSON object with a key called `resources`.<br />The value
 <tr>
     <td><CopyableCode code="urn" /></td>
     <td><code>string</code></td>
-    <td>The uniform resource name (URN) for the resource in the format do:resource_type:resource_id. (pattern: ^do:(dbaas|domain|droplet|floatingip|loadbalancer|space|volume|kubernetes|vpc):.*, example: do:droplet:13457723)</td>
+    <td>The uniform resource name (URN) for the resource in the format do:resource_type:resource_id. (pattern: <code>^do:(dbaas|domain|droplet|floatingip|loadbalancer|space|volume|kubernetes|vpc):.*</code>, example: do:droplet:13457723)</td>
 </tr>
 </tbody>
 </table>
@@ -141,7 +141,8 @@ assigned_at,
 links,
 status,
 urn
-FROM digitalocean.projects.default_resources;
+FROM digitalocean.projects.default_resources
+;
 ```
 </TabItem>
 </Tabs>

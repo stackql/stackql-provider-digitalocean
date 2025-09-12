@@ -164,7 +164,8 @@ status,
 status_message,
 team,
 uuid
-FROM digitalocean.account.account;
+FROM digitalocean.account.account
+;
 ```
 </TabItem>
 </Tabs>

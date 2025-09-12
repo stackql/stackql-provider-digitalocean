@@ -158,7 +158,8 @@ progress,
 slack_webhooks,
 spec
 FROM digitalocean.apps.alerts
-WHERE app_id = '{{ app_id }}' -- required;
+WHERE app_id = '{{ app_id }}' -- required
+;
 ```
 </TabItem>
 </Tabs>

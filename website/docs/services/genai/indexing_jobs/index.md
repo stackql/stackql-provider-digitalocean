@@ -270,7 +270,8 @@ total_items_skipped,
 updated_at,
 uuid
 FROM digitalocean.genai.indexing_jobs
-WHERE uuid = '{{ uuid }}' -- required;
+WHERE uuid = '{{ uuid }}' -- required
+;
 ```
 </TabItem>
 <TabItem value="genai_list_indexing_jobs">
@@ -284,7 +285,8 @@ links,
 meta
 FROM digitalocean.genai.indexing_jobs
 WHERE page = '{{ page }}'
-AND per_page = '{{ per_page }}';
+AND per_page = '{{ per_page }}'
+;
 ```
 </TabItem>
 </Tabs>

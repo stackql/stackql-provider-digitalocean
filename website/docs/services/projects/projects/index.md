@@ -289,7 +289,8 @@ owner_uuid,
 purpose,
 updated_at
 FROM digitalocean.projects.projects
-WHERE project_id = '{{ project_id }}' -- required;
+WHERE project_id = '{{ project_id }}' -- required
+;
 ```
 </TabItem>
 <TabItem value="projects_list">
@@ -310,7 +311,8 @@ purpose,
 updated_at
 FROM digitalocean.projects.projects
 WHERE per_page = '{{ per_page }}'
-AND page = '{{ page }}';
+AND page = '{{ page }}'
+;
 ```
 </TabItem>
 </Tabs>
@@ -337,9 +339,9 @@ data__purpose,
 data__environment
 )
 SELECT 
-'{{ name }}' --required,
+'{{ name }}' /* required */,
 '{{ description }}',
-'{{ purpose }}' --required,
+'{{ purpose }}' /* required */,
 '{{ environment }}'
 RETURNING
 project
@@ -469,7 +471,8 @@ To delete a project, send a DELETE request to `/v2/projects/$PROJECT_ID`. To<br 
 
 ```sql
 DELETE FROM digitalocean.projects.projects
-WHERE project_id = '{{ project_id }}' --required;
+WHERE project_id = '{{ project_id }}' --required
+;
 ```
 </TabItem>
 </Tabs>

@@ -170,7 +170,8 @@ updated_at
 FROM digitalocean.compute.droplet_autoscale_pool_history
 WHERE autoscale_pool_id = '{{ autoscale_pool_id }}' -- required
 AND per_page = '{{ per_page }}'
-AND page = '{{ page }}';
+AND page = '{{ page }}'
+;
 ```
 </TabItem>
 </Tabs>

@@ -217,7 +217,8 @@ uuid
 FROM digitalocean.container_registry.garbage_collections
 WHERE registry_name = '{{ registry_name }}' -- required
 AND per_page = '{{ per_page }}'
-AND page = '{{ page }}';
+AND page = '{{ page }}'
+;
 ```
 </TabItem>
 </Tabs>
@@ -267,7 +268,8 @@ Garbage collection enables users to clear out unreferenced blobs (layer &<br />m
 
 ```sql
 EXEC digitalocean.container_registry.garbage_collections.registries_run_garbage_collection 
-@registry_name='{{ registry_name }}' --required;
+@registry_name='{{ registry_name }}' --required
+;
 ```
 </TabItem>
 <TabItem value="registry_run_garbage_collection_legacy">
@@ -280,7 +282,8 @@ EXEC digitalocean.container_registry.garbage_collections.registry_run_garbage_co
 @@json=
 '{
 "type": "{{ type }}"
-}';
+}'
+;
 ```
 </TabItem>
 <TabItem value="registry_get_garbage_collection_legacy">
@@ -289,7 +292,8 @@ To get information about the currently-active garbage collection for a registry,
 
 ```sql
 EXEC digitalocean.container_registry.garbage_collections.registry_get_garbage_collection_legacy 
-@registry_name='{{ registry_name }}' --required;
+@registry_name='{{ registry_name }}' --required
+;
 ```
 </TabItem>
 <TabItem value="registry_list_garbage_collections_legacy">
@@ -300,7 +304,8 @@ To get information about past garbage collections for a registry, send a GET req
 EXEC digitalocean.container_registry.garbage_collections.registry_list_garbage_collections_legacy 
 @registry_name='{{ registry_name }}' --required, 
 @per_page='{{ per_page }}', 
-@page='{{ page }}';
+@page='{{ page }}'
+;
 ```
 </TabItem>
 <TabItem value="registry_update_garbage_collection_legacy">
@@ -314,7 +319,8 @@ EXEC digitalocean.container_registry.garbage_collections.registry_update_garbage
 @@json=
 '{
 "cancel": {{ cancel }}
-}';
+}'
+;
 ```
 </TabItem>
 </Tabs>

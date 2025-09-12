@@ -152,7 +152,8 @@ serves_inference,
 stream_inference_url
 FROM digitalocean.genai.datacenter_regions
 WHERE serves_inference = '{{ serves_inference }}'
-AND serves_batch = '{{ serves_batch }}';
+AND serves_batch = '{{ serves_batch }}'
+;
 ```
 </TabItem>
 </Tabs>

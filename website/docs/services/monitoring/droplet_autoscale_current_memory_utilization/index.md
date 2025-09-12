@@ -140,7 +140,8 @@ status
 FROM digitalocean.monitoring.droplet_autoscale_current_memory_utilization
 WHERE autoscale_pool_id = '{{ autoscale_pool_id }}' -- required
 AND start = '{{ start }}' -- required
-AND end = '{{ end }}' -- required;
+AND end = '{{ end }}' -- required
+;
 ```
 </TabItem>
 </Tabs>

@@ -129,7 +129,8 @@ This endpoint serves to provide additional information as to which option values
 SELECT
 available_regions,
 subscription_tiers
-FROM digitalocean.container_registry.options;
+FROM digitalocean.container_registry.options
+;
 ```
 </TabItem>
 </Tabs>
@@ -149,6 +150,7 @@ This endpoint serves to provide additional information as to which option values
 
 ```sql
 EXEC digitalocean.container_registry.options.registry_get_options_legacy 
+
 ;
 ```
 </TabItem>

@@ -106,7 +106,7 @@ data__tags,
 firewall_id
 )
 SELECT 
-'{{ tags }}' --required,
+'{{ tags }}' /* required */,
 '{{ firewall_id }}'
 ;
 ```
@@ -144,7 +144,8 @@ To remove a tag representing a group of Droplets from a firewall, send a<br />DE
 
 ```sql
 DELETE FROM digitalocean.compute.firewall_tags
-WHERE firewall_id = '{{ firewall_id }}' --required;
+WHERE firewall_id = '{{ firewall_id }}' --required
+;
 ```
 </TabItem>
 </Tabs>

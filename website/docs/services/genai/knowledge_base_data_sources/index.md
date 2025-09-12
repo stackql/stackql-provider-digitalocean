@@ -172,7 +172,8 @@ meta
 FROM digitalocean.genai.knowledge_base_data_sources
 WHERE knowledge_base_uuid = '{{ knowledge_base_uuid }}' -- required
 AND page = '{{ page }}'
-AND per_page = '{{ per_page }}';
+AND per_page = '{{ per_page }}'
+;
 ```
 </TabItem>
 </Tabs>
@@ -259,7 +260,8 @@ To delete a data source from a knowledge base, send a DELETE request to `/v2/gen
 ```sql
 DELETE FROM digitalocean.genai.knowledge_base_data_sources
 WHERE knowledge_base_uuid = '{{ knowledge_base_uuid }}' --required
-AND data_source_uuid = '{{ data_source_uuid }}' --required;
+AND data_source_uuid = '{{ data_source_uuid }}' --required
+;
 ```
 </TabItem>
 </Tabs>
@@ -282,7 +284,8 @@ EXEC digitalocean.genai.knowledge_base_data_sources.genai_create_data_source_fil
 @@json=
 '{
 "files": "{{ files }}"
-}';
+}'
+;
 ```
 </TabItem>
 </Tabs>

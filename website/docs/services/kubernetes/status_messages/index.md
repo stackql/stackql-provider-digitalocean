@@ -134,7 +134,8 @@ message,
 timestamp
 FROM digitalocean.kubernetes.status_messages
 WHERE cluster_id = '{{ cluster_id }}' -- required
-AND since = '{{ since }}';
+AND since = '{{ since }}'
+;
 ```
 </TabItem>
 </Tabs>

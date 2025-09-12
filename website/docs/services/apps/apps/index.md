@@ -444,7 +444,8 @@ updated_at,
 vpc
 FROM digitalocean.apps.apps
 WHERE id = '{{ id }}' -- required
-AND name = '{{ name }}';
+AND name = '{{ name }}'
+;
 ```
 </TabItem>
 <TabItem value="apps_list">
@@ -476,7 +477,8 @@ vpc
 FROM digitalocean.apps.apps
 WHERE page = '{{ page }}'
 AND per_page = '{{ per_page }}'
-AND with_projects = '{{ with_projects }}';
+AND with_projects = '{{ with_projects }}'
+;
 ```
 </TabItem>
 </Tabs>
@@ -503,7 +505,7 @@ Accept,
 Content-Type
 )
 SELECT 
-'{{ spec }}' --required,
+'{{ spec }}' /* required */,
 '{{ project_id }}',
 '{{ Accept }}',
 '{{ Content-Type }}'
@@ -581,7 +583,8 @@ Delete an existing app. Once deleted, all active deployments will be permanently
 
 ```sql
 DELETE FROM digitalocean.apps.apps
-WHERE id = '{{ id }}' --required;
+WHERE id = '{{ id }}' --required
+;
 ```
 </TabItem>
 </Tabs>
@@ -607,7 +610,8 @@ EXEC digitalocean.apps.apps.apps_restart
 @@json=
 '{
 "components": "{{ components }}"
-}';
+}'
+;
 ```
 </TabItem>
 <TabItem value="apps_validate_app_spec">
@@ -620,7 +624,8 @@ EXEC digitalocean.apps.apps.apps_validate_app_spec
 '{
 "spec": "{{ spec }}", 
 "app_id": "{{ app_id }}"
-}';
+}'
+;
 ```
 </TabItem>
 <TabItem value="apps_assign_alert_destinations">
@@ -635,7 +640,8 @@ EXEC digitalocean.apps.apps.apps_assign_alert_destinations
 '{
 "emails": "{{ emails }}", 
 "slack_webhooks": "{{ slack_webhooks }}"
-}';
+}'
+;
 ```
 </TabItem>
 </Tabs>

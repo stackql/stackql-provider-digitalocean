@@ -269,7 +269,8 @@ resource_type,
 size_gigabytes,
 tags
 FROM digitalocean.compute.volume_snapshots
-WHERE snapshot_id = '{{ snapshot_id }}' -- required;
+WHERE snapshot_id = '{{ snapshot_id }}' -- required
+;
 ```
 </TabItem>
 <TabItem value="volume_snapshots_list">
@@ -290,7 +291,8 @@ tags
 FROM digitalocean.compute.volume_snapshots
 WHERE volume_id = '{{ volume_id }}' -- required
 AND per_page = '{{ per_page }}'
-AND page = '{{ page }}';
+AND page = '{{ page }}'
+;
 ```
 </TabItem>
 </Tabs>
@@ -316,7 +318,7 @@ data__tags,
 volume_id
 )
 SELECT 
-'{{ name }}' --required,
+'{{ name }}' /* required */,
 '{{ tags }}',
 '{{ volume_id }}'
 RETURNING
@@ -362,7 +364,8 @@ To delete a volume snapshot, send a DELETE request to<br />`/v2/volumes/snapshot
 
 ```sql
 DELETE FROM digitalocean.compute.volume_snapshots
-WHERE snapshot_id = '{{ snapshot_id }}' --required;
+WHERE snapshot_id = '{{ snapshot_id }}' --required
+;
 ```
 </TabItem>
 </Tabs>

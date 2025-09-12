@@ -139,7 +139,8 @@ In order to access your container registry with the Docker client or from a<br /
 SELECT
 registry.digitalocean.com
 FROM digitalocean.container_registry.docker_credentials
-WHERE registry_name = '{{ registry_name }}' -- required;
+WHERE registry_name = '{{ registry_name }}' -- required
+;
 ```
 </TabItem>
 </Tabs>
@@ -160,7 +161,8 @@ In order to access your container registry with the Docker client or from a<br /
 ```sql
 EXEC digitalocean.container_registry.docker_credentials.registry_get_docker_credentials_legacy 
 @expiry_seconds='{{ expiry_seconds }}', 
-@read_write={{ read_write }};
+@read_write={{ read_write }}
+;
 ```
 </TabItem>
 </Tabs>

@@ -200,7 +200,8 @@ total_bytes,
 total_bytes_indexed,
 total_file_count
 FROM digitalocean.genai.indexing_job_data_sources
-WHERE indexing_job_uuid = '{{ indexing_job_uuid }}' -- required;
+WHERE indexing_job_uuid = '{{ indexing_job_uuid }}' -- required
+;
 ```
 </TabItem>
 </Tabs>

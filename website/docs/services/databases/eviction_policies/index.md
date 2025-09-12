@@ -124,7 +124,8 @@ To retrieve the configured eviction policy for an existing Caching or Valkey clu
 SELECT
 *
 FROM digitalocean.databases.eviction_policies
-WHERE database_cluster_uuid = '{{ database_cluster_uuid }}' -- required;
+WHERE database_cluster_uuid = '{{ database_cluster_uuid }}' -- required
+;
 ```
 </TabItem>
 </Tabs>

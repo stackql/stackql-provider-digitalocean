@@ -254,7 +254,8 @@ vcpus,
 volume_ids,
 vpc_uuid
 FROM digitalocean.compute.droplets_neighbors
-WHERE droplet_id = '{{ droplet_id }}' -- required;
+WHERE droplet_id = '{{ droplet_id }}' -- required
+;
 ```
 </TabItem>
 </Tabs>

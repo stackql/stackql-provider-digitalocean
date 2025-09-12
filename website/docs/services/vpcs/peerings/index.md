@@ -58,7 +58,7 @@ The response will be a JSON object with a key called `peerings`. This  will be s
 <tr>
     <td><CopyableCode code="name" /></td>
     <td><code>string</code></td>
-    <td>The name of the VPC peering. Must be unique within the team and may only contain alphanumeric characters and dashes. (pattern: ^[a-zA-Z0-9\-]+$, example: nyc1-blr1-peering)</td>
+    <td>The name of the VPC peering. Must be unique within the team and may only contain alphanumeric characters and dashes. (pattern: <code>^[a-zA-Z0-9\-]+$</code>, example: nyc1-blr1-peering)</td>
 </tr>
 <tr>
     <td><CopyableCode code="created_at" /></td>
@@ -177,7 +177,8 @@ vpc_ids
 FROM digitalocean.vpcs.peerings
 WHERE vpc_id = '{{ vpc_id }}' -- required
 AND per_page = '{{ per_page }}'
-AND page = '{{ page }}';
+AND page = '{{ page }}'
+;
 ```
 </TabItem>
 </Tabs>
@@ -203,8 +204,8 @@ data__vpc_id,
 vpc_id
 )
 SELECT 
-'{{ name }}' --required,
-'{{ vpc_id }}' --required,
+'{{ name }}' /* required */,
+'{{ vpc_id }}' /* required */,
 '{{ vpc_id }}'
 RETURNING
 peering

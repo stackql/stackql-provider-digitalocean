@@ -59,7 +59,7 @@ The response will be a JSON object with a firewall key. This will be set to an o
 <tr>
     <td><CopyableCode code="name" /></td>
     <td><code>string</code></td>
-    <td>A human-readable name for a firewall. The name must begin with an alphanumeric character. Subsequent characters must either be alphanumeric characters, a period (.), or a dash (-). (pattern: ^[a-zA-Z0-9][a-zA-Z0-9\.-]+$, example: firewall)</td>
+    <td>A human-readable name for a firewall. The name must begin with an alphanumeric character. Subsequent characters must either be alphanumeric characters, a period (.), or a dash (-). (pattern: <code>^[a-zA-Z0-9][a-zA-Z0-9\.-]+$</code>, example: firewall)</td>
 </tr>
 <tr>
     <td><CopyableCode code="created_at" /></td>
@@ -120,7 +120,7 @@ To list all of the firewalls available on your account, send a GET request to `/
 <tr>
     <td><CopyableCode code="name" /></td>
     <td><code>string</code></td>
-    <td>A human-readable name for a firewall. The name must begin with an alphanumeric character. Subsequent characters must either be alphanumeric characters, a period (.), or a dash (-). (pattern: ^[a-zA-Z0-9][a-zA-Z0-9\.-]+$, example: firewall)</td>
+    <td>A human-readable name for a firewall. The name must begin with an alphanumeric character. Subsequent characters must either be alphanumeric characters, a period (.), or a dash (-). (pattern: <code>^[a-zA-Z0-9][a-zA-Z0-9\.-]+$</code>, example: firewall)</td>
 </tr>
 <tr>
     <td><CopyableCode code="created_at" /></td>
@@ -194,14 +194,14 @@ The following methods are available for this resource:
 <tr>
     <td><a href="#firewalls_create"><CopyableCode code="firewalls_create" /></a></td>
     <td><CopyableCode code="insert" /></td>
-    <td><a href="#parameter-data__name"><code>data__name</code></a></td>
+    <td><a href="#parameter-data__inbound_rules"><code>data__inbound_rules</code></a></td>
     <td></td>
     <td>To create a new firewall, send a POST request to `/v2/firewalls`. The request<br />must contain at least one inbound or outbound access rule.<br /></td>
 </tr>
 <tr>
     <td><a href="#firewalls_update"><CopyableCode code="firewalls_update" /></a></td>
     <td><CopyableCode code="replace" /></td>
-    <td><a href="#parameter-firewall_id"><code>firewall_id</code></a>, <a href="#parameter-data__name"><code>data__name</code></a></td>
+    <td><a href="#parameter-firewall_id"><code>firewall_id</code></a>, <a href="#parameter-data__inbound_rules"><code>data__inbound_rules</code></a></td>
     <td></td>
     <td>To update the configuration of an existing firewall, send a PUT request to<br />`/v2/firewalls/$FIREWALL_ID`. The request should contain a full representation<br />of the firewall including existing attributes. **Note that any attributes that<br />are not provided will be reset to their default values.**<br /><br /><br />You must have read access (e.g. `droplet:read`) to all resources attached<br />to the firewall to successfully update the firewall.<br /></td>
 </tr>
@@ -285,7 +285,8 @@ pending_changes,
 status,
 tags
 FROM digitalocean.compute.firewalls
-WHERE firewall_id = '{{ firewall_id }}' -- required;
+WHERE firewall_id = '{{ firewall_id }}' -- required
+;
 ```
 </TabItem>
 <TabItem value="firewalls_list">
@@ -305,7 +306,8 @@ status,
 tags
 FROM digitalocean.compute.firewalls
 WHERE per_page = '{{ per_page }}'
-AND page = '{{ page }}';
+AND page = '{{ page }}'
+;
 ```
 </TabItem>
 </Tabs>
@@ -333,10 +335,10 @@ data__inbound_rules,
 data__outbound_rules
 )
 SELECT 
-'{{ name }}' --required,
+'{{ name }}',
 '{{ droplet_ids }}',
 '{{ tags }}',
-'{{ inbound_rules }}',
+'{{ inbound_rules }}' /* required */,
 '{{ outbound_rules }}'
 RETURNING
 firewall
@@ -395,7 +397,7 @@ data__inbound_rules = '{{ inbound_rules }}',
 data__outbound_rules = '{{ outbound_rules }}'
 WHERE 
 firewall_id = '{{ firewall_id }}' --required
-AND data__name = '{{ name }}' --required
+AND data__inbound_rules = '{{ inbound_rules }}' --required
 RETURNING
 firewall;
 ```
@@ -417,7 +419,8 @@ To delete a firewall send a DELETE request to `/v2/firewalls/$FIREWALL_ID`.<br /
 
 ```sql
 DELETE FROM digitalocean.compute.firewalls
-WHERE firewall_id = '{{ firewall_id }}' --required;
+WHERE firewall_id = '{{ firewall_id }}' --required
+;
 ```
 </TabItem>
 </Tabs>
@@ -442,7 +445,8 @@ EXEC digitalocean.compute.firewalls.firewalls_assign_droplets
 @@json=
 '{
 "droplet_ids": "{{ droplet_ids }}"
-}';
+}'
+;
 ```
 </TabItem>
 <TabItem value="firewalls_delete_droplets">
@@ -455,7 +459,8 @@ EXEC digitalocean.compute.firewalls.firewalls_delete_droplets
 @@json=
 '{
 "droplet_ids": "{{ droplet_ids }}"
-}';
+}'
+;
 ```
 </TabItem>
 </Tabs>
